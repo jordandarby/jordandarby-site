@@ -92,6 +92,18 @@ h2{font-size:clamp(1.9rem,4vw,2.8rem)}
 .cta p{margin:22px 0 30px;color:#e7ebf3}
 .cta-buttons{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
 .cta-thumb img{border-radius:6px}
+.cta-form{display:flex;flex-direction:column;gap:16px;background:rgba(255,255,255,.06);padding:30px;border-radius:var(--radius);box-shadow:var(--shadow)}
+.cta-form label{display:flex;flex-direction:column;gap:7px;font-size:.9rem;font-weight:600;color:#e7ebf3}
+.cta-form input,.cta-form textarea{font-family:inherit;font-size:1rem;padding:13px 15px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:#fff;color:var(--ink);width:100%}
+.cta-form input:focus,.cta-form textarea:focus{outline:2px solid var(--orange);outline-offset:1px;border-color:transparent}
+.cta-form textarea{resize:vertical;min-height:120px}
+.cta-form button{margin-top:4px;justify-content:center;width:100%}
+.cta-form input[name="_gotcha"]{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.form-status{font-size:.95rem;color:#e7ebf3;min-height:1px}
+.form-status.error{color:#ffd7c2}
+.cta-form.sent{align-items:center;text-align:center}
+.cta-form.sent > *{display:none}
+.cta-form.sent .form-status{display:block;color:#fff;font-size:1.15rem;font-weight:600}
 
 /* ---------- About ---------- */
 .about .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}

@@ -150,7 +150,14 @@
         <a class="btn btn-outline reveal" href="inspiration.html">Not Quite Ready? Get Inspired!</a>
       </div>
     </div>
-    <div class="cta-thumb reveal"><img src="images/inspiration-thumb.webp" alt="Collage of design inspiration pieces" loading="lazy"></div>
+    <form class="cta-form reveal" action="https://formspree.io/f/xaqraqrq" method="POST">
+      <label>Name<input type="text" name="name" autocomplete="name" required></label>
+      <label>Email<input type="email" name="email" autocomplete="email" required></label>
+      <label>Message<textarea name="message" rows="4" required></textarea></label>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit" class="btn btn-orange">&#9993;&ensp;Send Message</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 
