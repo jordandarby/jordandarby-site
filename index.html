@@ -21,8 +21,9 @@
 <link rel="icon" href="images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/redesign.css">
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 <script type="application/ld+json">
 {
@@ -53,8 +54,10 @@
     <a class="nav-brand" href="index.html"><img src="images/favicon.png" alt="Jordan Darby headshot logo">Jordan Darby Design</a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
     <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="inspiration.html" >Inspiration</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="inspiration.html">Inspiration</a></li>
+      <li><a class="nav-cta" href="#contact">Let’s Talk</a></li>
       <li><a class="nav-linkedin" href="https://www.linkedin.com/in/jordan-darby-design/" aria-label="Jordan Darby on LinkedIn" target="_blank" rel="noopener"><svg width="26" height="26" viewBox="0 0 24 24" fill="#182946" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="3" fill="#182946"/><path d="M6.94 8.5v9.06H4.13V8.5h2.81ZM7.13 5.69a1.63 1.63 0 1 1-3.26 0 1.63 1.63 0 0 1 3.26 0ZM19.87 12.4v5.16h-2.8v-4.84c0-1.22-.44-2.05-1.53-2.05-.83 0-1.33.56-1.55 1.1-.08.2-.1.47-.1.74v5.05h-2.81s.04-8.2 0-9.06h2.8v1.29c.38-.58 1.05-1.4 2.55-1.4 1.86 0 3.44 1.22 3.44 4.01Z" fill="#FCF5DE"/></svg></a></li>
     </ul>
   </div>
@@ -62,24 +65,46 @@
 
 <section class="hero">
   <div class="wrap">
-    <div>
-      <h1>Helping brands grow through creative solutions.</h1>
-      <p class="hero-sub">Graphic Design. Brand Strategy. Retail Marketing. Collaboration.</p>
-      <p class="hero-bio">Hey, I’m Jordan Darby, a graphic designer with 7+ years of experience in the retail industry. I help businesses, from local startups to national brands, create designs that tell their story, engage audiences, and drive results—whether through packaging, websites, or complete visual overhauls.</p>
+    <div class="hero-copy">
+      <span class="eyebrow">Northwest Arkansas · Brand &amp; Packaging Design</span>
+      <h1>Design that helps brands grow.</h1>
+      <p class="hero-sub">Branding · Packaging · Retail Marketing · Web</p>
+      <p class="hero-bio">Hey, I’m Jordan Darby — a graphic designer with 7+ years in retail. I help businesses, from local startups to national brands, create designs that tell their story, engage audiences, and drive results.</p>
       <div class="stats">
         <div class="stat"><h3>7+ Years</h3><span>Delivering Results</span></div>
         <div class="stat"><h3>250+</h3><span>Projects Delivered</span></div>
-        <div class="stat"><h3>Passionate</h3><span>About Every Project</span></div>
+        <div class="stat"><h3>Retail-Proven</h3><span>Shelf &amp; in-store design</span></div>
       </div>
-      <a class="btn btn-orange" href="mailto:hello@jordandarby.com">&#9993;&ensp;hello@jordandarby.com</a>
+      <div class="hero-cta">
+        <a class="btn btn-orange btn-lg" href="#work">View My Work</a>
+        <a class="btn btn-ghost btn-lg" href="#contact">Let’s Talk</a>
+      </div>
     </div>
-    <div class="hero-photo"><img src="images/hero-photo.webp" alt="Jordan Darby and his wife outdoors in Northwest Arkansas"></div>
+    <div class="hero-showcase reveal">
+      <a class="feat" href="images/work-21.webp" data-title="REV Eau de Parfum" data-cat="Packaging"><img src="images/work-21.webp" alt="REV eau de parfum packaging with dripping foil detail" loading="lazy"></a>
+      <a href="images/work-02.webp" data-title="Skullcandy Retail Display" data-cat="Retail Display"><img src="images/work-02.webp" alt="Skullcandy branded retail display for headphones and speakers" loading="lazy"></a>
+      <a href="images/work-01.webp" data-title="BRUTE Preworkout" data-cat="Packaging"><img src="images/work-01.webp" alt="BRUTE Ultimate Preworkout supplement packaging design" loading="lazy"></a>
+    </div>
   </div>
 </section>
 
-<section class="section">
+<section class="brands">
   <div class="wrap">
-    <div class="section-head reveal"><h2>How I Can Help Drive Value</h2><p>I offer a range of services for businesses</p></div>
+    <span class="eyebrow">Trusted to design for</span>
+    <ul>
+      <li>Skullcandy</li>
+      <li>MeatEater</li>
+      <li>Chomps</li>
+      <li>Rhino USA</li>
+      <li>GoodWipes</li>
+      <li>Speaqua</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Services</span><h2>How I Can Help Drive Value</h2><p>A full range of design services for growing businesses</p></div>
     <div class="services"><div class="service reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></div><p>Brand Strategy &amp; Development</p></div>
 <div class="service reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.5"/><circle cx="19" cy="21" r="1.5"/><path d="M1 1h4l2.6 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></div><p>Retail &amp; Experiential Marketing Design</p></div>
 <div class="service reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 9 12 14 1.5 9M12 14v9"/><path d="M20.5 5.5 12 1 3.5 5.5 12 10l8.5-4.5v11L12 23l-8.5-6.5v-11"/></svg></div><p>Packaging Design</p></div>
@@ -91,31 +116,41 @@
 
 <section class="section" id="work">
   <div class="wrap">
-    <div class="section-head reveal"><h2>Examples Of My Work</h2><p>Impactful design solutions that help brands succeed</p></div>
-    <div class="grid"><a class="reveal" href="images/work-01.webp" aria-label="View larger"><img src="images/work-01.webp" alt="BRUTE Ultimate Preworkout supplement packaging design" loading="lazy"></a>
-<a class="reveal" href="images/work-02.webp" aria-label="View larger"><img src="images/work-02.webp" alt="Skullcandy branded retail display for headphones and speakers" loading="lazy"></a>
-<a class="reveal" href="images/work-03.webp" aria-label="View larger"><img src="images/work-03.webp" alt="Ahola black hoodie apparel design" loading="lazy"></a>
-<a class="reveal" href="images/work-04.webp" aria-label="View larger"><img src="images/work-04.webp" alt="Speaqua Barnacle X counter display for waterproof speakers" loading="lazy"></a>
-<a class="reveal" href="images/work-05.webp" aria-label="View larger"><img src="images/work-05.webp" alt="Boilermaker's Son straight bourbon whiskey bottle and label design" loading="lazy"></a>
-<a class="reveal" href="images/work-06.webp" aria-label="View larger"><img src="images/work-06.webp" alt="Chomps snack sticks retail shelf display design" loading="lazy"></a>
-<a class="reveal" href="images/work-07.webp" aria-label="View larger"><img src="images/work-07.webp" alt="Neon green lion mark logo design" loading="lazy"></a>
-<a class="reveal" href="images/work-08.webp" aria-label="View larger"><img src="images/work-08.webp" alt="Boilermaker's Son business card and stationery design" loading="lazy"></a>
-<a class="reveal" href="images/work-09.webp" aria-label="View larger"><img src="images/work-09.webp" alt="Common Cense candle packaging with scent descriptions" loading="lazy"></a>
-<a class="reveal" href="images/work-10.webp" aria-label="View larger"><img src="images/work-10.webp" alt="Tanner Customs copper-foil business cards on black" loading="lazy"></a>
-<a class="reveal" href="images/work-11.webp" aria-label="View larger"><img src="images/work-11.webp" alt="Fox Trail Public House circular badge logo" loading="lazy"></a>
-<a class="reveal" href="images/work-12.webp" aria-label="View larger"><img src="images/work-12.webp" alt="Maverick's American-sourced bar soap packaging line" loading="lazy"></a>
-<a class="reveal" href="images/work-13.webp" aria-label="View larger"><img src="images/work-13.webp" alt="Abstract flower monogram logo mark" loading="lazy"></a>
-<a class="reveal" href="images/work-14.webp" aria-label="View larger"><img src="images/work-14.webp" alt="Rhino USA powersports accessories retail shelf displays" loading="lazy"></a>
-<a class="reveal" href="images/work-15.webp" aria-label="View larger"><img src="images/work-15.webp" alt="TekkArmor logo and brand identity" loading="lazy"></a>
-<a class="reveal" href="images/work-16.webp" aria-label="View larger"><img src="images/work-16.webp" alt="Tanner Customs t-shirt apparel design front and back" loading="lazy"></a>
-<a class="reveal" href="images/work-17.webp" aria-label="View larger"><img src="images/work-17.webp" alt="MeatEater in-line retail display with apparel and gear" loading="lazy"></a>
-<a class="reveal" href="images/work-18.webp" aria-label="View larger"><img src="images/work-18.webp" alt="Ahola surf shop social media and mobile design" loading="lazy"></a>
-<a class="reveal" href="images/work-19.webp" aria-label="View larger"><img src="images/work-19.webp" alt="Boilermaker's Son social media campaign on mobile screens" loading="lazy"></a>
-<a class="reveal" href="images/work-20.webp" aria-label="View larger"><img src="images/work-20.webp" alt="GoodWipes Clean Bum Club floor display towers" loading="lazy"></a>
-<a class="reveal" href="images/work-21.webp" aria-label="View larger"><img src="images/work-21.webp" alt="REV eau de parfum packaging with dripping foil detail" loading="lazy"></a>
-<a class="reveal" href="images/work-22.webp" aria-label="View larger"><img src="images/work-22.webp" alt="Candice Candle Co vegan handpoured candle badge logo" loading="lazy"></a>
-<a class="reveal" href="images/work-23.webp" aria-label="View larger"><img src="images/work-23.webp" alt="New Year's Eve 22 silver-foil lettering design" loading="lazy"></a>
-<a class="reveal" href="images/work-24.webp" aria-label="View larger"><img src="images/work-24.webp" alt="asmbly stationery and letterpress card design" loading="lazy"></a></div>
+    <div class="section-head reveal"><span class="eyebrow">Portfolio</span><h2>Examples Of My Work</h2><p>Impactful design solutions that help brands succeed</p></div>
+    <div class="work-filters reveal">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="Packaging">Packaging</button>
+      <button data-filter="Retail Display">Retail Display</button>
+      <button data-filter="Branding">Branding</button>
+      <button data-filter="Apparel">Apparel</button>
+      <button data-filter="Digital">Digital</button>
+      <button data-filter="Lettering">Lettering</button>
+    </div>
+    <div class="grid">
+<a class="reveal" href="images/work-01.webp" data-title="BRUTE Preworkout" data-cat="Packaging" aria-label="View larger"><img src="images/work-01.webp" alt="BRUTE Ultimate Preworkout supplement packaging design" loading="lazy"></a>
+<a class="reveal" href="images/work-02.webp" data-title="Skullcandy Retail Display" data-cat="Retail Display" aria-label="View larger"><img src="images/work-02.webp" alt="Skullcandy branded retail display for headphones and speakers" loading="lazy"></a>
+<a class="reveal" href="images/work-03.webp" data-title="Ahola Apparel" data-cat="Apparel" aria-label="View larger"><img src="images/work-03.webp" alt="Ahola black hoodie apparel design" loading="lazy"></a>
+<a class="reveal" href="images/work-04.webp" data-title="Speaqua Barnacle X Display" data-cat="Retail Display" aria-label="View larger"><img src="images/work-04.webp" alt="Speaqua Barnacle X counter display for waterproof speakers" loading="lazy"></a>
+<a class="reveal" href="images/work-05.webp" data-title="Boilermaker’s Son Bourbon" data-cat="Packaging" aria-label="View larger"><img src="images/work-05.webp" alt="Boilermaker's Son straight bourbon whiskey bottle and label design" loading="lazy"></a>
+<a class="reveal" href="images/work-06.webp" data-title="Chomps Shelf Display" data-cat="Retail Display" aria-label="View larger"><img src="images/work-06.webp" alt="Chomps snack sticks retail shelf display design" loading="lazy"></a>
+<a class="reveal" href="images/work-07.webp" data-title="Lion Mark Logo" data-cat="Branding" aria-label="View larger"><img src="images/work-07.webp" alt="Neon green lion mark logo design" loading="lazy"></a>
+<a class="reveal" href="images/work-08.webp" data-title="Boilermaker’s Son Stationery" data-cat="Branding" aria-label="View larger"><img src="images/work-08.webp" alt="Boilermaker's Son business card and stationery design" loading="lazy"></a>
+<a class="reveal" href="images/work-09.webp" data-title="Common Cense Candles" data-cat="Packaging" aria-label="View larger"><img src="images/work-09.webp" alt="Common Cense candle packaging with scent descriptions" loading="lazy"></a>
+<a class="reveal" href="images/work-10.webp" data-title="Tanner Customs Cards" data-cat="Branding" aria-label="View larger"><img src="images/work-10.webp" alt="Tanner Customs copper-foil business cards on black" loading="lazy"></a>
+<a class="reveal" href="images/work-11.webp" data-title="Fox Trail Public House" data-cat="Branding" aria-label="View larger"><img src="images/work-11.webp" alt="Fox Trail Public House circular badge logo" loading="lazy"></a>
+<a class="reveal" href="images/work-12.webp" data-title="Maverick’s Bar Soap" data-cat="Packaging" aria-label="View larger"><img src="images/work-12.webp" alt="Maverick's American-sourced bar soap packaging line" loading="lazy"></a>
+<a class="reveal" href="images/work-13.webp" data-title="Flower Monogram" data-cat="Branding" aria-label="View larger"><img src="images/work-13.webp" alt="Abstract flower monogram logo mark" loading="lazy"></a>
+<a class="reveal" href="images/work-14.webp" data-title="Rhino USA Displays" data-cat="Retail Display" aria-label="View larger"><img src="images/work-14.webp" alt="Rhino USA powersports accessories retail shelf displays" loading="lazy"></a>
+<a class="reveal" href="images/work-15.webp" data-title="TekkArmor Identity" data-cat="Branding" aria-label="View larger"><img src="images/work-15.webp" alt="TekkArmor logo and brand identity" loading="lazy"></a>
+<a class="reveal" href="images/work-16.webp" data-title="Tanner Customs Tee" data-cat="Apparel" aria-label="View larger"><img src="images/work-16.webp" alt="Tanner Customs t-shirt apparel design front and back" loading="lazy"></a>
+<a class="reveal" href="images/work-17.webp" data-title="MeatEater Retail Display" data-cat="Retail Display" aria-label="View larger"><img src="images/work-17.webp" alt="MeatEater in-line retail display with apparel and gear" loading="lazy"></a>
+<a class="reveal" href="images/work-18.webp" data-title="Ahola Surf Social" data-cat="Digital" aria-label="View larger"><img src="images/work-18.webp" alt="Ahola surf shop social media and mobile design" loading="lazy"></a>
+<a class="reveal" href="images/work-19.webp" data-title="Boilermaker’s Son Campaign" data-cat="Digital" aria-label="View larger"><img src="images/work-19.webp" alt="Boilermaker's Son social media campaign on mobile screens" loading="lazy"></a>
+<a class="reveal" href="images/work-20.webp" data-title="GoodWipes Floor Display" data-cat="Retail Display" aria-label="View larger"><img src="images/work-20.webp" alt="GoodWipes Clean Bum Club floor display towers" loading="lazy"></a>
+<a class="reveal" href="images/work-21.webp" data-title="REV Eau de Parfum" data-cat="Packaging" aria-label="View larger"><img src="images/work-21.webp" alt="REV eau de parfum packaging with dripping foil detail" loading="lazy"></a>
+<a class="reveal" href="images/work-22.webp" data-title="Candice Candle Co" data-cat="Branding" aria-label="View larger"><img src="images/work-22.webp" alt="Candice Candle Co vegan handpoured candle badge logo" loading="lazy"></a>
+<a class="reveal" href="images/work-23.webp" data-title="NYE ’22 Lettering" data-cat="Lettering" aria-label="View larger"><img src="images/work-23.webp" alt="New Year's Eve 22 silver-foil lettering design" loading="lazy"></a>
+<a class="reveal" href="images/work-24.webp" data-title="asmbly Letterpress" data-cat="Branding" aria-label="View larger"><img src="images/work-24.webp" alt="asmbly stationery and letterpress card design" loading="lazy"></a></div>
     <p class="behance-line reveal">Looking for case studies?<br>Check out my <a href="https://www.behance.net/jordan-darby" target="_blank" rel="noopener">Behance</a></p>
   </div>
 </section>
@@ -123,32 +158,37 @@
 <section class="section testimonials">
   <div class="wrap">
     <img class="headshot reveal" src="images/headshot.webp" alt="Jordan Darby headshot">
-    <div class="section-head reveal"><h2>A passion for serving others and achieving results</h2><p>Here’s what collaborators have said about me</p></div>
-    <div class="cards"><div class="card reveal"><div class="quote-mark">&#8220;</div><p>Working with Jordan was a privilege and a lot of fun. He is a very hard worker and a man of great talent. Jordan is very much a team player and has a great attitude. He’s a man of his word and will never let you down. I’d be honored to work with him again in the future.</p><h4>Jake Houser</h4><small>Jake was an advising engineer I collaborated with on many projects</small></div>
-<div class="card reveal"><div class="quote-mark">&#8220;</div><p>Over the last year, Jordan has been an integral component to the success of our sales team. Not only does he possess a strong/diverse functional skillset for a designer - he is excellent in the way he collaborates with clients to help bring their vision to life. Jordan is upbeat, extremely positive, a hard worker, and a fantastic teammate that I have relied on multiple times in critical situations.</p><h4>Ryan Toomer</h4><small>Ryan was a sales leader I collaborated with on many projects</small></div>
-<div class="card reveal"><div class="quote-mark">&#8220;</div><p>Jordan not only listens to clients to understand their needs but also asks appropriate questions to ensure the end product is compelling enough to drive the project to the next step. Jordan's collaborative nature and commitment to excellence has been present in every project we worked on together. I highly recommend Jordan to anyone seeking a top-notch graphic designer!</p><h4>Sheila Rogers</h4><small>Sheila was a sales leader I collaborated with on many projects</small></div></div>
+    <div class="section-head reveal"><span class="eyebrow">Testimonials</span><h2>A passion for serving others and achieving results</h2><p>Here’s what collaborators have said about me</p></div>
+    <div class="cards"><div class="card reveal"><span class="card-li" aria-label="Recommendation from LinkedIn" title="Recommendation from LinkedIn"><svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="3" fill="#0A66C2"/><path d="M6.94 8.5v9.06H4.13V8.5h2.81ZM7.13 5.69a1.63 1.63 0 1 1-3.26 0 1.63 1.63 0 0 1 3.26 0ZM19.87 12.4v5.16h-2.8v-4.84c0-1.22-.44-2.05-1.53-2.05-.83 0-1.33.56-1.55 1.1-.08.2-.1.47-.1.74v5.05h-2.81s.04-8.2 0-9.06h2.8v1.29c.38-.58 1.05-1.4 2.55-1.4 1.86 0 3.44 1.22 3.44 4.01Z" fill="#fff"/></svg></span><div class="quote-mark">&#8220;</div><p>Working with Jordan was a privilege and a lot of fun. He is a very hard worker and a man of great talent. Jordan is very much a team player and has a great attitude. He’s a man of his word and will never let you down. I’d be honored to work with him again in the future.</p><div class="card-person"><img src="images/testimonial-jake.webp" alt="Jake Houser" loading="lazy"><div><h4>Jake Houser</h4><small>Jake was an advising engineer I collaborated with on many projects</small></div></div></div>
+<div class="card reveal"><span class="card-li" aria-label="Recommendation from LinkedIn" title="Recommendation from LinkedIn"><svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="3" fill="#0A66C2"/><path d="M6.94 8.5v9.06H4.13V8.5h2.81ZM7.13 5.69a1.63 1.63 0 1 1-3.26 0 1.63 1.63 0 0 1 3.26 0ZM19.87 12.4v5.16h-2.8v-4.84c0-1.22-.44-2.05-1.53-2.05-.83 0-1.33.56-1.55 1.1-.08.2-.1.47-.1.74v5.05h-2.81s.04-8.2 0-9.06h2.8v1.29c.38-.58 1.05-1.4 2.55-1.4 1.86 0 3.44 1.22 3.44 4.01Z" fill="#fff"/></svg></span><div class="quote-mark">&#8220;</div><p>Over the last year, Jordan has been an integral component to the success of our sales team. Not only does he possess a strong/diverse functional skillset for a designer - he is excellent in the way he collaborates with clients to help bring their vision to life. Jordan is upbeat, extremely positive, a hard worker, and a fantastic teammate that I have relied on multiple times in critical situations.</p><div class="card-person"><img src="images/testimonial-ryan.webp" alt="Ryan Toomer" loading="lazy"><div><h4>Ryan Toomer</h4><small>Ryan was a sales leader I collaborated with on many projects</small></div></div></div>
+<div class="card reveal"><span class="card-li" aria-label="Recommendation from LinkedIn" title="Recommendation from LinkedIn"><svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="3" fill="#0A66C2"/><path d="M6.94 8.5v9.06H4.13V8.5h2.81ZM7.13 5.69a1.63 1.63 0 1 1-3.26 0 1.63 1.63 0 0 1 3.26 0ZM19.87 12.4v5.16h-2.8v-4.84c0-1.22-.44-2.05-1.53-2.05-.83 0-1.33.56-1.55 1.1-.08.2-.1.47-.1.74v5.05h-2.81s.04-8.2 0-9.06h2.8v1.29c.38-.58 1.05-1.4 2.55-1.4 1.86 0 3.44 1.22 3.44 4.01Z" fill="#fff"/></svg></span><div class="quote-mark">&#8220;</div><p>Jordan not only listens to clients to understand their needs but also asks appropriate questions to ensure the end product is compelling enough to drive the project to the next step. Jordan's collaborative nature and commitment to excellence has been present in every project we worked on together. I highly recommend Jordan to anyone seeking a top-notch graphic designer!</p><div class="card-person"><img src="images/testimonial-sheila.webp" alt="Sheila Rogers" loading="lazy"><div><h4>Sheila Rogers</h4><small>Sheila was a sales leader I collaborated with on many projects</small></div></div></div></div>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="section-head reveal"><h2>My Process</h2><p>Here’s how I turn ideas into impactful design solutions</p></div>
-    <div class="process"><h3 class="reveal">1. Discovery &amp; Strategy</h3><p class="reveal">We begin by understanding your brand, goals, and challenges to ensure the design will deliver results.</p>
-<h3 class="reveal">2. Concept Development</h3><p class="reveal">I’ll create initial concepts based on your feedback, ensuring we align on the direction before moving forward.</p>
-<h3 class="reveal">3. Collaboration &amp; Refinement</h3><p class="reveal">Working closely with your team, I’ll refine the designs to match your vision and requirements, ensuring all aspects meet expectations.</p>
-<h3 class="reveal">4. Final Delivery</h3><p class="reveal">Once approved, I’ll deliver the final design assets, ready for production or implementation, ensuring everything is on time and on budget.</p></div>
+    <div class="section-head reveal"><span class="eyebrow">Process</span><h2>My Process</h2><p>Here’s how I turn ideas into impactful design solutions</p></div>
+    <div class="steps">
+      <div class="step reveal"><span class="step-num">01</span><h3>Discovery &amp; Strategy</h3><p>We dig into your brand, goals, and audience first—so every design decision is built to drive results, not just look good.</p></div>
+      <div class="step reveal"><span class="step-num">02</span><h3>Concept Development</h3><p>I turn the strategy into clear creative directions, so we align on the big idea before investing in the fine details.</p></div>
+      <div class="step reveal"><span class="step-num">03</span><h3>Collaboration &amp; Refinement</h3><p>We refine together. I work closely with your team, iterating until the design is exactly right and ready to perform.</p></div>
+      <div class="step reveal"><span class="step-num">04</span><h3>Delivery &amp; Launch</h3><p>You get production-ready files, on time and on budget—plus the support to roll them out with confidence.</p></div>
+    </div>
   </div>
 </section>
 
-<section class="section cta">
+<section class="section cta" id="contact">
   <div class="wrap">
     <div>
-      <h2 class="reveal">Ready to Start Your Project?</h2>
-      <p class="reveal">Whether you’re looking to elevate your brand, improve your packaging, or launch a new website, I’m here to help. Let’s connect and create something amazing together.</p>
-      <div class="cta-buttons">
-        <a class="btn btn-green reveal" href="mailto:hello@jordandarby.com">&#9993;&ensp;hello@jordandarby.com</a>
-        <a class="btn btn-outline reveal" href="inspiration.html">Not Quite Ready? Get Inspired!</a>
-      </div>
+      <span class="eyebrow" style="color:var(--orange)">Get in touch</span>
+      <h2 class="reveal">Let’s build something your customers remember.</h2>
+      <p class="reveal">Tell me about your project—brand, packaging, retail, or web—and I’ll come back with ideas and clear next steps.</p>
+      <ul class="cta-points reveal">
+        <li>Free, no-pressure project consult</li>
+        <li>Typically reply within 1 business day</li>
+        <li>From local startups to national brands</li>
+      </ul>
+      <p class="cta-email reveal">Prefer email? <a href="mailto:hello@jordandarby.com">hello@jordandarby.com</a></p>
     </div>
     <form class="cta-form reveal" action="https://formspree.io/f/xaqraqrq" method="POST">
       <label>Name<input type="text" name="name" autocomplete="name" required></label>
@@ -157,30 +197,39 @@
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button type="submit" class="btn btn-orange">&#9993;&ensp;Send Message</button>
       <p class="form-status" role="status" aria-live="polite"></p>
+      <p class="form-note">No spam, ever — your details come straight to my inbox.</p>
     </form>
   </div>
 </section>
 
 <section class="section about">
   <div class="wrap">
-    <img class="reveal" src="images/about-me.webp" alt="Jordan Darby and his wife relaxing at an outdoor gathering" loading="lazy">
+    <img class="reveal" src="images/about-family.webp" alt="Jordan Darby and his wife, expecting their first child, at a maternity photoshoot in Northwest Arkansas" loading="lazy">
     <div>
-      <h2 class="reveal">Husband. Uncle. Brother. Son.</h2>
-      <p class="reveal">When I’m not designing, I’m usually spending quality time with family. I’m fortunate that most of my loved ones are right here in Northwest Arkansas. Whether we’re hanging out or problem solving, my wife and I find joy in simple living and building things together.</p>
+      <span class="eyebrow">The person behind the work</span>
+      <h2 class="reveal">Husband. Dad. Uncle. Brother. Son.</h2>
+      <p class="reveal">When I’m not designing, I’m usually spending quality time with family. I’m fortunate that most of my loved ones are right here in Northwest Arkansas — and my wife and I are about to welcome our first child, so our little family is growing. Whether we’re hanging out or building something together, we find joy in simple living.</p>
       <p class="reveal">Our Christian faith is at the heart of everything we do, and it guides us in all aspects of our lives, both personal and professional.</p>
     </div>
   </div>
 </section>
+
 <footer>
   <div class="wrap">
     <ul>
-      <li><a href="index.html">Home</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
       <li><a href="inspiration.html">Inspiration</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <span class="copy">&copy; 2026 Jordan Darby Design</span>
     <a class="fa-linkedin" href="https://www.linkedin.com/in/jordan-darby-design/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="3" fill="#182946"/><path d="M6.94 8.5v9.06H4.13V8.5h2.81ZM7.13 5.69a1.63 1.63 0 1 1-3.26 0 1.63 1.63 0 0 1 3.26 0ZM19.87 12.4v5.16h-2.8v-4.84c0-1.22-.44-2.05-1.53-2.05-.83 0-1.33.56-1.55 1.1-.08.2-.1.47-.1.74v5.05h-2.81s.04-8.2 0-9.06h2.8v1.29c.38-.58 1.05-1.4 2.55-1.4 1.86 0 3.44 1.22 3.44 4.01Z" fill="#fff"/></svg></a>
   </div>
 </footer>
+
+<div class="lightbox" aria-hidden="true"><button class="lb-close" aria-label="Close">&times;</button><img alt=""><div class="lb-cap"></div></div>
+
 <script src="js/main.js"></script>
+<script src="js/redesign.js"></script>
 </body>
 </html>
