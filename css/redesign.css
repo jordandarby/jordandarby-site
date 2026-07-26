@@ -34,8 +34,9 @@ body{font-size:17px}
 .hero-sub{color:var(--ink-light);font-weight:600;margin:20px 0 22px}
 .hero-bio{color:var(--ink);max-width:540px}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
-.stat h3{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:600}
-.stat span{color:var(--ink-light)}
+.hero .stats{gap:30px;margin:38px 0 30px}
+.stat h3{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:600;white-space:nowrap}
+.stat span{color:var(--ink-light);font-size:.9rem}
 
 /* Hero work showcase collage */
 .hero-showcase{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:16px;align-items:start}
