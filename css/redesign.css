@@ -191,3 +191,9 @@ body{font-size:17px}
 /* Verifiable testimonial links */
 .li-link{text-decoration:none;color:inherit;border-bottom:1px solid rgba(24,41,70,.25)}
 .li-link:hover{color:var(--orange);border-color:var(--orange)}
+
+/* Concept-project disclosure note */
+.cs-note{margin-top:22px;max-width:760px;font-size:.93rem;line-height:1.65;color:var(--ink-light);
+  border-left:3px solid var(--orange);padding:4px 0 4px 16px}
+.cs-card .concept-tag{display:inline-block;background:var(--navy);color:var(--cream);font-size:.62rem;
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:5px;margin-right:7px;vertical-align:2px}
