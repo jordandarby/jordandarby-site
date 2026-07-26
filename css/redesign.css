@@ -93,6 +93,9 @@ body{font-size:17px}
 /* ---------- Testimonials & headings polish ---------- */
 .testimonials h2,.cta h2{font-family:var(--display,'Fraunces',serif)}
 .card p{font-size:1rem}
+.card{position:relative}
+.card-li{position:absolute;top:20px;right:20px;line-height:0;opacity:.95}
+.card-li svg{width:22px;height:22px;display:block}
 .card-person{display:flex;align-items:center;gap:14px;margin-top:24px}
 .card-person img{width:54px;height:54px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--cream)}
 .card-person h4{margin:0}
