@@ -187,3 +187,7 @@ body{font-size:17px}
   .cs-cards{grid-template-columns:1fr}
   .cs-figs .two{grid-template-columns:1fr}
 }
+
+/* Verifiable testimonial links */
+.li-link{text-decoration:none;color:inherit;border-bottom:1px solid rgba(24,41,70,.25)}
+.li-link:hover{color:var(--orange);border-color:var(--orange)}
