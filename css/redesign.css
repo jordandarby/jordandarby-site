@@ -3,7 +3,7 @@
    work overlays + filters, lightbox, nav CTA, refined rhythm & accents. */
 
 /* ---------- Display typography ---------- */
-h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em}
+h1,h2,h3,.display{font-family:var(--display,'Fraunces',Georgia,serif);font-weight:600;letter-spacing:-.01em}
 h1{font-size:clamp(2.6rem,5.6vw,4.6rem);line-height:1.02;font-weight:600}
 h2{font-size:clamp(2rem,4vw,3rem);line-height:1.06}
 h4{font-family:'Poppins',sans-serif}
@@ -35,7 +35,7 @@ body{font-size:17px}
 .hero-bio{color:var(--ink);max-width:540px}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
 .hero .stats{gap:30px;margin:38px 0 30px}
-.stat h3{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:600;white-space:nowrap}
+.stat h3{font-family:var(--display,'Fraunces',serif);font-size:1.6rem;font-weight:600;white-space:nowrap}
 .stat span{color:var(--ink-light);font-size:.9rem}
 
 /* Hero work showcase collage */
@@ -51,7 +51,7 @@ body{font-size:17px}
 .brands .wrap{display:flex;align-items:center;gap:38px;flex-wrap:wrap;justify-content:center;text-align:center}
 .brands .eyebrow{color:var(--cream);opacity:.8;margin:0}
 .brands ul{list-style:none;display:flex;gap:14px 40px;flex-wrap:wrap;justify-content:center;align-items:center}
-.brands li{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.1rem,2vw,1.6rem);opacity:.92}
+.brands li{font-family:var(--display,'Fraunces',serif);font-weight:600;font-size:clamp(1.1rem,2vw,1.6rem);opacity:.92}
 .brands .placeholder{opacity:.5;font-style:italic;font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:500}
 
 /* ---------- Services: card treatment ---------- */
@@ -90,7 +90,7 @@ body{font-size:17px}
 .lightbox .lb-cap{position:absolute;bottom:24px;left:0;right:0;text-align:center;color:#fff;font-weight:600;font-size:.95rem}
 
 /* ---------- Testimonials & headings polish ---------- */
-.testimonials h2,.cta h2{font-family:'Fraunces',serif}
+.testimonials h2,.cta h2{font-family:var(--display,'Fraunces',serif)}
 .card p{font-size:1rem}
 
 /* ---------- Section dividers / rhythm ---------- */
