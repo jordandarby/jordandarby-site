@@ -98,9 +98,34 @@ body{font-size:17px}
 .card-person h4{margin:0}
 .card-person small{margin-top:2px}
 
+/* ---------- Process steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.step{background:var(--white);border:1px solid rgba(24,41,70,.08);border-radius:16px;padding:30px 24px;transition:transform .25s,box-shadow .25s,border-color .25s}
+.step:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:transparent}
+.step-num{font-family:var(--display,'Bricolage Grotesque',sans-serif);font-size:2.2rem;font-weight:700;color:var(--orange);line-height:1;display:block;margin-bottom:14px}
+.step h3{font-size:1.15rem;margin-bottom:10px}
+.step p{font-size:.95rem;color:var(--ink-light);line-height:1.6}
+
+/* ---------- CTA enhancements ---------- */
+.cta-points{list-style:none;margin:26px 0 24px;display:flex;flex-direction:column;gap:13px}
+.cta-points li{position:relative;padding-left:30px;color:#eef1f7}
+.cta-points li::before{content:"✓";position:absolute;left:0;top:-1px;color:var(--orange);font-weight:800}
+.cta-email{color:#c9d0de;font-size:.96rem;margin-top:4px}
+.cta-email a{color:var(--orange);font-weight:600;text-decoration:none}
+.cta-email a:hover{text-decoration:underline}
+.form-note{font-size:.8rem;color:#aeb6c7;text-align:center;margin-top:2px}
+
+/* ---------- Brand logo strip (activated when logo files exist) ---------- */
+.brands.logos ul{gap:26px 48px}
+.brands.logos li{opacity:1}
+.brands.logos li img{height:34px;width:auto;filter:brightness(0) invert(1);opacity:.8;transition:opacity .2s}
+.brands.logos li img:hover{opacity:1}
+
 /* ---------- Section dividers / rhythm ---------- */
 .section{padding:96px 0}
 .about{background:var(--cream)}
+@media (max-width:1000px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
 
 /* ---------- Responsive ---------- */
 @media (max-width:760px){
