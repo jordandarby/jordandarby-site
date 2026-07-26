@@ -3,6 +3,7 @@
    work overlays + filters, lightbox, nav CTA, refined rhythm & accents. */
 
 /* ---------- Display typography ---------- */
+:root{--display:'Bricolage Grotesque','Poppins',sans-serif} /* default headline face (switchable in preview) */
 h1,h2,h3,.display{font-family:var(--display,'Fraunces',Georgia,serif);font-weight:600;letter-spacing:-.01em}
 h1{font-size:clamp(2.6rem,5.6vw,4.6rem);line-height:1.02;font-weight:600}
 h2{font-size:clamp(2rem,4vw,3rem);line-height:1.06}
@@ -92,6 +93,10 @@ body{font-size:17px}
 /* ---------- Testimonials & headings polish ---------- */
 .testimonials h2,.cta h2{font-family:var(--display,'Fraunces',serif)}
 .card p{font-size:1rem}
+.card-person{display:flex;align-items:center;gap:14px;margin-top:24px}
+.card-person img{width:54px;height:54px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--cream)}
+.card-person h4{margin:0}
+.card-person small{margin-top:2px}
 
 /* ---------- Section dividers / rhythm ---------- */
 .section{padding:96px 0}
