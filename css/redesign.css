@@ -270,3 +270,15 @@ body{font-size:17px}
 /* packages without published prices: term line carries the top of the card */
 .pkg .pkg-term{margin-top:10px;font-size:.95rem;color:var(--ink)}
 .pkg.featured .pkg-term{color:#dfe5ef}
+
+/* ---------- Image grids: center a short final row instead of hanging left ---------- */
+.grid{display:flex;flex-wrap:wrap;justify-content:center;gap:26px}
+.grid > a{flex:0 1 calc(33.333% - 17.34px);max-width:calc(33.333% - 17.34px)}
+.inspo-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:34px 26px}
+.inspo-grid > .inspo-item{flex:0 1 calc(33.333% - 17.34px);max-width:calc(33.333% - 17.34px)}
+@media (max-width:1000px){
+  .grid > a,.inspo-grid > .inspo-item{flex-basis:calc(50% - 13px);max-width:calc(50% - 13px)}
+}
+@media (max-width:560px){
+  .grid > a,.inspo-grid > .inspo-item{flex-basis:100%;max-width:100%}
+}
