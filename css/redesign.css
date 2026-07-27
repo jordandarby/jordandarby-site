@@ -356,3 +356,14 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
   .faq summary{font-size:.98rem;padding:18px 0}
   .testimonials .headshot{width:96px;height:96px;margin-bottom:28px}
 }
+
+/* Mobile touch targets & minimum legible label sizes */
+@media (max-width:1080px){
+  .nav-toggle{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;
+    margin-right:-8px;line-height:1}
+}
+@media (max-width:760px){
+  .cs-card .concept-tag{font-size:.68rem;padding:4px 9px}
+  .pkg-flag{font-size:.68rem;padding:6px 15px}
+  .cs-card .cat{font-size:.74rem}
+}
