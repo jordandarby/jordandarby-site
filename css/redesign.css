@@ -189,10 +189,6 @@ body{font-size:17px}
   .cs-figs .two{grid-template-columns:1fr}
 }
 
-/* Verifiable testimonial links */
-.li-link{text-decoration:none;color:inherit;border-bottom:1px solid rgba(24,41,70,.25)}
-.li-link:hover{color:var(--orange);border-color:var(--orange)}
-
 /* Concept-project disclosure note */
 .cs-note{margin-top:22px;max-width:760px;font-size:.93rem;line-height:1.65;color:var(--ink-light);
   border-left:3px solid var(--orange);padding:4px 0 4px 16px}
