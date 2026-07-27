@@ -303,3 +303,56 @@ footer ul{flex-wrap:wrap;justify-content:center;gap:12px 22px}
 /* Honeypot: visually-hidden pattern that cannot affect layout or scroll width */
 .cta-form input[name="_gotcha"]{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
   overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;left:auto}
+
+/* ================= MOBILE POLISH ================= */
+/* Balance short headings/labels so a single word never drops to its own line.
+   Unsupported browsers simply ignore these. */
+h1,h2,h3,h4,.eyebrow,.cs-card h3,.service p,.step h3,.pkg h3,
+.faq summary,.pkg li,.cta-points li,.section-head p,.pkg-for{
+  text-wrap:balance;
+}
+p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
+  text-wrap:pretty;
+}
+
+@media (max-width:760px){
+  /* 96px between sections is a lot of dead space on a phone */
+  .section{padding:62px 0}
+  .section-head{margin-bottom:38px}
+  .hero{padding:44px 0 58px}
+  .hero .wrap{gap:38px}
+  h1{font-size:clamp(2.15rem,8.6vw,2.9rem)}
+  h2{font-size:clamp(1.6rem,6.4vw,2.1rem)}
+  .hero-bio{font-size:1rem;line-height:1.65}
+  .hero-sub{font-size:1.05rem;margin:16px 0 18px}
+  /* wide letter-spacing forces extra line breaks at small widths */
+  .eyebrow{letter-spacing:.11em;font-size:.72rem}
+
+  /* stats were wrapping 2 + 1, which reads as a mistake.
+     One per row, number and label on the same line: 3 tidy lines instead of 6. */
+  .hero .stats{flex-direction:column;gap:12px;margin:30px 0 26px}
+  .hero .stat{display:flex;align-items:baseline;gap:10px;width:100%}
+  .hero .stat h3{font-size:1.35rem;margin:0}
+  .hero .stat span{font-size:.92rem}
+
+  /* full-width tap targets read better than two half-width buttons */
+  .hero-cta{flex-direction:column;align-items:stretch;gap:12px}
+  .hero-cta .btn{justify-content:center;width:100%}
+
+  /* service tiles were ~390px tall for one icon and two words */
+  .services{gap:14px}
+  .service{padding:22px 14px}
+  .service-icon{width:54px;height:54px}
+  .service-icon svg{width:26px;height:26px}
+  .service p{font-size:.92rem}
+
+  .steps{gap:14px}
+  .step{padding:24px 20px}
+  .brands ul{gap:10px 22px}
+  .brands li{font-size:1.15rem}
+  .cs-hero{padding:52px 0 46px}
+  .cs-quote{padding:38px 0}
+  .pkg-custom{padding:24px 22px;text-align:center;justify-content:center}
+  .faq summary{font-size:.98rem;padding:18px 0}
+  .testimonials .headshot{width:96px;height:96px;margin-bottom:28px}
+}
