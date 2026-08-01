@@ -363,3 +363,8 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
   .pkg-flag{font-size:.68rem;padding:6px 15px}
   .cs-card .cat{font-size:.74rem}
 }
+
+/* Hero showcase: 2x2 with four tiles (offset shadow kept on the first as an accent) */
+.hero-showcase{grid-template-rows:auto auto}
+.hero-showcase .feat{grid-row:auto}
+.hero-showcase .feat img{aspect-ratio:1/1;height:auto}
