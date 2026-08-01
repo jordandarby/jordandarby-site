@@ -368,9 +368,3 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
 .hero-showcase{grid-template-rows:auto auto}
 .hero-showcase .feat{grid-row:auto}
 .hero-showcase .feat img{aspect-ratio:1/1;height:auto}
-
-/* Audience line above packages + named 3D use case under services */
-.pkg-audience{max-width:640px;margin:16px auto 0;color:var(--ink);font-size:1.02rem;line-height:1.65}
-.service-callout{max-width:720px;margin:40px auto 0;text-align:center;color:var(--ink);
-  font-size:1.02rem;line-height:1.7;border-top:1px solid rgba(24,41,70,.12);padding-top:30px}
-.service-callout strong{color:var(--navy);display:block;margin-bottom:4px}
