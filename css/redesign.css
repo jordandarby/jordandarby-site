@@ -368,3 +368,14 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
 .hero-showcase{grid-template-rows:auto auto}
 .hero-showcase .feat{grid-row:auto}
 .hero-showcase .feat img{aspect-ratio:1/1;height:auto}
+
+/* ---------- Services: 5 tiles, centre any short row ---------- */
+.services{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+.services > .service{flex:0 1 calc(20% - 17.6px);max-width:calc(20% - 17.6px)}
+@media (max-width:1000px){
+  .services > .service{flex-basis:calc(33.333% - 14.67px);max-width:calc(33.333% - 14.67px)}
+}
+@media (max-width:760px){
+  .services{gap:14px}
+  .services > .service{flex-basis:calc(50% - 7px);max-width:calc(50% - 7px)}
+}
