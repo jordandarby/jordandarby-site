@@ -377,7 +377,9 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
 }
 
 /* ---------- Work grid: multiple small category tags ---------- */
-.work-tags{position:absolute;top:9px;left:9px;right:9px;z-index:2;display:flex;flex-wrap:wrap;gap:4px;pointer-events:none}
+.work-tags{position:absolute;top:9px;left:9px;right:9px;z-index:2;display:flex;flex-wrap:wrap;gap:4px;pointer-events:none;
+  opacity:0;transform:translateY(-4px);transition:opacity .3s,transform .3s}
+.grid a:hover .work-tags{opacity:1;transform:none}
 .work-tags span{background:rgba(20,31,56,.82);color:var(--cream);font-family:'Poppins',sans-serif;
   font-size:.58rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
   padding:3px 7px;border-radius:4px;line-height:1.35;backdrop-filter:blur(2px)}
