@@ -20,9 +20,17 @@
   if (box) {
     var img = box.querySelector('img');
     var cap = box.querySelector('.lb-cap');
-    var open = function (src, title, cat) {
+    var open = function (src, title, cat, note) {
       img.src = src;
-      cap.textContent = title ? (title + (cat ? ' · ' + cat : '')) : '';
+      cap.innerHTML = '';
+      if (title) {
+        cap.appendChild(document.createTextNode(title + (cat ? ' · ' + cat : '')));
+        if (note) {
+          var em = document.createElement('em');
+          em.textContent = ' · ' + note;
+          cap.appendChild(em);
+        }
+      }
       box.classList.add('open');
       box.setAttribute('aria-hidden', 'false');
     };
@@ -34,7 +42,7 @@
     document.querySelectorAll('.grid a[href$=".webp"], .hero-showcase a[href$=".webp"]').forEach(function (a) {
       a.addEventListener('click', function (e) {
         e.preventDefault();
-        open(a.getAttribute('href'), a.getAttribute('data-title'), a.getAttribute('data-cat'));
+        open(a.getAttribute('href'), a.getAttribute('data-title'), a.getAttribute('data-cat'), a.getAttribute('data-note'));
       });
     });
     box.addEventListener('click', function (e) {
