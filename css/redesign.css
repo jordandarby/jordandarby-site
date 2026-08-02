@@ -34,7 +34,7 @@ body{font-size:17px}
 .hero .wrap{grid-template-columns:1.02fr .98fr;gap:60px}
 .hero-sub{color:var(--ink-light);font-weight:600;margin:20px 0 22px}
 .hero-bio{color:var(--ink);max-width:540px}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
 .hero .stats{gap:30px;margin:38px 0 30px}
 .stat h3{font-family:var(--display,'Fraunces',serif);font-size:1.6rem;font-weight:600;white-space:nowrap}
 .stat span{color:var(--ink-light);font-size:.9rem}
@@ -332,7 +332,7 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
   .hero .stat span{font-size:.92rem}
 
   /* full-width tap targets read better than two half-width buttons */
-  .hero-cta{flex-direction:column;align-items:stretch;gap:12px}
+  .hero-cta{flex-direction:column;align-items:stretch;gap:12px;margin-top:28px}
   .hero-cta .btn{justify-content:center;width:100%}
 
   /* service tiles were ~390px tall for one icon and two words */
