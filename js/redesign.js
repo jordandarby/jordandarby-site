@@ -10,8 +10,7 @@
       var f = btn.getAttribute('data-filter');
       filters.querySelectorAll('button').forEach(function (b) { b.classList.toggle('active', b === btn); });
       items.forEach(function (a) {
-        var cats = (a.getAttribute('data-cat') || '').split(/\s+/);
-        a.classList.toggle('hide', f !== 'all' && cats.indexOf(f) === -1);
+        a.classList.toggle('hide', f !== 'all' && a.getAttribute('data-cat') !== f);
       });
     });
   }
