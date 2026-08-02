@@ -394,3 +394,10 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
 
 /* Disclaimer chip on client-branding work */
 .work-tags .tag-note{background:rgba(252,245,222,.92);color:var(--navy);font-weight:600;letter-spacing:.04em}
+
+/* ---------- Reveal fix: hover transitions on cards were overriding the
+   entrance transition (transition is one property), so items blinked in.
+   Until an element has settled, the entrance transition wins. ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .reveal:not(.settled){transition:opacity .7s ease,transform .7s ease !important}
+}
