@@ -8,7 +8,9 @@
         if (e.isIntersecting) {
           e.target.classList.add('in');
           io.unobserve(e.target);
-          setTimeout(function () { e.target.classList.add('settled'); }, 750);
+          // Must outlast the longest reveal (cascade delay .30s + .7s duration),
+          // or 'settled' swaps the transition mid-fade and the item snaps in.
+          setTimeout(function () { e.target.classList.add('settled'); }, 1150);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });

@@ -1,0 +1,364 @@
+/* ============================================================
+   motion.css — intro sequence, testimonial expand, pricing
+   carousel, and sitewide motion. Loaded after redesign.css.
+   Every effect is wrapped so reduced-motion users get a calm,
+   fully functional site.
+   ============================================================ */
+
+/* ---------- 1. Intro sequence ---------- */
+
+/* Scroll is locked only while the overlay is armed. If JS never
+   runs, .intro-armed is never honored because the overlay itself
+   is display:none without JS (see .no-js guard below). */
+html.intro-armed, html.intro-armed body { overflow: hidden; }
+
+.intro {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--navy-deep);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  will-change: transform;
+}
+.intro[hidden], .intro.gone { display: none; }
+/* Overlay exists only while armed — no flash for repeat visitors. */
+html:not(.intro-armed) .intro { display: none; }
+
+/* Branded stripe wipe — five bars sweep across the panel */
+.intro-stripes { position: absolute; inset: 0; display: flex; }
+.intro-stripes i {
+  flex: 1; transform: scaleY(0); transform-origin: bottom;
+  animation: stripeIn .62s cubic-bezier(.65,0,.35,1) forwards;
+}
+/* Navy tones carry the panel; orange is a narrow accent, not a field. */
+.intro-stripes i:nth-child(1) { background: var(--navy);      animation-delay: .00s; }
+.intro-stripes i:nth-child(2) { background: #1B2F50;          animation-delay: .06s; }
+.intro-stripes i:nth-child(3) { background: var(--orange); flex: 0 0 clamp(6px, 1.4vw, 16px);
+                                animation-delay: .12s; }
+.intro-stripes i:nth-child(4) { background: #162744;          animation-delay: .18s; }
+.intro-stripes i:nth-child(5) { background: var(--navy);      animation-delay: .24s; }
+
+/* Scrim keeps the headline legible whatever sits behind it. */
+.intro-stripes::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 62% 55% at 50% 48%, rgba(20,31,56,.82), rgba(20,31,56,0) 72%);
+  pointer-events: none;
+}
+@keyframes stripeIn { to { transform: scaleY(1); } }
+
+/* Stripes retract just before the panel leaves, so the orange
+   bar reads as a deliberate brand beat rather than a flash. */
+.intro.leaving .intro-stripes i {
+  animation: stripeOut .42s cubic-bezier(.65,0,.35,1) forwards;
+  transform-origin: top;
+}
+.intro.leaving .intro-stripes i:nth-child(1) { animation-delay: .00s; }
+.intro.leaving .intro-stripes i:nth-child(2) { animation-delay: .04s; }
+.intro.leaving .intro-stripes i:nth-child(3) { animation-delay: .08s; }
+.intro.leaving .intro-stripes i:nth-child(4) { animation-delay: .12s; }
+.intro.leaving .intro-stripes i:nth-child(5) { animation-delay: .16s; }
+@keyframes stripeOut { to { transform: scaleY(0); } }
+
+.intro-inner {
+  position: relative; z-index: 2; text-align: center;
+  padding: 0 24px; max-width: 900px;
+}
+
+/* Name + role */
+.intro-head { margin-bottom: 22px; }
+.intro-name {
+  display: block; font-family: var(--display); font-weight: 600;
+  font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.04; color: #fff;
+  letter-spacing: -.02em;
+  opacity: 0; transform: translateY(18px);
+  animation: introUp .7s cubic-bezier(.22,1,.36,1) .30s forwards;
+}
+.intro-role {
+  display: block; margin-top: 10px;
+  font-family: 'Poppins', sans-serif; font-weight: 700;
+  font-size: .74rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--orange);
+  opacity: 0; transform: translateY(14px);
+  animation: introUp .7s cubic-bezier(.22,1,.36,1) .40s forwards;
+}
+@keyframes introUp { to { opacity: 1; transform: none; } }
+
+/* Vertical service roll */
+/* font-size lives on the container so the clip height, the step
+   distance and the line height all resolve against the same em. */
+.intro-roll {
+  font-size: clamp(.95rem, 2.4vw, 1.15rem);
+  height: 1.6em; overflow: hidden; margin: 0 auto 30px;
+  opacity: 0; animation: introFade .4s ease .50s forwards;
+}
+@keyframes introFade { to { opacity: 1; } }
+.intro-roll-track {
+  display: flex; flex-direction: column;
+  animation: roll 2.05s cubic-bezier(.7,0,.3,1) .50s forwards;
+}
+.intro-roll-track span {
+  height: 1.6em; line-height: 1.6em; flex: none;
+  font-family: 'Poppins', sans-serif; font-weight: 500; font-size: inherit;
+  color: rgba(255,255,255,.82); white-space: nowrap;
+}
+@keyframes roll {
+  0%,  14% { transform: translateY(0); }
+  20%, 34% { transform: translateY(-1.6em); }
+  40%, 54% { transform: translateY(-3.2em); }
+  60%, 74% { transform: translateY(-4.8em); }
+  80%, 94% { transform: translateY(-6.4em); }
+  100%     { transform: translateY(-8em); }
+}
+
+/* Work bubbles */
+.intro-bubbles { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.intro-bubbles span {
+  width: clamp(58px, 14vw, 92px); aspect-ratio: 1; border-radius: 50%;
+  overflow: hidden; background: var(--navy); display: block;
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+  opacity: 0; transform: scale(.4) translateY(20px);
+  animation: bubbleIn .72s cubic-bezier(.34,1.56,.64,1) var(--d, .3s) forwards;
+}
+.intro-bubbles img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@keyframes bubbleIn { to { opacity: 1; transform: none; } }
+
+/* Skip */
+.intro-skip {
+  position: absolute; bottom: 26px; right: 26px; z-index: 3;
+  background: rgba(255,255,255,.12); color: #fff; border: 0;
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .78rem;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 9px 18px; border-radius: 999px; cursor: pointer;
+  opacity: 0; animation: introFade .4s ease 1s forwards;
+  transition: background .2s;
+}
+.intro-skip:hover { background: rgba(255,255,255,.24); }
+
+/* Exit — panel lifts away, revealing the hero underneath */
+.intro.leaving {
+  transform: translateY(-101%);
+  transition: transform .66s cubic-bezier(.76,0,.24,1) .18s;
+}
+
+/* Hero gets a gentle lift as the panel clears */
+@media (prefers-reduced-motion: no-preference) {
+  html.intro-armed .hero-copy > *, html.intro-armed .hero-showcase {
+    opacity: 0; transform: translateY(26px);
+  }
+  html.intro-done .hero-copy > *, html.intro-done .hero-showcase {
+    animation: introUp .8s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  html.intro-done .hero-copy > *:nth-child(1) { animation-delay: .05s; }
+  html.intro-done .hero-copy > *:nth-child(2) { animation-delay: .12s; }
+  html.intro-done .hero-copy > *:nth-child(3) { animation-delay: .19s; }
+  html.intro-done .hero-copy > *:nth-child(4) { animation-delay: .26s; }
+  html.intro-done .hero-showcase             { animation-delay: .20s; }
+}
+
+/* Reduced motion: no animation at all — the overlay never arms. */
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none; }
+  html.intro-armed, html.intro-armed body { overflow: auto; }
+}
+
+
+/* ---------- 2. Testimonials: pull quote + expand ---------- */
+
+.t-pull {
+  font-family: var(--display); font-weight: 500;
+  font-size: clamp(1.15rem, 1.9vw, 1.42rem); line-height: 1.45;
+  color: var(--navy); letter-spacing: -.01em;
+  text-wrap: pretty; margin-bottom: 4px;
+}
+
+/* 0fr -> 1fr grid trick animates to auto height smoothly */
+.t-full {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows .45s cubic-bezier(.4,0,.2,1),
+              opacity .35s ease, margin-top .45s cubic-bezier(.4,0,.2,1);
+  opacity: 0; margin-top: 0;
+}
+.t-full > p {
+  overflow: hidden; min-height: 0;
+  font-size: .96rem; line-height: 1.7; color: var(--ink-light);
+}
+.t-full.open { grid-template-rows: 1fr; opacity: 1; margin-top: 12px; }
+
+/* [hidden] is removed by JS on load; keeps content readable if JS fails */
+.t-full[hidden] { display: grid; }
+
+.t-toggle {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: none; border: 0; padding: 10px 0 0; cursor: pointer;
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .82rem;
+  color: var(--orange); letter-spacing: .01em;
+  transition: color .2s, gap .2s;
+}
+.t-toggle:hover { color: var(--navy); gap: 10px; }
+.t-chev { transition: transform .35s cubic-bezier(.4,0,.2,1); flex: none; }
+.t-toggle[aria-expanded="true"] .t-chev { transform: rotate(180deg); }
+.t-toggle:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 4px; }
+
+/* Cards stay top-aligned so a card expanding doesn't shove its
+   neighbours' text around. */
+.testimonial-grid, .t-grid { align-items: start; }
+
+
+/* ---------- 3. Pricing carousel on mobile ---------- */
+
+/* Hint + dots are mobile-only furniture — declared before the query
+   so the mobile rules below can turn them back on. */
+.pkg-hint, .pkg-dots { display: none; }
+
+@media (max-width: 760px) {
+  .pkgs {
+    display: flex; grid-template-columns: none;
+    gap: 16px; max-width: none; margin: 0 -20px;
+    padding: 20px 20px 8px;
+    overflow-x: auto; overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .pkgs::-webkit-scrollbar { display: none; }
+  .pkg {
+    flex: 0 0 82%; max-width: 330px;
+    scroll-snap-align: center;
+    padding: 34px 24px 28px;
+  }
+  /* hover-lift is meaningless on touch and fights scroll-snap */
+  .pkg:hover { transform: none; }
+
+  .pkg-hint {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin: 4px auto 0; padding: 0;
+    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .76rem;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--ink-light);
+    transition: opacity .4s ease, transform .4s ease;
+  }
+  .pkg-hint.hide { opacity: 0; transform: translateY(-4px); pointer-events: none; }
+  .pkg-hint svg { flex: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .pkg-hint svg { animation: nudge 1.5s ease-in-out infinite; }
+  }
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(6px); }
+  }
+
+  /* Progress dots */
+  .pkg-dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; }
+  .pkg-dots button {
+    width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%;
+    background: rgba(24,41,70,.22); cursor: pointer;
+    transition: background .3s, width .3s, border-radius .3s;
+  }
+  .pkg-dots button.active { background: var(--orange); width: 20px; border-radius: 999px; }
+}
+
+
+/* ---------- 4. Sitewide motion ---------- */
+
+/* Scroll progress bar */
+.scroll-bar {
+  position: fixed; top: 0; left: 0; height: 3px; width: 100%;
+  transform: scaleX(0); transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--orange), var(--green));
+  z-index: 999; pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* Nav condenses once you leave the hero */
+  .site-header, header.site-header {
+    transition: background .35s ease, box-shadow .35s ease, padding .35s ease;
+  }
+  .nav-condensed .site-header, .site-header.nav-condensed {
+    background: rgba(252,245,222,.92);
+    backdrop-filter: saturate(1.4) blur(10px);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    box-shadow: 0 1px 0 rgba(24,41,70,.08), 0 6px 22px rgba(20,31,56,.07);
+  }
+
+  /* Grid items cascade instead of all arriving at once. Delay is applied
+     only while un-settled, so it never lags a hover afterwards. */
+  .cs-cards > .reveal:not(.settled),
+  .grid     > .reveal:not(.settled),
+  .services > .reveal:not(.settled),
+  .cards    > .reveal:not(.settled),
+  .steps    > .reveal:not(.settled),
+  .pkgs     > .reveal:not(.settled) { transition-delay: 0s; }
+
+  .cs-cards > .reveal:nth-child(2):not(.settled),
+  .grid     > .reveal:nth-child(2):not(.settled),
+  .services > .reveal:nth-child(2):not(.settled),
+  .cards    > .reveal:nth-child(2):not(.settled),
+  .steps    > .reveal:nth-child(2):not(.settled),
+  .pkgs     > .reveal:nth-child(2):not(.settled) { transition-delay: .09s; }
+
+  .cs-cards > .reveal:nth-child(3):not(.settled),
+  .grid     > .reveal:nth-child(3):not(.settled),
+  .services > .reveal:nth-child(3):not(.settled),
+  .cards    > .reveal:nth-child(3):not(.settled),
+  .steps    > .reveal:nth-child(3):not(.settled),
+  .pkgs     > .reveal:nth-child(3):not(.settled) { transition-delay: .18s; }
+
+  .cs-cards > .reveal:nth-child(4):not(.settled),
+  .grid     > .reveal:nth-child(4):not(.settled),
+  .services > .reveal:nth-child(4):not(.settled),
+  .steps    > .reveal:nth-child(4):not(.settled) { transition-delay: .27s; }
+
+  .grid     > .reveal:nth-child(5):not(.settled),
+  .services > .reveal:nth-child(5):not(.settled) { transition-delay: .30s; }
+
+  /* Buttons: lift + light sweep */
+  .btn { position: relative; overflow: hidden; transition: transform .25s cubic-bezier(.34,1.4,.64,1), box-shadow .25s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn::after {
+    content: ''; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.32), transparent);
+    transform: skewX(-20deg); transition: left .55s ease;
+  }
+  .btn:hover::after { left: 130%; }
+
+  /* Work images breathe on hover */
+  .grid a img, .cs-card img { transition: transform .6s cubic-bezier(.22,1,.36,1); }
+  .grid a:hover img, .cs-card:hover img { transform: scale(1.045); }
+
+  /* Hero showcase drifts gently — staggered so it never pulses in unison */
+  .hero-showcase img { animation: float 7s ease-in-out infinite; }
+  .hero-showcase a:nth-child(2) img { animation-delay: -1.6s; }
+  .hero-showcase a:nth-child(3) img { animation-delay: -3.2s; }
+  .hero-showcase a:nth-child(4) img { animation-delay: -4.8s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-7px); }
+  }
+  /* hover intent beats the idle drift */
+  .hero-showcase a:hover img { animation-play-state: paused; }
+
+  /* Eyebrow gets a drawing rule */
+  .section-head .eyebrow { position: relative; }
+  .section-head .eyebrow::after {
+    content: ''; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0;
+    background: var(--orange); transition: width .7s cubic-bezier(.22,1,.36,1) .2s;
+  }
+  .reveal.in .section-head .eyebrow::after,
+  .section-head.reveal.in .eyebrow::after { width: 34px; }
+
+  /* Nav links underline from the left */
+  .nav-links a { position: relative; }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; bottom: -3px; height: 2px; width: 0;
+    background: var(--orange); transition: width .28s cubic-bezier(.22,1,.36,1);
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* Service tiles */
+  .service { transition: transform .3s cubic-bezier(.34,1.4,.64,1), box-shadow .3s, border-color .3s; }
+  .service:hover { transform: translateY(-5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-bar { display: none; }
+  .t-full { transition: none; }
+}
