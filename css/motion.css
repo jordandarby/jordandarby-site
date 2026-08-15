@@ -45,79 +45,76 @@ html:not(.intro-armed) .intro { display: none; }
 }
 @keyframes stripeIn { to { transform: scaleY(1); } }
 
-/* Stripes retract just before the panel leaves, so the orange
-   bar reads as a deliberate brand beat rather than a flash. */
-.intro.leaving .intro-stripes i {
-  animation: stripeOut .42s cubic-bezier(.65,0,.35,1) forwards;
-  transform-origin: top;
-}
-.intro.leaving .intro-stripes i:nth-child(1) { animation-delay: .00s; }
-.intro.leaving .intro-stripes i:nth-child(2) { animation-delay: .04s; }
-.intro.leaving .intro-stripes i:nth-child(3) { animation-delay: .08s; }
-.intro.leaving .intro-stripes i:nth-child(4) { animation-delay: .12s; }
-.intro.leaving .intro-stripes i:nth-child(5) { animation-delay: .16s; }
-@keyframes stripeOut { to { transform: scaleY(0); } }
+/* Stripes hold until the white dissolve carries them off. */
 
 .intro-inner {
   position: relative; z-index: 2; text-align: center;
   padding: 0 24px; max-width: 900px;
 }
 
-/* Name + role */
-.intro-head { margin-bottom: 22px; }
-.intro-name {
-  display: block; font-family: var(--display); font-weight: 600;
-  font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.04; color: #fff;
-  letter-spacing: -.02em;
-  opacity: 0; transform: translateY(18px);
-  animation: introUp .7s cubic-bezier(.22,1,.36,1) .30s forwards;
-}
-.intro-role {
-  display: block; margin-top: 10px;
-  font-family: 'Poppins', sans-serif; font-weight: 700;
-  font-size: .74rem; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--orange);
-  opacity: 0; transform: translateY(14px);
-  animation: introUp .7s cubic-bezier(.22,1,.36,1) .40s forwards;
-}
-@keyframes introUp { to { opacity: 1; transform: none; } }
-
-/* Vertical service roll */
-/* font-size lives on the container so the clip height, the step
-   distance and the line height all resolve against the same em. */
-.intro-roll {
-  font-size: clamp(.95rem, 2.4vw, 1.15rem);
-  height: 1.6em; overflow: hidden; margin: 0 auto 30px;
-  opacity: 0; animation: introFade .4s ease .50s forwards;
+/* ---- Slot machine: capabilities roll bottom-to-top, landing on identity ---- */
+.intro-slots {
+  --slot: clamp(168px, 31vh, 250px);
+  height: var(--slot); overflow: hidden; width: 100%;
+  margin-bottom: 26px;
+  opacity: 0; animation: introFade .3s ease .28s forwards;
 }
 @keyframes introFade { to { opacity: 1; } }
-.intro-roll-track {
+
+.intro-slot-track {
   display: flex; flex-direction: column;
-  animation: roll 2.05s cubic-bezier(.7,0,.3,1) .50s forwards;
+  animation: slots 1.9s cubic-bezier(.72,0,.28,1) .35s forwards;
 }
-.intro-roll-track span {
-  height: 1.6em; line-height: 1.6em; flex: none;
-  font-family: 'Poppins', sans-serif; font-weight: 500; font-size: inherit;
-  color: rgba(255,255,255,.82); white-space: nowrap;
+.slot {
+  height: var(--slot); flex: none;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px;
+  padding: 0 clamp(18px, 5vw, 44px); text-align: center;
 }
-@keyframes roll {
-  0%,  14% { transform: translateY(0); }
-  20%, 34% { transform: translateY(-1.6em); }
-  40%, 54% { transform: translateY(-3.2em); }
-  60%, 74% { transform: translateY(-4.8em); }
-  80%, 94% { transform: translateY(-6.4em); }
-  100%     { transform: translateY(-8em); }
+.slot > span {
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(1.45rem, 4.6vw, 3.1rem); line-height: 1.12;
+  letter-spacing: -.015em; color: var(--orange);
+  text-wrap: balance;
+}
+/* Each capability sits one slot-height below the last, so the track
+   steps upward exactly one panel per beat. */
+@keyframes slots {
+  0%,  11% { transform: translateY(0); }
+  17%, 28% { transform: translateY(calc(var(--slot) * -1)); }
+  34%, 45% { transform: translateY(calc(var(--slot) * -2)); }
+  51%, 62% { transform: translateY(calc(var(--slot) * -3)); }
+  68%, 79% { transform: translateY(calc(var(--slot) * -4)); }
+  88%,100% { transform: translateY(calc(var(--slot) * -5)); }
+}
+
+/* Final panel — the reel settles on who did the work */
+.slot-photo {
+  width: clamp(76px, 15vh, 118px); height: clamp(76px, 15vh, 118px);
+  border-radius: 50%; object-fit: cover; display: block;
+  border: 3px solid var(--orange);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+/* Needs to outrank `.slot > span`, which sets the capability colour/size. */
+.slot-me > .slot-name {
+  font-family: var(--display); font-weight: 600; color: #fff;
+  font-size: clamp(1.6rem, 5vw, 3.2rem); line-height: 1.05;
+  letter-spacing: -.02em;
 }
 
 /* Work bubbles */
 .intro-bubbles { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .intro-bubbles span {
-  width: clamp(58px, 14vw, 92px); aspect-ratio: 1; border-radius: 50%;
-  overflow: hidden; background: var(--navy); display: block;
+  width: clamp(52px, 12vw, 84px); aspect-ratio: 1; border-radius: 50%;
+  overflow: hidden; display: block;
   box-shadow: 0 8px 24px rgba(0,0,0,.28);
   opacity: 0; transform: scale(.4) translateY(20px);
-  animation: bubbleIn .72s cubic-bezier(.34,1.56,.64,1) var(--d, .3s) forwards;
+  /* Pop in under the capability reel, then clear out before the reel
+     settles on the name — the identity frame stays uncluttered. */
+  animation: bubbleIn  .72s cubic-bezier(.34,1.56,.64,1) var(--d, .3s) forwards,
+             bubbleOut .34s ease 1.78s forwards;
 }
+@keyframes bubbleOut { to { opacity: 0; transform: scale(.82) translateY(-6px); } }
 .intro-bubbles img { width: 100%; height: 100%; object-fit: cover; display: block; }
 @keyframes bubbleIn { to { opacity: 1; transform: none; } }
 
@@ -133,11 +130,14 @@ html:not(.intro-armed) .intro { display: none; }
 }
 .intro-skip:hover { background: rgba(255,255,255,.24); }
 
-/* Exit — panel lifts away, revealing the hero underneath */
-.intro.leaving {
-  transform: translateY(-101%);
-  transition: transform .66s cubic-bezier(.76,0,.24,1) .18s;
-}
+/* Exit, stage 1 — everything dissolves to white */
+.intro.to-white { background: #fff; transition: background .42s ease; }
+.intro.to-white .intro-stripes,
+.intro.to-white .intro-inner,
+.intro.to-white .intro-skip { opacity: 0; transition: opacity .34s ease; }
+
+/* Exit, stage 2 — the white sheet fades off and the site comes up under it */
+.intro.clearing { opacity: 0; transition: opacity .5s ease; }
 
 /* Hero gets a gentle lift as the panel clears */
 @media (prefers-reduced-motion: no-preference) {
