@@ -17,20 +17,27 @@
     }
     try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
 
-    var finished = false;
+    // Timeline: stripes .62s | reel .35s-2.25s | hold | white | site.
+    var finished = false, timers = [];
     function finish() {
       if (finished) return;
       finished = true;
-      el.classList.add('leaving');
-      root.classList.remove('intro-armed');
-      root.classList.add('intro-done');
-      // remove from the DOM after the exit transition
-      setTimeout(function () {
+      timers.forEach(clearTimeout);
+
+      el.classList.add('to-white');                       // dissolve to white
+      timers.push(setTimeout(function () {
+        el.classList.add('clearing');                     // white sheet fades off
+        root.classList.remove('intro-armed');
+        root.classList.add('intro-done');                 // site fades up beneath
+      }, 400));
+      timers.push(setTimeout(function () {
         if (el.parentNode) el.parentNode.removeChild(el);
-      }, 1000);
+      }, 950));
     }
 
-    var timer = setTimeout(finish, 2750);
+    // 2.25s reel + a short beat on the name before the dissolve starts.
+    var timer = setTimeout(finish, 2850);
+    timers.push(timer);
 
     var skip = el.querySelector('.intro-skip');
     if (skip) skip.addEventListener('click', function () { clearTimeout(timer); finish(); });
@@ -44,7 +51,7 @@
       }
     });
     // Safety net: if anything above throws, never trap the visitor.
-    window.addEventListener('load', function () { setTimeout(finish, 3200); });
+    window.addEventListener('load', function () { setTimeout(finish, 3400); });
   })();
 
   /* ---------- 2. Testimonials ---------- */
