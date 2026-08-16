@@ -25,7 +25,28 @@
   if (toggle && links) {
     toggle.addEventListener('click', function () {
       var open = links.classList.toggle('open');
+      toggle.classList.toggle('open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    // Tapping a destination should close the menu behind you.
+    links.addEventListener('click', function (e) {
+      if (!e.target.closest('a')) return;
+      links.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+    });
+  }
+
+  // FAQ — accordion behaviour: opening one closes the rest
+  var faq = document.querySelectorAll('.faq details');
+  if (faq.length) {
+    faq.forEach(function (d) {
+      d.addEventListener('toggle', function () {
+        if (!d.open) return;
+        faq.forEach(function (other) { if (other !== d) other.open = false; });
+      });
     });
   }
 
