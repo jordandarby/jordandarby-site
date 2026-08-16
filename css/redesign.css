@@ -466,10 +466,17 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 .dsc.open{grid-template-rows:1fr;opacity:1;margin-top:10px}
 .dsc[hidden]{display:grid}   /* JS clears this; keeps content reachable if JS fails */
 
-/* package card: list margin lives on the wrapper now so it collapses cleanly */
+/* package card: list margin lives on the wrapper now so it collapses cleanly.
+   The wrapper also carries the floor gap above the CTA — `.pkg .btn` uses
+   margin-top:auto, which collapses to 0 on a content-sized card and left the
+   toggle sitting flush against the button. */
 .pkg .dsc-inner ul{margin-bottom:0}
-.pkg .dsc.open{margin-bottom:26px}
+.pkg .dsc{margin-bottom:24px}
 .pkg .dsc-btn{margin-bottom:0}
+/* Ghost buttons carry a 2px border, the solid one doesn't — without a
+   transparent border to match, the featured CTA sat 4px shorter than its
+   neighbours and the three tops didn't line up. */
+.pkg .btn-orange{border:2px solid transparent}
 .featured .dsc-btn{color:var(--orange)}
 
 /* process card: number + name only until asked */
