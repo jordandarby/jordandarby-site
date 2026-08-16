@@ -50,6 +50,20 @@
     });
   }
 
+  // Disclosures — package deliverables and process detail, collapsed by default
+  var discs = document.querySelectorAll('.dsc-btn');
+  discs.forEach(function (btn) {
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    panel.removeAttribute('hidden');
+    var label = btn.querySelector('.dsc-label');
+    btn.addEventListener('click', function () {
+      var open = panel.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (label) label.textContent = btn.getAttribute(open ? 'data-less' : 'data-more');
+    });
+  });
+
   // Contact form — AJAX submit with graceful fallback (no JS = normal POST)
   var form = document.querySelector('.cta-form');
   if (form && window.fetch) {
