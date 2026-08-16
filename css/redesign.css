@@ -32,7 +32,6 @@ body{font-size:17px}
 /* ---------- HERO reworked (work-led) ---------- */
 .hero{padding:70px 0 84px}
 .hero .wrap{grid-template-columns:1.02fr .98fr;gap:60px}
-.hero-sub{color:var(--ink-light);font-weight:600;margin:20px 0 22px}
 .hero-bio{color:var(--ink);max-width:540px}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
 .hero .stats{gap:30px;margin:38px 0 30px}
@@ -319,8 +318,7 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
   h1{font-size:clamp(2.15rem,8.6vw,2.9rem)}
   h2{font-size:clamp(1.6rem,6.4vw,2.1rem)}
   .hero-bio{font-size:1rem;line-height:1.65}
-  .hero-sub{font-size:1.05rem;margin:16px 0 18px}
-  /* wide letter-spacing forces extra line breaks at small widths */
+    /* wide letter-spacing forces extra line breaks at small widths */
   .eyebrow{letter-spacing:.11em;font-size:.72rem}
 
   /* stats were wrapping 2 + 1, which reads as a mistake.
@@ -479,8 +477,13 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 .pkg .btn-orange{border:2px solid transparent}
 .featured .dsc-btn{color:var(--orange)}
 
-/* process card: number + name only until asked */
-.step .dsc-btn{margin-top:2px}
+/* process card: number + name only until asked.
+   Step 03's heading wraps to two lines, which pushed its toggle 22px below
+   the other three. Reserving two lines evens the gaps, and margin-top:auto
+   keeps the toggles aligned even if a heading ever runs longer. */
+.step{display:flex;flex-direction:column}
+.step h3{min-height:44px;min-height:2lh}
+.step .dsc-btn{margin-top:auto}
 .step .dsc-inner p{margin:0}
 
 /* ---------- Animated cue pointing down to the case studies ---------- */
@@ -494,3 +497,7 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   .scroll-cue svg{animation:cueBob 1.7s ease-in-out infinite}
   @keyframes cueBob{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
 }
+
+/* ---------- Hero: the sub-line used to carry the gap under the headline ---------- */
+.hero-copy h1{margin-bottom:26px}
+@media (max-width:760px){.hero-copy h1{margin-bottom:18px}}
