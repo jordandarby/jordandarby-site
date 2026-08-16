@@ -450,3 +450,40 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   .brands .brand-track{flex-wrap:wrap;justify-content:center;gap:10px 30px}
   .brands .brand-track[aria-hidden="true"]{display:none}
 }
+
+/* ---------- Disclosure: collapsed detail in package + process cards ---------- */
+.dsc-btn{display:inline-flex;align-items:center;gap:7px;background:none;border:0;cursor:pointer;
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:.82rem;color:var(--orange);
+  padding:0;margin:0 0 4px;transition:color .2s,gap .2s}
+.dsc-btn:hover{gap:10px}
+.dsc-btn:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
+.dsc-chev{flex:none;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.dsc-btn[aria-expanded="true"] .dsc-chev{transform:rotate(180deg)}
+/* 0fr -> 1fr animates to auto height without measuring pixels */
+.dsc{display:grid;grid-template-rows:0fr;opacity:0;
+  transition:grid-template-rows .42s cubic-bezier(.4,0,.2,1),opacity .3s ease,margin-top .42s cubic-bezier(.4,0,.2,1)}
+.dsc-inner{overflow:hidden;min-height:0}
+.dsc.open{grid-template-rows:1fr;opacity:1;margin-top:10px}
+.dsc[hidden]{display:grid}   /* JS clears this; keeps content reachable if JS fails */
+
+/* package card: list margin lives on the wrapper now so it collapses cleanly */
+.pkg .dsc-inner ul{margin-bottom:0}
+.pkg .dsc.open{margin-bottom:26px}
+.pkg .dsc-btn{margin-bottom:0}
+.featured .dsc-btn{color:var(--orange)}
+
+/* process card: number + name only until asked */
+.step .dsc-btn{margin-top:2px}
+.step .dsc-inner p{margin:0}
+
+/* ---------- Animated cue pointing down to the case studies ---------- */
+.scroll-cue{display:flex;align-items:center;justify-content:center;width:46px;height:46px;
+  margin:18px auto 0;border-radius:50%;color:var(--navy);border:2px solid rgba(24,41,70,.16);
+  transition:background .25s,border-color .25s,color .25s}
+.scroll-cue:hover{background:var(--orange);border-color:var(--orange);color:var(--navy-deep)}
+.scroll-cue:focus-visible{outline:2px solid var(--orange);outline-offset:4px}
+.work-cta-line{margin-bottom:0}
+@media (prefers-reduced-motion:no-preference){
+  .scroll-cue svg{animation:cueBob 1.7s ease-in-out infinite}
+  @keyframes cueBob{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
+}
