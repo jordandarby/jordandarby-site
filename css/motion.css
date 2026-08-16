@@ -180,13 +180,15 @@
   .reveal.in .section-head .eyebrow::after,
   .section-head.reveal.in .eyebrow::after { width: 34px; }
 
-  /* Nav links underline from the left */
-  .nav-links a { position: relative; }
-  .nav-links a::after {
+  /* Nav links underline from the left. The CTA button and the LinkedIn mark
+     are not text links, so they must be excluded or the rule draws a stray
+     bar across the button. */
+  .nav-links a:not(.nav-cta):not(.nav-linkedin) { position: relative; }
+  .nav-links a:not(.nav-cta):not(.nav-linkedin)::after {
     content: ''; position: absolute; left: 0; bottom: -3px; height: 2px; width: 0;
     background: var(--orange); transition: width .28s cubic-bezier(.22,1,.36,1);
   }
-  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:not(.nav-cta):not(.nav-linkedin):hover::after { width: 100%; }
 
   /* Service tiles */
   .service { transition: transform .3s cubic-bezier(.34,1.4,.64,1), box-shadow .3s, border-color .3s; }

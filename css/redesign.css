@@ -401,3 +401,52 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
 @media (prefers-reduced-motion:no-preference){
   .reveal:not(.settled){transition:opacity .7s ease,transform .7s ease !important}
 }
+
+/* ---------- Nav: animated menu button ---------- */
+.nav-toggle .bars{display:block;position:relative;width:22px;height:16px}
+.nav-toggle .bars i{position:absolute;left:0;width:100%;height:2px;border-radius:2px;
+  background:var(--navy);transition:transform .3s cubic-bezier(.4,0,.2,1),opacity .2s ease,top .3s cubic-bezier(.4,0,.2,1)}
+.nav-toggle .bars i:nth-child(1){top:0}
+.nav-toggle .bars i:nth-child(2){top:7px}
+.nav-toggle .bars i:nth-child(3){top:14px}
+/* open: outer bars meet in the middle and cross, middle bar fades */
+.nav-toggle.open .bars i:nth-child(1){top:7px;transform:rotate(45deg)}
+.nav-toggle.open .bars i:nth-child(2){opacity:0;transform:scaleX(.4)}
+.nav-toggle.open .bars i:nth-child(3){top:7px;transform:rotate(-45deg)}
+@media (prefers-reduced-motion:reduce){.nav-toggle .bars i{transition:none}}
+
+/* ---------- Nav: CTA inside the mobile menu ----------
+   `.nav-links li a` (0,1,2) outranked `.nav-cta` (0,1,0), so the button lost
+   its horizontal padding and stretched as a plain block. ---------- */
+@media (max-width:1080px){
+  .nav-links li .nav-cta{display:block;margin:12px 0 6px;padding:13px 20px;
+    text-align:center;border-radius:10px}
+  .nav-links li .nav-linkedin{display:inline-flex;align-items:center;padding:10px 0}
+}
+
+/* ---------- Testimonials: LinkedIn mark is now a link ---------- */
+a.card-li{display:block;transition:transform .2s ease,opacity .2s ease}
+a.card-li:hover{transform:translateY(-2px);opacity:1}
+a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
+
+/* ---------- Brand marquee ---------- */
+.brands .wrap{display:block;text-align:center}
+.brand-marquee{display:flex;width:100%;overflow:hidden;margin-top:24px;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent)}
+.brands .brand-track{list-style:none;display:flex;flex-wrap:nowrap;flex:0 0 auto;
+  min-width:100%;justify-content:space-around;align-items:center;gap:0;margin:0;padding:0}
+.brands .brand-track li{flex:none;padding:0 clamp(20px,3vw,42px);white-space:nowrap;
+  font-family:var(--display,'Fraunces',serif);font-weight:600;
+  font-size:clamp(1.1rem,2vw,1.6rem);opacity:.92}
+@media (prefers-reduced-motion:no-preference){
+  .brands .brand-track{animation:marquee 36s linear infinite}
+  .brand-marquee:hover .brand-track{animation-play-state:paused}
+  @keyframes marquee{to{transform:translateX(-100%)}}
+}
+/* Reduced motion: no scroll — show one static, centred row */
+@media (prefers-reduced-motion:reduce){
+  .brand-marquee{overflow:hidden;-webkit-mask-image:none;mask-image:none}
+  .brands .brand-track{flex-wrap:wrap;justify-content:center;gap:10px 30px}
+  .brands .brand-track[aria-hidden="true"]{display:none}
+}
