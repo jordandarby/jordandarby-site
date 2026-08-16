@@ -578,3 +578,8 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 /* The preview caption now holds only the drag hint. */
 .sp-cap{justify-content:center}
 @media (hover:none){ .sp-cap{display:none} }
+
+/* ---------- Hero: copy starts level with the artwork ----------
+   style.css centres the two columns, which dropped the headline well below
+   the top edge of the image grid. Align to the top instead. */
+.hero .wrap{align-items:start}
