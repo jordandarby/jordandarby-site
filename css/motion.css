@@ -168,18 +168,6 @@
   .grid a img, .cs-card img { transition: transform .6s cubic-bezier(.22,1,.36,1); }
   .grid a:hover img, .cs-card:hover img { transform: scale(1.045); }
 
-  /* Hero showcase drifts gently — staggered so it never pulses in unison */
-  .hero-showcase img { animation: float 7s ease-in-out infinite; }
-  .hero-showcase a:nth-child(2) img { animation-delay: -1.6s; }
-  .hero-showcase a:nth-child(3) img { animation-delay: -3.2s; }
-  .hero-showcase a:nth-child(4) img { animation-delay: -4.8s; }
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-7px); }
-  }
-  /* hover intent beats the idle drift */
-  .hero-showcase a:hover img { animation-play-state: paused; }
-
   /* Eyebrow gets a drawing rule. .section-head .eyebrow is display:block and
      the head is centred, so the rule must be pinned to the centre — anchoring
      it at left:0 stranded it against the far edge of the section. */
