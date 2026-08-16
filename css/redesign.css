@@ -583,3 +583,13 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
    style.css centres the two columns, which dropped the headline well below
    the top edge of the image grid. Align to the top instead. */
 .hero .wrap{align-items:start}
+
+/* ---------- Client feature: scannable rationale ---------- */
+.client-lede{color:var(--navy);font-weight:600;font-size:1.05rem;line-height:1.5;
+  margin-bottom:16px;text-wrap:pretty}
+.client-points{list-style:none;display:flex;flex-direction:column;gap:11px;margin:0 0 22px}
+.client-points li{position:relative;padding-left:18px;font-size:.95rem;line-height:1.55;
+  color:var(--ink-light);text-wrap:pretty}
+.client-points li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:2px;
+  border-radius:2px;background:var(--orange)}
+.client-points strong{color:var(--navy);font-weight:600}
