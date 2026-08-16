@@ -192,6 +192,13 @@ body{font-size:17px}
   border-left:3px solid var(--orange);padding:4px 0 4px 16px}
 .cs-card .concept-tag{display:inline-block;background:var(--navy);color:var(--cream);font-size:.62rem;
   font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:5px;margin-right:7px;vertical-align:2px}
+/* Client work reads as the stronger signal, so it carries the accent colour. */
+.cs-card .client-tag{display:inline-block;background:var(--orange);color:var(--navy-deep);font-size:.62rem;
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:5px;margin-right:7px;vertical-align:2px}
+/* Case study group headings */
+.cs-group-head{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);
+  text-align:center;margin:0 0 10px;font-family:'Poppins',sans-serif;font-weight:700}
+.cs-group-intro{text-align:center;max-width:700px;margin:0 auto 34px;color:var(--ink-light)}
 
 /* ---------- Pricing packages ---------- */
 .pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:stretch}
@@ -356,7 +363,7 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
     margin-right:-8px;line-height:1}
 }
 @media (max-width:760px){
-  .cs-card .concept-tag{font-size:.68rem;padding:4px 9px}
+  .cs-card .concept-tag,.cs-card .client-tag{font-size:.68rem;padding:4px 9px}
   .pkg-flag{font-size:.68rem;padding:6px 15px}
   .cs-card .cat{font-size:.74rem}
 }
@@ -368,9 +375,9 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
 
 /* ---------- Services: 5 tiles, centre any short row ---------- */
 .services{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
-.services > .service{flex:0 1 calc(20% - 17.6px);max-width:calc(20% - 17.6px)}
+.services > .service{flex:0 1 calc(33.333% - 14.67px);max-width:calc(33.333% - 14.67px)}
 @media (max-width:1000px){
-  .services > .service{flex-basis:calc(33.333% - 14.67px);max-width:calc(33.333% - 14.67px)}
+  .services > .service{flex-basis:calc(50% - 11px);max-width:calc(50% - 11px)}
 }
 @media (max-width:760px){
   .services{gap:14px}
@@ -501,3 +508,10 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 /* ---------- Hero: the sub-line used to carry the gap under the headline ---------- */
 .hero-copy h1{margin-bottom:26px}
 @media (max-width:760px){.hero-copy h1{margin-bottom:18px}}
+
+/* ---------- Repositioning: services note + packaging add-on line ---------- */
+.services-note{text-align:center;max-width:640px;margin:30px auto 0;color:var(--ink-light);
+  font-size:1rem;line-height:1.65;text-wrap:pretty}
+.pkg-addon{margin-top:14px;padding-top:14px;border-top:1px solid rgba(24,41,70,.12);
+  font-size:.86rem;line-height:1.55;color:var(--ink-light)}
+.pkg.featured .pkg-addon{border-top-color:rgba(255,255,255,.18);color:#c9d3e4}
