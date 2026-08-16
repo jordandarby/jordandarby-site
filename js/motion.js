@@ -17,7 +17,7 @@
     }
     try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
 
-    // Timeline: stripes .62s | reel .35s-2.25s | hold | white | site.
+    // Timeline: stripes .62s | reel .3s-3.5s | hold | white | site.
     var finished = false, timers = [];
     function finish() {
       if (finished) return;
@@ -35,8 +35,8 @@
       }, 950));
     }
 
-    // 2.25s reel + a short beat on the name before the dissolve starts.
-    var timer = setTimeout(finish, 2850);
+    // Reel ends at 3.5s; hold on the name before the dissolve starts.
+    var timer = setTimeout(finish, 4150);
     timers.push(timer);
 
     var skip = el.querySelector('.intro-skip');
@@ -51,7 +51,7 @@
       }
     });
     // Safety net: if anything above throws, never trap the visitor.
-    window.addEventListener('load', function () { setTimeout(finish, 3400); });
+    window.addEventListener('load', function () { setTimeout(finish, 5200); });
   })();
 
   /* ---------- 2. Testimonials ---------- */

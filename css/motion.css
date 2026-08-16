@@ -30,12 +30,13 @@ html:not(.intro-armed) .intro { display: none; }
   animation: stripeIn .62s cubic-bezier(.65,0,.35,1) forwards;
 }
 /* Navy tones carry the panel; orange is a narrow accent, not a field. */
-.intro-stripes i:nth-child(1) { background: var(--navy);      animation-delay: .00s; }
-.intro-stripes i:nth-child(2) { background: #1B2F50;          animation-delay: .06s; }
-.intro-stripes i:nth-child(3) { background: var(--orange); flex: 0 0 clamp(6px, 1.4vw, 16px);
-                                animation-delay: .12s; }
-.intro-stripes i:nth-child(4) { background: #162744;          animation-delay: .18s; }
-.intro-stripes i:nth-child(5) { background: var(--navy);      animation-delay: .24s; }
+/* Tones sit close together so the wipe reads as texture, not blocks —
+   the capability type should be the only thing with contrast. */
+.intro-stripes i:nth-child(1) { background: #17273F;          animation-delay: .00s; }
+.intro-stripes i:nth-child(2) { background: #182A44;          animation-delay: .06s; }
+.intro-stripes i:nth-child(3) { background: #192C48;          animation-delay: .12s; }
+.intro-stripes i:nth-child(4) { background: #172942;          animation-delay: .18s; }
+.intro-stripes i:nth-child(5) { background: #17273F;          animation-delay: .24s; }
 
 /* Scrim keeps the headline legible whatever sits behind it. */
 .intro-stripes::after {
@@ -49,74 +50,73 @@ html:not(.intro-armed) .intro { display: none; }
 
 .intro-inner {
   position: relative; z-index: 2; text-align: center;
-  padding: 0 24px; max-width: 900px;
+  padding: 0; width: 100%;
 }
 
-/* ---- Slot machine: capabilities roll bottom-to-top, landing on identity ---- */
+/* ---- Slot machine: capabilities roll bottom-to-top, landing on identity.
+   The window is three panels tall — the centre one is in focus, the ones
+   arriving from below and leaving above sit behind a blurred haze. ---- */
 .intro-slots {
-  --slot: clamp(168px, 31vh, 250px);
-  height: var(--slot); overflow: hidden; width: 100%;
-  margin-bottom: 26px;
-  opacity: 0; animation: introFade .3s ease .28s forwards;
+  --slot: clamp(155px, 25vh, 205px);
+  position: relative;
+  height: calc(var(--slot) * 3); width: 100%; overflow: hidden;
+  opacity: 0; animation: introFade .3s ease .22s forwards;
 }
 @keyframes introFade { to { opacity: 1; } }
 
 .intro-slot-track {
   display: flex; flex-direction: column;
-  animation: slots 1.9s cubic-bezier(.72,0,.28,1) .35s forwards;
+  animation: slots 3.2s cubic-bezier(.66,0,.34,1) .3s forwards;
 }
 .slot {
   height: var(--slot); flex: none;
   display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 14px;
-  padding: 0 clamp(18px, 5vw, 44px); text-align: center;
+  align-items: center; justify-content: center; gap: 12px;
+  padding: 0 clamp(16px, 4vw, 40px); text-align: center;
 }
 .slot > span {
   font-family: var(--display); font-weight: 600;
-  font-size: clamp(1.45rem, 4.6vw, 3.1rem); line-height: 1.12;
-  letter-spacing: -.015em; color: var(--orange);
-  text-wrap: balance;
+  font-size: clamp(2.6rem, 7.4vw, 5.6rem); line-height: 1.02;
+  letter-spacing: -.03em; color: var(--orange);
+  text-wrap: balance; max-width: 1100px;
 }
-/* Each capability sits one slot-height below the last, so the track
-   steps upward exactly one panel per beat. */
+
+/* Haze blurs whatever passes behind it, so only the centre panel is sharp. */
+.slot-haze {
+  position: absolute; left: 0; right: 0; height: var(--slot);
+  z-index: 2; pointer-events: none;
+  backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
+}
+.slot-haze-top    { top: 0;    background: linear-gradient(to bottom, var(--navy-deep) 6%, rgba(20,31,56,.42)); }
+.slot-haze-bottom { bottom: 0; background: linear-gradient(to top,    var(--navy-deep) 6%, rgba(20,31,56,.42)); }
+/* Once the reel lands, the haze goes solid so the name sits alone. */
+.slot-haze::after {
+  content: ''; position: absolute; inset: 0; background: var(--navy-deep);
+  opacity: 0; animation: introFade .4s ease 3.05s forwards;
+}
+
+/* Track starts one panel low, so capability 1 sits in the centre band. */
 @keyframes slots {
-  0%,  11% { transform: translateY(0); }
-  17%, 28% { transform: translateY(calc(var(--slot) * -1)); }
-  34%, 45% { transform: translateY(calc(var(--slot) * -2)); }
-  51%, 62% { transform: translateY(calc(var(--slot) * -3)); }
-  68%, 79% { transform: translateY(calc(var(--slot) * -4)); }
-  88%,100% { transform: translateY(calc(var(--slot) * -5)); }
+  0%,  12% { transform: translateY(calc(var(--slot) *  1)); }
+  20%, 32% { transform: translateY(0); }
+  40%, 52% { transform: translateY(calc(var(--slot) * -1)); }
+  60%, 72% { transform: translateY(calc(var(--slot) * -2)); }
+  78%, 88% { transform: translateY(calc(var(--slot) * -3)); }
+  95%,100% { transform: translateY(calc(var(--slot) * -4)); }
 }
 
 /* Final panel — the reel settles on who did the work */
 .slot-photo {
-  width: clamp(76px, 15vh, 118px); height: clamp(76px, 15vh, 118px);
+  width: clamp(80px, 13vh, 124px); height: clamp(80px, 13vh, 124px);
   border-radius: 50%; object-fit: cover; display: block;
   border: 3px solid var(--orange);
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
-/* Needs to outrank `.slot > span`, which sets the capability colour/size. */
 .slot-me > .slot-name {
   font-family: var(--display); font-weight: 600; color: #fff;
-  font-size: clamp(1.6rem, 5vw, 3.2rem); line-height: 1.05;
+  font-size: max(1.6rem, min(3.4rem, 5vw, 6.5vh)); line-height: 1.05;
   letter-spacing: -.02em;
 }
-
-/* Work bubbles */
-.intro-bubbles { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-.intro-bubbles span {
-  width: clamp(52px, 12vw, 84px); aspect-ratio: 1; border-radius: 50%;
-  overflow: hidden; display: block;
-  box-shadow: 0 8px 24px rgba(0,0,0,.28);
-  opacity: 0; transform: scale(.4) translateY(20px);
-  /* Pop in under the capability reel, then clear out before the reel
-     settles on the name — the identity frame stays uncluttered. */
-  animation: bubbleIn  .72s cubic-bezier(.34,1.56,.64,1) var(--d, .3s) forwards,
-             bubbleOut .34s ease 1.78s forwards;
-}
-@keyframes bubbleOut { to { opacity: 0; transform: scale(.82) translateY(-6px); } }
-.intro-bubbles img { width: 100%; height: 100%; object-fit: cover; display: block; }
-@keyframes bubbleIn { to { opacity: 1; transform: none; } }
 
 /* Skip */
 .intro-skip {
