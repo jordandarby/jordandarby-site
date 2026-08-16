@@ -64,6 +64,34 @@
     });
   });
 
+  // Live site preview — loads only on request, and the desktop-width iframe is
+  // scaled to whatever width the frame actually has.
+  document.querySelectorAll('.site-preview').forEach(function (fig) {
+    var frame = fig.querySelector('.sp-frame');
+    var stage = fig.querySelector('.sp-stage');
+    var btn   = fig.querySelector('.sp-load');
+    if (!frame || !stage) return;
+
+    function fit() {
+      var s = stage.clientWidth / 1280;
+      frame.style.transform = 'scale(' + s + ')';
+    }
+    fit();
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(stage);
+    else window.addEventListener('resize', fit);
+
+    // Poster clears on the frame's load event, not on the click — if the embed
+    // ever fails, the visitor keeps the logo and the button instead of a blank box.
+    frame.addEventListener('load', function () {
+      if (frame.src) fig.classList.add('loaded');
+    });
+    if (btn) btn.addEventListener('click', function () {
+      if (fig.classList.contains('loading') || fig.classList.contains('loaded')) return;
+      fig.classList.add('loading');
+      frame.src = fig.getAttribute('data-src');
+    });
+  });
+
   // Contact form — AJAX submit with graceful fallback (no JS = normal POST)
   var form = document.querySelector('.cta-form');
   if (form && window.fetch) {
