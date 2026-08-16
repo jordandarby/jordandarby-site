@@ -35,7 +35,7 @@
     /* Deadman switch: runs inline, so a failed motion.js can never trap the page. */
     setTimeout(function(){if(r.classList.contains('intro-armed')){
       r.classList.remove('intro-armed');
-      var i=document.getElementById('intro');if(i&&i.parentNode)i.parentNode.removeChild(i);}},6000);
+      var i=document.getElementById('intro');if(i&&i.parentNode)i.parentNode.removeChild(i);}},8000);
   })();
   </script>
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
@@ -78,14 +78,10 @@
           <span class="slot-name">Jordan Darby</span>
         </div>
       </div>
+      <div class="slot-haze slot-haze-top" aria-hidden="true"></div>
+      <div class="slot-haze slot-haze-bottom" aria-hidden="true"></div>
     </div>
-    <div class="intro-bubbles" aria-hidden="true">
-      <span style="--d:.30s"><img src="images/work-05.webp" alt="" width="120" height="120" decoding="async"></span>
-      <span style="--d:.38s"><img src="images/work-25.webp" alt="" width="120" height="120" decoding="async"></span>
-      <span style="--d:.46s"><img src="images/work-09.webp" alt="" width="120" height="120" decoding="async"></span>
-      <span style="--d:.54s"><img src="images/hero-mavericks-v3.webp" alt="" width="120" height="120" decoding="async"></span>
-    </div>
-  </div>
+      </div>
   <button class="intro-skip" type="button">Skip</button>
 </div>
 
