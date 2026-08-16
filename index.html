@@ -22,9 +22,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=13">
-<link rel="stylesheet" href="css/redesign.css?v=13">
-  <link rel="stylesheet" href="css/motion.css?v=13">
+<link rel="stylesheet" href="css/style.css?v=15">
+<link rel="stylesheet" href="css/redesign.css?v=15">
+  <link rel="stylesheet" href="css/motion.css?v=15">
   <noscript><style>.t-full,.dsc{grid-template-rows:1fr!important;opacity:1!important;margin-top:12px!important}.t-toggle,.dsc-btn{display:none}</style></noscript>
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 <script type="application/ld+json">
@@ -154,26 +154,23 @@
         </ul>
       </div>
 
-      <!-- Live preview: the iframe src is only set when the visitor asks for it. -->
-      <figure class="site-preview" data-src="https://darbytime31.github.io/doggytime-site/">
+      <!-- Live preview. The iframe renders the whole page at desktop width and
+           drifts vertically inside the frame; drag to scrub, hover to pause. -->
+      <figure class="site-preview" data-src="https://darbytime31.github.io/doggytime-site/"
+              data-w="1280" data-h="3695">
         <div class="sp-chrome" aria-hidden="true">
           <span class="sp-dot"></span><span class="sp-dot"></span><span class="sp-dot"></span>
           <span class="sp-url">doggytimedisposal.com</span>
         </div>
         <div class="sp-stage">
-          <div class="sp-poster">
-            <img src="images/case-studies/doggytime-logo.png" alt="Doggytime Discreet Disposal logo" width="447" height="459" loading="lazy">
-            <button class="sp-load btn btn-orange" type="button">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-              <span>Load live preview</span>
-            </button>
-          </div>
           <iframe class="sp-frame" title="Doggytime Discreet Disposal website preview"
-                  loading="lazy" referrerpolicy="no-referrer"
+                  loading="lazy" referrerpolicy="no-referrer" tabindex="-1"
                   sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+          <div class="sp-veil" aria-hidden="true"></div>
+          <noscript><p class="sp-fallback">Open the site to view it.</p></noscript>
         </div>
         <figcaption class="sp-cap">
-          <span class="sp-hint">Scroll inside the frame to explore</span>
+          <span class="sp-hint">Drag to explore</span>
           <a class="sp-open" href="https://darbytime31.github.io/doggytime-site/" target="_blank" rel="noopener">Open full site &#8599;</a>
         </figcaption>
       </figure>
@@ -415,8 +412,8 @@
 
 <div class="lightbox" aria-hidden="true"><button class="lb-close" aria-label="Close">&times;</button><img alt=""><div class="lb-cap"></div></div>
 
-<script src="js/main.js?v=13"></script>
-<script src="js/redesign.js?v=13"></script>
-  <script src="js/motion.js?v=13" defer></script>
+<script src="js/main.js?v=15"></script>
+<script src="js/redesign.js?v=15"></script>
+  <script src="js/motion.js?v=15" defer></script>
 </body>
 </html>

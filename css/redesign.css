@@ -537,24 +537,23 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   background:#fff;border-radius:999px;padding:4px 14px;flex:1;text-align:center;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* Stage holds a desktop-width render, scaled down by JS to fit the frame. */
-.sp-stage{position:relative;aspect-ratio:1280/820;overflow:hidden;background:#FBF7EF}
-.sp-frame{position:absolute;top:0;left:0;width:1280px;height:820px;border:0;
-  transform-origin:0 0;opacity:0;transition:opacity .4s ease}
+/* The stage is a window onto a full-height render of the site. */
+.sp-stage{position:relative;aspect-ratio:4/5;overflow:hidden;background:#FBF7EF;cursor:grab}
+.sp-stage.dragging{cursor:grabbing}
+.sp-frame{position:absolute;top:0;left:0;border:0;transform-origin:0 0;
+  opacity:0;transition:opacity .5s ease;pointer-events:none}
 .site-preview.loaded .sp-frame{opacity:1}
-
-.sp-poster{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:20px;background:#FBF7EF;
-  transition:opacity .35s ease}
-.sp-poster img{width:clamp(90px,18%,150px);height:auto}
-.site-preview.loaded .sp-poster{opacity:0;pointer-events:none}
-.sp-load{display:inline-flex;align-items:center;gap:9px}
+/* Veil takes the pointer so dragging scrubs the preview instead of the iframe
+   swallowing the gesture — and on touch it keeps the page scrolling normally. */
+.sp-veil{position:absolute;inset:0;z-index:2;background:transparent;touch-action:pan-y}
+.sp-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:var(--ink-light);font-size:.9rem}
 
 .sp-cap{display:flex;align-items:center;justify-content:space-between;gap:14px;
   padding:11px 16px;background:var(--white);border-top:1px solid rgba(24,41,70,.1);
   font-size:.8rem;color:var(--ink-light)}
-.sp-hint{opacity:0}
-.site-preview.loaded .sp-hint{opacity:1;transition:opacity .3s ease}
+.sp-hint{opacity:0;transition:opacity .3s ease}
+.site-preview.loaded .sp-hint{opacity:1}
 .sp-open{color:var(--navy);font-weight:600;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .sp-open:hover{color:var(--orange)}
 
@@ -562,14 +561,9 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   .client-feature{grid-template-columns:1fr;gap:26px}
   .client-feature-copy h3{font-size:1.6rem}
 }
-/* On touch, scrolling inside a scaled iframe fights the page scroll — show it,
-   but send interaction to the real site instead. */
+/* On touch the veil yields vertical panning to the page (touch-action:pan-y),
+   so dragging scrolls the page rather than scrubbing — hide the hint there. */
 @media (hover:none){
-  .sp-frame{pointer-events:none}
   .sp-hint{display:none}
+  .sp-stage{cursor:default}
 }
-/* Loading state between the click and the frame's load event */
-.site-preview.loading .sp-load{opacity:.55;pointer-events:none}
-.site-preview.loading .sp-load span{display:none}
-.site-preview.loading .sp-load::after{content:'Loading…'}
-.site-preview.loading .sp-load svg{display:none}
