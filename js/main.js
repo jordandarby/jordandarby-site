@@ -138,15 +138,22 @@
     else window.addEventListener('resize', measure);
     measure();
 
-    // Load and start drifting only once it is actually on screen.
+    // Two observers, deliberately: load a little early so the frame is ready,
+    // but only start drifting once the section is genuinely on screen.
     if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
+      new IntersectionObserver(function (entries, obs) {
         entries.forEach(function (en) {
-          if (en.isIntersecting && !frame.src) { frame.src = fig.getAttribute('data-src'); measure(); }
-          paused = !en.isIntersecting;
+          if (en.isIntersecting && !frame.src) {
+            frame.src = fig.getAttribute('data-src');
+            measure();
+            obs.disconnect();
+          }
         });
-      }, { rootMargin: '200px 0px' });
-      io.observe(fig);
+      }, { rootMargin: '300px 0px' }).observe(fig);
+
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { paused = !en.isIntersecting; });
+      }, { threshold: 0.35 }).observe(fig);
     } else {
       frame.src = fig.getAttribute('data-src');
       paused = false;
