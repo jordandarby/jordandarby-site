@@ -1,58 +1,8 @@
-/* motion.js — intro sequence, testimonial expand, pricing carousel,
+/* motion.js — testimonial expand, pricing carousel,
    scroll progress + condensed nav. No libraries. */
 (function () {
   var root = document.documentElement;
   var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- 1. Intro sequence ---------- */
-  (function intro() {
-    var el = document.getElementById('intro');
-    if (!el) return;
-
-    // The head guard already decided whether this plays (once per session,
-    // never for reduced-motion). Respect that decision rather than re-deriving it.
-    if (!root.classList.contains('intro-armed')) {
-      if (el.parentNode) el.parentNode.removeChild(el);
-      return;
-    }
-    try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
-
-    // Timeline: stripes .62s | reel .3s-3.5s | hold | white | site.
-    var finished = false, timers = [];
-    function finish() {
-      if (finished) return;
-      finished = true;
-      timers.forEach(clearTimeout);
-
-      el.classList.add('to-white');                       // dissolve to white
-      timers.push(setTimeout(function () {
-        el.classList.add('clearing');                     // white sheet fades off
-        root.classList.remove('intro-armed');
-        root.classList.add('intro-done');                 // site fades up beneath
-      }, 400));
-      timers.push(setTimeout(function () {
-        if (el.parentNode) el.parentNode.removeChild(el);
-      }, 950));
-    }
-
-    // Reel ends at 3.5s; hold on the name before the dissolve starts.
-    var timer = setTimeout(finish, 4150);
-    timers.push(timer);
-
-    var skip = el.querySelector('.intro-skip');
-    if (skip) skip.addEventListener('click', function () { clearTimeout(timer); finish(); });
-    el.addEventListener('click', function (e) {
-      if (e.target === skip) return;
-      clearTimeout(timer); finish();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (!finished && (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ')) {
-        clearTimeout(timer); finish();
-      }
-    });
-    // Safety net: if anything above throws, never trap the visitor.
-    window.addEventListener('load', function () { setTimeout(finish, 5200); });
-  })();
 
   /* ---------- 2. Testimonials ---------- */
   (function testimonials() {

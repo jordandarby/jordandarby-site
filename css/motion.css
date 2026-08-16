@@ -1,165 +1,9 @@
 /* ============================================================
-   motion.css — intro sequence, testimonial expand, pricing
+   motion.css — testimonial expand, pricing
    carousel, and sitewide motion. Loaded after redesign.css.
    Every effect is wrapped so reduced-motion users get a calm,
    fully functional site.
    ============================================================ */
-
-/* ---------- 1. Intro sequence ---------- */
-
-/* Scroll is locked only while the overlay is armed. If JS never
-   runs, .intro-armed is never honored because the overlay itself
-   is display:none without JS (see .no-js guard below). */
-html.intro-armed, html.intro-armed body { overflow: hidden; }
-
-.intro {
-  position: fixed; inset: 0; z-index: 9999;
-  background: var(--navy-deep);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-  will-change: transform;
-}
-.intro[hidden], .intro.gone { display: none; }
-/* Overlay exists only while armed — no flash for repeat visitors. */
-html:not(.intro-armed) .intro { display: none; }
-
-/* Branded stripe wipe — five bars sweep across the panel */
-.intro-stripes { position: absolute; inset: 0; display: flex; }
-.intro-stripes i {
-  flex: 1; transform: scaleY(0); transform-origin: bottom;
-  animation: stripeIn .62s cubic-bezier(.65,0,.35,1) forwards;
-}
-/* Navy tones carry the panel; orange is a narrow accent, not a field. */
-/* Tones sit close together so the wipe reads as texture, not blocks —
-   the capability type should be the only thing with contrast. */
-.intro-stripes i:nth-child(1) { background: #17273F;          animation-delay: .00s; }
-.intro-stripes i:nth-child(2) { background: #182A44;          animation-delay: .06s; }
-.intro-stripes i:nth-child(3) { background: #192C48;          animation-delay: .12s; }
-.intro-stripes i:nth-child(4) { background: #172942;          animation-delay: .18s; }
-.intro-stripes i:nth-child(5) { background: #17273F;          animation-delay: .24s; }
-
-/* Scrim keeps the headline legible whatever sits behind it. */
-.intro-stripes::after {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse 62% 55% at 50% 48%, rgba(20,31,56,.82), rgba(20,31,56,0) 72%);
-  pointer-events: none;
-}
-@keyframes stripeIn { to { transform: scaleY(1); } }
-
-/* Stripes hold until the white dissolve carries them off. */
-
-.intro-inner {
-  position: relative; z-index: 2; text-align: center;
-  padding: 0; width: 100%;
-}
-
-/* ---- Slot machine: capabilities roll bottom-to-top, landing on identity.
-   The window is three panels tall — the centre one is in focus, the ones
-   arriving from below and leaving above sit behind a blurred haze. ---- */
-.intro-slots {
-  --slot: clamp(155px, 25vh, 205px);
-  position: relative;
-  height: calc(var(--slot) * 3); width: 100%; overflow: hidden;
-  opacity: 0; animation: introFade .3s ease .22s forwards;
-}
-@keyframes introFade { to { opacity: 1; } }
-
-.intro-slot-track {
-  display: flex; flex-direction: column;
-  animation: slots 3.2s cubic-bezier(.66,0,.34,1) .3s forwards;
-}
-.slot {
-  height: var(--slot); flex: none;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 12px;
-  padding: 0 clamp(16px, 4vw, 40px); text-align: center;
-}
-.slot > span {
-  font-family: var(--display); font-weight: 600;
-  font-size: clamp(2.6rem, 7.4vw, 5.6rem); line-height: 1.02;
-  letter-spacing: -.03em; color: var(--orange);
-  text-wrap: balance; max-width: 1100px;
-}
-
-/* Haze blurs whatever passes behind it, so only the centre panel is sharp. */
-.slot-haze {
-  position: absolute; left: 0; right: 0; height: var(--slot);
-  z-index: 2; pointer-events: none;
-  backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
-}
-.slot-haze-top    { top: 0;    background: linear-gradient(to bottom, var(--navy-deep) 6%, rgba(20,31,56,.42)); }
-.slot-haze-bottom { bottom: 0; background: linear-gradient(to top,    var(--navy-deep) 6%, rgba(20,31,56,.42)); }
-/* Once the reel lands, the haze goes solid so the name sits alone. */
-.slot-haze::after {
-  content: ''; position: absolute; inset: 0; background: var(--navy-deep);
-  opacity: 0; animation: introFade .4s ease 3.05s forwards;
-}
-
-/* Track starts one panel low, so capability 1 sits in the centre band. */
-@keyframes slots {
-  0%,  12% { transform: translateY(calc(var(--slot) *  1)); }
-  20%, 32% { transform: translateY(0); }
-  40%, 52% { transform: translateY(calc(var(--slot) * -1)); }
-  60%, 72% { transform: translateY(calc(var(--slot) * -2)); }
-  78%, 88% { transform: translateY(calc(var(--slot) * -3)); }
-  95%,100% { transform: translateY(calc(var(--slot) * -4)); }
-}
-
-/* Final panel — the reel settles on who did the work */
-.slot-photo {
-  width: clamp(80px, 13vh, 124px); height: clamp(80px, 13vh, 124px);
-  border-radius: 50%; object-fit: cover; display: block;
-  border: 3px solid var(--orange);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-.slot-me > .slot-name {
-  font-family: var(--display); font-weight: 600; color: #fff;
-  font-size: max(1.6rem, min(3.4rem, 5vw, 6.5vh)); line-height: 1.05;
-  letter-spacing: -.02em;
-}
-
-/* Skip */
-.intro-skip {
-  position: absolute; bottom: 26px; right: 26px; z-index: 3;
-  background: rgba(255,255,255,.12); color: #fff; border: 0;
-  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .78rem;
-  letter-spacing: .08em; text-transform: uppercase;
-  padding: 9px 18px; border-radius: 999px; cursor: pointer;
-  opacity: 0; animation: introFade .4s ease 1s forwards;
-  transition: background .2s;
-}
-.intro-skip:hover { background: rgba(255,255,255,.24); }
-
-/* Exit, stage 1 — everything dissolves to white */
-.intro.to-white { background: #fff; transition: background .42s ease; }
-.intro.to-white .intro-stripes,
-.intro.to-white .intro-inner,
-.intro.to-white .intro-skip { opacity: 0; transition: opacity .34s ease; }
-
-/* Exit, stage 2 — the white sheet fades off and the site comes up under it */
-.intro.clearing { opacity: 0; transition: opacity .5s ease; }
-
-/* Hero gets a gentle lift as the panel clears */
-@media (prefers-reduced-motion: no-preference) {
-  html.intro-armed .hero-copy > *, html.intro-armed .hero-showcase {
-    opacity: 0; transform: translateY(26px);
-  }
-  html.intro-done .hero-copy > *, html.intro-done .hero-showcase {
-    animation: introUp .8s cubic-bezier(.22,1,.36,1) forwards;
-  }
-  html.intro-done .hero-copy > *:nth-child(1) { animation-delay: .05s; }
-  html.intro-done .hero-copy > *:nth-child(2) { animation-delay: .12s; }
-  html.intro-done .hero-copy > *:nth-child(3) { animation-delay: .19s; }
-  html.intro-done .hero-copy > *:nth-child(4) { animation-delay: .26s; }
-  html.intro-done .hero-showcase             { animation-delay: .20s; }
-}
-
-/* Reduced motion: no animation at all — the overlay never arms. */
-@media (prefers-reduced-motion: reduce) {
-  .intro { display: none; }
-  html.intro-armed, html.intro-armed body { overflow: auto; }
-}
-
 
 /* ---------- 2. Testimonials: pull quote + expand ---------- */
 
@@ -336,10 +180,13 @@ html:not(.intro-armed) .intro { display: none; }
   /* hover intent beats the idle drift */
   .hero-showcase a:hover img { animation-play-state: paused; }
 
-  /* Eyebrow gets a drawing rule */
+  /* Eyebrow gets a drawing rule. .section-head .eyebrow is display:block and
+     the head is centred, so the rule must be pinned to the centre — anchoring
+     it at left:0 stranded it against the far edge of the section. */
   .section-head .eyebrow { position: relative; }
   .section-head .eyebrow::after {
-    content: ''; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0;
+    content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+    bottom: -7px; height: 2px; width: 0; border-radius: 2px;
     background: var(--orange); transition: width .7s cubic-bezier(.22,1,.36,1) .2s;
   }
   .reveal.in .section-head .eyebrow::after,

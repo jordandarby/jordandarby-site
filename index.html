@@ -25,19 +25,7 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/redesign.css">
   <link rel="stylesheet" href="css/motion.css">
-  <noscript><style>#intro{display:none}.t-full{grid-template-rows:1fr!important;opacity:1!important;margin-top:12px!important}.t-toggle{display:none}html.intro-armed,html.intro-armed body{overflow:auto!important}</style></noscript>
-  <script>
-  (function(){var r=document.documentElement,ok=true;
-    try{if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)ok=false;}catch(e){}
-    try{if(sessionStorage.getItem('introSeen')==='1')ok=false;}catch(e){}
-    if(!ok)return;
-    r.className=(r.className+' intro-armed').replace(/^ /,'');
-    /* Deadman switch: runs inline, so a failed motion.js can never trap the page. */
-    setTimeout(function(){if(r.classList.contains('intro-armed')){
-      r.classList.remove('intro-armed');
-      var i=document.getElementById('intro');if(i&&i.parentNode)i.parentNode.removeChild(i);}},8000);
-  })();
-  </script>
+  <noscript><style>.t-full{grid-template-rows:1fr!important;opacity:1!important;margin-top:12px!important}.t-toggle{display:none}</style></noscript>
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 <script type="application/ld+json">
 {
@@ -63,27 +51,6 @@
 </head>
 <body>
 <div class="scroll-bar" aria-hidden="true"></div>
-<div class="intro" id="intro" aria-hidden="true">
-  <div class="intro-stripes"><i></i><i></i><i></i><i></i><i></i></div>
-  <div class="intro-inner">
-    <div class="intro-slots">
-      <div class="intro-slot-track">
-        <div class="slot"><span>Brand Strategy &amp; Positioning</span></div>
-        <div class="slot"><span>Packaging &amp; Label Design</span></div>
-        <div class="slot"><span>Brand Identity Systems</span></div>
-        <div class="slot"><span>Web &amp; Digital Design</span></div>
-        <div class="slot"><span>3D Product Visualization</span></div>
-        <div class="slot slot-me">
-          <img class="slot-photo" src="images/headshot.webp" alt="" width="270" height="270" decoding="async">
-          <span class="slot-name">Jordan Darby</span>
-        </div>
-      </div>
-      <div class="slot-haze slot-haze-top" aria-hidden="true"></div>
-      <div class="slot-haze slot-haze-bottom" aria-hidden="true"></div>
-    </div>
-      </div>
-  <button class="intro-skip" type="button">Skip</button>
-</div>
 
 <header class="nav">
   <div class="wrap">
