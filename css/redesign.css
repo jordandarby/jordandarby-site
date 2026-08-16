@@ -554,8 +554,6 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   font-size:.8rem;color:var(--ink-light)}
 .sp-hint{opacity:0;transition:opacity .3s ease}
 .site-preview.loaded .sp-hint{opacity:1}
-.sp-open{color:var(--navy);font-weight:600;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
-.sp-open:hover{color:var(--orange)}
 
 @media (max-width:900px){
   .client-feature{grid-template-columns:1fr;gap:26px}
@@ -567,3 +565,16 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   .sp-hint{display:none}
   .sp-stage{cursor:default}
 }
+
+/* ---------- Contact form spacing ----------
+   `.cta p{margin:22px 0 30px}` was written for the section's intro paragraph.
+   Inside the form it also hit .form-status and .form-note, and because flex
+   gaps ADD to margins it opened a ~107px hole under the send button. The
+   form's own 16px gap is the only spacing these need. */
+.cta-form p{margin:0}
+/* The empty status still reserves a gap; keep it in the a11y tree but flat. */
+.cta-form .form-status:empty{min-height:0}
+
+/* The preview caption now holds only the drag hint. */
+.sp-cap{justify-content:center}
+@media (hover:none){ .sp-cap{display:none} }
