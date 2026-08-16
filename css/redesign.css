@@ -518,7 +518,7 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 .pkg.featured .pkg-addon{border-top-color:rgba(255,255,255,.18);color:#c9d3e4}
 
 /* ---------- Client feature: copy + live site preview ---------- */
-.client-feature{display:grid;grid-template-columns:0.85fr 1.15fr;gap:36px;align-items:center;
+.client-feature{display:grid;grid-template-columns:0.85fr 1.15fr;gap:36px;align-items:start;
   max-width:1120px;margin:0 auto 64px}
 .client-feature-copy h3{font-size:1.9rem;margin:12px 0 12px}
 .client-feature-copy p{color:var(--ink-light);line-height:1.7}
