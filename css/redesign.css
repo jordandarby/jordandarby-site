@@ -192,8 +192,9 @@ body{font-size:17px}
   border-left:3px solid var(--orange);padding:4px 0 4px 16px}
 .cs-card .concept-tag{display:inline-block;background:var(--navy);color:var(--cream);font-size:.62rem;
   font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:5px;margin-right:7px;vertical-align:2px}
-/* Client work reads as the stronger signal, so it carries the accent colour. */
-.cs-card .client-tag{display:inline-block;background:var(--orange);color:var(--navy-deep);font-size:.62rem;
+/* Client work reads as the stronger signal, so it carries the accent colour.
+   Used both inside a case-study card and standalone in the client feature. */
+.cs-card .client-tag,.client-tag{display:inline-block;background:var(--orange);color:var(--navy-deep);font-size:.62rem;
   font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:5px;margin-right:7px;vertical-align:2px}
 /* Case study group headings */
 .cs-group-head{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);
@@ -515,3 +516,60 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 .pkg-addon{margin-top:14px;padding-top:14px;border-top:1px solid rgba(24,41,70,.12);
   font-size:.86rem;line-height:1.55;color:var(--ink-light)}
 .pkg.featured .pkg-addon{border-top-color:rgba(255,255,255,.18);color:#c9d3e4}
+
+/* ---------- Client feature: copy + live site preview ---------- */
+.client-feature{display:grid;grid-template-columns:0.85fr 1.15fr;gap:36px;align-items:center;
+  max-width:1120px;margin:0 auto 64px}
+.client-feature-copy h3{font-size:1.9rem;margin:12px 0 12px}
+.client-feature-copy p{color:var(--ink-light);line-height:1.7}
+.client-feature-list{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+.client-feature-list li{background:rgba(24,41,70,.06);border-radius:999px;padding:6px 14px;
+  font-size:.82rem;font-weight:600;color:var(--navy)}
+.client-feature-status{margin-top:18px;font-weight:600;color:var(--navy)}
+
+/* Browser frame */
+.site-preview{margin:0;border-radius:14px;overflow:hidden;background:var(--white);
+  box-shadow:0 18px 44px rgba(20,31,56,.18);border:1px solid rgba(24,41,70,.1)}
+.sp-chrome{display:flex;align-items:center;gap:7px;padding:11px 14px;background:#EDEAE2;
+  border-bottom:1px solid rgba(24,41,70,.1)}
+.sp-dot{width:11px;height:11px;border-radius:50%;background:rgba(24,41,70,.22);flex:none}
+.sp-url{margin-left:10px;font-family:'Poppins',sans-serif;font-size:.72rem;color:var(--ink-light);
+  background:#fff;border-radius:999px;padding:4px 14px;flex:1;text-align:center;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Stage holds a desktop-width render, scaled down by JS to fit the frame. */
+.sp-stage{position:relative;aspect-ratio:1280/820;overflow:hidden;background:#FBF7EF}
+.sp-frame{position:absolute;top:0;left:0;width:1280px;height:820px;border:0;
+  transform-origin:0 0;opacity:0;transition:opacity .4s ease}
+.site-preview.loaded .sp-frame{opacity:1}
+
+.sp-poster{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:20px;background:#FBF7EF;
+  transition:opacity .35s ease}
+.sp-poster img{width:clamp(90px,18%,150px);height:auto}
+.site-preview.loaded .sp-poster{opacity:0;pointer-events:none}
+.sp-load{display:inline-flex;align-items:center;gap:9px}
+
+.sp-cap{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:11px 16px;background:var(--white);border-top:1px solid rgba(24,41,70,.1);
+  font-size:.8rem;color:var(--ink-light)}
+.sp-hint{opacity:0}
+.site-preview.loaded .sp-hint{opacity:1;transition:opacity .3s ease}
+.sp-open{color:var(--navy);font-weight:600;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.sp-open:hover{color:var(--orange)}
+
+@media (max-width:900px){
+  .client-feature{grid-template-columns:1fr;gap:26px}
+  .client-feature-copy h3{font-size:1.6rem}
+}
+/* On touch, scrolling inside a scaled iframe fights the page scroll — show it,
+   but send interaction to the real site instead. */
+@media (hover:none){
+  .sp-frame{pointer-events:none}
+  .sp-hint{display:none}
+}
+/* Loading state between the click and the frame's load event */
+.site-preview.loading .sp-load{opacity:.55;pointer-events:none}
+.site-preview.loading .sp-load span{display:none}
+.site-preview.loading .sp-load::after{content:'Loading…'}
+.site-preview.loading .sp-load svg{display:none}
