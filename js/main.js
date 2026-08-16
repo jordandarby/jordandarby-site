@@ -64,32 +64,93 @@
     });
   });
 
-  // Live site preview — loads only on request, and the desktop-width iframe is
-  // scaled to whatever width the frame actually has.
+  // Live site preview — the iframe renders the whole page at desktop width and
+  // drifts vertically inside a fixed window. Drag to scrub, hover to pause.
+  // Nothing loads until the frame is near the viewport.
   document.querySelectorAll('.site-preview').forEach(function (fig) {
     var frame = fig.querySelector('.sp-frame');
     var stage = fig.querySelector('.sp-stage');
-    var btn   = fig.querySelector('.sp-load');
+    var veil  = fig.querySelector('.sp-veil');
     if (!frame || !stage) return;
 
-    function fit() {
-      var s = stage.clientWidth / 1280;
-      frame.style.transform = 'scale(' + s + ')';
-    }
-    fit();
-    if (window.ResizeObserver) new ResizeObserver(fit).observe(stage);
-    else window.addEventListener('resize', fit);
+    var PAGE_W = +fig.getAttribute('data-w') || 1280;
+    var PAGE_H = +fig.getAttribute('data-h') || 3000;
+    var still  = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Poster clears on the frame's load event, not on the click — if the embed
-    // ever fails, the visitor keeps the logo and the button instead of a blank box.
-    frame.addEventListener('load', function () {
-      if (frame.src) fig.classList.add('loaded');
-    });
-    if (btn) btn.addEventListener('click', function () {
-      if (fig.classList.contains('loading') || fig.classList.contains('loaded')) return;
-      fig.classList.add('loading');
+    var scale = 1, travel = 0, offset = 0, dir = 1, paused = true, dragging = false;
+
+    function measure() {
+      scale = stage.clientWidth / PAGE_W;
+      frame.style.width  = PAGE_W + 'px';
+      frame.style.height = PAGE_H + 'px';
+      // how far the render can move before its bottom edge reaches the window
+      travel = Math.max(0, PAGE_H - stage.clientHeight / scale);
+      if (offset > travel) offset = travel;
+      paint();
+    }
+    function paint() {
+      frame.style.transform = 'scale(' + scale + ') translateY(' + (-offset) + 'px)';
+    }
+
+    // Drift: down, then back up, so it never snaps.
+    var last = 0, SPEED = 26;                 // css px per second, pre-scale
+    function tick(now) {
+      if (!last) last = now;
+      var dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+      if (!paused && !dragging && !still && travel > 0) {
+        offset += dir * SPEED * dt;
+        if (offset >= travel) { offset = travel; dir = -1; }
+        else if (offset <= 0) { offset = 0; dir = 1; }
+        paint();
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    // Drag to scrub
+    var startY = 0, startOffset = 0;
+    function down(e) {
+      dragging = true; stage.classList.add('dragging');
+      startY = (e.touches ? e.touches[0].clientY : e.clientY);
+      startOffset = offset;
+      if (veil.setPointerCapture && e.pointerId != null) { try { veil.setPointerCapture(e.pointerId); } catch (err) {} }
+    }
+    function move(e) {
+      if (!dragging) return;
+      var y = (e.touches ? e.touches[0].clientY : e.clientY);
+      offset = Math.min(travel, Math.max(0, startOffset - (y - startY) / scale));
+      paint();
+    }
+    function up() { dragging = false; stage.classList.remove('dragging'); }
+
+    veil.addEventListener('pointerdown', down);
+    window.addEventListener('pointermove', move, { passive: true });
+    window.addEventListener('pointerup', up);
+    window.addEventListener('pointercancel', up);
+
+    stage.addEventListener('mouseenter', function () { paused = true; });
+    stage.addEventListener('mouseleave', function () { paused = false; });
+
+    frame.addEventListener('load', function () { if (frame.src) fig.classList.add('loaded'); });
+
+    if (window.ResizeObserver) new ResizeObserver(measure).observe(stage);
+    else window.addEventListener('resize', measure);
+    measure();
+
+    // Load and start drifting only once it is actually on screen.
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting && !frame.src) { frame.src = fig.getAttribute('data-src'); measure(); }
+          paused = !en.isIntersecting;
+        });
+      }, { rootMargin: '200px 0px' });
+      io.observe(fig);
+    } else {
       frame.src = fig.getAttribute('data-src');
-    });
+      paused = false;
+    }
   });
 
   // Contact form — AJAX submit with graceful fallback (no JS = normal POST)
