@@ -659,3 +659,11 @@ section[id]{scroll-margin-top:77px}
 /* ---------- About: copy starts level with the photo ----------
    Fourth and last of the centred two-column grids in style.css. */
 .about .wrap{align-items:start}
+
+/* ---------- Touch targets ----------
+   The LinkedIn marks are 22px and 28px icons — fine for a cursor, too small
+   for a thumb. Pad the hit area without moving the icon. */
+@media (hover:none){
+  .card-li{padding:11px;margin:-11px}
+  footer .fa-linkedin{display:inline-block;padding:8px;margin:-8px}
+}
