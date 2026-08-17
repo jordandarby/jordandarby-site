@@ -199,3 +199,8 @@
   .scroll-bar { display: none; }
   .t-full { transition: none; }
 }
+
+/* Touch: the expand button is a text link — give the thumb a real target. */
+@media (hover:none){
+  .t-toggle{padding:14px 0 12px}
+}
