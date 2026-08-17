@@ -73,13 +73,19 @@
     var veil  = fig.querySelector('.sp-veil');
     if (!frame || !stage) return;
 
-    var PAGE_W = +fig.getAttribute('data-w') || 1280;
-    var PAGE_H = +fig.getAttribute('data-h') || 3000;
+    // Two render sizes: the desktop layout on wide frames, the site's own
+    // mobile layout on narrow ones. Squeezing a 1280px page into a 340px
+    // frame renders its type at about 4px — legible to nobody.
+    var DESK = { w: +fig.getAttribute('data-w') || 1280, h: +fig.getAttribute('data-h') || 3000 };
+    var MOB  = { w: +fig.getAttribute('data-mw') || DESK.w, h: +fig.getAttribute('data-mh') || DESK.h };
+    var PAGE_W = DESK.w, PAGE_H = DESK.h;
     var still  = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     var scale = 1, travel = 0, offset = 0, dir = 1, paused = true, dragging = false;
 
     function measure() {
+      var page = stage.clientWidth < 560 ? MOB : DESK;
+      PAGE_W = page.w; PAGE_H = page.h;
       scale = stage.clientWidth / PAGE_W;
       frame.style.width  = PAGE_W + 'px';
       frame.style.height = PAGE_H + 'px';
