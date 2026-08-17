@@ -155,14 +155,14 @@
   .services > .reveal:nth-child(5):not(.settled) { transition-delay: .30s; }
 
   /* Buttons: lift + light sweep */
-  .btn { position: relative; overflow: hidden; transition: transform .25s cubic-bezier(.34,1.4,.64,1), box-shadow .25s; }
-  .btn:hover { transform: translateY(-2px); }
-  .btn::after {
+  .btn, .nav-links .nav-cta { position: relative; overflow: hidden; transition: transform .25s cubic-bezier(.34,1.4,.64,1), box-shadow .25s; }
+  .btn:hover, .nav-links .nav-cta:hover { transform: translateY(-2px); }
+  .btn::after, .nav-links .nav-cta::after {
     content: ''; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
     background: linear-gradient(100deg, transparent, rgba(255,255,255,.32), transparent);
     transform: skewX(-20deg); transition: left .55s ease;
   }
-  .btn:hover::after { left: 130%; }
+  .btn:hover::after, .nav-links .nav-cta:hover::after { left: 130%; }
 
   /* Work images breathe on hover */
   .grid a img, .cs-card img { transition: transform .6s cubic-bezier(.22,1,.36,1); }
