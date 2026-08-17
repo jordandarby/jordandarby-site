@@ -114,23 +114,60 @@
     }
     requestAnimationFrame(tick);
 
-    // Drag to scrub
-    var startY = 0, startOffset = 0;
+    // Scroll the preview under the cursor / finger. At either end the gesture
+    // is handed back to the page, so the frame never traps the reader.
+    function atEdge(delta) {
+      return (delta < 0 && offset <= 0.5) || (delta > 0 && offset >= travel - 0.5);
+    }
+    function nudge(deltaPx) {
+      var next = Math.min(travel, Math.max(0, offset + deltaPx / scale));
+      var moved = next !== offset;
+      offset = next; if (moved) paint();
+      return moved;
+    }
+
+    stage.addEventListener('wheel', function (e) {
+      if (travel <= 0) return;
+      if (atEdge(e.deltaY)) return;          // let the page take over
+      e.preventDefault();
+      nudge(e.deltaY);
+    }, { passive: false });
+
+    // Touch: same idea, but we only claim the gesture while there is travel
+    // left in the direction being dragged.
+    var startY = 0, startOffset = 0, claimed = false;
+    veil.addEventListener('touchstart', function (e) {
+      startY = e.touches[0].clientY; startOffset = offset; claimed = false;
+      dragging = true; stage.classList.add('dragging');
+    }, { passive: true });
+
+    veil.addEventListener('touchmove', function (e) {
+      if (!dragging || travel <= 0) return;
+      var dy = startY - e.touches[0].clientY;      // finger up = scroll down
+      if (!claimed && atEdge(dy)) return;          // page keeps the gesture
+      claimed = true;
+      e.preventDefault();
+      offset = Math.min(travel, Math.max(0, startOffset + dy / scale));
+      paint();
+    }, { passive: false });
+
+    function endTouch() { dragging = false; claimed = false; stage.classList.remove('dragging'); }
+    veil.addEventListener('touchend', endTouch);
+    veil.addEventListener('touchcancel', endTouch);
+
+    // Mouse drag still works on desktop.
     function down(e) {
       dragging = true; stage.classList.add('dragging');
-      startY = (e.touches ? e.touches[0].clientY : e.clientY);
-      startOffset = offset;
+      startY = e.clientY; startOffset = offset;
       if (veil.setPointerCapture && e.pointerId != null) { try { veil.setPointerCapture(e.pointerId); } catch (err) {} }
     }
     function move(e) {
-      if (!dragging) return;
-      var y = (e.touches ? e.touches[0].clientY : e.clientY);
-      offset = Math.min(travel, Math.max(0, startOffset - (y - startY) / scale));
+      if (!dragging || e.pointerType === 'touch') return;
+      offset = Math.min(travel, Math.max(0, startOffset - (e.clientY - startY) / scale));
       paint();
     }
     function up() { dragging = false; stage.classList.remove('dragging'); }
-
-    veil.addEventListener('pointerdown', down);
+    veil.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'touch') down(e); });
     window.addEventListener('pointermove', move, { passive: true });
     window.addEventListener('pointerup', up);
     window.addEventListener('pointercancel', up);
