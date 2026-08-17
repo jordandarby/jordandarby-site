@@ -281,7 +281,8 @@ body{font-size:17px}
   .grid > a,.inspo-grid > .inspo-item{flex-basis:calc(50% - 13px);max-width:calc(50% - 13px)}
 }
 @media (max-width:560px){
-  .grid > a,.inspo-grid > .inspo-item{flex-basis:100%;max-width:100%}
+  .grid > a{flex-basis:calc(50% - 7px);max-width:calc(50% - 7px)}
+  .inspo-grid > .inspo-item{flex-basis:100%;max-width:100%}
 }
 
 /* ---------- Nav: 7 items need more room, so collapse to the menu button earlier ---------- */
@@ -545,7 +546,7 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 .site-preview.loaded .sp-frame{opacity:1}
 /* Veil takes the pointer so dragging scrubs the preview instead of the iframe
    swallowing the gesture — and on touch it keeps the page scrolling normally. */
-.sp-veil{position:absolute;inset:0;z-index:2;background:transparent;touch-action:pan-y}
+.sp-veil{position:absolute;inset:0;z-index:2;background:transparent;touch-action:none}
 .sp-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   color:var(--ink-light);font-size:.9rem}
 
@@ -562,7 +563,7 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 /* On touch the veil yields vertical panning to the page (touch-action:pan-y),
    so dragging scrolls the page rather than scrubbing — hide the hint there. */
 @media (hover:none){
-  .sp-hint{display:none}
+  .sp-cap{display:flex}
   .sp-stage{cursor:default}
 }
 
@@ -666,4 +667,43 @@ section[id]{scroll-margin-top:77px}
 @media (hover:none){
   .card-li{padding:11px;margin:-11px}
   footer .fa-linkedin{display:inline-block;padding:8px;margin:-8px}
+}
+
+/* ---------- Mobile hero strip ----------
+   A small right-to-left marquee above the headline. The 2x2 showcase is
+   hidden there — the strip carries the same four images. */
+.hero-strip{display:none}
+@media (max-width:760px){
+  /* A grid/flex item defaults to min-width:auto, so the track's max-content
+     width (~820px) would blow the column out and scroll the page sideways. */
+  .hero-copy{min-width:0}
+  /* No mask-image here on purpose: masking an element whose child is running
+     an infinite animation is a known compositing hazard on mobile browsers,
+     and the strip already bleeds off both edges. */
+  .hero-strip{display:block;overflow:hidden;min-width:0;width:auto;margin:0 -20px 22px}
+  .hero-strip-track{display:flex;gap:10px;width:max-content}
+  .hero-strip img{width:94px;height:94px;object-fit:cover;border-radius:10px;flex:none;
+    box-shadow:0 6px 16px rgba(20,31,56,.12)}
+  .hero-showcase{display:none}            /* the strip replaces it on mobile */
+  @media (prefers-reduced-motion:no-preference){
+    .hero-strip-track{animation:heroStrip 24s linear infinite}
+  }
+  /* one full set is half the track, so -50% loops seamlessly */
+  @keyframes heroStrip{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+}
+
+/* ---------- Websites section: preview left, copy right on desktop ---------- */
+@media (min-width:901px){
+  .client-feature{grid-template-columns:1.15fr 0.85fr}
+  .client-feature .site-preview{order:1}
+  .client-feature-copy{order:2}
+}
+
+/* ---------- Doggytime copy on mobile ---------- */
+@media (max-width:900px){
+  .client-feature{gap:22px}
+  .client-feature-copy h3{font-size:1.35rem;margin-bottom:12px}
+  .client-feature-copy .client-lede{font-size:.94rem;padding:9px 16px;margin-bottom:16px;line-height:1.4}
+  .client-points{gap:9px;margin-bottom:0}
+  .client-points li{font-size:.92rem}
 }
