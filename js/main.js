@@ -6,6 +6,7 @@
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
+          if (e.target.__shown) { io.unobserve(e.target); return; }
           e.target.classList.add('in');
           io.unobserve(e.target);
           // Must outlast the longest reveal (cascade delay .30s + .7s duration),
@@ -14,7 +15,33 @@
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    // Anything already on screen was never "revealed" — it was just there.
+    // Fading it in is what makes a reload look like it glitches. The sweep
+    // runs after the browser has applied hash / restored scroll, otherwise
+    // everything still measures as below the fold and gets a fade anyway.
+    function showNow(el) {
+      if (el.__shown) return;
+      el.__shown = true;
+      io.unobserve(el);
+      el.style.transition = 'none';
+      el.classList.add('in', 'settled');
+      void el.offsetHeight;               // flush before restoring transitions
+      el.style.transition = '';
+    }
+    function sweep() {
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      reveals.forEach(function (el) {
+        if (el.__shown) return;
+        var r = el.getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) showNow(el);
+      });
+    }
+
+    // Observe first so nothing is missed, then sweep once layout has settled.
     reveals.forEach(function (el) { io.observe(el); });
+    requestAnimationFrame(function () { requestAnimationFrame(sweep); });
+    window.addEventListener('load', sweep);
   } else {
     reveals.forEach(function (el) { el.classList.add('in', 'settled'); });
   }
@@ -99,7 +126,7 @@
     }
 
     // Drift: down, then back up, so it never snaps.
-    var last = 0, SPEED = 26;                 // css px per second, pre-scale
+    var last = 0, running = 0, SPEED = 26;                 // css px per second, pre-scale
     function tick(now) {
       if (!last) last = now;
       var dt = Math.min((now - last) / 1000, 0.05);
@@ -110,9 +137,10 @@
         else if (offset <= 0) { offset = 0; dir = 1; }
         paint();
       }
-      requestAnimationFrame(tick);
+      running = requestAnimationFrame(tick);
     }
-    requestAnimationFrame(tick);
+    function start() { if (!running) { last = 0; running = requestAnimationFrame(tick); } }
+    function stop() { if (running) { cancelAnimationFrame(running); running = 0; } }
 
     // Scroll the preview under the cursor / finger. At either end the gesture
     // is handed back to the page, so the frame never traps the reader.
@@ -195,11 +223,14 @@
       }, { rootMargin: '300px 0px' }).observe(fig);
 
       new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) { paused = !en.isIntersecting; });
+        entries.forEach(function (en) {
+          paused = !en.isIntersecting;
+          if (paused) stop(); else start();
+        });
       }, { threshold: 0.35 }).observe(fig);
     } else {
       frame.src = fig.getAttribute('data-src');
-      paused = false;
+      paused = false; start();
     }
   });
 

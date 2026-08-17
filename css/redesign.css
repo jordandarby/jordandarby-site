@@ -706,3 +706,14 @@ section[id]{scroll-margin-top:77px}
   .client-points{gap:9px;margin-bottom:0}
   .client-points li{font-size:.92rem}
 }
+
+/* ---------- Mobile vertical rhythm ----------
+   Two gaps were tuned for side-by-side columns and became oversized once the
+   layout stacks: the contact grid's 56px column gap (plus the bullet list's
+   own 24px margin) and the services note's 46px desktop offset. */
+@media (max-width:760px){
+  .cta .wrap{gap:34px}
+  .cta-points{margin-bottom:0}
+  #services .services-note{margin-top:28px}
+  .services-note{padding:22px 22px}
+}

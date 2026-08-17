@@ -13,7 +13,11 @@
   --shadow:0 10px 30px rgba(20,31,56,.12);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+/* Smooth scrolling only after the user interacts. Applying it globally
+   makes the browser animate scroll restoration on reload, which reads
+   as the page lurching around. */
+html{scroll-behavior:auto}
+@media (prefers-reduced-motion:no-preference){html:focus-within{scroll-behavior:smooth}}
 body{font-family:'Poppins',system-ui,sans-serif;color:var(--ink);background:var(--white);line-height:1.7;font-size:17px}
 img{max-width:100%;display:block;height:auto}
 a{color:inherit}
