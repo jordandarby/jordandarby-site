@@ -15,7 +15,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Poppins',system-ui,sans-serif;color:var(--ink);background:var(--white);line-height:1.7;font-size:17px}
-img{max-width:100%;display:block}
+img{max-width:100%;display:block;height:auto}
 a{color:inherit}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 
