@@ -27,7 +27,7 @@ body{font-size:17px}
 .nav-links{gap:26px}
 .nav-cta{background:var(--orange);color:var(--navy-deep)!important;padding:10px 20px;border-radius:10px;
   font-weight:600!important;transition:transform .2s,box-shadow .2s}
-.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(240,160,60,.4);color:var(--navy-deep)!important}
+.nav-links .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(20,31,56,.18);color:var(--navy-deep)!important}
 
 /* ---------- HERO reworked (work-led) ---------- */
 .hero{padding:70px 0 84px}
@@ -629,7 +629,9 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 
 /* ---------- Anchor targets clear the 72px sticky header ----------
    Without this, "Let's Talk" landed with the heading jammed against the bar. */
-section[id]{scroll-margin-top:96px}
+/* 76px bar + 1px border — lands the section flush under the header with no
+   sliver of the previous section showing. */
+section[id]{scroll-margin-top:77px}
 
 /* ---------- Load sequence ----------
    fill-mode is `backwards`, not `both`, on purpose: `both` would keep the
@@ -653,3 +655,7 @@ section[id]{scroll-margin-top:96px}
   @keyframes heroIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
   @keyframes navIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 }
+
+/* ---------- About: copy starts level with the photo ----------
+   Fourth and last of the centred two-column grids in style.css. */
+.about .wrap{align-items:start}
