@@ -631,15 +631,25 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
    Without this, "Let's Talk" landed with the heading jammed against the bar. */
 section[id]{scroll-margin-top:96px}
 
-/* ---------- Load sequence: hero first, then the bar ---------- */
+/* ---------- Load sequence ----------
+   fill-mode is `backwards`, not `both`, on purpose: `both` would keep the
+   final keyframe applied forever, and its `transform:none` would out-rank
+   the hover lift on the showcase tiles. `backwards` only holds the start
+   state during the delay, then hands control back to the normal cascade. */
 @media (prefers-reduced-motion:no-preference){
-  .hero-copy{animation:heroIn .75s cubic-bezier(.22,1,.36,1) both}
-  .hero-showcase{animation:heroIn .75s cubic-bezier(.22,1,.36,1) .12s both}
-  /* The bar itself only fades — transforming a position:sticky element can
-     destabilise it, so the slide lives on the inner wrapper. */
-  .nav{animation:navFade .5s ease .55s both}
-  .nav .wrap{animation:navSlide .55s cubic-bezier(.22,1,.36,1) .55s both}
+  .hero-copy{animation:heroIn .75s cubic-bezier(.22,1,.36,1) backwards}
+
+  /* Tiles arrive one at a time */
+  .hero-showcase a{animation:heroIn .7s cubic-bezier(.22,1,.36,1) backwards}
+  .hero-showcase a:nth-child(1){animation-delay:.16s}
+  .hero-showcase a:nth-child(2){animation-delay:.30s}
+  .hero-showcase a:nth-child(3){animation-delay:.44s}
+  .hero-showcase a:nth-child(4){animation-delay:.58s}
+
+  /* The cream bar must stay solid from the first frame — fading `.nav`
+     itself exposed the white body behind it. Only its contents animate,
+     and they come in with the hero rather than after it. */
+  .nav .wrap{animation:navIn .7s cubic-bezier(.22,1,.36,1) backwards}
   @keyframes heroIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-  @keyframes navFade{from{opacity:0}to{opacity:1}}
-  @keyframes navSlide{from{transform:translateY(-14px)}to{transform:none}}
+  @keyframes navIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 }
