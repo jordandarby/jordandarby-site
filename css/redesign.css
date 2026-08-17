@@ -604,3 +604,8 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 
 /* The URL pill is gone from the preview chrome; nothing else needs it. */
 .sp-url{display:none}
+
+/* ---------- Contact: copy starts level with the form ----------
+   style.css centres the two columns, dropping the heading below the form's
+   top edge. Same fix as the hero and the client feature. */
+.cta .wrap{align-items:start}
