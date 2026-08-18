@@ -19,9 +19,15 @@
 <meta name="twitter:description" content="A regularly updated collection of design work that inspires Jordan Darby: packaging, branding, lettering, and craft.">
 <meta name="twitter:image" content="https://jordandarby.com/images/og-image.jpg">
 <link rel="icon" href="images/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Poppins:wght@400;500;600;700&display=fallback" rel="stylesheet">
+<!-- Self-hosted fonts (faces declared in css/style.css). Preloaded so they are
+     in flight before the stylesheet parses. crossorigin is required even
+     same-origin: font fetches are CORS-mode, and without it the preload does
+     not match the real request and the file is fetched twice. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/bricolage-grotesque-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-400-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-600-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-700-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-500-latin.woff2">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/redesign.css">
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
