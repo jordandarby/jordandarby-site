@@ -717,3 +717,12 @@ section[id]{scroll-margin-top:77px}
   #services .services-note{margin-top:28px}
   .services-note{padding:22px 22px}
 }
+
+/* ---------- Hero headline scale ----------
+   With the bio paragraph gone the copy column was 314px against a 535px image
+   grid — 221px of dead space under the headline. Scaling the headline up fills
+   it, so the two columns finish together. Desktop only: the mobile hero stacks
+   and has no column to balance against. */
+@media (min-width:761px){
+  .hero-copy h1{font-size:clamp(2.9rem,7vw,5.8rem)}
+}
