@@ -656,6 +656,16 @@ section[id]{scroll-margin-top:77px}
   @keyframes navIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 }
 
+/* The intro belongs to arriving at the page, not to re-rendering it. On a
+   refresh or a back-navigation these replayed, so the hero and nav restarted
+   at opacity 0 and 20px out of place every time — which is what read as the
+   page glitching on reload. `no-intro` is set on <html> by a small inline
+   script in the head (before first paint) whenever the navigation is not a
+   fresh one, so a returning view simply appears already settled. */
+.no-intro .hero-copy,
+.no-intro .hero-showcase a,
+.no-intro .nav .wrap{animation:none}
+
 /* ---------- About: copy starts level with the photo ----------
    Fourth and last of the centred two-column grids in style.css. */
 .about .wrap{align-items:start}
@@ -682,7 +692,16 @@ section[id]{scroll-margin-top:77px}
   .hero-strip{display:block;overflow:hidden;min-width:0;width:auto;margin:0 -20px 22px}
   .hero-strip-track{display:flex;gap:10px;width:max-content}
   .hero-strip img{width:94px;height:94px;object-fit:cover;border-radius:10px;flex:none;
-    box-shadow:0 6px 16px rgba(20,31,56,.12)}
+    box-shadow:0 6px 16px rgba(20,31,56,.12);
+    background-size:cover;background-position:center;background-repeat:no-repeat}
+  /* 16px blurred stand-ins, inline so they cost no request and are painted with
+     the stylesheet. Until the real file arrives you see a soft version of the
+     artwork rather than an empty white box — these sit above the fold, so on a
+     slow connection the gap was the first thing you saw. ~800 bytes each. */
+  .hero-strip img[src$="strip-mavericks.webp"]{background-image:url(data:image/webp;base64,UklGRlwCAABXRUJQVlA4WAoAAAAgAAAADwAADwAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDggbgAAABACAJ0BKhAAEAACwEwlsAJ0AQ71xmPcIRAA/vRd2ReYUhG9Xae0lC5IE4+vY/ODE0DduetjMuWZWnO9/LlrFsS7i0nisbMrXXG8id1PFf2XMGLqPHfVVU/s44GruTP/2ccDU7d/+zMb//YAAAAA)}
+  .hero-strip img[src$="strip-work-05.webp"]{background-image:url(data:image/webp;base64,UklGRjwCAABXRUJQVlA4WAoAAAAgAAAADwAADwAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDggTgAAANABAJ0BKhAAEAACwEwlnAAC5jOL2iUAAP766zbonBK75gDkP/2wRxINJqf2RzLmzgXAK83EiPOJ/j8J0fuYKIzFmu3mwxWIny1n4IgAAA==)}
+  .hero-strip img[src$="strip-work-25.webp"]{background-image:url(data:image/webp;base64,UklGRl4CAABXRUJQVlA4WAoAAAAgAAAADwAADwAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDggcAAAADACAJ0BKhAAEAACwEwloAJ0AQLWGOylabVAAN4Ua3DZH6jP8GqOAPP3Yb49eZoMx2nfmf94bdVeEOCLDZV7ztmnxW44lbYt5sYfjvemFs04/vaKnhHE10galXNaVk5mRGrgr2PGHg6uXup4+VwAAAA=)}
+  .hero-strip img[src$="strip-work-09.webp"]{background-image:url(data:image/webp;base64,UklGRkoCAABXRUJQVlA4WAoAAAAgAAAADwAADwAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDggXAAAAPABAJ0BKhAAEAACwEwljAJ0AQ9z4JPjgAD+mF+fX4rZ8seByMB1Y4d6D86XP3RSebCfcPltYUCA3EOvnRZIdBd/kdg8EyDhYLxq1ra7tigZVTBklNGhrYPDrNAA)}
   .hero-showcase{display:none}            /* the strip replaces it on mobile */
   @media (prefers-reduced-motion:no-preference){
     .hero-strip-track{animation:heroStrip 24s linear infinite}
