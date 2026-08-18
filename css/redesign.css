@@ -725,8 +725,22 @@ section[id]{scroll-margin-top:77px}
    stacks into a bold block that fills most of the column, with the button
    sitting directly beneath it and any leftover space resting at the bottom.
    The measure is capped so a long line can't run into the artwork — the
-   crowding an uncapped vw scale caused. Desktop only: mobile stacks. */
+   crowding an uncapped vw scale caused. Desktop only: mobile stacks.
+
+   The block is then centred in the space before the artwork while its text
+   stays left-aligned: justify-self shrinks it to its content and centres it
+   in the grid column, and the nudge adds half the 72px column gap (which
+   would otherwise sit entirely on the right and read as left-biased). 10.7ch
+   rather than 11ch trims the sliver of empty box past the longest line, so
+   the centring follows the visible text instead of the box — same wrap, and
+   whitespace either side matches within a pixel from 820px up. */
 @media (min-width:761px){
-  .hero-copy h1{font-size:clamp(3.2rem,6vw,5.4rem);max-width:11ch}
+  .hero-copy h1{font-size:clamp(3.2rem,6vw,5.4rem);max-width:10.7ch}
   .hero .wrap{gap:72px}
+}
+/* Below ~800px the grid column itself is narrower than the headline's longest
+   line, so the box stops tracking the visible text and centring would strand
+   the block. There it stays flush left, as before. */
+@media (min-width:800px){
+  .hero-copy{justify-self:center;position:relative;left:38px}
 }
