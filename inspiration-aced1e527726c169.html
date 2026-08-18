@@ -23,6 +23,21 @@
      in flight before the stylesheet parses. crossorigin is required even
      same-origin: font fetches are CORS-mode, and without it the preload does
      not match the real request and the file is fetched twice. -->
+<script>
+/* Wait for the fonts before the entrance runs. Added by script only, so a
+   visitor without JS is never affected, and released either when the fonts
+   report ready or after a fixed wait — whichever lands first — so a slow or
+   failed font can only delay the hero, never hide it. */
+(function(){try{
+  var h=document.documentElement;
+  h.classList.add('fonts-pending');
+  var go=function(){h.classList.remove('fonts-pending');};
+  if(document.fonts&&document.fonts.ready&&document.fonts.ready.then){
+    document.fonts.ready.then(go).catch(go);
+    setTimeout(go,1200);
+  }else{go();}
+}catch(_){}})();
+</script>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/bricolage-grotesque-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-400-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-600-latin.woff2">

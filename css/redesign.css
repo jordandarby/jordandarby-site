@@ -671,6 +671,17 @@ section[id]{scroll-margin-top:77px}
   .nav .wrap{animation:navIn .95s cubic-bezier(.22,.61,.36,1) .08s backwards}
   @keyframes heroIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
   @keyframes navIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+  /* Hold the entrance until the fonts are in. The hero fades in over about a
+     second, and a font arriving mid-fade re-draws the headline and the button
+     in different letterforms while you are watching them — the glitch. Because
+     the fill-mode is `backwards`, a paused animation simply keeps its first
+     frame, so the hero waits invisibly rather than showing the wrong face.
+     The class is only ever added by script and is always removed, capped by a
+     timeout, so this can never strand the hero. */
+  .fonts-pending .hero-copy,
+  .fonts-pending .hero-showcase a,
+  .fonts-pending .nav .wrap{animation-play-state:paused}
 }
 
 /* The intro plays on every load, refreshes included — it is the arrival, not
