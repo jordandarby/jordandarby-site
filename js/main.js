@@ -40,8 +40,31 @@
 
     // Observe first so nothing is missed, then sweep once layout has settled.
     reveals.forEach(function (el) { io.observe(el); });
-    requestAnimationFrame(function () { requestAnimationFrame(sweep); });
-    window.addEventListener('load', sweep);
+
+    // A fixed number of frames isn't enough: iOS restores the scroll position
+    // after `load`, so a sweep timed to either one still measures everything as
+    // below the fold and the restored view fades in — which is what a refresh
+    // looks like glitching. Watch the scroll position instead of guessing at
+    // the timing, and re-sweep whenever it moves during the first second.
+    var lastY = -1, until = 0, watching = false;
+    function watch() {
+      if (window.pageYOffset !== lastY) { lastY = window.pageYOffset; sweep(); }
+      if (performance.now() < until) requestAnimationFrame(watch);
+      else watching = false;
+    }
+    function startWatch() {
+      // Sweep straight away as well: rAF is suspended in a background tab, so
+      // the watcher alone would leave a page loaded there fully faded out.
+      sweep();
+      until = performance.now() + 1200;
+      if (!watching) { watching = true; requestAnimationFrame(watch); }
+    }
+    startWatch();
+    window.addEventListener('load', startWatch);
+    // bfcache restores keep their painted state, so they only need a sweep.
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) sweep(); else startWatch();
+    });
   } else {
     reveals.forEach(function (el) { el.classList.add('in', 'settled'); });
   }
@@ -267,4 +290,18 @@
       });
     });
   }
+
+  /* The mobile hero marquee is decorative and loops forever. Left running it
+     keeps the compositor busy animating a strip that is usually off-screen,
+     which is exactly the sort of background work that makes a phone stutter
+     elsewhere on the page. Pause it whenever it isn't visible. */
+  (function heroStrip() {
+    var track = document.querySelector('.hero-strip-track');
+    if (!track || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        track.style.animationPlayState = e.isIntersecting ? '' : 'paused';
+      });
+    }, { threshold: 0 }).observe(track);
+  })();
 })();
