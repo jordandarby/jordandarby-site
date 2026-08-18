@@ -155,14 +155,14 @@
   .services > .reveal:nth-child(5):not(.settled) { transition-delay: .30s; }
 
   /* Buttons: lift + light sweep */
-  .btn, .nav-links .nav-cta { position: relative; overflow: hidden; transition: transform .25s cubic-bezier(.34,1.4,.64,1), box-shadow .25s; }
-  .btn:hover, .nav-links .nav-cta:hover { transform: translateY(-2px); }
-  .btn::after, .nav-links .nav-cta::after {
+  .btn { position: relative; overflow: hidden; transition: transform .25s cubic-bezier(.34,1.4,.64,1), box-shadow .25s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn::after {
     content: ''; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
     background: linear-gradient(100deg, transparent, rgba(255,255,255,.32), transparent);
     transform: skewX(-20deg); transition: left .55s ease;
   }
-  .btn:hover::after, .nav-links .nav-cta:hover::after { left: 130%; }
+  .btn:hover::after { left: 130%; }
 
   /* Work images breathe on hover */
   .grid a img, .cs-card img { transition: transform .6s cubic-bezier(.22,1,.36,1); }
@@ -180,15 +180,15 @@
   .reveal.in .section-head .eyebrow::after,
   .section-head.reveal.in .eyebrow::after { width: 34px; }
 
-  /* Nav links underline from the left. The CTA button and the LinkedIn mark
-     are not text links, so they must be excluded or the rule draws a stray
-     bar across the button. */
-  .nav-links a:not(.nav-cta):not(.nav-linkedin) { position: relative; }
-  .nav-links a:not(.nav-cta):not(.nav-linkedin)::after {
+  /* Nav links underline from the left. Every item in the bar is a text link
+     now — the button and the icon that once had to be excluded are gone — so
+     this applies to the whole list. */
+  .nav-links a { position: relative; }
+  .nav-links a::after {
     content: ''; position: absolute; left: 0; bottom: -3px; height: 2px; width: 0;
     background: var(--orange); transition: width .28s cubic-bezier(.22,1,.36,1);
   }
-  .nav-links a:not(.nav-cta):not(.nav-linkedin):hover::after { width: 100%; }
+  .nav-links a:hover::after { width: 100%; }
 
 }
 
@@ -247,5 +247,5 @@
   /* The nav underline is a hover affordance with nothing to hover on a phone —
      a tap just latched it on under the finger. The stacked menu uses dividers
      to separate rows instead. */
-  .nav-links a:not(.nav-cta):not(.nav-linkedin)::after{content:none}
+  .nav-links a::after{content:none}
 }
