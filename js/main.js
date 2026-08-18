@@ -239,7 +239,7 @@
     var PAGE_W = DESK.w, PAGE_H = DESK.h;
     var still  = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    var scale = 1, travel = 0, offset = 0, dir = 1, paused = true, dragging = false;
+    var scale = 1, travel = 0, offset = 0, paused = true, dragging = false;
 
     function measure() {
       var page = stage.clientWidth < 560 ? MOB : DESK;
@@ -256,21 +256,24 @@
       frame.style.transform = 'scale(' + scale + ') translateY(' + (-offset) + 'px)';
     }
 
-    // Drift: down, then back up, so it never snaps.
-    var last = 0, running = 0, SPEED = 26;                 // css px per second, pre-scale
+    /* Drift: down once, then rest at the bottom. It used to turn around and
+       climb back up on a loop, which made the panel look like a screensaver
+       and never let the reader see the foot of the page settle. Reaching the
+       end is the end — dragging still works from there. */
+    var last = 0, running = 0, drifted = false, SPEED = 26;   // css px/sec, pre-scale
     function tick(now) {
       if (!last) last = now;
       var dt = Math.min((now - last) / 1000, 0.05);
       last = now;
-      if (!paused && !dragging && !still && travel > 0) {
-        offset += dir * SPEED * dt;
-        if (offset >= travel) { offset = travel; dir = -1; }
-        else if (offset <= 0) { offset = 0; dir = 1; }
+      if (!paused && !dragging && !still && travel > 0 && !drifted) {
+        offset += SPEED * dt;
+        if (offset >= travel) { offset = travel; drifted = true; }
         paint();
       }
+      if (drifted) { running = 0; return; }        // stop asking for frames
       running = requestAnimationFrame(tick);
     }
-    function start() { if (!running) { last = 0; running = requestAnimationFrame(tick); } }
+    function start() { if (!running && !drifted) { last = 0; running = requestAnimationFrame(tick); } }
     function stop() { if (running) { cancelAnimationFrame(running); running = 0; } }
 
     // Scroll the preview under the cursor / finger. At either end the gesture

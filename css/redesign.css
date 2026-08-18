@@ -581,9 +581,27 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 /* The empty status still reserves a gap; keep it in the a11y tree but flat. */
 .cta-form .form-status:empty{min-height:0}
 
-/* The preview caption now holds only the drag hint. */
+/* The preview caption holds only the hint, and the hint is worded for the
+   input you actually have: a cursor scrolls inside the frame, a thumb drags it.
+   Touch used to get no hint at all, which left the panel looking like a picture
+   rather than something you can move. */
 .sp-cap{justify-content:center}
-@media (hover:none){ .sp-cap{display:none} }
+.sp-hint{display:inline-flex;align-items:center;gap:7px}
+.sp-hint-touch{display:none}
+@media (hover:none){
+  .sp-cap{display:flex}
+  .sp-hint-cursor{display:none}
+  .sp-hint-touch{display:inline-flex}
+  /* A small nudge on the arrow: the hint has to compete with a live website
+     directly above it, and a static line under it goes unread. */
+  @media (prefers-reduced-motion:no-preference){
+    .sp-hint-touch svg{animation:spNudge 1.6s ease-in-out infinite}
+  }
+  @keyframes spNudge{
+    0%,100%{transform:translateY(0)}
+    50%    {transform:translateY(3px)}
+  }
+}
 
 /* ---------- Hero: copy starts level with the artwork ----------
    style.css centres the two columns, which dropped the headline well below
@@ -679,6 +697,14 @@ section[id]{scroll-margin-top:77px}
      frame, so the hero waits invisibly rather than showing the wrong face.
      The class is only ever added by script and is always removed, capped by a
      timeout, so this can never strand the hero. */
+
+  /* Pausing the hero alone left the page half-dressed while it waited: the
+     hero keeps its layout space, so an empty cream block sat above the navy
+     band with the header's hairline drawn across the top. Hold the whole page
+     instead — the canvas stays cream, so the wait reads as the page simply not
+     having started yet, and everything arrives together. */
+  .fonts-pending{background:var(--cream)}
+  .fonts-pending body{visibility:hidden}
   .fonts-pending .hero-copy,
   .fonts-pending .hero-showcase a,
   .fonts-pending .nav .wrap{animation-play-state:paused}
