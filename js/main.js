@@ -93,27 +93,25 @@
         el.classList.remove('in', 'settled');
         io.observe(el);
       });
-      /* The observer covers whatever scrolls in. This guard covers the rest: a
-         block already on screen, or a tall one whose 12% threshold the arrival
-         never trips. Without it a replayed section could sit invisible, which
-         is far worse than the finished state being replaced.
-         Timers as well as frames, deliberately: rAF is suspended in a
-         background tab, and a guard that only ran on frames would leave the
-         section blank there — the same trap the load sweep fell into. */
-      function pass() {
+      /* The observer does the revealing — it is what gives the motion its
+         timing, firing at 12% visibility so a block animates as you reach it.
+         An earlier version of this guard revealed on any pixel of overlap and
+         ran immediately, which meant the fade started while the section was
+         still a sliver at the edge of the screen and was over before it was in
+         front of you: motion technically played, but nothing was seen.
+
+         So this now only catches what the observer misses — and waits until
+         the scroll has arrived before looking. Timers, not frames, because rAF
+         is suspended in a background tab. */
+      function guard() {
         var vh = window.innerHeight || document.documentElement.clientHeight;
         list.forEach(function (el) {
           var r = el.getBoundingClientRect();
-          if (r.top < vh && r.bottom > 0) revealNow(el);
+          var shown = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+          if (shown > 0 && (shown >= r.height * 0.12 || shown >= vh * 0.25)) revealNow(el);
         });
       }
-      pass();
-      [120, 350, 700, 1200, 1600].forEach(function (t) { setTimeout(pass, t); });
-      var until = performance.now() + 1600;
-      (function frame() {
-        pass();
-        if (performance.now() < until) requestAnimationFrame(frame);
-      })();
+      [900, 1500, 2200, 3000].forEach(function (t) { setTimeout(guard, t); });
     }
     document.addEventListener('click', function (ev) {
       var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
