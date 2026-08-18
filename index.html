@@ -23,14 +23,29 @@
      in flight before the stylesheet parses. crossorigin is required even
      same-origin: font fetches are CORS-mode, and without it the preload does
      not match the real request and the file is fetched twice. -->
+<script>
+/* Wait for the fonts before the entrance runs. Added by script only, so a
+   visitor without JS is never affected, and released either when the fonts
+   report ready or after a fixed wait — whichever lands first — so a slow or
+   failed font can only delay the hero, never hide it. */
+(function(){try{
+  var h=document.documentElement;
+  h.classList.add('fonts-pending');
+  var go=function(){h.classList.remove('fonts-pending');};
+  if(document.fonts&&document.fonts.ready&&document.fonts.ready.then){
+    document.fonts.ready.then(go).catch(go);
+    setTimeout(go,1200);
+  }else{go();}
+}catch(_){}})();
+</script>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/bricolage-grotesque-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-400-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-600-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-700-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-500-latin.woff2">
-<link rel="stylesheet" href="css/style.css?v=110">
-<link rel="stylesheet" href="css/redesign.css?v=110">
-  <link rel="stylesheet" href="css/motion.css?v=110">
+<link rel="stylesheet" href="css/style.css?v=111">
+<link rel="stylesheet" href="css/redesign.css?v=111">
+  <link rel="stylesheet" href="css/motion.css?v=111">
   <noscript><style>.t-full,.dsc{grid-template-rows:1fr!important;opacity:1!important;margin-top:12px!important}.t-toggle,.dsc-btn{display:none}</style></noscript>
 <noscript><style>.reveal{opacity:1;transform:none}.client-points li{opacity:1;transform:none}</style></noscript>
 <script type="application/ld+json">
@@ -75,7 +90,7 @@
 <section class="hero">
   <div class="wrap">
     <div class="hero-copy">
-      <div class="hero-strip" aria-hidden="true"><div class="hero-strip-track"><img src="images/strip-mavericks.webp?v=110" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-05.webp?v=110" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-25.webp?v=110" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-09.webp?v=110" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-mavericks.webp?v=110" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-05.webp?v=110" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-25.webp?v=110" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-09.webp?v=110" alt="" width="94" height="94" decoding="async" fetchpriority="high"></div></div>
+      <div class="hero-strip" aria-hidden="true"><div class="hero-strip-track"><img src="images/strip-mavericks.webp?v=111" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-05.webp?v=111" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-25.webp?v=111" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-09.webp?v=111" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-mavericks.webp?v=111" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-05.webp?v=111" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-25.webp?v=111" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-09.webp?v=111" alt="" width="94" height="94" decoding="async" fetchpriority="high"></div></div>
       <h1>Custom brands, websites, even software.</h1>
       <div class="hero-cta">
         <a class="btn btn-orange btn-lg" href="#contact">Let’s Talk</a>
@@ -393,8 +408,8 @@
 
 <div class="lightbox" aria-hidden="true"><button class="lb-close" aria-label="Close">&times;</button><img alt=""><div class="lb-cap"></div></div>
 
-<script src="js/main.js?v=110"></script>
-<script src="js/redesign.js?v=110"></script>
-  <script src="js/motion.js?v=110" defer></script>
+<script src="js/main.js?v=111"></script>
+<script src="js/redesign.js?v=111"></script>
+  <script src="js/motion.js?v=111" defer></script>
 </body>
 </html>
