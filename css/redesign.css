@@ -724,5 +724,13 @@ section[id]{scroll-margin-top:77px}
    it, so the two columns finish together. Desktop only: the mobile hero stacks
    and has no column to balance against. */
 @media (min-width:761px){
-  .hero-copy h1{font-size:clamp(2.9rem,7vw,5.8rem)}
+  /* Comfortable size, not maximal — at 7vw the longest line ran right up to
+     the gutter and crowded the artwork. The leftover column height is taken
+     up by pushing the CTA to the bottom instead of by inflating the type. */
+  .hero-copy h1{font-size:clamp(2.9rem,5.6vw,5rem)}
+  .hero-copy{display:flex;flex-direction:column;min-height:100%}
+  .hero-copy .hero-cta{margin-top:auto;padding-top:34px}
+  .hero .wrap{gap:72px}
+  /* keep the longest line clear of the gutter */
+  .hero-copy h1{max-width:12ch}
 }
