@@ -408,13 +408,23 @@
      Pause each one whenever it isn't visible. */
   (function marquees() {
     if (!('IntersectionObserver' in window)) return;
-    var tracks = document.querySelectorAll('.hero-strip-track, .brand-track');
-    if (!tracks.length) return;
+    /* Watch the window the strip runs inside, never the strip itself. A track
+       is far wider than the screen and the duplicate copies sit off to the
+       right waiting their turn — so observing tracks reported those copies as
+       "not visible" and paused them where they stood. The first copy would
+       scroll away and nothing followed it: the loop appeared to break. The
+       container only ever leaves the viewport vertically, which is the actual
+       question being asked. */
+    var frames = document.querySelectorAll('.hero-strip, .brand-marquee');
+    if (!frames.length) return;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        e.target.style.animationPlayState = e.isIntersecting ? '' : 'paused';
+        var tracks = e.target.querySelectorAll('.hero-strip-track, .brand-track');
+        Array.prototype.forEach.call(tracks, function (t) {
+          t.style.animationPlayState = e.isIntersecting ? '' : 'paused';
+        });
       });
     }, { threshold: 0 });
-    Array.prototype.forEach.call(tracks, function (t) { io.observe(t); });
+    Array.prototype.forEach.call(frames, function (f) { io.observe(f); });
   })();
 })();
