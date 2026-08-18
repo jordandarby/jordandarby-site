@@ -11,7 +11,12 @@
           io.unobserve(e.target);
           // Must outlast the longest reveal (cascade delay .30s + .7s duration),
           // or 'settled' swaps the transition mid-fade and the item snaps in.
-          setTimeout(function () { e.target.classList.add('settled'); }, 1150);
+          // Held on the element so a replay can cancel a pending one — left
+          // running it would land mid-replay and cut that animation short.
+          clearTimeout(e.target.__settle);
+          e.target.__settle = setTimeout(function () {
+            e.target.classList.add('settled');
+          }, 1150);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
@@ -64,6 +69,59 @@
     // bfcache restores keep their painted state, so they only need a sweep.
     window.addEventListener('pageshow', function (e) {
       if (e.persisted) sweep(); else startWatch();
+    });
+
+    /* ---- Replay a section's motion when it is navigated to ----
+       Reveal normally fires once. Jump to a section you have already scrolled
+       past and you arrive at something visibly finished, which reads as the
+       link having done nothing. Pressing a link resets that section so its
+       motion runs again on arrival. */
+    function revealNow(el) {
+      if (el.classList.contains('in')) return;
+      el.classList.add('in');
+      clearTimeout(el.__settle);
+      el.__settle = setTimeout(function () { el.classList.add('settled'); }, 1150);
+    }
+    function replay(root) {
+      var list = [];
+      if (root.classList && root.classList.contains('reveal')) list.push(root);
+      Array.prototype.push.apply(list, root.querySelectorAll('.reveal'));
+      if (!list.length) return;
+      list.forEach(function (el) {
+        clearTimeout(el.__settle);
+        el.__shown = false;
+        el.classList.remove('in', 'settled');
+        io.observe(el);
+      });
+      /* The observer covers whatever scrolls in. This guard covers the rest: a
+         block already on screen, or a tall one whose 12% threshold the arrival
+         never trips. Without it a replayed section could sit invisible, which
+         is far worse than the finished state being replaced.
+         Timers as well as frames, deliberately: rAF is suspended in a
+         background tab, and a guard that only ran on frames would leave the
+         section blank there — the same trap the load sweep fell into. */
+      function pass() {
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        list.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.top < vh && r.bottom > 0) revealNow(el);
+        });
+      }
+      pass();
+      [120, 350, 700, 1200, 1600].forEach(function (t) { setTimeout(pass, t); });
+      var until = performance.now() + 1600;
+      (function frame() {
+        pass();
+        if (performance.now() < until) requestAnimationFrame(frame);
+      })();
+    }
+    document.addEventListener('click', function (ev) {
+      var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+      if (!a || !a.hash || a.hash.length < 2) return;
+      // same page only — a link to another document reveals normally on load
+      if (a.host !== location.host || a.pathname !== location.pathname) return;
+      var target = document.getElementById(a.hash.slice(1));
+      if (target) replay(target);
     });
   } else {
     reveals.forEach(function (el) { el.classList.add('in', 'settled'); });
