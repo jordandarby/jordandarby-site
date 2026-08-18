@@ -190,9 +190,16 @@
   }
   .nav-links a:not(.nav-cta):not(.nav-linkedin):hover::after { width: 100%; }
 
-  /* Service tiles */
-  .service { transition: transform .3s cubic-bezier(.34,1.4,.64,1), box-shadow .3s, border-color .3s; }
-  .service:hover { transform: translateY(-5px); }
+  /* Headshot drifts as though it has a little weight to it: slowing as it
+     reaches the top, accelerating on the way back down. Gated on .settled
+     because the reveal animates transform too — starting the float any earlier
+     would override the entrance and the photo would skip its fade-in. */
+  .headshot.settled { animation: headshotFloat 5.5s infinite; }
+  @keyframes headshotFloat {
+    0%   { transform: translateY(0);     animation-timing-function: ease-out; }
+    50%  { transform: translateY(-8px);  animation-timing-function: ease-in; }
+    100% { transform: translateY(0); }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -211,4 +218,8 @@
      paired zoom goes with them, for the same reason. */
   .grid a::after{content:none}
   .grid a:hover img{transform:none}
+  /* The category tags are a second, separate hover layer over the same tiles —
+     hiding the caption alone still left these flashing under a thumb. Tapping
+     the photo opens the lightbox, which names the category anyway. */
+  .work-tags{display:none}
 }

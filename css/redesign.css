@@ -56,9 +56,9 @@ body{font-size:17px}
 
 /* ---------- Services: card treatment ---------- */
 .services{gap:22px}
-.service{background:var(--white);border:1px solid rgba(24,41,70,.08);border-radius:16px;padding:26px 18px;
-  transition:transform .25s,box-shadow .25s,border-color .25s}
-.service:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:transparent}
+/* No hover state: these tiles aren't links or controls, so lifting them on
+   hover implied a click target that isn't there. */
+.service{background:var(--white);border:1px solid rgba(24,41,70,.08);border-radius:16px;padding:26px 18px}
 .service-icon{border-radius:16px;background:var(--cream);border:0;width:66px;height:66px}
 
 /* ---------- Work grid: overlays + filters ---------- */
@@ -435,7 +435,12 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
 @media (max-width:1080px){
   .nav-links li .nav-cta{display:block;margin:12px 0 6px;padding:13px 20px;
     text-align:center;border-radius:10px}
-  .nav-links li .nav-linkedin{display:inline-flex;align-items:center;padding:10px 0}
+  /* In the stacked menu a bare 26px mark read as a stray tile dropped below the
+     button. Labelling it makes it a menu row like the others; the icon alone is
+     still right in the desktop bar, where it sits among other marks. */
+  .nav-links li .nav-linkedin{display:inline-flex;align-items:center;gap:12px;padding:12px 0}
+  .nav-links li .nav-linkedin .nav-li-label{display:inline;font-weight:500;
+    font-size:1rem;color:var(--navy);line-height:1}
 }
 
 /* ---------- Testimonials: LinkedIn mark is now a link ---------- */
@@ -637,6 +642,8 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 .nav-links li{display:flex;align-items:center}
 .nav-linkedin{display:flex;align-items:center;line-height:0}
 .nav-linkedin svg{display:block}
+/* Label is for the stacked mobile menu only — the desktop bar shows the mark. */
+.nav-li-label{display:none}
 
 /* ---------- Anchor targets clear the 72px sticky header ----------
    Without this, "Let's Talk" landed with the heading jammed against the bar. */
@@ -714,9 +721,11 @@ section[id]{scroll-margin-top:77px}
      at zero alpha — plain `transparent` interpolates through black and leaves a
      grey cast mid-gradient. */
   .hero-strip::before,.hero-strip::after{content:'';position:absolute;top:0;bottom:0;
-    width:52px;z-index:2;pointer-events:none}
-  .hero-strip::before{left:0;background:linear-gradient(to right,var(--cream) 12%,rgba(252,245,222,0))}
-  .hero-strip::after{right:0;background:linear-gradient(to left,var(--cream) 12%,rgba(252,245,222,0))}
+    width:34px;z-index:2;pointer-events:none}
+  /* Kept deliberately light: narrower than before and starting just under full
+     opacity, so the edge softens without wiping out the tile behind it. */
+  .hero-strip::before{left:0;background:linear-gradient(to right,rgba(252,245,222,.92),rgba(252,245,222,0))}
+  .hero-strip::after{right:0;background:linear-gradient(to left,rgba(252,245,222,.92),rgba(252,245,222,0))}
   /* Own compositing layer so scrolling the page doesn't repaint the marquee
      (each tile carries a box-shadow, which is expensive to repaint on a phone). */
   .hero-strip-track{display:flex;gap:10px;width:max-content;will-change:transform}
@@ -751,7 +760,12 @@ section[id]{scroll-margin-top:77px}
 
 /* ---------- Doggytime copy on mobile ---------- */
 @media (max-width:900px){
-  .client-feature{gap:22px}
+  /* Stacked, the claim and the proof of it need a clear break between them —
+     at 22px the preview read as part of the list. The section's own bottom
+     padding then piled on top of the preview's, so trim that back: the space
+     belongs above the preview, not below it. */
+  .client-feature{gap:34px}
+  #case-studies{padding-bottom:34px}
   .client-feature-copy h3{font-size:1.35rem;margin-bottom:12px}
   .client-feature-copy .client-lede{font-size:1rem;margin-bottom:16px;line-height:1.5}
   .client-points{gap:9px;margin-bottom:0}
@@ -794,7 +808,17 @@ section[id]{scroll-margin-top:77px}
      Pinned right so the page gutter stays put as it shrinks. Height units are
      safe here: a desktop viewport doesn't resize under you the way a phone's
      does when its toolbar collapses. */
-  .hero-showcase{max-width:min(100%,calc(100vh - 200px));justify-self:end}
+  /* margin-left:auto rather than justify-self:end — an end-aligned grid item is
+     sized shrink-to-fit, so the whole collage collapsed to nothing in the moment
+     before the images had dimensions to be measured from. Stretch-plus-max-width
+     keeps the width purely a function of the column, never of the content. */
+  .hero-showcase{max-width:min(100%,calc(100vh - 200px));margin-left:auto}
+  /* Finish exactly at the fold so the next section doesn't show as a thin navy
+     line under the artwork. Safe on desktop specifically: a desktop viewport
+     doesn't change height while you scroll, so this cannot produce the resizing
+     that the same idea caused on mobile. The cap above keeps the content inside
+     that height, so this only ever adds space, never clips. */
+  .hero{min-height:calc(100vh - 77px);display:flex;flex-direction:column;justify-content:center}
 }
 /* On a laptop-height window the hero's own padding is what tips it over the
    fold, so trim it there rather than shrinking the work any further. */
