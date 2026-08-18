@@ -19,20 +19,18 @@
 <meta name="twitter:description" content="Jordan Darby builds brands end to end — naming, identity, websites, and launch collateral for food, beverage, and local businesses in Northwest Arkansas and beyond.">
 <meta name="twitter:image" content="https://jordandarby.com/images/og-image.jpg">
 <link rel="icon" href="images/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9K6as8bTXq_nANBjzKo3IeZx8z6up5BeSl9D4dj_x9PpZBMlGIInHWVyNJ.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2">
-<!-- 600 carries the nav, buttons and labels and 700 the sub-heads; without
-     these the browser only discovers them after the Google stylesheet parses,
-     so they arrived late and visibly swapped in after the rest of the page. -->
-<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLGT9Z1xlFd2JQEk.woff2">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Poppins:wght@400;500;600;700&display=fallback" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=66">
-<link rel="stylesheet" href="css/redesign.css?v=66">
-  <link rel="stylesheet" href="css/motion.css?v=66">
+<!-- Self-hosted fonts (faces declared in css/style.css). Preloaded so they are
+     in flight before the stylesheet parses. crossorigin is required even
+     same-origin: font fetches are CORS-mode, and without it the preload does
+     not match the real request and the file is fetched twice. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/bricolage-grotesque-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-400-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-600-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-700-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-500-latin.woff2">
+<link rel="stylesheet" href="css/style.css?v=68">
+<link rel="stylesheet" href="css/redesign.css?v=68">
+  <link rel="stylesheet" href="css/motion.css?v=68">
   <noscript><style>.t-full,.dsc{grid-template-rows:1fr!important;opacity:1!important;margin-top:12px!important}.t-toggle,.dsc-btn{display:none}</style></noscript>
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 <script type="application/ld+json">
@@ -396,8 +394,8 @@
 
 <div class="lightbox" aria-hidden="true"><button class="lb-close" aria-label="Close">&times;</button><img alt=""><div class="lb-cap"></div></div>
 
-<script src="js/main.js?v=66"></script>
-<script src="js/redesign.js?v=66"></script>
-  <script src="js/motion.js?v=66" defer></script>
+<script src="js/main.js?v=68"></script>
+<script src="js/redesign.js?v=68"></script>
+  <script src="js/motion.js?v=68" defer></script>
 </body>
 </html>

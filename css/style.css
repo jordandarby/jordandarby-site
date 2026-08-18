@@ -1,5 +1,47 @@
 /* Jordan Darby Design — static rebuild
    Palette matched to existing site */
+
+/* ---------- Fonts (self-hosted) ----------
+   Served from this origin rather than fonts.gstatic.com. Going through Google
+   meant the browser had to fetch and parse their stylesheet before it even
+   learned the font URLs, so the real faces landed after first paint and
+   visibly swapped in. These are the same latin-subset woff2 files Google was
+   serving, preloaded in the page head so they are in flight immediately.
+
+   `fallback` gives the font a brief moment to arrive before anything paints,
+   so on a normal connection nothing swaps; unlike `optional` it still uses the
+   real face if it shows up late, rather than stranding the visit in Arial.
+
+   Bricolage is one variable file covering 600-700 — the two weights below
+   deliberately share a src. Unicode-range matches what Google served, so
+   characters outside it (←, →, ✓) fall back exactly as they do today. */
+@font-face{
+  font-family:'Bricolage Grotesque'; font-style:normal; font-weight:600 700;
+  font-stretch:100%; font-display:fallback;
+  src:url(../fonts/bricolage-grotesque-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Poppins'; font-style:normal; font-weight:400; font-display:fallback;
+  src:url(../fonts/poppins-400-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Poppins'; font-style:normal; font-weight:500; font-display:fallback;
+  src:url(../fonts/poppins-500-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Poppins'; font-style:normal; font-weight:600; font-display:fallback;
+  src:url(../fonts/poppins-600-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Poppins'; font-style:normal; font-weight:700; font-display:fallback;
+  src:url(../fonts/poppins-700-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
 :root{
   --navy:#182946;
   --navy-deep:#141F38;
