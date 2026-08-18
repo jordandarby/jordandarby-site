@@ -451,9 +451,16 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 
 /* ---------- Brand marquee ---------- */
 .brands .wrap{display:block;text-align:center}
-.brand-marquee{display:flex;width:100%;overflow:hidden;margin-top:24px;
-  -webkit-mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);
-  mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent)}
+/* Edges fade with overlays rather than mask-image. Masking an element whose
+   child runs an infinite animation is a known compositing hazard on mobile —
+   the same one that made the hero strip render as faint ghosts — and it is the
+   likeliest reason this loop broke up rather than running clean. The section
+   behind is flat navy, so an overlay is indistinguishable from a real mask. */
+.brand-marquee{position:relative;display:flex;width:100%;overflow:hidden;margin-top:24px}
+.brand-marquee::before,.brand-marquee::after{content:'';position:absolute;top:0;bottom:0;
+  width:7%;z-index:2;pointer-events:none}
+.brand-marquee::before{left:0;background:linear-gradient(to right,var(--navy),rgba(24,41,70,0))}
+.brand-marquee::after{right:0;background:linear-gradient(to left,var(--navy),rgba(24,41,70,0))}
 .brands .brand-track{list-style:none;display:flex;flex-wrap:nowrap;flex:0 0 auto;
   min-width:100%;justify-content:space-around;align-items:center;gap:0;margin:0;padding:0}
 .brands .brand-track li{flex:none;padding:0 clamp(20px,3vw,42px);white-space:nowrap;
@@ -461,12 +468,20 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   font-size:clamp(1.1rem,2vw,1.6rem);opacity:.92}
 @media (prefers-reduced-motion:no-preference){
   .brands .brand-track{animation:marquee 36s linear infinite}
-  .brand-marquee:hover .brand-track{animation-play-state:paused}
+  /* Pause on hover only where hovering is a thing. On touch :hover latches
+     after a tap, so brushing the strip while scrolling stopped it dead and it
+     stayed stopped — the loop looking broken when it had simply been paused. */
+  @media (hover:hover){
+    .brand-marquee:hover .brand-track{animation-play-state:paused}
+  }
   @keyframes marquee{to{transform:translateX(-100%)}}
 }
-/* Reduced motion: no scroll — show one static, centred row */
+/* Reduced motion: no scroll — show one static, centred row. The edge fades go
+   with the scrolling: nothing is running off the sides to soften, and leaving
+   them on would just dim the first and last name. */
 @media (prefers-reduced-motion:reduce){
-  .brand-marquee{overflow:hidden;-webkit-mask-image:none;mask-image:none}
+  .brand-marquee{overflow:hidden}
+  .brand-marquee::before,.brand-marquee::after{display:none}
   .brands .brand-track{flex-wrap:wrap;justify-content:center;gap:10px 30px}
   .brands .brand-track[aria-hidden="true"]{display:none}
 }
