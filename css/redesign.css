@@ -461,8 +461,14 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   width:7%;z-index:2;pointer-events:none}
 .brand-marquee::before{left:0;background:linear-gradient(to right,var(--navy),rgba(24,41,70,0))}
 .brand-marquee::after{right:0;background:linear-gradient(to left,var(--navy),rgba(24,41,70,0))}
+/* Natural width, never stretched. `min-width:100%` with space-around forced
+   each copy to fill the screen and spread the eight names to suit — so on a
+   wide monitor the spacing ballooned and the loop read as gaps rather than a
+   run of names. At natural width every gap is just the item padding, which
+   makes the join between the last name and the first indistinguishable from
+   the spacing everywhere else. Enough copies follow to cover any screen. */
 .brands .brand-track{list-style:none;display:flex;flex-wrap:nowrap;flex:0 0 auto;
-  min-width:100%;justify-content:space-around;align-items:center;gap:0;margin:0;padding:0}
+  justify-content:flex-start;align-items:center;gap:0;margin:0;padding:0}
 .brands .brand-track li{flex:none;padding:0 clamp(20px,3vw,42px);white-space:nowrap;
   font-family:var(--display,'Fraunces',serif);font-weight:600;
   font-size:clamp(1.1rem,2vw,1.6rem);opacity:.92}
