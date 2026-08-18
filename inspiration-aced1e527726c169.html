@@ -27,21 +27,24 @@
 /* Skip the entrance animation on a refresh or a back-navigation, but never on a
    genuine arrival — the intro is the point on a first view.
 
-   Refresh is detected by comparing against the last URL loaded in this tab: the
-   same URL twice in a row is a reload. That needs no timing API, which is what
-   makes it hold on iOS, where Safari can still have an empty Navigation Timing
-   buffer this early in the head. A plain "has visited" flag was wrong here — it
-   also swallowed the intro on real navigations. */
+   Three independent signals, because any one of them can come up empty:
+   Safari can have an empty Navigation Timing buffer this early in the head,
+   and sessionStorage throws outright when storage is blocked. window.name
+   survives a reload in the same tab and keeps working in both of those cases,
+   while still resetting when you navigate to a different page. Any signal
+   saying "seen this exact URL already" is enough. */
 (function(){try{
   var t='';
   var e=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];
   if(e)t=e.type;
   if(!t&&performance.navigation){var n=performance.navigation.type;t=n===1?'reload':n===2?'back_forward':'navigate';}
-  var repeat=false;
+  var mark='jd-seen:'+location.href,repeat=false;
   try{
-    repeat=sessionStorage.getItem('jd-last-url')===location.href;
+    if(sessionStorage.getItem('jd-last-url')===location.href)repeat=true;
     sessionStorage.setItem('jd-last-url',location.href);
   }catch(_){}
+  if(window.name===mark)repeat=true;
+  try{window.name=mark;}catch(_){}
   if(repeat||(t&&t!=='navigate'))document.documentElement.classList.add('no-intro');
 }catch(_){}})();
 </script>
