@@ -299,10 +299,13 @@ body{font-size:17px}
      the link shrink-wrapped and pinned left. As a block the link fills the row,
      so the label centres and the whole row becomes the tap target. */
   .nav-links li{display:block;padding:0;text-align:center}
-  /* A hairline between rows, but never above the CTA — a rule directly over the
-     button would fence it off from the menu instead of separating peers. */
+  /* The CTA and the LinkedIn mark are the last two items in the list. The menu
+     is destinations only — the button already sits in the bar itself and again
+     in the page, and the mark lives in the footer. nth-last-child keeps this
+     working without depending on :has(). */
+  .nav-links li:nth-last-child(-n+2){display:none}
+  /* A hairline between the remaining rows. */
   .nav-links li + li{border-top:1px solid rgba(24,41,70,.08)}
-  .nav-links li:has(> .nav-cta){border-top:0}
   .nav-links li a{display:block;padding:15px 0;text-align:center}
   .nav-cta{display:inline-block;margin:8px 0}
   .nav-toggle{display:block}
