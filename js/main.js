@@ -7,21 +7,8 @@
       entries.forEach(function (e) {
         if (e.isIntersecting) {
           if (e.target.__shown) { io.unobserve(e.target); return; }
-          // Release the pin a replay left behind, in the same order as
-          // revealNow: transition, then values, then the class that animates.
-          e.target.style.transition = '';
-          e.target.style.opacity = '';
-          e.target.style.transform = '';
-          e.target.classList.add('in');
+          playReveal(e.target);
           io.unobserve(e.target);
-          // Must outlast the longest reveal (cascade delay .30s + .7s duration),
-          // or 'settled' swaps the transition mid-fade and the item snaps in.
-          // Held on the element so a replay can cancel a pending one — left
-          // running it would land mid-replay and cut that animation short.
-          clearTimeout(e.target.__settle);
-          e.target.__settle = setTimeout(function () {
-            e.target.classList.add('settled');
-          }, 1150);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
@@ -87,19 +74,36 @@
        past and you arrive at something visibly finished, which reads as the
        link having done nothing. Pressing a link resets that section so its
        motion runs again on arrival. */
-    function revealNow(el) {
+    /* One reveal path, used by the observer and by the guard.
+
+       A replayed element is animated explicitly rather than left to the CSS
+       transition. Relying on the transition meant depending on the browser
+       noticing a change between two style recalculations, and measurement
+       showed it firing for transform while silently skipping opacity — so a
+       replayed section shifted 26px without ever fading, which is far too
+       subtle to read as motion. An explicit animation states both ends
+       outright and cannot be optimised away. */
+    function playReveal(el) {
       if (el.classList.contains('in')) return;
-      /* Lift the pin set by replay(): transitions back on first, then drop the
-         inline values — which lands on the same hidden value the stylesheet
-         already specifies, so nothing animates yet — and only then add `in`,
-         which is the single change the transition runs on. */
+      var replayed = el.__replay;
+      el.__replay = false;
       el.style.transition = '';
       el.style.opacity = '';
       el.style.transform = '';
       el.classList.add('in');
+      if (replayed && el.animate) {
+        try {
+          el.animate(
+            [{ opacity: 0, transform: 'translateY(26px)' },
+             { opacity: 1, transform: 'none' }],
+            { duration: 700, easing: 'ease' }
+          );
+        } catch (_) {}
+      }
       clearTimeout(el.__settle);
       el.__settle = setTimeout(function () { el.classList.add('settled'); }, 1150);
     }
+    function revealNow(el) { playReveal(el); }
     function replay(root) {
       // Nothing to replay when motion is turned off, and the hidden state below
       // would fight the reduced-motion rule that keeps `.reveal` visible.
@@ -111,6 +115,7 @@
       list.forEach(function (el) {
         clearTimeout(el.__settle);
         el.__shown = false;
+        el.__replay = true;
         /* Snap back to hidden, don't fade back. `.reveal` carries the
            transition, so merely removing `in` starts a 0.7s fade-OUT from full
            opacity, and the observer re-adding `in` moments later just reverses
