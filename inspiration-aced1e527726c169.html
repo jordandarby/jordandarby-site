@@ -26,7 +26,7 @@
 <script>
 /* Wait for the fonts before the entrance runs. Added by script only, so a
    visitor without JS is never affected, and released either when the fonts
-   report ready or after a fixed wait — whichever lands first — so a slow or
+   report ready or after a short fixed wait — whichever lands first — so a slow or
    failed font can only delay the hero, never hide it. */
 (function(){try{
   var h=document.documentElement;
@@ -34,7 +34,7 @@
   var go=function(){h.classList.remove('fonts-pending');};
   if(document.fonts&&document.fonts.ready&&document.fonts.ready.then){
     document.fonts.ready.then(go).catch(go);
-    setTimeout(go,1200);
+    setTimeout(go,900);
   }else{go();}
 }catch(_){}})();
 </script>
