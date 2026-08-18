@@ -621,11 +621,16 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 .cta .wrap{align-items:start}
 
 /* ---------- Client feature: copy rides along with the preview ----------
-   The preview is much taller than the copy, so the copy sticks just below the
-   72px sticky header while the site scrolls past it. Two-column layouts only —
-   stacked on mobile there is nothing to ride alongside. */
+   The preview is much taller than the copy, so the copy sticks below the
+   sticky header while the site scrolls past it. Two-column layouts only —
+   stacked on mobile there is nothing to ride alongside.
+
+   The offset is measured from the header's real height (77px, not the 72px
+   this once assumed): at 96px the copy locked just 19px under the bar and
+   looked wedged against it the moment it started sticking. 125px leaves a
+   clear 48px of breathing room. */
 @media (min-width:901px){
-  .client-feature-copy{position:sticky;top:96px;align-self:start}
+  .client-feature-copy{position:sticky;top:125px;align-self:start}
 }
 
 /* ---------- Nav: CTA and LinkedIn mark on the same optical line ---------- */
@@ -783,6 +788,18 @@ section[id]{scroll-margin-top:77px}
 @media (min-width:761px){
   .hero-copy h1{font-size:clamp(3.2rem,6vw,5.4rem);max-width:10.7ch}
   .hero .wrap{gap:72px}
+  /* Keep the artwork inside the window. The tiles are square, so the grid's
+     height tracks its width — capping that width against the height left after
+     the header and padding stops the bottom row running off a laptop screen.
+     Pinned right so the page gutter stays put as it shrinks. Height units are
+     safe here: a desktop viewport doesn't resize under you the way a phone's
+     does when its toolbar collapses. */
+  .hero-showcase{max-width:min(100%,calc(100vh - 200px));justify-self:end}
+}
+/* On a laptop-height window the hero's own padding is what tips it over the
+   fold, so trim it there rather than shrinking the work any further. */
+@media (min-width:761px) and (max-height:820px){
+  .hero{padding:44px 0 52px}
 }
 /* Below ~800px the grid column itself is narrower than the headline's longest
    line, so the box stops tracking the visible text and centring would strand
