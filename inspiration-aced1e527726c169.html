@@ -26,16 +26,22 @@
 <script>
 /* Wait for the fonts before the entrance runs. Added by script only, so a
    visitor without JS is never affected, and released either when the fonts
-   report ready or after a short fixed wait — whichever lands first — so a slow or
-   failed font can only delay the hero, never hide it. */
+   report ready or after a short fixed wait — whichever lands first — so a slow
+   or failed font can only delay the hero, never hide it.
+
+   There is also a floor. With the fonts cached the ready signal comes back
+   almost instantly, so the page snapped straight in and the arrival read as
+   two different experiences depending on whether you had been here before.
+   Holding briefly either way makes it one deliberate entrance. */
 (function(){try{
-  var h=document.documentElement;
+  var h=document.documentElement,t0=Date.now(),MIN=300;
   h.classList.add('fonts-pending');
   var go=function(){h.classList.remove('fonts-pending');};
+  var hold=function(){setTimeout(go,Math.max(0,MIN-(Date.now()-t0)));};
   if(document.fonts&&document.fonts.ready&&document.fonts.ready.then){
-    document.fonts.ready.then(go).catch(go);
+    document.fonts.ready.then(hold).catch(hold);
     setTimeout(go,900);
-  }else{go();}
+  }else{hold();}
 }catch(_){}})();
 </script>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/bricolage-grotesque-latin.woff2">
