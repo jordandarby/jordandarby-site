@@ -7,6 +7,11 @@
       entries.forEach(function (e) {
         if (e.isIntersecting) {
           if (e.target.__shown) { io.unobserve(e.target); return; }
+          // Release the pin a replay left behind, in the same order as
+          // revealNow: transition, then values, then the class that animates.
+          e.target.style.transition = '';
+          e.target.style.opacity = '';
+          e.target.style.transform = '';
           e.target.classList.add('in');
           io.unobserve(e.target);
           // Must outlast the longest reveal (cascade delay .30s + .7s duration),
@@ -31,6 +36,12 @@
       io.unobserve(el);
       el.style.transition = 'none';
       el.classList.add('in', 'settled');
+      // Clear any inline hidden state a replay left on the element. Without
+      // this an element could end up carrying `in` while still pinned at
+      // opacity 0 by that inline style — visible to the code, invisible on
+      // screen, which is the worst of both.
+      el.style.opacity = '';
+      el.style.transform = '';
       void el.offsetHeight;               // flush before restoring transitions
       el.style.transition = '';
     }
@@ -78,11 +89,21 @@
        motion runs again on arrival. */
     function revealNow(el) {
       if (el.classList.contains('in')) return;
+      /* Lift the pin set by replay(): transitions back on first, then drop the
+         inline values — which lands on the same hidden value the stylesheet
+         already specifies, so nothing animates yet — and only then add `in`,
+         which is the single change the transition runs on. */
+      el.style.transition = '';
+      el.style.opacity = '';
+      el.style.transform = '';
       el.classList.add('in');
       clearTimeout(el.__settle);
       el.__settle = setTimeout(function () { el.classList.add('settled'); }, 1150);
     }
     function replay(root) {
+      // Nothing to replay when motion is turned off, and the hidden state below
+      // would fight the reduced-motion rule that keeps `.reveal` visible.
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       var list = [];
       if (root.classList && root.classList.contains('reveal')) list.push(root);
       Array.prototype.push.apply(list, root.querySelectorAll('.reveal'));
@@ -90,7 +111,27 @@
       list.forEach(function (el) {
         clearTimeout(el.__settle);
         el.__shown = false;
+        /* Snap back to hidden, don't fade back. `.reveal` carries the
+           transition, so merely removing `in` starts a 0.7s fade-OUT from full
+           opacity, and the observer re-adding `in` moments later just reverses
+           it — the section never visibly restarts, which is what made pressing
+           a link look like it did nothing.
+
+           The hidden state is written inline rather than left to the class:
+           reading offsetHeight forces layout, and opacity/transform don't
+           affect layout, so the recalculation that would commit them can be
+           deferred right past this point. Reading the computed value forces the
+           style recalculation itself, which is the part that has to happen. */
+        el.style.transition = 'none';
         el.classList.remove('in', 'settled');
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(26px)';
+        /* The transition stays switched off until the reveal clears it. Turning
+           it back on here — in the same task that hid the element — meant the
+           browser never saw the hidden state as its own step: it collapsed the
+           whole thing into "opacity 1 to 0, transitions on" and simply animated
+           the fade-out again. Leaving it off holds the element genuinely hidden
+           across frames, so the reveal has a real starting point. */
         io.observe(el);
       });
       /* The observer does the revealing — it is what gives the motion its
