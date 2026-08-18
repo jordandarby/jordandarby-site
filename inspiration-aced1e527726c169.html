@@ -24,13 +24,22 @@
      same-origin: font fetches are CORS-mode, and without it the preload does
      not match the real request and the file is fetched twice. -->
 <script>
-/* Skip the entrance animation when this is a refresh or a back-navigation:
-   replaying it made the page look like it glitched. Inline and before the
-   stylesheets on purpose, so the class is set ahead of the first paint. */
+/* Skip the entrance animation on any view that is not a first arrival — a
+   refresh, a back-navigation, or a later page in the same tab. Replaying it is
+   what made a reload look like the page glitched.
+
+   Two independent signals on purpose: Safari can still have an empty Navigation
+   Timing buffer this early in the head, so the type check alone worked on
+   desktop Chrome but silently did nothing on iOS. The sessionStorage flag needs
+   no timing API and is the part that actually holds there. */
 (function(){try{
-  var e=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0],t=e&&e.type;
+  var t='';
+  var e=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];
+  if(e)t=e.type;
   if(!t&&performance.navigation){var n=performance.navigation.type;t=n===1?'reload':n===2?'back_forward':'navigate';}
-  if(t&&t!=='navigate')document.documentElement.classList.add('no-intro');
+  var seen=false;
+  try{seen=!!sessionStorage.getItem('jd-visited');sessionStorage.setItem('jd-visited','1');}catch(_){}
+  if(seen||(t&&t!=='navigate'))document.documentElement.classList.add('no-intro');
 }catch(_){}})();
 </script>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/bricolage-grotesque-latin.woff2">
