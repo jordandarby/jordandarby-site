@@ -291,17 +291,19 @@
     });
   }
 
-  /* The mobile hero marquee is decorative and loops forever. Left running it
-     keeps the compositor busy animating a strip that is usually off-screen,
-     which is exactly the sort of background work that makes a phone stutter
-     elsewhere on the page. Pause it whenever it isn't visible. */
-  (function heroStrip() {
-    var track = document.querySelector('.hero-strip-track');
-    if (!track || !('IntersectionObserver' in window)) return;
-    new IntersectionObserver(function (entries) {
+  /* The marquees are decorative and loop forever. Left running they keep the
+     compositor busy animating strips that are usually off-screen, which is the
+     sort of background work that makes scrolling stutter elsewhere on the page.
+     Pause each one whenever it isn't visible. */
+  (function marquees() {
+    if (!('IntersectionObserver' in window)) return;
+    var tracks = document.querySelectorAll('.hero-strip-track, .brand-track');
+    if (!tracks.length) return;
+    var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        track.style.animationPlayState = e.isIntersecting ? '' : 'paused';
+        e.target.style.animationPlayState = e.isIntersecting ? '' : 'paused';
       });
-    }, { threshold: 0 }).observe(track);
+    }, { threshold: 0 });
+    Array.prototype.forEach.call(tracks, function (t) { io.observe(t); });
   })();
 })();

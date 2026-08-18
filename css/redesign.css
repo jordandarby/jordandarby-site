@@ -323,15 +323,13 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
   /* 96px between sections is a lot of dead space on a phone */
   .section{padding:62px 0}
   .section-head{margin-bottom:38px}
-  /* Fill the screen rather than stopping just short of it. Ending a little
-     above the fold left the navy band showing as a thin stripe with none of
-     its own content, which reads as a mistake instead of a transition. svh is
-     the viewport with the browser chrome visible, so the hero finishes level
-     with what you can actually see; vh is the fallback for older browsers.
-     Centring distributes the leftover height above and below the copy instead
-     of pooling it all under the button. */
-  .hero{padding:40px 0;min-height:calc(100vh - 77px);min-height:calc(100svh - 77px);
-    display:flex;flex-direction:column;justify-content:center}
+  /* Deliberately NOT sized to the viewport. Tying this to 100svh/100vh made the
+     cream block grow as iOS collapsed its toolbar mid-scroll — the height unit
+     and the visible area stop agreeing the moment the chrome moves, and the
+     section visibly resized under the thumb. Content-sized with generous
+     padding instead: it cannot fight the browser chrome, and the taller strip
+     already carries the section. */
+  .hero{padding:40px 0 56px}
   .hero .wrap{gap:38px}
   h1{font-size:clamp(2.5rem,10.2vw,3.5rem)}
   h2{font-size:clamp(1.6rem,6.4vw,2.1rem)}
@@ -697,8 +695,26 @@ section[id]{scroll-margin-top:77px}
   /* No mask-image here on purpose: masking an element whose child is running
      an infinite animation is a known compositing hazard on mobile browsers,
      and the strip already bleeds off both edges. */
-  .hero-strip{display:block;overflow:hidden;min-width:0;width:auto;margin:0 -20px 26px}
-  .hero-strip-track{display:flex;gap:10px;width:max-content}
+  /* Span the viewport exactly. The old -20px margin was pulling against 24px of
+     .wrap padding, so the strip stopped 4px short of each edge. This works out
+     the offset from the column's own width, so it stays flush if the padding
+     ever changes. */
+  .hero-strip{display:block;overflow:hidden;min-width:0;width:auto;position:relative;
+    margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);margin-bottom:26px}
+  /* Soft edges. Done with gradient overlays rather than mask-image on purpose:
+     masking an element whose child runs an infinite animation is the exact
+     compositing hazard that made these images render as faint ghosts before.
+     The hero sits on flat cream, so a cream-to-transparent overlay is
+     indistinguishable from a real fade. Fully transparent is written as cream
+     at zero alpha — plain `transparent` interpolates through black and leaves a
+     grey cast mid-gradient. */
+  .hero-strip::before,.hero-strip::after{content:'';position:absolute;top:0;bottom:0;
+    width:52px;z-index:2;pointer-events:none}
+  .hero-strip::before{left:0;background:linear-gradient(to right,var(--cream) 12%,rgba(252,245,222,0))}
+  .hero-strip::after{right:0;background:linear-gradient(to left,var(--cream) 12%,rgba(252,245,222,0))}
+  /* Own compositing layer so scrolling the page doesn't repaint the marquee
+     (each tile carries a box-shadow, which is expensive to repaint on a phone). */
+  .hero-strip-track{display:flex;gap:10px;width:max-content;will-change:transform}
   /* 122px rather than 94px: with the hero now filling the screen there was room,
      and the packaging work is the substance of this section — at 94px it read as
      decoration. Source files are 366px to stay sharp on 3x screens. */
