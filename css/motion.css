@@ -190,15 +190,67 @@
   }
   .nav-links a:not(.nav-cta):not(.nav-linkedin):hover::after { width: 100%; }
 
-  /* Headshot drifts as though it has a little weight to it: slowing as it
-     reaches the top, accelerating on the way back down. Gated on .settled
-     because the reveal animates transform too — starting the float any earlier
-     would override the entrance and the photo would skip its fade-in. */
-  .headshot.settled { animation: headshotFloat 5.5s infinite; }
-  @keyframes headshotFloat {
-    0%   { transform: translateY(0);     animation-timing-function: ease-out; }
-    50%  { transform: translateY(-8px);  animation-timing-function: ease-in; }
-    100% { transform: translateY(0); }
+  /* Both portraits drift slowly. Eased symmetrically at each end so it reads as
+     floating rather than falling, and given different periods so the two never
+     bob in lockstep — a shared loop in sync is what makes this look mechanical.
+     Gated on .settled because the reveal animates transform too: starting the
+     float any earlier would override the entrance and skip the fade-in. */
+  .headshot.settled    { animation: photoFloat 9s ease-in-out infinite; }
+  .about-photo.settled { animation: photoFloat 11.5s ease-in-out infinite; }
+  @keyframes photoFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+  }
+}
+
+/* ---------- Hand-drawn underline ----------
+   Sits under a single word and draws itself as the section arrives. The path
+   carries pathLength="1", so one dash animation works for any squiggle without
+   measuring it. Drawn by default and only hidden where motion is welcome, so a
+   reduced-motion visitor still gets the mark rather than a missing one. */
+.scribble { position: relative; display: inline-block; }
+.scribble-line {
+  position: absolute; left: 0; bottom: -.2em;
+  width: 100%; height: .34em; color: var(--orange);
+  overflow: visible; pointer-events: none;
+}
+.scribble-line path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .scribble-line path { stroke-dashoffset: 1; }
+  /* Matches whether .reveal is the heading itself or an ancestor of it. */
+  .reveal.in .scribble-line path {
+    animation: scribbleDraw .8s cubic-bezier(.45,.05,.3,1) .18s forwards;
+  }
+  @keyframes scribbleDraw { to { stroke-dashoffset: 0; } }
+
+  /* Proof points arrive one after another rather than as a block, so the eye
+     reads them as a list being ticked off. Hidden only here — without this
+     query, or without JS, they are simply visible from the start. */
+  .client-points li { opacity: 0; transform: translateY(8px); }
+  .reveal.in .client-points li {
+    animation: pointIn .5s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .reveal.in .client-points li:nth-child(1) { animation-delay: .18s; }
+  .reveal.in .client-points li:nth-child(2) { animation-delay: .30s; }
+  .reveal.in .client-points li:nth-child(3) { animation-delay: .42s; }
+  .reveal.in .client-points li:nth-child(4) { animation-delay: .54s; }
+  @keyframes pointIn { to { opacity: 1; transform: none; } }
+
+  /* The strategy icon is an eye, so it blinks. The blink sits at the very start
+     of the cycle and the tile only animates once revealed, so the first one
+     lands as the icon arrives; the rest of the 6s cycle is the pause between
+     blinks — roughly a human interval. Closing is quicker than opening, which
+     is what keeps it from looking like a squash. */
+  .reveal.in .icon-eye svg {
+    transform-origin: 50% 50%;
+    animation: eyeBlink 6s ease-in-out .45s infinite;
+  }
+  @keyframes eyeBlink {
+    0%   { transform: scaleY(1); }
+    2.5% { transform: scaleY(.08); }
+    6%   { transform: scaleY(1); }
+    100% { transform: scaleY(1); }
   }
 }
 
@@ -222,4 +274,9 @@
      hiding the caption alone still left these flashing under a thumb. Tapping
      the photo opens the lightbox, which names the category anyway. */
   .work-tags{display:none}
+
+  /* The nav underline is a hover affordance with nothing to hover on a phone —
+     a tap just latched it on under the finger. The stacked menu uses dividers
+     to separate rows instead. */
+  .nav-links a:not(.nav-cta):not(.nav-linkedin)::after{content:none}
 }
