@@ -24,13 +24,22 @@
      same-origin: font fetches are CORS-mode, and without it the preload does
      not match the real request and the file is fetched twice. -->
 <script>
-/* Skip the entrance animation when this is a refresh or a back-navigation:
-   replaying it made the page look like it glitched. Inline and before the
-   stylesheets on purpose, so the class is set ahead of the first paint. */
+/* Skip the entrance animation on any view that is not a first arrival — a
+   refresh, a back-navigation, or a later page in the same tab. Replaying it is
+   what made a reload look like the page glitched.
+
+   Two independent signals on purpose: Safari can still have an empty Navigation
+   Timing buffer this early in the head, so the type check alone worked on
+   desktop Chrome but silently did nothing on iOS. The sessionStorage flag needs
+   no timing API and is the part that actually holds there. */
 (function(){try{
-  var e=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0],t=e&&e.type;
+  var t='';
+  var e=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];
+  if(e)t=e.type;
   if(!t&&performance.navigation){var n=performance.navigation.type;t=n===1?'reload':n===2?'back_forward':'navigate';}
-  if(t&&t!=='navigate')document.documentElement.classList.add('no-intro');
+  var seen=false;
+  try{seen=!!sessionStorage.getItem('jd-visited');sessionStorage.setItem('jd-visited','1');}catch(_){}
+  if(seen||(t&&t!=='navigate'))document.documentElement.classList.add('no-intro');
 }catch(_){}})();
 </script>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/bricolage-grotesque-latin.woff2">
@@ -38,9 +47,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-600-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-700-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-500-latin.woff2">
-<link rel="stylesheet" href="css/style.css?v=71">
-<link rel="stylesheet" href="css/redesign.css?v=71">
-  <link rel="stylesheet" href="css/motion.css?v=71">
+<link rel="stylesheet" href="css/style.css?v=72">
+<link rel="stylesheet" href="css/redesign.css?v=72">
+  <link rel="stylesheet" href="css/motion.css?v=72">
   <noscript><style>.t-full,.dsc{grid-template-rows:1fr!important;opacity:1!important;margin-top:12px!important}.t-toggle,.dsc-btn{display:none}</style></noscript>
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 <script type="application/ld+json">
@@ -85,7 +94,7 @@
 <section class="hero">
   <div class="wrap">
     <div class="hero-copy">
-      <div class="hero-strip" aria-hidden="true"><div class="hero-strip-track"><img src="images/strip-mavericks.webp?v=71" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-05.webp?v=71" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-25.webp?v=71" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-09.webp?v=71" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-mavericks.webp?v=71" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-05.webp?v=71" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-25.webp?v=71" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-09.webp?v=71" alt="" width="94" height="94" decoding="async" fetchpriority="high"></div></div>
+      <div class="hero-strip" aria-hidden="true"><div class="hero-strip-track"><img src="images/strip-mavericks.webp?v=72" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-05.webp?v=72" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-25.webp?v=72" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-09.webp?v=72" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-mavericks.webp?v=72" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-05.webp?v=72" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-25.webp?v=72" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/strip-work-09.webp?v=72" alt="" width="94" height="94" decoding="async" fetchpriority="high"></div></div>
       <h1>Custom brands, websites, even software.</h1>
       <div class="hero-cta">
         <a class="btn btn-orange btn-lg" href="#contact">Let’s Talk</a>
@@ -404,8 +413,8 @@
 
 <div class="lightbox" aria-hidden="true"><button class="lb-close" aria-label="Close">&times;</button><img alt=""><div class="lb-cap"></div></div>
 
-<script src="js/main.js?v=71"></script>
-<script src="js/redesign.js?v=71"></script>
-  <script src="js/motion.js?v=71" defer></script>
+<script src="js/main.js?v=72"></script>
+<script src="js/redesign.js?v=72"></script>
+  <script src="js/motion.js?v=72" defer></script>
 </body>
 </html>

@@ -203,4 +203,12 @@
 /* Touch: the expand button is a text link — give the thumb a real target. */
 @media (hover:none){
   .t-toggle{padding:14px 0 12px}
+
+  /* A touch device has no hover to leave: tapping or brushing a work tile
+     latched :hover on, and the title/category panel then sat over the artwork
+     until something else was tapped. The captions are decoration here — the
+     work itself is the point — so they are dropped rather than re-timed. The
+     paired zoom goes with them, for the same reason. */
+  .grid a::after{content:none}
+  .grid a:hover img{transform:none}
 }
