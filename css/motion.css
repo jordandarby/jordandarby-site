@@ -190,40 +190,9 @@
   }
   .nav-links a:not(.nav-cta):not(.nav-linkedin):hover::after { width: 100%; }
 
-  /* Both portraits drift slowly. Eased symmetrically at each end so it reads as
-     floating rather than falling, and given different periods so the two never
-     bob in lockstep — a shared loop in sync is what makes this look mechanical.
-     Gated on .settled because the reveal animates transform too: starting the
-     float any earlier would override the entrance and skip the fade-in. */
-  .headshot.settled    { animation: photoFloat 9s ease-in-out infinite; }
-  .about-photo.settled { animation: photoFloat 11.5s ease-in-out infinite; }
-  @keyframes photoFloat {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-10px); }
-  }
 }
-
-/* ---------- Hand-drawn underline ----------
-   Sits under a single word and draws itself as the section arrives. The path
-   carries pathLength="1", so one dash animation works for any squiggle without
-   measuring it. Drawn by default and only hidden where motion is welcome, so a
-   reduced-motion visitor still gets the mark rather than a missing one. */
-.scribble { position: relative; display: inline-block; }
-.scribble-line {
-  position: absolute; left: 0; bottom: -.2em;
-  width: 100%; height: .34em; color: var(--orange);
-  overflow: visible; pointer-events: none;
-}
-.scribble-line path { stroke-dasharray: 1; stroke-dashoffset: 0; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .scribble-line path { stroke-dashoffset: 1; }
-  /* Matches whether .reveal is the heading itself or an ancestor of it. */
-  .reveal.in .scribble-line path {
-    animation: scribbleDraw .8s cubic-bezier(.45,.05,.3,1) .18s forwards;
-  }
-  @keyframes scribbleDraw { to { stroke-dashoffset: 0; } }
-
   /* Proof points arrive one after another rather than as a block, so the eye
      reads them as a list being ticked off. Hidden only here — without this
      query, or without JS, they are simply visible from the start. */
