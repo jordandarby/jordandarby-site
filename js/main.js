@@ -59,6 +59,12 @@
       // Sweep straight away as well: rAF is suspended in a background tab, so
       // the watcher alone would leave a page loaded there fully faded out.
       sweep();
+      // And on timers, because the frame loop is throttled or suspended exactly
+      // when it is needed most — a slow phone restoring a mid-page scroll. A
+      // block that lands on screen after the last sweep would otherwise sit
+      // invisible until touched, which is the glitch this whole sweep exists
+      // to prevent. Sweeping twice costs nothing: it is guarded per element.
+      [120, 300, 600, 1000].forEach(function (t) { setTimeout(sweep, t); });
       until = performance.now() + 1200;
       if (!watching) { watching = true; requestAnimationFrame(watch); }
     }

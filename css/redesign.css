@@ -673,15 +673,13 @@ section[id]{scroll-margin-top:77px}
   @keyframes navIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 }
 
-/* The intro belongs to arriving at the page, not to re-rendering it. On a
-   refresh or a back-navigation these replayed, so the hero and nav restarted
-   at opacity 0 and 20px out of place every time — which is what read as the
-   page glitching on reload. `no-intro` is set on <html> by a small inline
-   script in the head (before first paint) whenever the navigation is not a
-   fresh one, so a returning view simply appears already settled. */
-.no-intro .hero-copy,
-.no-intro .hero-showcase a,
-.no-intro .nav .wrap{animation:none}
+/* The intro plays on every load, refreshes included — it is the arrival, not
+   an interruption. It was once suppressed on reload, back when a refresh
+   genuinely looked broken; the causes of that (content fading in behind a
+   restored scroll position, fonts swapping, images popping in) have each been
+   dealt with since, so the animation now reads as intended rather than as a
+   glitch. Mid-page refreshes stay calm for a different reason: the sweep in
+   main.js marks whatever is already on screen as shown without fading it. */
 
 /* ---------- About: copy starts level with the photo ----------
    Fourth and last of the centred two-column grids in style.css. */
