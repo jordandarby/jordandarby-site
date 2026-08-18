@@ -672,6 +672,18 @@ section[id]{scroll-margin-top:77px}
   .nav .wrap{animation:navIn .7s cubic-bezier(.22,1,.36,1) backwards}
   @keyframes heroIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
   @keyframes navIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+  /* Mobile gets a longer, gentler arrival. The shared curve above is close to
+     ease-out-quint: it covers most of its distance almost immediately and then
+     coasts, which on a phone — where the hero fills the whole screen and there
+     are no tiles arriving after it — lands as one abrupt flash. A softer curve
+     over a longer beat gives it somewhere to travel. The nav follows a moment
+     later so the two no longer land on the same frame. */
+  @media (max-width:760px){
+    .hero-copy{animation-duration:1.15s;animation-timing-function:cubic-bezier(.22,.61,.36,1)}
+    .nav .wrap{animation-duration:.95s;animation-timing-function:cubic-bezier(.22,.61,.36,1);
+      animation-delay:.08s}
+  }
 }
 
 /* The intro belongs to arriving at the page, not to re-rendering it. On a
