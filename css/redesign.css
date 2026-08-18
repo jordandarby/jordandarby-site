@@ -725,17 +725,8 @@ section[id]{scroll-margin-top:77px}
    stacks into a bold block that fills most of the column, with the button
    sitting directly beneath it and any leftover space resting at the bottom.
    The measure is capped so a long line can't run into the artwork — the
-   crowding an uncapped vw scale caused. The block is centred within its
-   column, so it sits midway between the left margin and the artwork rather
-   than hugging the edge. Desktop only: mobile stacks. */
+   crowding an uncapped vw scale caused. Desktop only: mobile stacks. */
 @media (min-width:761px){
-  .hero-copy h1{font-size:clamp(3.2rem,6vw,5.4rem);max-width:11ch;
-    margin-left:auto;margin-right:auto;text-align:center}
-  .hero-cta{justify-content:center}
-  /* Nudge the centred block right by half the 72px column gap. Centring within
-     the column alone leaves the whole gap as slack on the right, so the block
-     reads as left-biased; +36px lands it midway between the left margin and
-     the artwork. */
-  .hero-copy h1,.hero-cta{position:relative;left:36px}
+  .hero-copy h1{font-size:clamp(3.2rem,6vw,5.4rem);max-width:11ch}
   .hero .wrap{gap:72px}
 }
