@@ -1,2 +1,5 @@
 .DS_Store
 .claude/settings.local.json
+# Local tooling and working files — never part of the published site
+.claude/
+jordandarby-brand-spec.md
