@@ -319,15 +319,14 @@ footer ul{flex-wrap:wrap;justify-content:center;gap:12px 22px}
    inside its own box — the anchor was centred, the icon inside it wasn't.
    Taking it out of inline flow lines the two up properly. */
 footer .fa-linkedin{display:inline-flex;align-items:center;line-height:0}
+.nav-li{display:none}
 /* Keep the LinkedIn mark clear of the fixed back-to-top button, which sits
    in the bottom-right corner. Only needed while the footer's right edge is
    near the window edge; on wide screens the 1200px container clears it. */
 @media (min-width:761px) and (max-width:1400px){
   footer .wrap{padding-right:100px}
 }
-@media (max-width:760px){
-  footer .wrap{padding-right:84px}
-}
+
 footer .fa-linkedin svg{display:block}
 /* Honeypot: visually-hidden pattern that cannot affect layout or scroll width */
 .cta-form input[name="_gotcha"]{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
@@ -397,6 +396,16 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
 @media (max-width:1080px){
   .nav-toggle{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;
     margin-right:-8px;line-height:1}
+  /* LinkedIn mark beside the menu button, same 44px target. margin-left:auto
+     pulls it (and the button after it) to the right edge of the bar. */
+  .nav-li{display:inline-flex;width:44px;height:44px;align-items:center;justify-content:center;
+    margin-left:auto;margin-right:2px;border-radius:8px}
+  .nav-li svg{display:block}
+  .nav-li:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+  /* The mark now lives in the nav bar on these screens, so it leaves the
+     footer and the dropdown menu. */
+  footer .fa-linkedin{display:none}
+  .nav-links .nav-social{display:none}
 }
 @media (max-width:760px){
   .cs-card .concept-tag,.cs-card .client-tag{font-size:.68rem;padding:4px 9px}
@@ -749,7 +758,8 @@ section[id]{scroll-margin-top:77px}
    for a thumb. Pad the hit area without moving the icon. */
 @media (hover:none){
   .card-li{padding:11px;margin:-11px}
-  footer .fa-linkedin{display:inline-block;padding:8px;margin:-8px}
+  /* Hidden here: the mark sits in the nav bar on these screens (see .nav-li). */
+  footer .fa-linkedin{display:none}
 }
 
 /* ---------- Mobile hero strip ----------
