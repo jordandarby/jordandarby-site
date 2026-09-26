@@ -344,7 +344,7 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
      section visibly resized under the thumb. Content-sized with generous
      padding instead: it cannot fight the browser chrome, and the taller strip
      already carries the section. */
-  .hero{padding:40px 0 56px}
+  .hero{padding:44px 0 68px}
   .hero .wrap{gap:38px}
   h1{font-size:clamp(2.5rem,10.2vw,3.5rem)}
   h2{font-size:clamp(1.6rem,6.4vw,2.1rem)}
@@ -543,6 +543,10 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 
 /* ---------- Hero: the sub-line used to carry the gap under the headline ---------- */
 .hero-copy h1{margin-bottom:26px}
+/* Poppins to match the nav wordmark: the display face's narrow counters read
+   soft at headline size on phones. Tighter tracking keeps the wide face from
+   forcing an extra line. */
+.hero-copy h1{font-family:'Poppins',sans-serif;font-weight:700;letter-spacing:-.025em}
 @media (max-width:760px){.hero-copy h1{margin-bottom:18px}}
 
 /* ---------- Repositioning: services note + packaging add-on line ---------- */
@@ -864,7 +868,9 @@ section[id]{scroll-margin-top:77px}
    the centring follows the visible text instead of the box — same wrap, and
    whitespace either side matches within a pixel from 820px up. */
 @media (min-width:761px){
-  .hero-copy h1{font-size:clamp(3.2rem,6vw,5.4rem);max-width:10.7ch}
+  /* 12ch in Poppins keeps the same four-line wrap the display face had at 10.7ch:
+     wide enough for "even software.", narrow enough to break "Custom brands,". */
+  .hero-copy h1{font-size:clamp(3.2rem,6vw,5.4rem);max-width:12ch}
   .hero .wrap{gap:72px}
   /* Keep the artwork inside the window. The tiles are square, so the grid's
      height tracks its width — capping that width against the height left after
@@ -894,4 +900,16 @@ section[id]{scroll-margin-top:77px}
    the block. There it stays flush left, as before. */
 @media (min-width:800px){
   .hero-copy{justify-self:center;position:relative;left:38px}
+}
+
+/* ---------- Phones: one moving strip at a time ----------
+   The hero strip and the brand marquee both sat in the first screen and
+   scrolled against each other. The brand names become a static, centred,
+   wrapped list here; the edge fades go with the motion. */
+@media (max-width:760px){
+  .brand-marquee{overflow:visible;margin-top:18px;flex-wrap:wrap}
+  .brand-marquee::before,.brand-marquee::after{display:none}
+  .brands .brand-track{animation:none;flex:1 1 100%;flex-wrap:wrap;justify-content:center;gap:6px 0}
+  .brands .brand-track[aria-hidden="true"]{display:none}
+  .brands .brand-track li{padding:0 12px;font-size:1.15rem}
 }
