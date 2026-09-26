@@ -548,8 +548,8 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 /* Poppins to match the nav wordmark: the display face's narrow counters read
    soft at headline size on phones. Tighter tracking keeps the wide face from
    forcing an extra line. */
-.hero-copy h1{font-family:'Poppins',sans-serif;font-weight:700;letter-spacing:-.025em}
-@media (max-width:760px){.hero-copy h1{margin-bottom:18px}}
+.hero-copy h1{font-family:'Poppins',sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.12}
+@media (max-width:760px){.hero-copy h1{margin-bottom:18px;font-size:clamp(2.3rem,9.6vw,3.3rem)}}
 
 /* ---------- Repositioning: services note + packaging add-on line ---------- */
 .services-note{max-width:760px;margin:30px auto 0;padding:26px 32px;
@@ -870,9 +870,10 @@ section[id]{scroll-margin-top:77px}
    the centring follows the visible text instead of the box — same wrap, and
    whitespace either side matches within a pixel from 820px up. */
 @media (min-width:761px){
-  /* 12ch in Poppins keeps the same four-line wrap the display face had at 10.7ch:
-     wide enough for "even software.", narrow enough to break "Custom brands,". */
-  .hero-copy h1{font-size:clamp(3.2rem,6vw,5.4rem);max-width:12ch}
+  /* Sized so the copy sets in three lines — "Custom brands," / "websites," /
+     "even software." — from ~900px up. 14ch is wider than the first line and
+     narrower than the first two joined, so the wrap stays put as it scales. */
+  .hero-copy h1{font-size:clamp(2.9rem,5vw,4.1rem);max-width:14ch}
   .hero .wrap{gap:72px}
   /* Keep the artwork inside the window. The tiles are square, so the grid's
      height tracks its width — capping that width against the height left after
