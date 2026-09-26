@@ -598,11 +598,12 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   background:#fff;border-radius:999px;padding:4px 14px;flex:1;text-align:center;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* The stage is a window onto the live site. The iframe is rendered at the
-   site's own desktop width and scaled down to fit, so it stays interactive:
-   scrolling happens inside the iframe, and its buttons and links work. */
-.sp-stage{position:relative;aspect-ratio:4/5;overflow:hidden;background:#FBF7EF}
-.sp-frame{position:absolute;top:0;left:0;border:0;transform-origin:0 0;
+/* The stage is a window onto the live site, rendered 1:1 at the stage's own
+   width so the site shows its responsive layout. Fully interactive: scrolling
+   happens inside the iframe, and its buttons and links work. contain:paint
+   keeps the embedded site's repaints from spilling into the page. */
+.sp-stage{position:relative;aspect-ratio:4/5;overflow:hidden;background:#FBF7EF;contain:paint}
+.sp-frame{display:block;width:100%;height:100%;border:0;
   opacity:0;transition:opacity .5s ease}
 .site-preview.loaded .sp-frame{opacity:1}
 .sp-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
