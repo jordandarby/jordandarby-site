@@ -85,6 +85,26 @@
     }, { passive: true });
   })();
 
+  /* ---------- 3b. Back-to-top button ---------- */
+  (function toTop() {
+    var btn = document.querySelector('.to-top');
+    if (!btn) return;
+    btn.removeAttribute('hidden');
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      btn.classList.toggle('show', y > window.innerHeight * 0.8);
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' });
+    });
+    update();
+  })();
+
   /* ---------- 4. Scroll progress + condensed nav ---------- */
   (function scrollFx() {
     if (calm) return;
