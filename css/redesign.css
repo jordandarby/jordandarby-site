@@ -639,10 +639,12 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   }
 }
 
-/* ---------- Hero: copy starts level with the artwork ----------
-   style.css centres the two columns, which dropped the headline well below
-   the top edge of the image grid. Align to the top instead. */
-.hero .wrap{align-items:start}
+/* ---------- Hero: copy centred on the artwork ----------
+   The collage is much taller than the three-line headline plus button, so
+   top-aligning the two left the copy stranded in the upper corner with a
+   blank cream field under the button. Centred, the headline sits on the
+   grid's midline and the whitespace splits evenly above and below. */
+.hero .wrap{align-items:center}
 
 /* ---------- Client feature: scannable rationale ---------- */
 /* Badge treatment, matching the package flag's colour language. */
@@ -895,7 +897,8 @@ section[id]{scroll-margin-top:77px}
   /* Larger artwork to balance the (now smaller) headline: a wider hero row
      than the rest of the page, with the split tilted toward the collage. The
      copy column stays wide enough for "Custom brands," on one line. */
-  .hero .wrap{max-width:1360px;grid-template-columns:.46fr .54fr;gap:56px}
+  .hero .wrap,.nav .wrap{max-width:1360px}
+  .hero .wrap{grid-template-columns:.46fr .54fr;gap:56px}
   /* The section is already centred to the fold by min-height, so the padding
      only needs to keep the collage off the header and the next section.
      168px = 77px header + 88px padding + a little slack, so the grid's cap
@@ -906,8 +909,11 @@ section[id]{scroll-margin-top:77px}
 /* Below ~800px the grid column itself is narrower than the headline's longest
    line, so the box stops tracking the visible text and centring would strand
    the block. There it stays flush left, as before. */
+/* Flush left: the headline's left edge lines up with the nav wordmark. The
+   old 38px nudge centred a narrow headline in a wide column; with the column
+   now sized to the text it only pushed the copy off the page gutter. */
 @media (min-width:800px){
-  .hero-copy{justify-self:center;position:relative;left:38px}
+  .hero-copy{justify-self:start}
 }
 
 /* ---------- Phones: one moving strip at a time ----------
