@@ -222,149 +222,46 @@
     });
   });
 
-  // Live site preview — the iframe renders the whole page at desktop width and
-  // drifts vertically inside a fixed window. Drag to scrub, hover to pause.
+  // Live site preview — the real site in an iframe, rendered at its desktop
+  // width and scaled down to fit the window. It is fully interactive: scroll
+  // inside it, press its buttons, follow its links. Nothing is moved by
+  // script, so there is no per-frame repaint to fight the page's own scroll.
   // Nothing loads until the frame is near the viewport.
   document.querySelectorAll('.site-preview').forEach(function (fig) {
     var frame = fig.querySelector('.sp-frame');
     var stage = fig.querySelector('.sp-stage');
-    var veil  = fig.querySelector('.sp-veil');
     if (!frame || !stage) return;
 
-    // Two render sizes: the desktop layout on wide frames, the site's own
+    // Two render widths: the desktop layout on wide frames, the site's own
     // mobile layout on narrow ones. Squeezing a 1280px page into a 340px
     // frame renders its type at about 4px — legible to nobody.
-    var DESK = { w: +fig.getAttribute('data-w') || 1280, h: +fig.getAttribute('data-h') || 3000 };
-    var MOB  = { w: +fig.getAttribute('data-mw') || DESK.w, h: +fig.getAttribute('data-mh') || DESK.h };
-    var PAGE_W = DESK.w, PAGE_H = DESK.h;
-    var still  = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    var scale = 1, travel = 0, offset = 0, paused = true, dragging = false;
+    var DESK_W = +fig.getAttribute('data-w') || 1280;
+    var MOB_W  = +fig.getAttribute('data-mw') || DESK_W;
 
     function measure() {
-      var page = stage.clientWidth < 560 ? MOB : DESK;
-      PAGE_W = page.w; PAGE_H = page.h;
-      scale = stage.clientWidth / PAGE_W;
-      frame.style.width  = PAGE_W + 'px';
-      frame.style.height = PAGE_H + 'px';
-      // how far the render can move before its bottom edge reaches the window
-      travel = Math.max(0, PAGE_H - stage.clientHeight / scale);
-      if (offset > travel) offset = travel;
-      paint();
+      var pageW = stage.clientWidth < 560 ? MOB_W : DESK_W;
+      var scale = stage.clientWidth / pageW;
+      frame.style.width  = pageW + 'px';
+      frame.style.height = Math.ceil(stage.clientHeight / scale) + 'px';
+      frame.style.transform = 'scale(' + scale + ')';
     }
-    function paint() {
-      frame.style.transform = 'scale(' + scale + ') translateY(' + (-offset) + 'px)';
+    function load() {
+      if (frame.src) return;
+      frame.src = fig.getAttribute('data-src');
+      measure();
     }
-
-    /* Drift: down once, then rest at the bottom. It used to turn around and
-       climb back up on a loop, which made the panel look like a screensaver
-       and never let the reader see the foot of the page settle. Reaching the
-       end is the end — dragging still works from there. */
-    var last = 0, running = 0, drifted = false, SPEED = 26;   // css px/sec, pre-scale
-    function tick(now) {
-      if (!last) last = now;
-      var dt = Math.min((now - last) / 1000, 0.05);
-      last = now;
-      if (!paused && !dragging && !still && travel > 0 && !drifted) {
-        offset += SPEED * dt;
-        if (offset >= travel) { offset = travel; drifted = true; }
-        paint();
-      }
-      if (drifted) { running = 0; return; }        // stop asking for frames
-      running = requestAnimationFrame(tick);
-    }
-    function start() { if (!running && !drifted) { last = 0; running = requestAnimationFrame(tick); } }
-    function stop() { if (running) { cancelAnimationFrame(running); running = 0; } }
-
-    // Scroll the preview under the cursor / finger. At either end the gesture
-    // is handed back to the page, so the frame never traps the reader.
-    function atEdge(delta) {
-      return (delta < 0 && offset <= 0.5) || (delta > 0 && offset >= travel - 0.5);
-    }
-    function nudge(deltaPx) {
-      var next = Math.min(travel, Math.max(0, offset + deltaPx / scale));
-      var moved = next !== offset;
-      offset = next; if (moved) paint();
-      return moved;
-    }
-
-    stage.addEventListener('wheel', function (e) {
-      if (travel <= 0) return;
-      if (atEdge(e.deltaY)) return;          // let the page take over
-      e.preventDefault();
-      nudge(e.deltaY);
-    }, { passive: false });
-
-    // Touch: same idea, but we only claim the gesture while there is travel
-    // left in the direction being dragged.
-    var startY = 0, startOffset = 0, claimed = false;
-    veil.addEventListener('touchstart', function (e) {
-      startY = e.touches[0].clientY; startOffset = offset; claimed = false;
-      dragging = true; stage.classList.add('dragging');
-    }, { passive: true });
-
-    veil.addEventListener('touchmove', function (e) {
-      if (!dragging || travel <= 0) return;
-      var dy = startY - e.touches[0].clientY;      // finger up = scroll down
-      if (!claimed && atEdge(dy)) return;          // page keeps the gesture
-      claimed = true;
-      e.preventDefault();
-      offset = Math.min(travel, Math.max(0, startOffset + dy / scale));
-      paint();
-    }, { passive: false });
-
-    function endTouch() { dragging = false; claimed = false; stage.classList.remove('dragging'); }
-    veil.addEventListener('touchend', endTouch);
-    veil.addEventListener('touchcancel', endTouch);
-
-    // Mouse drag still works on desktop.
-    function down(e) {
-      dragging = true; stage.classList.add('dragging');
-      startY = e.clientY; startOffset = offset;
-      if (veil.setPointerCapture && e.pointerId != null) { try { veil.setPointerCapture(e.pointerId); } catch (err) {} }
-    }
-    function move(e) {
-      if (!dragging || e.pointerType === 'touch') return;
-      offset = Math.min(travel, Math.max(0, startOffset - (e.clientY - startY) / scale));
-      paint();
-    }
-    function up() { dragging = false; stage.classList.remove('dragging'); }
-    veil.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'touch') down(e); });
-    window.addEventListener('pointermove', move, { passive: true });
-    window.addEventListener('pointerup', up);
-    window.addEventListener('pointercancel', up);
-
-    stage.addEventListener('mouseenter', function () { paused = true; });
-    stage.addEventListener('mouseleave', function () { paused = false; });
 
     frame.addEventListener('load', function () { if (frame.src) fig.classList.add('loaded'); });
-
     if (window.ResizeObserver) new ResizeObserver(measure).observe(stage);
     else window.addEventListener('resize', measure);
     measure();
 
-    // Two observers, deliberately: load a little early so the frame is ready,
-    // but only start drifting once the section is genuinely on screen.
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries, obs) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting && !frame.src) {
-            frame.src = fig.getAttribute('data-src');
-            measure();
-            obs.disconnect();
-          }
-        });
+        entries.forEach(function (en) { if (en.isIntersecting) { load(); obs.disconnect(); } });
       }, { rootMargin: '300px 0px' }).observe(fig);
-
-      new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          paused = !en.isIntersecting;
-          if (paused) stop(); else start();
-        });
-      }, { threshold: 0.35 }).observe(fig);
     } else {
-      frame.src = fig.getAttribute('data-src');
-      paused = false; start();
+      load();
     }
   });
 

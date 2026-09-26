@@ -319,6 +319,15 @@ footer ul{flex-wrap:wrap;justify-content:center;gap:12px 22px}
    inside its own box — the anchor was centred, the icon inside it wasn't.
    Taking it out of inline flow lines the two up properly. */
 footer .fa-linkedin{display:inline-flex;align-items:center;line-height:0}
+/* Keep the LinkedIn mark clear of the fixed back-to-top button, which sits
+   in the bottom-right corner. Only needed while the footer's right edge is
+   near the window edge; on wide screens the 1200px container clears it. */
+@media (min-width:761px) and (max-width:1400px){
+  footer .wrap{padding-right:100px}
+}
+@media (max-width:760px){
+  footer .wrap{padding-right:84px}
+}
 footer .fa-linkedin svg{display:block}
 /* Honeypot: visually-hidden pattern that cannot affect layout or scroll width */
 .cta-form input[name="_gotcha"]{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
@@ -580,15 +589,13 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   background:#fff;border-radius:999px;padding:4px 14px;flex:1;text-align:center;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* The stage is a window onto a full-height render of the site. */
-.sp-stage{position:relative;aspect-ratio:4/5;overflow:hidden;background:#FBF7EF;cursor:grab}
-.sp-stage.dragging{cursor:grabbing}
+/* The stage is a window onto the live site. The iframe is rendered at the
+   site's own desktop width and scaled down to fit, so it stays interactive:
+   scrolling happens inside the iframe, and its buttons and links work. */
+.sp-stage{position:relative;aspect-ratio:4/5;overflow:hidden;background:#FBF7EF}
 .sp-frame{position:absolute;top:0;left:0;border:0;transform-origin:0 0;
-  opacity:0;transition:opacity .5s ease;pointer-events:none}
+  opacity:0;transition:opacity .5s ease}
 .site-preview.loaded .sp-frame{opacity:1}
-/* Veil takes the pointer so dragging scrubs the preview instead of the iframe
-   swallowing the gesture — and on touch it keeps the page scrolling normally. */
-.sp-veil{position:absolute;inset:0;z-index:2;background:transparent;touch-action:none}
 .sp-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   color:var(--ink-light);font-size:.9rem}
 
@@ -602,12 +609,6 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   .client-feature{grid-template-columns:1fr;gap:26px}
   .client-feature-copy h3{font-size:1.2rem}
 }
-/* On touch the veil yields vertical panning to the page (touch-action:pan-y),
-   so dragging scrolls the page rather than scrubbing — hide the hint there. */
-@media (hover:none){
-  .sp-cap{display:flex}
-  .sp-stage{cursor:default}
-}
 
 /* ---------- Contact form spacing ----------
    `.cta p{margin:22px 0 30px}` was written for the section's intro paragraph.
@@ -618,27 +619,9 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 /* The empty status still reserves a gap; keep it in the a11y tree but flat. */
 .cta-form .form-status:empty{min-height:0}
 
-/* The preview caption holds only the hint, and the hint is worded for the
-   input you actually have: a cursor scrolls inside the frame, a thumb drags it.
-   Touch used to get no hint at all, which left the panel looking like a picture
-   rather than something you can move. */
+/* The preview caption holds only the hint. */
 .sp-cap{justify-content:center}
-.sp-hint{display:inline-flex;align-items:center;gap:7px}
-.sp-hint-touch{display:none}
-@media (hover:none){
-  .sp-cap{display:flex}
-  .sp-hint-cursor{display:none}
-  .sp-hint-touch{display:inline-flex}
-  /* A small nudge on the arrow: the hint has to compete with a live website
-     directly above it, and a static line under it goes unread. */
-  @media (prefers-reduced-motion:no-preference){
-    .sp-hint-touch svg{animation:spNudge 1.6s ease-in-out infinite}
-  }
-  @keyframes spNudge{
-    0%,100%{transform:translateY(0)}
-    50%    {transform:translateY(3px)}
-  }
-}
+.sp-hint{display:inline-flex;align-items:center}
 
 /* ---------- Hero: copy centred on the artwork ----------
    The collage is much taller than the three-line headline plus button, so

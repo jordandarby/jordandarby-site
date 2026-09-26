@@ -48,9 +48,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-600-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-700-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/poppins-500-latin.woff2">
-<link rel="stylesheet" href="css/style.css?v=135">
-<link rel="stylesheet" href="css/redesign.css?v=135">
-  <link rel="stylesheet" href="css/motion.css?v=135">
+<link rel="stylesheet" href="css/style.css?v=136">
+<link rel="stylesheet" href="css/redesign.css?v=136">
+  <link rel="stylesheet" href="css/motion.css?v=136">
   <noscript><style>.t-full,.dsc{grid-template-rows:1fr!important;opacity:1!important;margin-top:12px!important}.t-toggle,.dsc-btn{display:none}</style></noscript>
 <noscript><style>.reveal{opacity:1;transform:none}.client-points li{opacity:1;transform:none}</style></noscript>
 <script type="application/ld+json">
@@ -95,7 +95,7 @@
 <section class="hero">
   <div class="wrap">
     <div class="hero-copy">
-      <div class="hero-strip" aria-hidden="true"><div class="hero-strip-track"><img src="images/image-02.webp?v=135" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-03.webp?v=135" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-05.webp?v=135" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-04.webp?v=135" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-02.webp?v=135" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-03.webp?v=135" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-05.webp?v=135" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-04.webp?v=135" alt="" width="94" height="94" decoding="async" fetchpriority="high"></div></div>
+      <div class="hero-strip" aria-hidden="true"><div class="hero-strip-track"><img src="images/image-02.webp?v=136" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-03.webp?v=136" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-05.webp?v=136" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-04.webp?v=136" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-02.webp?v=136" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-03.webp?v=136" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-05.webp?v=136" alt="" width="94" height="94" decoding="async" fetchpriority="high"><img src="images/image-04.webp?v=136" alt="" width="94" height="94" decoding="async" fetchpriority="high"></div></div>
       <h1>Custom brands, websites, even software.</h1>
       <div class="hero-cta">
         <a class="btn btn-orange btn-lg" href="#contact">Contact Me</a>
@@ -164,24 +164,20 @@
         </ul>
       </div>
 
-      <!-- Live preview. The iframe renders the whole page at desktop width and
-           drifts vertically inside the frame; drag to scrub, hover to pause. -->
+      <!-- Live preview: the real site rendered at desktop width, scaled to
+           fit the window, and fully interactive — scroll it, click it. -->
       <figure class="site-preview" data-src="https://darbytime31.github.io/doggytime-site/"
-              data-w="1280" data-h="3695" data-mw="430" data-mh="4513">
+              data-w="1280" data-mw="430">
         <div class="sp-chrome" aria-hidden="true">
           <span class="sp-dot"></span><span class="sp-dot"></span><span class="sp-dot"></span>
         </div>
         <div class="sp-stage">
           <iframe class="sp-frame" title="Doggytime Discreet Disposal website preview"
-                  loading="lazy" referrerpolicy="no-referrer" tabindex="-1"
-                  sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
-          <div class="sp-veil" aria-hidden="true"></div>
+                  loading="lazy" referrerpolicy="no-referrer"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
           <noscript><p class="sp-fallback">Open the site to view it.</p></noscript>
         </div>
-        <figcaption class="sp-cap">
-          <span class="sp-hint sp-hint-cursor">Scroll inside to explore</span>
-          <span class="sp-hint sp-hint-touch">Drag to explore<svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true"><path d="M6 1v12M2.5 9.5 6 13l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </figcaption>
+        <figcaption class="sp-cap"><span class="sp-hint">Scroll inside to explore</span></figcaption>
       </figure>
     </div>
 
@@ -238,17 +234,9 @@
       <label>Name<input type="text" name="name" autocomplete="name" required></label>
       <label>Email<input type="email" name="email" autocomplete="email" required></label>
       <label>Tell me about your project<textarea name="message" rows="4" required></textarea></label>
-      <label>Ideal timeline
-        <select name="timeline">
-          <option value="">Select…</option>
-          <option>As soon as possible</option>
-          <option>Within 1–2 months</option>
-          <option>3+ months out</option>
-          <option>Just exploring</option>
-        </select>
-      </label>
+      <label>Ideal timeline<input type="text" name="timeline" placeholder="e.g., launch in 6 weeks" autocomplete="off"></label>
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <button type="submit" class="btn btn-orange"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>Send Message</button>
+      <button type="submit" class="btn btn-orange">Submit Message</button>
       <p class="form-status" role="status" aria-live="polite"></p>
       <p class="form-note">No spam, ever — your details come straight to my inbox.</p>
     </form>
@@ -266,8 +254,8 @@
 
 <div class="lightbox" aria-hidden="true"><button class="lb-close" aria-label="Close">&times;</button><img alt=""><div class="lb-cap"></div></div>
 
-<script src="js/main.js?v=135"></script>
-<script src="js/redesign.js?v=135"></script>
-  <script src="js/motion.js?v=135" defer></script>
+<script src="js/main.js?v=136"></script>
+<script src="js/redesign.js?v=136"></script>
+  <script src="js/motion.js?v=136" defer></script>
 </body>
 </html>
