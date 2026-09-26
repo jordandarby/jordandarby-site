@@ -20,7 +20,7 @@ body{font-size:17px}
 .btn-green{background:var(--orange);color:var(--navy-deep)} /* retire green CTA -> orange */
 .btn-ghost{background:transparent;color:var(--navy);border:2px solid rgba(24,41,70,.22)}
 .btn-ghost:hover{border-color:var(--navy);background:var(--navy);color:#fff}
-.btn-lg{padding:16px 30px;font-size:1.05rem}
+.btn-lg{padding:18px 36px;font-size:1.1rem}
 
 /* ---------- Nav: add CTA + refine ---------- */
 .nav .wrap{height:76px}
@@ -875,7 +875,7 @@ section[id]{scroll-margin-top:77px}
   /* Sized so the copy sets in three lines — "Custom brands," / "websites," /
      "even software." — from ~900px up. 14ch is wider than the first line and
      narrower than the first two joined, so the wrap stays put as it scales. */
-  .hero-copy h1{font-size:clamp(2.9rem,5vw,4.1rem);max-width:14ch}
+  .hero-copy h1{font-size:clamp(2.3rem,4.6vw,4rem);max-width:14ch}
   .hero .wrap{gap:72px}
   /* Keep the artwork inside the window. The tiles are square, so the grid's
      height tracks its width — capping that width against the height left after
@@ -893,17 +893,27 @@ section[id]{scroll-margin-top:77px}
      doesn't change height while you scroll, so this cannot produce the resizing
      that the same idea caused on mobile. The cap above keeps the content inside
      that height, so this only ever adds space, never clips. */
-  .hero{min-height:calc(100vh - 77px);display:flex;flex-direction:column;justify-content:center}
+  .hero{padding:64px 0 72px}
   /* Larger artwork to balance the (now smaller) headline: a wider hero row
      than the rest of the page, with the split tilted toward the collage. The
      copy column stays wide enough for "Custom brands," on one line. */
   .hero .wrap,.nav .wrap{max-width:1360px}
+  /* Real desktop gutters. .wrap's 24px is a phone gutter; on a laptop it put
+     the wordmark and headline almost against the window edge. Scales with the
+     window from 40px to 80px, matched on the nav so the edges stay aligned. */
+  .hero .wrap,.nav .wrap{padding:0 clamp(40px,5vw,72px)}
   .hero .wrap{grid-template-columns:.46fr .54fr;gap:56px}
   /* The section is already centred to the fold by min-height, so the padding
      only needs to keep the collage off the header and the next section.
      168px = 77px header + 88px padding + a little slack, so the grid's cap
      lands the hero exactly one screen tall. */
-  .hero{padding:40px 0 48px}
+}
+/* Landscape screens (laptops, desktops, tablets on their side): the hero
+   fills the first screen and the collage is capped to fit inside it. Tablets
+   in portrait stay content-sized above, since a 1100px-tall section around a
+   370px grid read as empty. */
+@media (min-width:761px) and (min-aspect-ratio:5/4){
+  .hero{min-height:calc(100vh - 77px);display:flex;flex-direction:column;justify-content:center;padding:40px 0 48px}
   .hero-showcase{max-width:min(100%,calc(100vh - 168px))}
 }
 /* Below ~800px the grid column itself is narrower than the headline's longest
