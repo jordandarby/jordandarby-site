@@ -338,13 +338,15 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
   /* 96px between sections is a lot of dead space on a phone */
   .section{padding:62px 0}
   .section-head{margin-bottom:38px}
-  /* Deliberately NOT sized to the viewport. Tying this to 100svh/100vh made the
-     cream block grow as iOS collapsed its toolbar mid-scroll — the height unit
-     and the visible area stop agreeing the moment the chrome moves, and the
-     section visibly resized under the thumb. Content-sized with generous
-     padding instead: it cannot fight the browser chrome, and the taller strip
-     already carries the section. */
+  /* Fill the first screen so the brands section starts below the fold.
+     svh specifically: it is the viewport with the browser toolbar showing and
+     stays fixed while the toolbar collapses, unlike vh/dvh, which made this
+     block resize under the thumb in an earlier pass. Content is centred in the
+     extra room; the 77px is the header. */
   .hero{padding:44px 0 68px}
+  @supports (height:100svh){
+    .hero{min-height:calc(100svh - 77px);display:flex;flex-direction:column;justify-content:center}
+  }
   .hero .wrap{gap:38px}
   h1{font-size:clamp(2.5rem,10.2vw,3.5rem)}
   h2{font-size:clamp(1.6rem,6.4vw,2.1rem)}
