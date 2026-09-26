@@ -197,6 +197,38 @@
     });
   }
 
+  // In-page links scroll to their section without writing "#section" into
+  // the address bar. Same scroll, same target offset (scroll-margin-top still
+  // applies) — only the URL is left alone. Arriving from another page with a
+  // hash still lands on the section; the hash is then cleared the same way.
+  (function cleanHashes() {
+    if (!window.history || !history.replaceState) return;
+    var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function clean() { history.replaceState(null, '', location.pathname + location.search); }
+    document.addEventListener('click', function (ev) {
+      var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+      if (!a || !a.hash || a.hash.length < 2) return;
+      if (a.host !== location.host || a.pathname !== location.pathname) return;
+      var target = document.getElementById(a.hash.slice(1));
+      if (!target) return;
+      ev.preventDefault();
+      target.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
+      clean();
+    });
+    if (location.hash && document.getElementById(location.hash.slice(1))) {
+      // The browser has already jumped to the section by the time this runs
+      // (the script sits at the end of the body). Clear the hash on the next
+      // tick, and again after load in case a late layout shift re-jumped it.
+      setTimeout(clean, 100);
+      window.addEventListener('load', function () { setTimeout(clean, 50); });
+    }
+    // A hash arriving in the same document (back/forward, or a typed URL)
+    // scrolls natively; clear it once that jump has happened.
+    window.addEventListener('hashchange', function () {
+      if (location.hash) setTimeout(clean, 100);
+    });
+  })();
+
   // FAQ — accordion behaviour: opening one closes the rest
   var faq = document.querySelectorAll('.faq details');
   if (faq.length) {
