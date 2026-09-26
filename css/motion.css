@@ -110,6 +110,29 @@
   z-index: 999; pointer-events: none;
 }
 
+/* Back-to-top button (shown by motion.js once you scroll past the hero) */
+.to-top {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--orange); color: var(--navy-deep);
+  border: 0; cursor: pointer; z-index: 998;
+  box-shadow: 0 6px 18px rgba(20,31,56,.22);
+  opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease, box-shadow .2s ease;
+}
+.to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+.to-top:hover { box-shadow: 0 10px 24px rgba(20,31,56,.28); }
+.to-top:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+@media (max-width: 760px) {
+  .to-top { width: 44px; height: 44px; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .to-top { transition: none; transform: none; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
 
   /* Nav condenses once you leave the hero */
