@@ -396,7 +396,7 @@ nav a:hover::after, nav a:focus-visible::after{transform:scaleX(1)}
 .plan-first + .btn{margin-top:.85rem}
 .plan ul{list-style:none; padding:1.1rem 0 0; margin:1.1rem 0 0; border-top:1px solid var(--line); display:grid; gap:.6rem; align-content:start}
 .plan li{display:flex; gap:.6rem; font-size:17px; line-height:1.55; align-items:center; justify-content:center; text-align:left}
-.plan li svg{width:18px; height:18px; flex:none; margin-top:3px; color:var(--pine)}
+.plan li svg{width:18px; height:18px; flex:none; margin-top:3px; color:var(--gold-deep)}
 .plan-once ul{flex:1; align-content:center; justify-content:center}
 .plan-once li{justify-content:flex-start}
 /* bonus service — deliberately unlike the cleanup-fee callout below it */
@@ -407,6 +407,20 @@ nav a:hover::after, nav a:focus-visible::after{transform:scaleX(1)}
 }
 /* inline, so wrapped lines run the full width of the card instead of clearing the icon */
 .plan-bonus svg{width:18px; height:18px; color:var(--gold-deep); vertical-align:-3px; margin-right:.45rem}
+/* Featured plan: the one most customers want, called out so the choice is
+   easy. Aqua rule and a flag, lifted a touch off the row. */
+.plan-value{position:relative; border:2px solid var(--gold); box-shadow:var(--shadow-lg); overflow:visible}
+.plans{padding-top:14px}   /* room for the flag, which sits half above its card */
+.plan-flag{
+  position:absolute; top:0; left:50%; transform:translate(-50%,-50%);
+  font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:14px; letter-spacing:.16em;
+  text-transform:uppercase; line-height:1; padding:.5rem .95rem; border-radius:999px;
+  background:var(--gold); color:var(--pine-deep); white-space:nowrap; box-shadow:0 6px 14px -8px rgba(7,36,48,.6);
+}
+/* Water-line edge: the hero's dark water meets the pricing section on a wave
+   rather than a hard rule. */
+.hero-wave{position:absolute; left:0; right:0; bottom:-1px; width:100%; height:clamp(26px,4.5vw,64px); display:block; z-index:2}
+.hero{padding-bottom:clamp(26px,4.5vw,64px)}
 /* shared, deliberately faint sheen */
 .btn-gold{position:relative; overflow:hidden}
 .btn-gold::after{
@@ -846,6 +860,7 @@ header.shrunk .bar .brand{flex-basis:100%; margin-right:0; opacity:1; visibility
       </div>
     </div>
   </div>
+  <svg class="hero-wave" viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0,34 C180,62 360,6 540,30 C720,54 900,10 1080,30 C1260,50 1350,44 1440,26 L1440,64 L0,64 Z" fill="#D6E8EE"/></svg>
 </section>
 
 <!-- ============ PLANS ============ -->
@@ -859,6 +874,7 @@ header.shrunk .bar .brand{flex-basis:100%; margin-right:0; opacity:1; visibility
     <div class="plans rv">
 
       <div class="plan plan-value">
+        <span class="plan-flag">Most popular</span>
         <div class="plan-pad">
           <h3><span class="plan-name">Weekly Plan</span> <span class="plan-rec">(recurring)</span></h3>
           <div class="plan-price"><b>$45</b><span>per visit</span></div>
