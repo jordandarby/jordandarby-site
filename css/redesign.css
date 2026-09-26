@@ -607,27 +607,13 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   .sp-shot{transition:transform .6s ease}
   .site-preview:hover .sp-shot{transform:scale(1.025)}
 }
-/* Phones: the window takes a phone's proportions, so the site's mobile
-   layout is seen the way a visitor would see it. */
-@media (max-width:760px){
-  /* Phone proportions, but never taller than the screen: the window, its
-     button and the caption should all be in view at once. */
-  /* width pinned: with only max-height set, the browser kept the ratio by
-     narrowing the box instead, leaving a strip of frame beside it. */
-  .sp-stage{aspect-ratio:9/19;max-height:72svh;width:100%}
-}
-/* The whole window is one button that opens the real site full-screen. The
-   label rides a soft gradient along the bottom edge so it never covers the
-   site's logo or headline. */
-.sp-open{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:center;
-  padding:0 18px 20px;background:linear-gradient(to top,rgba(7,36,48,.62),rgba(7,36,48,0) 48%);
-  border:0;cursor:pointer;font:inherit;transition:background .25s ease}
-.sp-open:hover{background:linear-gradient(to top,rgba(7,36,48,.72),rgba(7,36,48,.14))}
+/* Same laptop-shaped still on every screen: on a phone it reads as an
+   overview of the whole site rather than a sliver of its mobile header. */
+/* The whole window is one invisible button that opens the real site
+   full-screen; the still stays uncovered. The hover zoom on the still and
+   the caption below are the affordance. */
+.sp-open{position:absolute;inset:0;z-index:2;background:transparent;border:0;cursor:pointer;padding:0}
 .sp-open:focus-visible{outline:3px solid var(--orange);outline-offset:-3px}
-.sp-open-pill{display:inline-flex;align-items:center;min-height:44px;padding:11px 24px;border-radius:999px;
-  background:var(--orange);color:var(--navy-deep);font-weight:700;font-size:.95rem;
-  box-shadow:0 8px 20px rgba(20,31,56,.28);transition:transform .2s ease}
-.sp-open:hover .sp-open-pill{transform:translateY(-2px)}
 
 /* ---------- Full-screen demo ---------- */
 .demo-modal{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;background:var(--navy-deep)}
@@ -677,14 +663,11 @@ body.demo-open{overflow:hidden}
 /* The preview caption holds only the hint. */
 .sp-cap{justify-content:center}
 .sp-hint{display:inline-flex;align-items:center}
-/* Copy column: carry more weight beside the window, and offer the demo as a
+/* Copy column: carry more weight beside the window, and offer the site as a
    proper button as well as through the window itself. */
 .client-feature-copy .client-lede{font-size:1.3rem;line-height:1.45}
 .client-points li{font-size:1.05rem}
 .sp-cta{margin-top:6px}
-@media (max-width:900px){
-  .sp-cta{display:none}   /* stacked: the window's own button is right below */
-}
 
 /* ---------- Hero: copy centred on the artwork ----------
    The collage is much taller than the three-line headline plus button, so
