@@ -222,40 +222,19 @@
     });
   });
 
-  // Live site preview — the real site in an iframe, rendered at its desktop
-  // width and scaled down to fit the window. It is fully interactive: scroll
-  // inside it, press its buttons, follow its links. Nothing is moved by
-  // script, so there is no per-frame repaint to fight the page's own scroll.
-  // Nothing loads until the frame is near the viewport.
+  // Live site preview — the real site in an iframe at the window's own width,
+  // so it shows its responsive layout at 1:1. No transform: a scaled iframe
+  // has to be rasterised at full page size and rescaled every frame, and with
+  // the embedded site's own animations running that repaint was what made the
+  // page's scroll stutter. Nothing loads until the frame is near the viewport.
   document.querySelectorAll('.site-preview').forEach(function (fig) {
     var frame = fig.querySelector('.sp-frame');
-    var stage = fig.querySelector('.sp-stage');
-    if (!frame || !stage) return;
-
-    // Two render widths: the desktop layout on wide frames, the site's own
-    // mobile layout on narrow ones. Squeezing a 1280px page into a 340px
-    // frame renders its type at about 4px — legible to nobody.
-    var DESK_W = +fig.getAttribute('data-w') || 1280;
-    var MOB_W  = +fig.getAttribute('data-mw') || DESK_W;
-
-    function measure() {
-      var pageW = stage.clientWidth < 560 ? MOB_W : DESK_W;
-      var scale = stage.clientWidth / pageW;
-      frame.style.width  = pageW + 'px';
-      frame.style.height = Math.ceil(stage.clientHeight / scale) + 'px';
-      frame.style.transform = 'scale(' + scale + ')';
-    }
+    if (!frame) return;
     function load() {
       if (frame.src) return;
       frame.src = fig.getAttribute('data-src');
-      measure();
     }
-
     frame.addEventListener('load', function () { if (frame.src) fig.classList.add('loaded'); });
-    if (window.ResizeObserver) new ResizeObserver(measure).observe(stage);
-    else window.addEventListener('resize', measure);
-    measure();
-
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries, obs) {
         entries.forEach(function (en) { if (en.isIntersecting) { load(); obs.disconnect(); } });
