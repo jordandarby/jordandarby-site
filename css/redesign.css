@@ -835,7 +835,11 @@ section[id]{scroll-margin-top:77px}
   .client-feature-copy h3{font-size:1.35rem;margin-bottom:12px}
   .client-feature-copy .client-lede{font-size:1rem;margin-bottom:16px;line-height:1.5}
   .client-points{gap:9px;margin-bottom:0}
-  .client-points li{font-size:.92rem}
+  /* Centred as a block on small screens: the lede and each check line sit on
+     the page's centre axis, with the check riding inline ahead of its text. */
+  .client-feature-copy{text-align:center}
+  .client-points li{font-size:.92rem;padding-left:0;text-align:center}
+  .client-points li::before{position:static;display:inline;margin-right:8px}
 }
 
 /* ---------- Mobile vertical rhythm ----------
