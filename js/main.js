@@ -254,27 +254,63 @@
     });
   });
 
-  // Live site preview — the real site in an iframe at the window's own width,
-  // so it shows its responsive layout at 1:1. No transform: a scaled iframe
-  // has to be rasterised at full page size and rescaled every frame, and with
-  // the embedded site's own animations running that repaint was what made the
-  // page's scroll stutter. Nothing loads until the frame is near the viewport.
-  document.querySelectorAll('.site-preview').forEach(function (fig) {
-    var frame = fig.querySelector('.sp-frame');
-    if (!frame) return;
-    function load() {
-      if (frame.src) return;
-      frame.src = fig.getAttribute('data-src');
+  // Live site preview + full-screen demo.
+  // The window shows the real site as an inert preview (the iframe takes no
+  // pointer input, so it can't hijack scrolling or catch stray taps). The
+  // "Try it live" button opens the site full-screen in its own frame, with an
+  // Exit button, Escape to close, and the page's scroll locked underneath.
+  // Nothing loads until the preview is near the viewport.
+  (function demo() {
+    var modal = document.querySelector('.demo-modal');
+    var mFrame = modal && modal.querySelector('.demo-frame');
+    var mTitle = modal && modal.querySelector('.demo-title');
+    var mLink  = modal && modal.querySelector('.demo-newtab');
+    var mExit  = modal && modal.querySelector('.demo-exit');
+    var lastFocus = null;
+
+    function openDemo(src, name) {
+      if (!modal || !mFrame) { window.open(src, '_blank', 'noopener'); return; }
+      lastFocus = document.activeElement;
+      if (mTitle) mTitle.textContent = name || '';
+      if (mLink) mLink.href = src;
+      mFrame.src = src;
+      modal.hidden = false;
+      document.body.classList.add('demo-open');
+      if (mExit) mExit.focus();
     }
-    frame.addEventListener('load', function () { if (frame.src) fig.classList.add('loaded'); });
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries, obs) {
-        entries.forEach(function (en) { if (en.isIntersecting) { load(); obs.disconnect(); } });
-      }, { rootMargin: '300px 0px' }).observe(fig);
-    } else {
-      load();
+    function closeDemo() {
+      if (!modal || modal.hidden) return;
+      modal.hidden = true;
+      document.body.classList.remove('demo-open');
+      mFrame.removeAttribute('src');          // stop the site running unseen
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
     }
-  });
+    if (mExit) mExit.addEventListener('click', closeDemo);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeDemo();
+    });
+
+    document.querySelectorAll('.site-preview').forEach(function (fig) {
+      var frame = fig.querySelector('.sp-frame');
+      var open  = fig.querySelector('.sp-open');
+      var src   = fig.getAttribute('data-src');
+      var name  = fig.getAttribute('data-name') || '';
+      if (open) open.addEventListener('click', function () { openDemo(src, name); });
+      if (!frame) return;
+      function load() {
+        if (frame.src) return;
+        frame.src = src;
+      }
+      frame.addEventListener('load', function () { if (frame.src) fig.classList.add('loaded'); });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries, obs) {
+          entries.forEach(function (en) { if (en.isIntersecting) { load(); obs.disconnect(); } });
+        }, { rootMargin: '300px 0px' }).observe(fig);
+      } else {
+        load();
+      }
+    });
+  })();
 
   // Contact form — AJAX submit with graceful fallback (no JS = normal POST)
   var form = document.querySelector('.cta-form');
