@@ -886,7 +886,11 @@ section[id]{scroll-margin-top:77px}
      the wordmark and headline almost against the window edge. Scales with the
      window from 40px to 80px, matched on the nav so the edges stay aligned. */
   .hero .wrap,.nav .wrap{padding:0 clamp(40px,5vw,72px)}
-  .hero .wrap{grid-template-columns:.46fr .54fr;gap:56px}
+  .hero .wrap{grid-template-columns:1fr 1fr;gap:40px}
+  /* Nudge the copy inward. Flush against the gutter it read as pinned to the
+     left while the collage sat pinned to the right, with the slack all in
+     the middle. Scales with the window so the headline keeps three lines. */
+  .hero-copy{padding-left:clamp(0px,3.5vw,48px)}
   /* The section is already centred to the fold by min-height, so the padding
      only needs to keep the collage off the header and the next section.
      168px = 77px header + 88px padding + a little slack, so the grid's cap
