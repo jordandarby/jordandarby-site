@@ -598,11 +598,15 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
   background:#fff;border-radius:999px;padding:4px 14px;flex:1;text-align:center;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* The stage is a window onto the live site, rendered 1:1 at the stage's own
-   width so the site shows its responsive layout. Fully interactive: scrolling
-   happens inside the iframe, and its buttons and links work. contain:paint
-   keeps the embedded site's repaints from spilling into the page. */
-.sp-stage{position:relative;aspect-ratio:16/10;overflow:hidden;background:#FBF7EF;contain:paint}
+/* The stage is a still of the site: a laptop-shaped crop on desktop, a phone
+   crop on phones (see the <picture> sources). Nothing loads until it is near
+   the viewport, and nothing inside it can catch a scroll or a stray tap. */
+.sp-stage{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0B2F3A}
+.sp-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+@media (prefers-reduced-motion:no-preference){
+  .sp-shot{transition:transform .6s ease}
+  .site-preview:hover .sp-shot{transform:scale(1.025)}
+}
 /* Phones: the window takes a phone's proportions, so the site's mobile
    layout is seen the way a visitor would see it. */
 @media (max-width:760px){
@@ -612,15 +616,13 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
      narrowing the box instead, leaving a strip of frame beside it. */
   .sp-stage{aspect-ratio:9/19;max-height:72svh;width:100%}
 }
-.sp-frame{display:block;width:100%;height:100%;border:0;pointer-events:none;background:#FBF7EF}
-/* The preview is a picture of the site, not the site: the iframe takes no
-   pointer input, so scrolling the page over it never scrolls the demo and a
-   thumb brushing it never taps a button inside. The whole window is one
-   button that opens the real thing full-screen. */
-.sp-open{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
-  padding:18px;background:rgba(20,31,56,.12);
+/* The whole window is one button that opens the real site full-screen. The
+   label rides a soft gradient along the bottom edge so it never covers the
+   site's logo or headline. */
+.sp-open{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:center;
+  padding:0 18px 20px;background:linear-gradient(to top,rgba(7,36,48,.62),rgba(7,36,48,0) 48%);
   border:0;cursor:pointer;font:inherit;transition:background .25s ease}
-.sp-open:hover{background:rgba(20,31,56,.28)}
+.sp-open:hover{background:linear-gradient(to top,rgba(7,36,48,.72),rgba(7,36,48,.14))}
 .sp-open:focus-visible{outline:3px solid var(--orange);outline-offset:-3px}
 .sp-open-pill{display:inline-flex;align-items:center;min-height:44px;padding:11px 24px;border-radius:999px;
   background:var(--orange);color:var(--navy-deep);font-weight:700;font-size:.95rem;
@@ -657,8 +659,6 @@ body.demo-open{overflow:hidden}
 .sp-cap{display:flex;align-items:center;justify-content:space-between;gap:14px;
   padding:11px 16px;background:var(--white);border-top:1px solid rgba(24,41,70,.1);
   font-size:.8rem;color:var(--ink-light)}
-.sp-hint{opacity:0;transition:opacity .3s ease}
-.site-preview.loaded .sp-hint{opacity:1}
 
 @media (max-width:900px){
   .client-feature{grid-template-columns:1fr;gap:26px}
@@ -677,6 +677,14 @@ body.demo-open{overflow:hidden}
 /* The preview caption holds only the hint. */
 .sp-cap{justify-content:center}
 .sp-hint{display:inline-flex;align-items:center}
+/* Copy column: carry more weight beside the window, and offer the demo as a
+   proper button as well as through the window itself. */
+.client-feature-copy .client-lede{font-size:1.3rem;line-height:1.45}
+.client-points li{font-size:1.05rem}
+.sp-cta{margin-top:6px}
+@media (max-width:900px){
+  .sp-cta{display:none}   /* stacked: the window's own button is right below */
+}
 
 /* ---------- Hero: copy centred on the artwork ----------
    The collage is much taller than the three-line headline plus button, so
@@ -878,7 +886,7 @@ section[id]{scroll-margin-top:77px}
   /* Centred as a block on small screens: the lede and each check line sit on
      the page's centre axis, with the check riding inline ahead of its text. */
   .client-feature-copy{text-align:center}
-  .client-points li{font-size:.92rem;padding-left:0;text-align:center}
+  .client-points li{font-size:1rem;padding-left:0;text-align:center}
   .client-points li::before{position:static;display:inline;margin-right:8px}
 }
 

@@ -254,12 +254,10 @@
     });
   });
 
-  // Live site preview + full-screen demo.
-  // The window shows the real site as an inert preview (the iframe takes no
-  // pointer input, so it can't hijack scrolling or catch stray taps). The
-  // "Try it live" button opens the site full-screen in its own frame, with an
-  // Exit button, Escape to close, and the page's scroll locked underneath.
-  // Nothing loads until the preview is near the viewport.
+  // Website demo. The section shows a still of the site; "Try it live" (on
+  // the still, or the button in the copy) opens the real site full-screen in
+  // its own frame, with an Exit button, Escape to close, and the page's
+  // scroll locked underneath. The live page loads only when opened.
   (function demo() {
     var modal = document.querySelector('.demo-modal');
     var mFrame = modal && modal.querySelector('.demo-frame');
@@ -291,24 +289,14 @@
     });
 
     document.querySelectorAll('.site-preview').forEach(function (fig) {
-      var frame = fig.querySelector('.sp-frame');
-      var open  = fig.querySelector('.sp-open');
-      var src   = fig.getAttribute('data-src');
-      var name  = fig.getAttribute('data-name') || '';
+      var src  = fig.getAttribute('data-src');
+      var name = fig.getAttribute('data-name') || '';
+      var open = fig.querySelector('.sp-open');
       if (open) open.addEventListener('click', function () { openDemo(src, name); });
-      if (!frame) return;
-      function load() {
-        if (frame.src) return;
-        frame.src = src;
-      }
-      frame.addEventListener('load', function () { if (frame.src) fig.classList.add('loaded'); });
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (entries, obs) {
-          entries.forEach(function (en) { if (en.isIntersecting) { load(); obs.disconnect(); } });
-        }, { rootMargin: '300px 0px' }).observe(fig);
-      } else {
-        load();
-      }
+      // The copy's button belongs to the nearest feature block.
+      var block = fig.closest('.client-feature');
+      var cta = block && block.querySelector('.sp-cta');
+      if (cta) cta.addEventListener('click', function () { openDemo(src, name); });
     });
   })();
 
