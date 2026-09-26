@@ -892,11 +892,16 @@ section[id]{scroll-margin-top:77px}
      that the same idea caused on mobile. The cap above keeps the content inside
      that height, so this only ever adds space, never clips. */
   .hero{min-height:calc(100vh - 77px);display:flex;flex-direction:column;justify-content:center}
-}
-/* On a laptop-height window the hero's own padding is what tips it over the
-   fold, so trim it there rather than shrinking the work any further. */
-@media (min-width:761px) and (max-height:820px){
-  .hero{padding:44px 0 52px}
+  /* Larger artwork to balance the (now smaller) headline: a wider hero row
+     than the rest of the page, with the split tilted toward the collage. The
+     copy column stays wide enough for "Custom brands," on one line. */
+  .hero .wrap{max-width:1360px;grid-template-columns:.46fr .54fr;gap:56px}
+  /* The section is already centred to the fold by min-height, so the padding
+     only needs to keep the collage off the header and the next section.
+     168px = 77px header + 88px padding + a little slack, so the grid's cap
+     lands the hero exactly one screen tall. */
+  .hero{padding:40px 0 48px}
+  .hero-showcase{max-width:min(100%,calc(100vh - 168px))}
 }
 /* Below ~800px the grid column itself is narrower than the headline's longest
    line, so the box stops tracking the visible text and centring would strand
