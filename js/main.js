@@ -340,7 +340,7 @@
     var problem = function (f) {
       var v = f.value.trim();
       if (!v) return notes[f.name] || 'Please fill this in.';
-      if (f.name === 'email' && !emailOk(v)) return 'Check this email for a typo.';
+      if (f.name === 'email' && !emailOk(v)) return 'Check this email for a typo';
       return '';
     };
     var showError = function (f, text) {
@@ -413,7 +413,7 @@
               restore('');
               status.className = 'form-status';
               status.textContent = '';
-              showError(f, f.name === 'email' ? 'Check this email for a typo.' : (e0.message || 'Please check this.'));
+              showError(f, f.name === 'email' ? 'Check this email for a typo' : (e0.message || 'Please check this.'));
               f.focus();
             } else {
               restore(e0 && e0.message);
