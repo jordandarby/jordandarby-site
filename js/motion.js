@@ -17,8 +17,26 @@
         var open = panel.classList.toggle('open');
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         if (label) label.textContent = open ? 'Show less' : 'Read the full recommendation';
+        if (!open) setTimeout(evenCards, 500);
       });
     });
+
+    /* Closed cards share the tallest closed card's height when they sit in one
+       row, so the row looks even without stretching an open card's neighbours. */
+    var wrap = document.querySelector('.cards');
+    var cards = wrap ? [].slice.call(wrap.querySelectorAll('.card')) : [];
+    function evenCards() {
+      if (cards.length < 2 || wrap.querySelector('.t-full.open')) return;
+      cards.forEach(function (c) { c.style.minHeight = ''; });
+      if (cards[0].offsetTop !== cards[1].offsetTop) return;   // stacked: leave natural
+      var h = 0;
+      cards.forEach(function (c) { h = Math.max(h, c.offsetHeight); });
+      cards.forEach(function (c) { c.style.minHeight = h + 'px'; });
+    }
+    evenCards();
+    window.addEventListener('resize', evenCards);
+    window.addEventListener('load', evenCards);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(evenCards);
   })();
 
   /* ---------- 3. Pricing carousel (mobile) ---------- */
