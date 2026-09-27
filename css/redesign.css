@@ -601,7 +601,7 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
 /* The stage is a still of the site: a laptop-shaped crop on desktop, a phone
    crop on phones (see the <picture> sources). Nothing loads until it is near
    the viewport, and nothing inside it can catch a scroll or a stray tap. */
-.sp-stage{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0B2F3A}
+.sp-stage{position:relative;aspect-ratio:16/10;overflow:hidden;background:#1F2E26}
 .sp-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 @media (prefers-reduced-motion:no-preference){
   .sp-shot{transition:transform .6s ease}
@@ -707,7 +707,7 @@ body.demo-open{overflow:hidden}
    The window is a laptop-shaped 16:10 now, so the copy sits on its midline
    rather than sticking to the top of a tall column. */
 @media (min-width:901px){
-  .client-feature{align-items:center}
+  .client-feature{align-items:center;margin-bottom:0}
 }
 
 /* ---------- Nav: CTA and LinkedIn mark on the same optical line ----------
@@ -866,6 +866,7 @@ section[id]{scroll-margin-top:77px}
   .client-feature-copy h3{font-size:1.35rem;margin-bottom:12px}
   .client-feature-copy .client-lede{font-size:1.25rem;margin-bottom:16px;line-height:1.3}
   .client-points{gap:9px;margin-bottom:0}
+  .sp-cta{margin-top:22px}
   /* Centred as a block on small screens: the lede and each check line sit on
      the page's centre axis, with the check riding inline ahead of its text. */
   .client-feature-copy{text-align:center}
