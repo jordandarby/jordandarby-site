@@ -16,7 +16,7 @@
       btn.addEventListener('click', function () {
         var open = panel.classList.toggle('open');
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        if (label) label.textContent = open ? 'Show less' : 'Read the full recommendation';
+        if (label) label.textContent = open ? 'Show less' : 'Read more';
         if (!open) setTimeout(evenCards, 500);
       });
     });

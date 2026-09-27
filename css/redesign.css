@@ -1023,3 +1023,31 @@ button.btn{font-family:inherit}
   #contact .wrap{grid-template-columns:1fr;gap:30px}
   .cta .cta-form{gap:20px}
 }
+
+/* ---------- Reviews: open columns, no boxes ----------
+   Quotes sit straight on the navy between thin rules, with an inline mark,
+   "Read more" at the end of the quote and a one-line byline. */
+.testimonials .cards{gap:0}
+.testimonials .card{display:flex;flex-direction:column;background:none;box-shadow:none;border-radius:0;
+  padding:4px 34px;border-left:1px solid rgba(255,255,255,.16);color:#fff}
+.testimonials .card:first-child{border-left:0;padding-left:0}
+.testimonials .card:last-child{padding-right:0}
+.testimonials .t-pull{color:#fff;font-size:1.12rem;line-height:1.6;font-weight:500;margin:0}
+.testimonials .t-pull::before{content:"\201C";color:var(--orange);font-weight:700;margin-right:2px}
+.testimonials .t-toggle{display:inline;background:none;border:0;padding:0;margin:0 0 0 4px;cursor:pointer;
+  font:inherit;font-size:.9rem;font-weight:600;color:var(--orange);text-decoration:underline;text-underline-offset:3px}
+.testimonials .t-toggle:hover{color:#fff}
+.testimonials .t-full p{color:#E7EBF3;font-size:.98rem;line-height:1.65}
+.testimonials .card-person{margin-top:auto;padding-top:18px;gap:12px}
+.testimonials .card-person img{width:40px;height:40px;border:0}
+.testimonials .card-person h4{display:flex;align-items:center;gap:8px;color:#fff;font-size:1rem;margin:0}
+.testimonials .card-person small{color:#AEB8CC;font-size:.84rem;margin-top:1px;line-height:1.4}
+.testimonials .card-li{position:static;display:inline-flex;opacity:.85}
+.testimonials .card-li:hover{opacity:1;transform:none}
+.testimonials .card-li rect{fill:#E7EBF3}
+.testimonials .card-li path{fill:var(--navy)}
+@media (max-width:900px){
+  .testimonials .cards{grid-template-columns:1fr}
+  .testimonials .card{border-left:0;border-top:1px solid rgba(255,255,255,.16);padding:24px 0}
+  .testimonials .card:first-child{border-top:0;padding-top:0}
+}
