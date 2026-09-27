@@ -336,7 +336,7 @@
     form.noValidate = true;
     var alertIcon = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M12 7v6" stroke="#182946" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="16.6" r="1.4" fill="#182946"/></svg>';
     var emailOk = function (v) { return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[a-z]{2,}$/i.test(v); };
-    var notes = { name: 'Please add your name.', email: 'Please add your email.', message: 'Please tell me a little about your project.', timeline: 'Please add a timeline, even a rough one.' };
+    var notes = { name: 'Please add your name', email: 'Please add your email', message: 'Please tell me about your project', timeline: 'Please add a timeline' };
     var problem = function (f) {
       var v = f.value.trim();
       if (!v) return notes[f.name] || 'Please fill this in.';
