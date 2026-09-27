@@ -200,9 +200,9 @@ nav a:hover::after, nav a:focus-visible::after{transform:scaleX(1)}
    the whole line wipes away left to right and the cycle starts over */
 .hero h1 .type-a, .hero h1 .type-b{display:inline-block}
 .hero h1 .type-in{display:inline-block}
-.js .hero h1 .type-in{opacity:0}
-.js .hero h1 .type-a .type-in{animation:showA 5.05s .85s ease infinite}
-.js .hero h1 .type-b .type-in{animation:showB 5.05s .85s ease infinite}
+/* headline is static: it rises in with the rest of the copy. The old
+   typewriter loop kept erasing and retyping it, so it was often half-written. */
+.js .hero h1 .type-in{opacity:1; animation:none}
 /* the two spans stagger their wipe so it reads as one sweep back across the
    line; past the wipe, opacity is already 0, so the clip resets unseen */
 @keyframes showA{
