@@ -1184,3 +1184,11 @@ footer .wrap{justify-content:center;text-align:center}
 }
 .cta .cta-form .form-status.error{display:flex;align-items:flex-start;gap:8px;color:var(--error);font-weight:500;font-size:.95rem}
 .cta .cta-form .form-status.error svg{flex:none;margin-top:3px}
+
+/* Touch screens keep :hover after a tap, which left "Show less" stuck in its
+   navy hover colour; on touch the link keeps its resting orange underline. */
+@media (hover:none){
+  .testimonials .t-toggle:hover{color:var(--navy);text-decoration-color:var(--orange)}
+  .t-toggle:hover{gap:7px}
+}
+.t-toggle{-webkit-tap-highlight-color:transparent}
