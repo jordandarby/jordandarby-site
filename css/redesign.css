@@ -949,17 +949,14 @@ section[id]{scroll-margin-top:77px}
 /* ---------- Website example ---------- */
 
 /* ---------- Services: minimal list ----------
-   Name on the left, one line on the right, hairlines between. Nothing else. */
-.svc-list{list-style:none;margin:0 auto;padding:0;max-width:920px;border-bottom:1px solid rgba(24,41,70,.12)}
-.svc-list li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:baseline;
-  padding:30px 0;border-top:1px solid rgba(24,41,70,.12)}
+   Service names only, centred under the heading, hairlines between. */
+.svc-list{list-style:none;margin:0 auto;padding:0;max-width:760px;border-bottom:1px solid rgba(24,41,70,.12)}
+.svc-list li{padding:24px 0;border-top:1px solid rgba(24,41,70,.12);text-align:center}
 .svc-list h3{font-family:'Poppins',sans-serif;font-weight:600;color:var(--navy);
-  font-size:clamp(1.3rem,2.2vw,1.7rem);line-height:1.2;letter-spacing:-.02em;margin:0;text-wrap:balance}
-.svc-list p{color:var(--ink-light);font-size:1rem;line-height:1.65;margin:0;text-wrap:pretty}
+  font-size:clamp(1.25rem,2.2vw,1.7rem);line-height:1.2;letter-spacing:-.02em;margin:0;text-wrap:balance}
 @media (max-width:700px){
-  .svc-list li{grid-template-columns:1fr;gap:6px;padding:22px 0}
-  .svc-list h3{font-size:1.22rem}
-  .svc-list p{font-size:.95rem}
+  .svc-list li{padding:18px 0}
+  .svc-list h3{font-size:1.2rem}
 }
 
 /* ---------- Contact: prose, not a checklist ---------- */
