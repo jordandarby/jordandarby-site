@@ -1051,3 +1051,14 @@ button.btn{font-family:inherit}
   .testimonials .card{border-left:0;border-top:1px solid rgba(255,255,255,.16);padding:24px 0}
   .testimonials .card:first-child{border-top:0;padding-top:0}
 }
+
+/* Reviews fit one screen: tighter padding, a smaller headshot, and room for
+   the heading to run on one line on wide screens. */
+#recommendations{padding:64px 0}
+#recommendations .headshot{width:88px;height:88px;margin-bottom:20px}
+#recommendations .section-head{max-width:1160px;margin-bottom:40px}
+@media (max-width:760px){
+  #recommendations{padding:52px 0}
+  #recommendations .headshot{width:76px;height:76px;margin-bottom:18px}
+  #recommendations .section-head{margin-bottom:28px}
+}
