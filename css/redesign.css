@@ -1165,3 +1165,22 @@ footer .wrap{justify-content:center;text-align:center}
   .cta .cta-form{gap:10px}
   .cta .cta-form .form-send{padding:11px 22px}
 }
+
+/* ---------- Contact: red field errors, on brand ----------
+   A warm coral red that sits with the orange on navy; the line under the field
+   turns red and a short note with an alert mark slides in below it. */
+.cta{--error:#FF7A6B}
+.cta .cta-form .field.has-error{color:var(--error)}
+.cta .cta-form .field.has-error input,
+.cta .cta-form .field.has-error textarea{border-bottom-color:var(--error);box-shadow:0 1.5px 0 var(--error)}
+.cta .cta-form .field-error{display:flex;align-items:center;gap:7px;margin-top:4px;font-size:.88rem;font-weight:500;line-height:1.35;color:var(--error);
+  animation:errIn .3s cubic-bezier(.22,1,.36,1) both}
+.cta .cta-form .field-error svg{flex:none}
+.cta .cta-form .field.has-error input{animation:errNudge .32s ease}
+@keyframes errIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@keyframes errNudge{0%,100%{transform:none}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){
+  .cta .cta-form .field-error,.cta .cta-form .field.has-error input{animation:none}
+}
+.cta .cta-form .form-status.error{display:flex;align-items:flex-start;gap:8px;color:var(--error);font-weight:500;font-size:.95rem}
+.cta .cta-form .form-status.error svg{flex:none;margin-top:3px}
