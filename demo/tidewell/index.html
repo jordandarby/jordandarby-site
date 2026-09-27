@@ -12,7 +12,6 @@
 <meta name="theme-color" content="#0B2F3A">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <!-- the mark is a CSS background, so the browser would not find it until the stylesheet parses -->
-<link rel="preload" as="image" href="logo.svg" fetchpriority="high">
 <script>document.documentElement.className+=' js';</script>
 <style>
 /* Brand typefaces embedded — no external requests, renders identically offline */
@@ -105,6 +104,12 @@ header{
 .logo-mark{opacity:0; transition:opacity .4s ease}
 .logo-ready .logo-mark{opacity:1}
 .brand{display:flex; align-items:center; gap:.7rem; text-decoration:none}
+/* ---------- logotype ---------- */
+.wordmark{display:inline-flex; flex-direction:column; align-items:flex-start; line-height:1; color:var(--paper)}
+.wm-name{font-family:'Zilla Slab',serif; font-weight:700; font-size:24px; letter-spacing:.07em; text-transform:uppercase; line-height:1}
+.wm-wave{display:block; width:100%; height:7px; color:var(--gold); margin:4px 0 5px}
+.wm-sub{font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); line-height:1}
+.foot-brand .wm-name{font-size:34px} .foot-brand .wm-wave{height:9px} .foot-brand .wm-sub{font-size:14px}
 .brand .logo-mark{width:58px; height:58px; flex:none}
 .brand-txt{display:flex; flex-direction:column; line-height:1}
 .brand-txt b{font-family:'Zilla Slab',serif; text-transform:uppercase; font-size:21px; line-height:1; color:var(--paper); letter-spacing:.01em; white-space:nowrap}
@@ -165,25 +170,27 @@ nav a:hover::after, nav a:focus-visible::after{transform:scaleX(1)}
 }
 
 /* ---------- hero ---------- */
-.hero{position:relative; background:var(--pine); color:var(--paper); overflow:hidden}
+.hero{position:relative; background:var(--pine); color:var(--paper); overflow:hidden; min-height:min(88vh,820px); display:flex; flex-direction:column; justify-content:center}
+.hero-photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 62%; z-index:0}
+/* dark water wash on the left so the copy reads; the pool stays bright on the right */
 .hero::before{
-  content:''; position:absolute; inset:0; background:var(--hatch); opacity:.22;
+  content:''; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(100deg, rgba(7,36,48,.96) 0%, rgba(7,36,48,.9) 34%, rgba(7,36,48,.55) 62%, rgba(7,36,48,.18) 100%);
 }
 /* nav-coloured wash that carries the header down past the middle of the lockup */
 .hero::after{
   content:''; position:absolute; left:0; right:0; top:0; z-index:1; pointer-events:none;
-  height:var(--hero-fade, 58%);
-  background:linear-gradient(to bottom,
-    rgba(7,36,48,.97) 0%,
-    rgba(7,36,48,.88) 32%,
-    rgba(7,36,48,.55) 66%,
-    rgba(7,36,48,0) 100%);
+  height:22%;
+  background:linear-gradient(to bottom, rgba(7,36,48,.55) 0%, rgba(7,36,48,0) 100%);
 }
 .hero-in{
   position:relative; z-index:2; display:grid;
-  grid-template-columns:minmax(300px,.88fr) 1.12fr; gap:3.4rem;
-  align-items:center; padding:4.4rem 0 4.8rem;
+  grid-template-columns:minmax(0,640px); gap:0;
+  align-items:center; padding:4.6rem 0 5rem;
 }
+.hero-eyebrow{color:var(--gold); margin-bottom:1.1rem}
+/* narrow screens: a flat wash — there is no room for a bright side */
+@media(max-width:800px){.hero::before{background:linear-gradient(rgba(7,36,48,.84), rgba(7,36,48,.86))} .hero-photo{object-position:center 50%}}
 .hero-copy{display:flex; flex-direction:column; align-items:flex-start; text-align:left}
 .hero h1{
   font-size:clamp(2.1rem,4.6vw,3.9rem); color:var(--paper); margin:.2rem 0 .9rem;
@@ -221,11 +228,7 @@ nav a:hover::after, nav a:focus-visible::after{transform:scaleX(1)}
 .hero-copy .hero-chips{justify-content:flex-start; margin-top:1.6rem; padding-top:1.2rem}
 @media(max-width:800px){.hero-copy .hero-chips{justify-content:center}}
 /* soft aqua glow behind the lockup card: lifts it off the dark water */
-.hero-in::before{
-  content:''; position:absolute; z-index:-1; left:-8%; top:6%; width:56%; height:88%;
-  background:radial-gradient(closest-side, rgba(79,209,197,.28), rgba(79,209,197,0));
-  filter:blur(34px); pointer-events:none;
-}
+
 .chips{display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; margin-top:1.8rem; padding-top:1.4rem; border-top:1px solid rgba(79,209,197,.26)}
 .chip{
   display:inline-flex; align-items:center; gap:.45rem; font-size:16.5px; line-height:1.25;
@@ -367,7 +370,7 @@ nav a:hover::after, nav a:focus-visible::after{transform:scaleX(1)}
 .step:last-child .step-line{display:none}
 
 /* ---------- plans ---------- */
-.plans-sec{background:#D6E8EE; border-bottom:1px solid var(--line)}   /* deeper than the page so white cards lift off it */
+.plans-sec{background:linear-gradient(rgba(214,232,238,.9), rgba(214,232,238,.96)), url(https://images.unsplash.com/photo-1562016600-ece13e8ba570?auto=format&fit=crop&w=1600&q=75) center/cover no-repeat; border-bottom:1px solid var(--line)}   /* deeper than the page so white cards lift off it */
 .plans{display:grid; grid-template-columns:repeat(4,1fr); gap:1.1rem; align-items:stretch}
 .plan{
   background:#fff; color:var(--ink); border-radius:var(--r); overflow:hidden;
@@ -483,7 +486,10 @@ nav a:hover::after, nav a:focus-visible::after{transform:scaleX(1)}
 .factor p{font-size:16.5px; color:var(--muted); line-height:1.5}
 
 /* ---------- included ---------- */
-.incl-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1.1rem; margin-inline:auto}
+.incl-split{display:grid; grid-template-columns:.92fr 1.08fr; gap:2.6rem; align-items:center}
+.incl-photo{margin:0; border-radius:calc(var(--r) + 6px); overflow:hidden; box-shadow:var(--shadow-lg); border:1px solid rgba(79,209,197,.35); aspect-ratio:4/3}
+.incl-photo img{width:100%; height:100%; object-fit:cover; display:block}
+.incl-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1.1rem}
 .incl-card{
   background:var(--pine-deep); border:1px solid rgba(79,209,197,.45);
   border-radius:var(--r); padding:1.7rem 1.5rem 1.6rem; transition:border-color .2s ease, transform .2s ease;
@@ -500,7 +506,7 @@ nav a:hover::after, nav a:focus-visible::after{transform:scaleX(1)}
   font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:14.5px; letter-spacing:.18em;
   text-transform:uppercase; color:var(--gold); line-height:1;
 }
-@media(max-width:1000px){.incl-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1000px){.incl-split{grid-template-columns:1fr; gap:1.6rem} .incl-photo{aspect-ratio:16/10}}
 .incl-card h4{font-size:1.3rem; color:var(--paper); margin-bottom:0; font-family:'Zilla Slab',serif}
 .incl-card p{font-size:17px; color:rgba(246,250,251,.92); line-height:1.6}
 
@@ -571,6 +577,8 @@ nav a:hover::after, nav a:focus-visible::after{transform:scaleX(1)}
 
 /* ---------- final cta ---------- */
 .cta{background:var(--pine-deep); color:var(--paper); position:relative; overflow:hidden; text-align:center}
+.cta-photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 40%; z-index:0}
+.cta::after{content:''; position:absolute; inset:0; z-index:0; background:linear-gradient(rgba(7,36,48,.66), rgba(7,36,48,.84))}
 /* the same water-line as the hero, carrying the light FAQ into the dark close */
 .cta-wave{position:absolute; left:0; right:0; top:-1px; width:100%; height:clamp(26px,4.5vw,64px); display:block; z-index:1}
 .cta{padding-top:calc(5.5rem + clamp(26px,4.5vw,64px))}
@@ -676,7 +684,7 @@ header.shrunk{box-shadow:0 12px 34px -20px rgba(0,0,0,.75)}
 .bar{justify-content:space-between}
 .bar .brand{flex:0 0 auto; min-width:0; white-space:nowrap; margin-right:auto}
 .bar nav{margin-inline:auto}
-@media(max-width:600px){.bar .brand-tag{display:none} .bar .brand .logo-mark{width:40px; height:40px}}
+@media(max-width:600px){.bar .wm-name{font-size:19px} .bar .wm-sub{font-size:10px} .bar .wm-wave{height:5px; margin:3px 0 4px}}
 /* compact, fixed-height bar: the big logo lives in the hero */
 .bar{padding:.45rem 0}
 
@@ -832,8 +840,7 @@ header.shrunk{box-shadow:0 12px 34px -20px rgba(0,0,0,.75)}
 <header>
   <div class="wrap bar">
     <a class="brand" href="#top">
-      <span class="logo-mark" aria-hidden="true"></span>
-      <span class="brand-txt"><b>Tidewell</b><span class="brand-name2">Pool Care</span><span class="brand-tag"><svg viewBox="0 0 24 24"><use href="#i-drop"/></svg><span class="tag-text">Pool Cleaning Service</span><svg viewBox="0 0 24 24"><use href="#i-drop"/></svg></span></span>
+      <span class="wordmark"><span class="wm-name">Tidewell</span><svg class="wm-wave" viewBox="0 0 120 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M1 6c10-7 20-7 30 0s20 7 30 0 20-7 30 0 20 7 28 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span class="wm-sub">Pool Care</span></span>
     </a>
     <nav>
       <a href="#plans">Pricing Plans</a>
@@ -857,20 +864,13 @@ header.shrunk{box-shadow:0 12px 34px -20px rgba(0,0,0,.75)}
 
 <!-- ============ HERO ============ -->
 <section class="hero on-dark" id="top">
+  <img class="hero-photo" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1800&q=75" srcset="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1000&q=75 1000w, https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1800&q=75 1800w, https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=2400&q=75 2400w" sizes="100vw" alt="" fetchpriority="high" decoding="async">
   <div class="wrap hero-in">
-    <div class="hero-lockup">
-      <span class="logo-mark" aria-hidden="true"></span>
-      <span class="brand-txt"><b>Tidewell</b><span class="brand-name2">Pool Care</span><span class="brand-tag"><svg viewBox="0 0 24 24"><use href="#i-drop"/></svg><span class="tag-text">Pool Cleaning Service</span><svg viewBox="0 0 24 24"><use href="#i-drop"/></svg></span></span>
-      <div class="hero-meta">
-        <span class="eyebrow">Servicing Bentonville, Rogers, &amp; Bella Vista</span>
-        <span class="hero-badge"><svg viewBox="0 0 24 24"><use href="#i-shield"/></svg>Licensed &amp; Insured</span>
-          <span class="hero-owner">Owner Operator NWA</span>
-      </div>
-    </div>
     <div class="hero-copy">
+      <span class="eyebrow hero-eyebrow">Servicing Bentonville &middot; Rogers &middot; Bella&nbsp;Vista</span>
       <h1><span class="type-a"><span class="type-in">We skim</span></span> <em class="type-b"><span class="type-in">so you swim.</span></em></h1>
       <p class="lede">We keep your pool crystal clear on the same day every week, every&nbsp;two&nbsp;weeks, or once a&nbsp;month &mdash; and you don't need to&nbsp;be home. Professional, dependable, &amp;&nbsp;friendly.</p>
-      <p class="eyebrow svc-title">Services</p>
+      <p class="eyebrow svc-title">Every visit</p>
       <ul class="svc-list">
         <li><svg viewBox="0 0 24 24"><use href="#i-drop"/></svg>Skim, brush &amp; vacuum the whole pool</li>
         <li><svg viewBox="0 0 24 24"><use href="#i-drop"/></svg>Test &amp; balance your water&nbsp;chemistry</li>
@@ -880,9 +880,10 @@ header.shrunk{box-shadow:0 12px 34px -20px rgba(0,0,0,.75)}
         <a class="btn btn-gold" href="tel:+14795550134"><svg viewBox="0 0 24 24"><use href="#i-phone"/></svg>Call or text to schedule</a>
       </div>
       <div class="chips hero-chips">
+        <span class="chip"><svg viewBox="0 0 24 24"><use href="#i-shield"/></svg>Licensed &amp; insured</span>
+        <span class="chip"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg>Owner operator, NWA</span>
         <span class="chip"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg>Photo text after every visit</span>
         <span class="chip"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg>No contracts</span>
-        <span class="chip"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg>Same-day scheduling</span>
       </div>
     </div>
   </div>
@@ -978,6 +979,10 @@ header.shrunk{box-shadow:0 12px 34px -20px rgba(0,0,0,.75)}
     <div class="sec-head rv">
       <h2>Services Include</h2>
     </div>
+    <div class="incl-split">
+      <figure class="incl-photo rv">
+        <img src="https://images.unsplash.com/photo-1784935839477-207ce2c61108?auto=format&fit=crop&w=1200&q=75" srcset="https://images.unsplash.com/photo-1784935839477-207ce2c61108?auto=format&fit=crop&w=800&q=75 800w, https://images.unsplash.com/photo-1784935839477-207ce2c61108?auto=format&fit=crop&w=1200&q=75 1200w, https://images.unsplash.com/photo-1784935839477-207ce2c61108?auto=format&fit=crop&w=1600&q=75 1600w" sizes="(max-width:1000px) 92vw, 44vw" alt="A pool skimmer net and cleaning supplies on a sunlit deck" loading="lazy" decoding="async" width="1200" height="800">
+      </figure>
     <div class="incl-grid">
       <div class="incl-card rv">
         <span class="incl-ic"><svg viewBox="0 0 24 24"><use href="#i-net"/></svg></span>
@@ -999,6 +1004,7 @@ header.shrunk{box-shadow:0 12px 34px -20px rgba(0,0,0,.75)}
         <span class="incl-step">Step 04</span>
         <h4>We secure the gate &amp;&nbsp;send you a text&nbsp;pic</h4>
       </div>
+    </div>
     </div>
   </div>
 </section>
@@ -1045,6 +1051,7 @@ header.shrunk{box-shadow:0 12px 34px -20px rgba(0,0,0,.75)}
 
 <!-- ============ FINAL CTA ============ -->
 <section class="sec cta">
+  <img class="cta-photo" src="https://images.unsplash.com/photo-1631752674874-9994662712af?auto=format&fit=crop&w=1800&q=75" srcset="https://images.unsplash.com/photo-1631752674874-9994662712af?auto=format&fit=crop&w=1000&q=75 1000w, https://images.unsplash.com/photo-1631752674874-9994662712af?auto=format&fit=crop&w=1800&q=75 1800w" sizes="100vw" alt="" loading="lazy" decoding="async">
   <svg class="cta-wave" viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0,30 C180,2 360,58 540,34 C720,10 900,54 1080,34 C1260,14 1350,20 1440,38 L1440,0 L0,0 Z" fill="#F6FAFB"/></svg>
   <div class="wrap">
     <h2 class="rv">Get your weekends&nbsp;back <span class="cta-line">this week.<svg class="scribble" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M2.4,7.9 C26,4.9 58,3.4 96,4.1 C134,4.8 166,6.9 197.4,4.3"/></svg></span></h2>
@@ -1056,8 +1063,7 @@ header.shrunk{box-shadow:0 12px 34px -20px rgba(0,0,0,.75)}
   <div class="wrap">
     <div class="foot-grid">
       <a class="brand foot-brand" href="#top">
-        <span class="logo-mark" aria-hidden="true"></span>
-        <span class="brand-txt"><b>Tidewell</b><span class="brand-name2">Pool Care</span><span class="brand-tag"><svg viewBox="0 0 24 24"><use href="#i-drop"/></svg><span class="tag-text">Pool Cleaning Service</span><svg viewBox="0 0 24 24"><use href="#i-drop"/></svg></span></span>
+        <span class="wordmark"><span class="wm-name">Tidewell</span><svg class="wm-wave" viewBox="0 0 120 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M1 6c10-7 20-7 30 0s20 7 30 0 20-7 30 0 20 7 28 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span class="wm-sub">Pool Care</span></span>
       </a>
       <div class="foot-links">
         <a href="#plans">Pricing Plans</a>
@@ -1278,15 +1284,6 @@ header.shrunk{box-shadow:0 12px 34px -20px rgba(0,0,0,.75)}
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(buildStrip);
   }
 
-  /* ---------- fade the mark in when it is actually decoded ---------- */
-  (function(){
-    var show = function(){ document.documentElement.classList.add('logo-ready'); };
-    var img = new Image();
-    img.onload = img.onerror = show;
-    img.src = 'logo.svg';
-    if (img.complete) show();
-    setTimeout(show, 2500);          /* never leave it hidden */
-  })();
 
   el('yr').textContent = new Date().getFullYear();
 })();
