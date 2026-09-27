@@ -323,19 +323,73 @@
       btn.classList.remove('is-sent');
       btn.innerHTML = btnHTML;
       status.className = 'form-status error';
-      status.textContent = text || fail;
+      status.innerHTML = alertIcon + '<span></span>';
+      status.lastChild.textContent = text || fail;
     };
     var fields = form.querySelectorAll('.field input, .field textarea');
     var lock = function (on) {
       form.classList.toggle('is-locked', on);
       [].forEach.call(fields, function (f) { f.readOnly = on; });
     };
+    // Our own checks replace the browser's grey bubbles: each field gets a
+    // short red note under it, and nothing turns green until every field passes.
+    form.noValidate = true;
+    var alertIcon = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M12 7v6" stroke="#182946" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="16.6" r="1.4" fill="#182946"/></svg>';
+    var emailOk = function (v) { return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[a-z]{2,}$/i.test(v); };
+    var notes = { name: 'Please add your name.', email: 'Please add your email.', message: 'Please tell me a little about your project.', timeline: 'Please add a timeline, even a rough one.' };
+    var problem = function (f) {
+      var v = f.value.trim();
+      if (!v) return notes[f.name] || 'Please fill this in.';
+      if (f.name === 'email' && !emailOk(v)) return 'Check this email for a typo.';
+      return '';
+    };
+    var showError = function (f, text) {
+      var label = f.closest('.field'), note = label.querySelector('.field-error');
+      if (!text) {
+        label.classList.remove('has-error');
+        f.removeAttribute('aria-invalid');
+        if (note) note.remove();
+        return;
+      }
+      if (!note) {
+        note = document.createElement('span');
+        note.className = 'field-error';
+        note.id = 'err-' + f.name;
+        label.appendChild(note);
+      }
+      note.innerHTML = alertIcon + '<span></span>';
+      note.lastChild.textContent = text;
+      label.classList.add('has-error');
+      f.setAttribute('aria-invalid', 'true');
+      f.setAttribute('aria-describedby', note.id);
+    };
+    // A note clears as soon as the field is fixed; the email is re-checked when you leave it.
+    [].forEach.call(fields, function (f) {
+      f.addEventListener('input', function () {
+        if (f.closest('.field').classList.contains('has-error') && !problem(f)) showError(f, '');
+      });
+      f.addEventListener('blur', function () {
+        if (f.name === 'email' && f.value.trim() && problem(f)) showError(f, problem(f));
+      });
+    });
     // The button turns green and says "Sent!" and the fields grey out the
     // moment it is pressed; the message goes out in the background. If that
     // fails, the fields unlock and the button comes back, so nothing is lost.
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (pending) return;
+      var first = null;
+      [].forEach.call(fields, function (f) {
+        var p = problem(f);
+        showError(f, p);
+        if (p && !first) first = f;
+      });
+      if (first) {
+        status.className = 'form-status';
+        status.textContent = '';
+        first.focus();
+        return;
+      }
       pending = true;
       btn.disabled = true;
       btn.classList.add('is-sent');
@@ -353,7 +407,17 @@
           status.textContent = 'Message sent.';
         } else {
           return r.json().then(function (d) {
-            restore(d && d.errors && d.errors[0] && d.errors[0].message);
+            var e0 = d && d.errors && d.errors[0];
+            var f = e0 && e0.field && form.querySelector('[name="' + e0.field + '"]');
+            if (f && f.closest('.field')) {
+              restore('');
+              status.className = 'form-status';
+              status.textContent = '';
+              showError(f, f.name === 'email' ? 'Check this email for a typo.' : (e0.message || 'Please check this.'));
+              f.focus();
+            } else {
+              restore(e0 && e0.message);
+            }
           }, function () { restore(); });
         }
       }).catch(function () { restore(); });
