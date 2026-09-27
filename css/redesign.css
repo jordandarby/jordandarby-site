@@ -1094,3 +1094,12 @@ button.btn{font-family:inherit}
 #recommendations .section-head h2{font-size:clamp(1.5rem,2.6vw,2.3rem)}
 footer .wrap{justify-content:center;text-align:center}
 .testimonials .card-person{padding-top:28px}
+
+/* Services rows rise in one after another */
+@media (prefers-reduced-motion:no-preference){
+  .svc-list > .reveal:nth-child(2):not(.settled){transition-delay:.07s}
+  .svc-list > .reveal:nth-child(3):not(.settled){transition-delay:.14s}
+  .svc-list > .reveal:nth-child(4):not(.settled){transition-delay:.21s}
+  .svc-list > .reveal:nth-child(5):not(.settled){transition-delay:.28s}
+  .svc-list > .reveal:nth-child(6):not(.settled){transition-delay:.35s}
+}
