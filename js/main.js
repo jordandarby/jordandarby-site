@@ -300,14 +300,56 @@
     });
   })();
 
-  // Contact form — AJAX submit with graceful fallback (no JS = normal POST)
+  // Contact form suggestions: tapping a chip writes into the text field next to
+  // it, which always stays free to type in. "multi" adds or removes the term in
+  // a comma list; "single" swaps the whole value.
+  document.querySelectorAll('.cta-form .chips').forEach(function (group) {
+    var input = document.getElementById(group.getAttribute('data-for'));
+    if (!input) return;
+    var multi = group.getAttribute('data-mode') === 'multi';
+    var chips = [].slice.call(group.querySelectorAll('.chip'));
+    function parts() {
+      return input.value.split(',').map(function (t) { return t.trim(); }).filter(Boolean);
+    }
+    function sync() {
+      var have = multi ? parts().map(function (t) { return t.toLowerCase(); }) : [input.value.trim().toLowerCase()];
+      chips.forEach(function (c) {
+        c.setAttribute('aria-pressed', have.indexOf(c.textContent.trim().toLowerCase()) > -1 ? 'true' : 'false');
+      });
+    }
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        var term = c.textContent.trim();
+        if (multi) {
+          var list = parts();
+          var i = list.map(function (t) { return t.toLowerCase(); }).indexOf(term.toLowerCase());
+          if (i > -1) list.splice(i, 1); else list.push(term);
+          input.value = list.join(', ');
+        } else {
+          input.value = input.value.trim().toLowerCase() === term.toLowerCase() ? '' : term;
+        }
+        sync();
+      });
+    });
+    input.addEventListener('input', sync);
+    sync();
+  });
+
+  // The message box grows with what's typed (native where supported).
+  var msg = document.querySelector('.cta-form textarea');
+  if (msg && !(window.CSS && CSS.supports && CSS.supports('field-sizing', 'content'))) {
+    var grow = function () { msg.style.height = 'auto'; msg.style.height = msg.scrollHeight + 'px'; };
+    msg.addEventListener('input', grow);
+  }
+
+  // Contact form: AJAX submit with graceful fallback (no JS = normal POST)
   var form = document.querySelector('.cta-form');
   if (form && window.fetch) {
     var status = form.querySelector('.form-status');
     var fail = 'Something went wrong. Please try again, or message me on LinkedIn.';
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var btn = form.querySelector('button');
+      var btn = form.querySelector('button[type="submit"]');
       btn.disabled = true;
       status.className = 'form-status';
       status.textContent = 'Sending…';
@@ -318,7 +360,7 @@
       }).then(function (r) {
         if (r.ok) {
           form.classList.add('sent');
-          status.textContent = 'Thanks! Your message is on its way — I’ll be in touch soon.';
+          status.textContent = 'Thanks! Your message is on its way. I’ll be in touch soon.';
         } else {
           return r.json().then(function (d) {
             btn.disabled = false;
