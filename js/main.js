@@ -347,11 +347,11 @@
        scroll away and nothing followed it: the loop appeared to break. The
        container only ever leaves the viewport vertically, which is the actual
        question being asked. */
-    var frames = document.querySelectorAll('.hero-strip, .brand-marquee');
+    var frames = document.querySelectorAll('.hero-strip');
     if (!frames.length) return;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        var tracks = e.target.querySelectorAll('.hero-strip-track, .brand-track');
+        var tracks = e.target.querySelectorAll('.hero-strip-track');
         Array.prototype.forEach.call(tracks, function (t) {
           t.style.animationPlayState = e.isIntersecting ? '' : 'paused';
         });
