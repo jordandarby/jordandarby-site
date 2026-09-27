@@ -446,6 +446,83 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
 @media(max-width:900px){.plans{grid-template-columns:minmax(0,1fr); max-width:420px}}
 .banner .btn-white{background:var(--forest); color:var(--limestone); box-shadow:0 10px 24px -14px rgba(30,36,31,.5)}
 .banner .btn-white:hover{background:var(--forest-2)}
+
+/* ---------- add-ons: a quiet rate row under the plans ---------- */
+.addons{max-width:980px; margin:min(1.8rem,3svh) auto 0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px}
+.addons div{display:flex; flex-direction:column; align-items:center; gap:2px; padding-top:1rem; border-top:1px solid var(--line); text-align:center}
+.addons dt{font-size:15.5px; font-weight:600; color:var(--ink)}
+.addons dd{margin:0; font-size:15.5px; color:var(--muted)}
+@media(max-width:900px){
+  .addons{max-width:420px; grid-template-columns:minmax(0,1fr); gap:0; border-bottom:1px solid var(--line)}
+  .addons div{flex-direction:row; justify-content:space-between; padding:.8rem 0}
+}
+
+/* ---------- seasons: four cards, always centred ---------- */
+.year{overflow:visible}
+.season-grid{list-style:none; margin-block:0; padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; max-width:1160px}
+.season-grid .sc{width:auto; height:auto; aspect-ratio:4/5; transform:none; opacity:1; border-radius:28px; box-shadow:0 1px 2px rgba(30,36,31,.06), 0 18px 40px -22px rgba(30,36,31,.35)}
+.season-grid .sc-card{top:auto; bottom:14px; left:14px; right:14px; padding:14px 16px 13px; border-radius:18px}
+.season-grid .sc-title{font-size:17px}
+.season-grid .sc-desc{margin:.3rem 0 .6rem; font-size:14.5px; line-height:1.4}
+.season-grid .sc-when{font-size:13px}
+@media (min-width:901px){
+  .season-grid{--cw:min(100%, calc((100svh - 72px - 230px) * .8 * 4 + 60px))}
+  .season-grid{max-width:var(--cw)}
+}
+@media (prefers-reduced-motion:no-preference){
+  .js .season-grid > .rv:nth-child(2){transition-delay:.08s}
+  .js .season-grid > .rv:nth-child(3){transition-delay:.16s}
+  .js .season-grid > .rv:nth-child(4){transition-delay:.24s}
+}
+@media(max-width:900px){
+  .season-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; max-width:560px}
+  .season-grid .sc{aspect-ratio:3/4; border-radius:22px}
+}
+@media(max-width:560px){
+  .season-grid{gap:10px}
+  .season-grid .sc-card{left:8px; right:8px; bottom:8px; padding:10px 11px; border-radius:14px}
+  .season-grid .sc-title{font-size:15px; gap:7px}
+  .season-grid .sc-title svg{width:17px; height:17px}
+  .season-grid .sc-desc{font-size:13px; margin:.2rem 0 0}
+  .season-grid .sc-when{display:none}
+}
+
+/* ---------- dark green sections ---------- */
+.steps-sec,.builders{background:#1F2E26; color:#F3EEE4}
+.steps-sec .steps-head,.builders h2{color:#F3EEE4}
+.steps-sec .step-text{color:rgba(243,238,228,.7)}
+.steps-sec .step-text b{color:#F3EEE4}
+.steps-sec .step-tile{border-color:rgba(255,255,255,.06); box-shadow:0 22px 44px -26px rgba(0,0,0,.6)}
+.builders .intro{color:rgba(243,238,228,.74)}
+.builders .btn{background:#F3EEE4; color:#172219}
+.builders .btn:hover{background:#fff}
+
+/* ---------- builders: text left, photo right ---------- */
+.builders-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(2.5rem,5vw,4.5rem)}
+.builders-grid > .builders-copy{text-align:left; align-items:flex-start}
+.builders .intro{margin-inline:0; max-width:30ch; font-size:19px}
+.builders h2{font-size:clamp(2.4rem,4.4vw,3.6rem)}
+.builders img{box-shadow:0 22px 44px -26px rgba(0,0,0,.6)}
+@media(max-width:900px){
+  .builders-grid{grid-template-columns:minmax(0,1fr)}
+  .builders-grid > .builders-copy{text-align:center; align-items:center}
+  .builders .intro{margin-inline:auto}
+}
+
+/* ---------- squarer corners: its own look, apart from the portfolio ---------- */
+.btn,.bar .btn,.mobile-nav a.btn{border-radius:4px}
+.navtoggle{border-radius:4px}
+.hero-photo img,.builders img,.step-tile,.plans li,.banner,.season-grid .sc{border-radius:6px}
+.glass-card,.ask-card,.report-card,.season-grid .sc-card,.photo-stack img{border-radius:4px}
+.sc-when span{border-radius:3px}
+
+.acc summary::after{border-radius:4px}
+@media(max-width:700px){.banner{border-radius:6px}}
+@media(max-width:900px){.season-grid .sc{border-radius:6px}}
+@media(max-width:560px){.season-grid .sc-card{border-radius:4px}}
+.season-grid .sc-when{flex-wrap:nowrap; gap:4px; font-size:12.5px; white-space:nowrap}
+.season-grid .sc-when span{padding:2px 6px}
+.steps-sec .step-tile{color:var(--ink)}
 </style>
 <noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -554,7 +631,11 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
       <li class="plan-pop"><p class="plan-name">Every two weeks</p><p class="plan-price">$65</p><p class="plan-for">Covered or light use</p></li>
       <li><p class="plan-name">Monthly</p><p class="plan-price">$95</p><p class="plan-for">Off-season</p></li>
     </ul>
-    <p class="extras-line rv">Spa +$15 · First clean from $150 · Green-to-clean from&nbsp;$150</p>
+    <dl class="addons rv">
+      <div><dt>Spa or hot tub</dt><dd>+$15 a visit</dd></div>
+      <div><dt>First clean</dt><dd>From $150</dd></div>
+      <div><dt>Green-to-clean</dt><dd>From $150</dd></div>
+    </dl>
 
   </div>
 </section>
@@ -562,36 +643,35 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
 <!-- ============ SEASONS ============ -->
 <section class="year" id="year">
   <div class="wrap"><h2 class="rv">Through the year</h2></div>
-  <ol class="season-track rv" aria-label="Pool care through the year">
-      <li class="sc">
-        <img src="img/season-opening-900.webp" srcset="img/season-opening-560.webp 560w, img/season-opening-900.webp 900w" sizes="(max-width:700px) 80vw, 460px" alt="A garden pool with a split-rail fence and spring flowers" width="900" height="1125" loading="lazy" decoding="async">
-        <div class="sc-card"><p class="sc-title"><svg aria-hidden="true"><use href="#i-sun"/></svg>Opening</p><p class="sc-desc">Cover off, water balanced.</p><p class="sc-when"><svg aria-hidden="true"><use href="#i-repeat"/></svg>Repeats <span>every year</span> starting <span>March</span></p></div>
+  <ol class="season-grid wrap" aria-label="Pool care through the year">
+      <li class="sc rv">
+        <img src="img/season-opening-900.webp" srcset="img/season-opening-560.webp 560w, img/season-opening-900.webp 900w" sizes="(max-width:700px) 46vw, 290px" alt="A garden pool with a split-rail fence and spring flowers" width="900" height="1125" loading="lazy" decoding="async">
+        <div class="sc-card"><p class="sc-title"><svg aria-hidden="true"><use href="#i-sun"/></svg>Opening</p><p class="sc-desc">Cover off, water balanced.</p><p class="sc-when"><svg aria-hidden="true"><use href="#i-repeat"/></svg><span>Every year</span><span>From March</span></p></div>
       </li>
-      <li class="sc">
-        <img src="img/season-swim-900.webp" srcset="img/season-swim-560.webp 560w, img/season-swim-900.webp 900w" sizes="(max-width:700px) 80vw, 460px" alt="A clear pool below tall pines in summer" width="900" height="1125" loading="lazy" decoding="async">
-        <div class="sc-card"><p class="sc-title"><svg aria-hidden="true"><use href="#i-wave"/></svg>Swim season</p><p class="sc-desc">Weekly visits, all summer.</p><p class="sc-when"><svg aria-hidden="true"><use href="#i-repeat"/></svg>Repeats <span>every week</span> starting <span>May</span></p></div>
+      <li class="sc rv">
+        <img src="img/season-swim-900.webp" srcset="img/season-swim-560.webp 560w, img/season-swim-900.webp 900w" sizes="(max-width:700px) 46vw, 290px" alt="A clear pool below tall pines in summer" width="900" height="1125" loading="lazy" decoding="async">
+        <div class="sc-card"><p class="sc-title"><svg aria-hidden="true"><use href="#i-wave"/></svg>Swim season</p><p class="sc-desc">Weekly visits, all summer.</p><p class="sc-when"><svg aria-hidden="true"><use href="#i-repeat"/></svg><span>Every week</span><span>From May</span></p></div>
       </li>
-      <li class="sc">
-        <img src="img/season-leaves-900.webp" srcset="img/season-leaves-560.webp 560w, img/season-leaves-900.webp 900w" sizes="(max-width:700px) 80vw, 460px" alt="Oak leaves floating on dark pool water in fall" width="900" height="1125" loading="lazy" decoding="async">
-        <div class="sc-card"><p class="sc-title"><svg aria-hidden="true"><use href="#i-leaf"/></svg>Leaf season</p><p class="sc-desc">Netted before they stain.</p><p class="sc-when"><svg aria-hidden="true"><use href="#i-repeat"/></svg>Repeats <span>every visit</span> starting <span>October</span></p></div>
+      <li class="sc rv">
+        <img src="img/season-leaves-900.webp" srcset="img/season-leaves-560.webp 560w, img/season-leaves-900.webp 900w" sizes="(max-width:700px) 46vw, 290px" alt="Oak leaves floating on dark pool water in fall" width="900" height="1125" loading="lazy" decoding="async">
+        <div class="sc-card"><p class="sc-title"><svg aria-hidden="true"><use href="#i-leaf"/></svg>Leaf season</p><p class="sc-desc">Netted before they stain.</p><p class="sc-when"><svg aria-hidden="true"><use href="#i-repeat"/></svg><span>Every visit</span><span>From October</span></p></div>
       </li>
-      <li class="sc">
-        <img src="img/season-covered-900.webp" srcset="img/season-covered-560.webp 560w, img/season-covered-900.webp 900w" sizes="(max-width:700px) 80vw, 460px" alt="Snow on Adirondack chairs beside a pool in winter" width="900" height="1125" loading="lazy" decoding="async">
-        <div class="sc-card"><p class="sc-title"><svg aria-hidden="true"><use href="#i-snow"/></svg>Winter check</p><p class="sc-desc">Covered and freeze-checked.</p><p class="sc-when"><svg aria-hidden="true"><use href="#i-repeat"/></svg>Repeats <span>every month</span> starting <span>December</span></p></div>
+      <li class="sc rv">
+        <img src="img/season-covered-900.webp" srcset="img/season-covered-560.webp 560w, img/season-covered-900.webp 900w" sizes="(max-width:700px) 46vw, 290px" alt="Snow on Adirondack chairs beside a pool in winter" width="900" height="1125" loading="lazy" decoding="async">
+        <div class="sc-card"><p class="sc-title"><svg aria-hidden="true"><use href="#i-snow"/></svg>Winter check</p><p class="sc-desc">Covered and freeze-checked.</p><p class="sc-when"><svg aria-hidden="true"><use href="#i-repeat"/></svg><span>Every month</span><span>From December</span></p></div>
       </li>
   </ol>
-  <div class="dots" role="tablist" aria-label="Choose a season"><button type="button" aria-label="Opening"></button><button type="button" aria-label="Swim season"></button><button type="button" aria-label="Leaf season"></button><button type="button" aria-label="Winter check"></button></div>
 </section>
 
 <!-- ============ BUILDERS ============ -->
 <section class="builders" id="builders">
   <div class="wrap builders-grid">
-    <img class="rv" src="img/builder-home-pool-1400.webp" srcset="img/builder-home-pool-800.webp 800w, img/builder-home-pool-1400.webp 1400w" sizes="(max-width:1000px) calc(100vw - 40px), 48vw" alt="A two-story home above its lit pool and lawn at dusk" width="1400" height="1050" loading="lazy" decoding="async">
-    <div>
+    <div class="builders-copy">
       <h2 class="rv">For builders</h2>
       <p class="intro rv">Start-ups, spec homes and community pools across Benton&nbsp;County.</p>
       <a class="btn" href="tel:+14795550134"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call about builder rates</a>
     </div>
+    <img class="rv" src="img/builder-home-pool-1400.webp" srcset="img/builder-home-pool-800.webp 800w, img/builder-home-pool-1400.webp 1400w" sizes="(max-width:1000px) calc(100vw - 40px), 48vw" alt="A two-story home above its lit pool and lawn at dusk" width="1400" height="1050" loading="lazy" decoding="async">
   </div>
 </section>
 
@@ -640,22 +720,6 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
   mobileNav.addEventListener('click', function(ev){ if (ev.target.closest('a')) setNav(false); });
   document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape') setNav(false); });
   window.addEventListener('resize', function(){ if (window.innerWidth > 1000) setNav(false); });
-  /* seasons carousel: active card follows the scroll, dots jump to a card */
-  var track = document.querySelector('.season-track');
-  if (track){
-    var cards = [].slice.call(track.children), dots = [].slice.call(document.querySelectorAll('.dots button'));
-    var setActive = function(){
-      var mid = track.scrollLeft + track.clientWidth/2, best = 0, bd = 1e9;
-      cards.forEach(function(c,i){ var d = Math.abs(c.offsetLeft + c.offsetWidth/2 - mid); if (d < bd){ bd = d; best = i; } });
-      cards.forEach(function(c,i){ c.classList.toggle('is-active', i === best); });
-      dots.forEach(function(b,i){ b.setAttribute('aria-selected', i === best ? 'true' : 'false'); });
-    };
-    dots.forEach(function(b,i){ b.addEventListener('click', function(){ var c = cards[i]; track.scrollTo({ left: c.offsetLeft - (track.clientWidth - c.offsetWidth)/2, behavior:'smooth' }); }); });
-    track.addEventListener('scroll', function(){ window.requestAnimationFrame(setActive); }, { passive:true });
-    window.addEventListener('resize', setActive);
-    var start = cards[1]; if (start) track.scrollLeft = start.offsetLeft - (track.clientWidth - start.offsetWidth)/2;
-    setActive();
-  }
   /* scroll reveal */
   var rvs = document.querySelectorAll('.rv');
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
