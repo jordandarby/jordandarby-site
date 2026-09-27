@@ -1062,3 +1062,26 @@ button.btn{font-family:inherit}
   #recommendations .headshot{width:76px;height:76px;margin-bottom:18px}
   #recommendations .section-head{margin-bottom:28px}
 }
+
+/* ---------- Reviews: tonal cream cards ----------
+   Soft brand-cream panels on the navy: flat, rounded, no shadow, navy text,
+   so the quotes read as easily as dark-on-light while staying quiet. */
+.testimonials .cards{gap:20px}
+.testimonials .card,
+.testimonials .card:first-child,
+.testimonials .card:last-child{background:var(--cream);color:var(--ink);border:0;border-radius:18px;padding:26px 28px}
+.testimonials .t-pull{color:var(--navy)}
+.testimonials .t-toggle{color:var(--navy);text-decoration-color:var(--orange);text-decoration-thickness:2px}
+.testimonials .t-toggle:hover{color:var(--navy);text-decoration-color:var(--navy)}
+.testimonials .t-full p{color:var(--ink)}
+.testimonials .card-person h4{color:var(--navy)}
+.testimonials .card-person small{color:var(--ink-light)}
+.testimonials .card-li rect{fill:var(--navy)}
+.testimonials .card-li path{fill:var(--cream)}
+@media (max-width:900px){
+  .testimonials .cards{gap:14px}
+  .testimonials .card,
+  .testimonials .card:first-child{border:0;padding:22px 22px}
+}
+.brands .eyebrow{font-size:.95rem}
+@media (max-width:560px){.brands .eyebrow{font-size:.82rem}}
