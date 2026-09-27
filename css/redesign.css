@@ -948,13 +948,68 @@ section[id]{scroll-margin-top:77px}
 
 /* ---------- Website example ---------- */
 
-/* ---------- Services: a plain list, no icon tiles ---------- */
-.service-list{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 40px;margin:0;max-width:1080px;margin-inline:auto}
-.service-list div{border-top:2px solid var(--orange);padding-top:16px}
-.service-list dt{font-weight:600;color:var(--navy);font-size:1.12rem;line-height:1.35}
-.service-list dd{margin:6px 0 0;color:var(--ink-light);line-height:1.65;font-size:.98rem;text-wrap:pretty}
-@media (max-width:900px){.service-list{grid-template-columns:repeat(2,1fr);gap:28px 30px}}
-@media (max-width:560px){.service-list{grid-template-columns:1fr;gap:22px}}
+/* ---------- Services: editorial index ----------
+   Big type rows, each paired with a real piece of work. Hover tilts the work
+   in beside the row; on touch the thumbnail is always shown. */
+#services{overflow:hidden}
+.svc-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;
+  max-width:1120px;margin:0 auto 26px}
+.svc-head h2{margin:0}
+.svc-head p{margin:0;color:var(--ink-light);font-size:.95rem}
+.svc-index{list-style:none;margin:0 auto;padding:0;max-width:1120px;border-bottom:1px solid rgba(24,41,70,.14)}
+.svc-index li{position:relative}
+.svc-index li:hover,.svc-index li:focus-within{z-index:2}
+.svc-row{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 190px 48px;
+  align-items:center;gap:28px;padding:30px 18px;border-top:1px solid rgba(24,41,70,.14);
+  text-decoration:none;color:inherit;
+  transition:background .35s ease}
+.svc-name{font-family:'Poppins',sans-serif;font-weight:700;color:var(--navy);
+  font-size:clamp(1.55rem,3vw,2.5rem);line-height:1.05;letter-spacing:-.025em;text-wrap:balance;
+  transition:transform .45s cubic-bezier(.22,1,.36,1),color .3s ease}
+.svc-desc{color:var(--ink-light);font-size:1rem;line-height:1.6;text-wrap:pretty}
+/* floats over its column, so the hidden image never sets the row height */
+.svc-thumb{position:absolute;right:94px;top:50%;margin-top:-85px;width:170px;aspect-ratio:1/1;border-radius:12px;overflow:hidden;
+  box-shadow:0 18px 40px rgba(20,31,56,.28);pointer-events:none;
+  opacity:0;transform:translateY(10px) rotate(-6deg) scale(.7);
+  transition:opacity .35s ease,transform .5s cubic-bezier(.22,1,.36,1)}
+.svc-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.svc-thumb-text{display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;
+  background:var(--orange);color:var(--navy-deep);font-weight:700;font-size:1.05rem;line-height:1.25}
+.svc-go{grid-column:4;width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(24,41,70,.3);
+  display:flex;align-items:center;justify-content:center;color:var(--navy);
+  transition:background .3s ease,border-color .3s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+.svc-row:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.svc-row:hover,.svc-row:focus-visible{background:var(--cream)}
+.svc-row:hover .svc-name,.svc-row:focus-visible .svc-name{transform:translateX(10px)}
+.svc-row:hover .svc-thumb,.svc-row:focus-visible .svc-thumb{opacity:1;transform:rotate(-3deg)}
+.svc-row:hover .svc-go,.svc-row:focus-visible .svc-go{background:var(--orange);border-color:var(--orange);transform:rotate(-45deg)}
+/* touch screens have no hover: show the work outright */
+@media (hover:none){
+  .svc-thumb{opacity:1;transform:rotate(-3deg)}
+}
+@media (max-width:980px){
+  .svc-row{grid-template-columns:minmax(0,1fr) 120px 44px;gap:8px 22px;padding:24px 10px}
+  .svc-desc{grid-column:1;grid-row:2}
+  .svc-name{grid-column:1;grid-row:1}
+  .svc-thumb{position:static;margin:0;grid-column:2;grid-row:1 / span 2;width:120px;
+    opacity:1;transform:rotate(-3deg);box-shadow:0 10px 24px rgba(20,31,56,.22)}
+  .svc-go{grid-column:3;grid-row:1 / span 2;width:44px;height:44px}
+}
+@media (max-width:600px){
+  .svc-head{margin-bottom:18px}
+  .svc-row{grid-template-columns:76px minmax(0,1fr) 36px;gap:4px 16px;padding:20px 6px}
+  .svc-thumb{grid-column:1;grid-row:1 / span 2;width:76px;border-radius:10px;box-shadow:0 8px 18px rgba(20,31,56,.2);transform:none}
+  .svc-name{grid-column:2;grid-row:1;font-size:1.22rem;line-height:1.15}
+  .svc-desc{grid-column:2;grid-row:2;font-size:.92rem;line-height:1.5}
+  .svc-go{grid-column:3;grid-row:1 / span 2;width:36px;height:36px}
+  .svc-go svg{width:16px;height:16px}
+  .svc-thumb-text{font-size:.72rem;padding:8px}
+  .svc-row:hover .svc-name,.svc-row:focus-visible .svc-name{transform:none}
+  .svc-row:hover .svc-thumb,.svc-row:focus-visible .svc-thumb{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .svc-row,.svc-name,.svc-thumb,.svc-go{transition:none}
+}
 
 /* ---------- Contact: prose, not a checklist ---------- */
 .cta .cta-lede{color:#E7EBF3;font-size:1.08rem;line-height:1.7;margin:18px 0 0;max-width:38ch;text-wrap:pretty}
@@ -970,3 +1025,4 @@ button.btn{font-family:inherit}
    stretches its cards; motion.js gives closed cards a shared min-height so they
    still line up when side by side. */
 .cards{align-items:start}
+.svc-thumb img.svc-site{object-position:96% 34%}
