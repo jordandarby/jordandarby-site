@@ -1005,3 +1005,5 @@ button.btn{font-family:inherit}
 /* Website example: the preview stands alone, centred under the heading. */
 #websites .client-feature{display:block;max-width:900px;margin:0 auto}
 @media (max-width:900px){#websites{padding-bottom:60px}}
+#websites .section-head .web-hint{font-size:1.2rem}
+@media (max-width:760px){#websites .section-head .web-hint{font-size:1.1rem}}
