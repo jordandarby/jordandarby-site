@@ -318,24 +318,21 @@
     var pending = false;
     var restore = function (text) {
       pending = false;
+      lock(false);
       btn.disabled = false;
       btn.classList.remove('is-sent');
       btn.innerHTML = btnHTML;
       status.className = 'form-status error';
       status.textContent = text || fail;
     };
-    // Typing a new message after a send brings the button back.
-    form.addEventListener('input', function () {
-      if (pending || !btn.classList.contains('is-sent')) return;
-      btn.disabled = false;
-      btn.classList.remove('is-sent');
-      btn.innerHTML = btnHTML;
-      status.className = 'form-status';
-      status.textContent = '';
-    });
-    // The button turns green and says "Sent!" the moment it is pressed; the
-    // message goes out in the background. If that fails, the button comes
-    // back and the fields are untouched, so nothing typed is lost.
+    var fields = form.querySelectorAll('.field input, .field textarea');
+    var lock = function (on) {
+      form.classList.toggle('is-locked', on);
+      [].forEach.call(fields, function (f) { f.readOnly = on; });
+    };
+    // The button turns green and says "Sent!" and the fields grey out the
+    // moment it is pressed; the message goes out in the background. If that
+    // fails, the fields unlock and the button comes back, so nothing is lost.
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (pending) return;
@@ -343,6 +340,7 @@
       btn.disabled = true;
       btn.classList.add('is-sent');
       btn.innerHTML = sentHTML;
+      lock(true);
       status.className = 'form-status sr-only';
       status.textContent = 'Sending your message.';
       fetch(form.action, {
@@ -353,8 +351,6 @@
         if (r.ok) {
           pending = false;
           status.textContent = 'Message sent.';
-          form.reset();
-          if (msg) msg.style.height = '';
         } else {
           return r.json().then(function (d) {
             restore(d && d.errors && d.errors[0] && d.errors[0].message);
