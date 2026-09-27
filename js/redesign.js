@@ -39,7 +39,7 @@
       box.setAttribute('aria-hidden', 'true');
       img.src = '';
     };
-    document.querySelectorAll('.grid a[href$=".webp"], .hero-showcase a[href$=".webp"], .svc-stack a[href$=".webp"]').forEach(function (a) {
+    document.querySelectorAll('.grid a[href$=".webp"], .hero-showcase a[href$=".webp"]').forEach(function (a) {
       a.addEventListener('click', function (e) {
         e.preventDefault();
         open(a.getAttribute('href'), a.getAttribute('data-title'), a.getAttribute('data-cat'), a.getAttribute('data-note'));
