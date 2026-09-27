@@ -255,6 +255,48 @@ footer{background:#172219; color:rgba(243,238,228,.7); padding:2.4rem 0; font-si
   .float-card b{font-size:14px}
   .hero-photo .float-card{top:10px; bottom:auto}
 }
+
+/* ---------- seasons: four sun-faded cards ---------- */
+.year h2{margin-bottom:2.4rem}
+.season-cards{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px}
+.season-cards li{min-height:330px; border-radius:var(--r); padding:24px 24px 26px; display:flex; flex-direction:column; justify-content:space-between; color:var(--ink)}
+.season-cards .when{font-size:13.5px; font-weight:600; opacity:.8}
+.season-cards h3{font-size:1.9rem; line-height:1.05; margin-bottom:.55rem; color:var(--ink)}
+.season-cards li p:not(.when){font-size:15.5px; line-height:1.5}
+.sc-spring{background:#B9C4A4}
+.sc-summer{background:#A9C7CC}
+.sc-fall{background:#D2A07C}
+.sc-winter{background:#A7AFB3}
+
+/* ---------- where we work: towns stacked large ---------- */
+.area .area-label{font-family:var(--sans); font-size:14px; font-weight:600; letter-spacing:0; color:var(--muted); margin-bottom:.4rem}
+.town-stack{list-style:none; margin:0; padding:0}
+.town-stack li{font-family:var(--serif); color:var(--forest); font-size:clamp(2.6rem,5vw,4.2rem); line-height:1.12; padding:.2rem 0 .35rem; border-bottom:1px solid var(--line)}
+.towns-more{margin-top:1.2rem; color:var(--muted); font-size:15.5px; max-width:40ch}
+
+/* ---------- closing line on a photo ---------- */
+.quote{background:none; color:var(--limestone); padding:0 0 5.5rem}
+.quote-photo{position:relative; border-radius:calc(var(--r) + 6px); overflow:hidden; min-height:560px; display:grid; place-items:center}
+.quote-photo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 60%}
+.quote-photo::after{content:''; position:absolute; inset:0; background:linear-gradient(rgba(22,32,26,.42), rgba(22,32,26,.62))}
+.quote-copy{position:relative; z-index:1; text-align:center; padding:3rem 1.5rem; display:flex; flex-direction:column; align-items:center}
+.quote-copy h2{color:#fff; font-size:clamp(2.8rem,6vw,4.8rem); margin-bottom:1rem}
+.quote-copy p{color:rgba(255,255,255,.9); max-width:36ch; margin-bottom:1.8rem}
+.btn-light{background:#fff; color:var(--forest)}
+.btn-light:hover{background:var(--limestone)}
+
+@media(max-width:1000px){
+  .season-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .season-cards li{min-height:260px}
+}
+@media(max-width:700px){
+  .season-cards{grid-template-columns:minmax(0,1fr); gap:10px}
+  .season-cards li{min-height:0; gap:2.2rem}
+  .season-cards h3{font-size:1.6rem}
+  .town-stack li{font-size:clamp(2.2rem,11vw,2.8rem)}
+  .quote{padding-bottom:3rem}
+  .quote-photo{min-height:460px; border-radius:var(--r)}
+}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.001ms !important}}
 </style>
 </head>
@@ -368,20 +410,13 @@ footer{background:#172219; color:rgba(243,238,228,.7); padding:2.4rem 0; font-si
 
 <!-- ============ POOL YEAR ============ -->
 <section class="year" id="year">
-  <div class="wrap year-grid">
-    <div>
-      <h2>A pool year in Northwest Arkansas</h2>
-      <p class="muted">Pools here work on the same calendar as the trees around them. This is what we see, and what we do about it, month by&nbsp;month.</p>
-      <figure>
-        <img src="img/oak-leaves-pool-1200.webp" srcset="img/oak-leaves-pool-700.webp 700w, img/oak-leaves-pool-1200.webp 1200w" sizes="(max-width:1000px) calc(100vw - 40px), 40vw" alt="Fallen oak leaves floating on pool water" width="1200" height="900" loading="lazy" decoding="async">
-        <figcaption>Oak leaves in October. Left in the water, they sink and&nbsp;stain.</figcaption>
-      </figure>
-    </div>
-    <ol class="seasons">
-      <li><p class="when">March and April</p><div><h3>Opening</h3><p>Cover off, equipment started, and the water balanced before the first warm weekend. We clean filters more often through April's&nbsp;pollen.</p></div></li>
-      <li><p class="when">May to September</p><div><h3>Swim season</h3><p>Heat and afternoon storms burn through chlorine. This is when a weekly visit matters&nbsp;most.</p></div></li>
-      <li><p class="when">October and November</p><div><h3>Leaves</h3><p>Oak and hickory drop by the bagful. We net them before they sink, then close the pool when you're&nbsp;ready.</p></div></li>
-      <li><p class="when">December to February</p><div><h3>Covered</h3><p>We check covered pools after hard freezes, and keep monthly care going for spas and heated&nbsp;pools.</p></div></li>
+  <div class="wrap">
+    <h2>A pool year in Northwest Arkansas</h2>
+    <ol class="season-cards">
+      <li class="sc-spring"><p class="when">March and April</p><div><h3>Opening</h3><p>Cover off, equipment on, water balanced before the first warm&nbsp;weekend.</p></div></li>
+      <li class="sc-summer"><p class="when">May to September</p><div><h3>Swim season</h3><p>Heat and storms burn chlorine. This is when weekly visits matter&nbsp;most.</p></div></li>
+      <li class="sc-fall"><p class="when">October and November</p><div><h3>Leaves</h3><p>Oak and hickory drop by the bagful. We net them before they&nbsp;stain.</p></div></li>
+      <li class="sc-winter"><p class="when">December to February</p><div><h3>Covered</h3><p>Checks after hard freezes, and monthly care for spas and heated&nbsp;pools.</p></div></li>
     </ol>
   </div>
 </section>
@@ -420,10 +455,13 @@ footer{background:#172219; color:rgba(243,238,228,.7); padding:2.4rem 0; font-si
       </svg>
     </div>
     <div>
-      <h2>Where we work</h2>
-      <p class="muted">Our route runs along I-49 from Bella Vista down to Lowell. Keeping it tight means we're on time, and it's why we can come the same day every&nbsp;week.</p>
-      <p class="towns">Bella&nbsp;Vista&nbsp;· Bentonville&nbsp;· Rogers&nbsp;· Centerton&nbsp;· Pea&nbsp;Ridge&nbsp;· Cave&nbsp;Springs&nbsp;· Lowell</p>
-      <p class="towns-extra">Springdale and Fayetteville by request.</p>
+      <h2 class="area-label">Where we work</h2>
+      <ul class="town-stack">
+        <li>Bella Vista</li>
+        <li>Bentonville</li>
+        <li>Rogers</li>
+      </ul>
+      <p class="towns-more">Also Centerton, Pea Ridge, Cave Springs and Lowell, along I-49. Springdale and Fayetteville by&nbsp;request.</p>
     </div>
   </div>
 </section>
@@ -465,14 +503,14 @@ footer{background:#172219; color:rgba(243,238,228,.7); padding:2.4rem 0; font-si
 
 <!-- ============ QUOTE ============ -->
 <section class="quote">
-  <div class="wrap quote-grid">
-    <div>
-      <h2>Want a price?</h2>
-      <p>Text us your address and a photo of the pool. We'll reply with a quote and the day of the week we'd&nbsp;come.</p>
-    </div>
-    <div class="quote-call">
-      <a href="tel:+14795550134">479.555.0134</a>
-      <p>Call or text</p>
+  <div class="wrap">
+    <div class="quote-photo">
+      <img src="img/close-pool-pines-1080.webp" srcset="img/close-pool-pines-720.webp 720w, img/close-pool-pines-1080.webp 1080w" sizes="(max-width:1240px) calc(100vw - 40px), 1160px" alt="" width="1080" height="984" loading="lazy" decoding="async">
+      <div class="quote-copy">
+        <h2>Want a price?</h2>
+        <p>Text your address and a photo of the pool. We'll reply with a quote and the day we'd&nbsp;come.</p>
+        <a class="btn btn-light" href="tel:+14795550134"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call or text 479.555.0134</a>
+      </div>
     </div>
   </div>
 </section>
