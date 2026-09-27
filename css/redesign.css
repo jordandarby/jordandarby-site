@@ -1085,3 +1085,15 @@ button.btn{font-family:inherit}
 }
 .brands .eyebrow{font-size:.95rem}
 @media (max-width:560px){.brands .eyebrow{font-size:.82rem}}
+
+/* ---------- About: fits one screen ----------
+   The portrait's height is capped to the space left under the header, so the
+   photo sets a shorter section; the pair is grouped toward the centre. */
+#about{padding:64px 0}
+#about .wrap{max-width:1000px;grid-template-columns:auto minmax(0,1fr);gap:56px;align-items:center}
+#about img{height:min(480px,calc(100svh - 77px - 128px));width:auto;aspect-ratio:4/5;object-fit:cover}
+@media (max-width:760px){
+  #about{padding:52px 0}
+  #about .wrap{grid-template-columns:1fr;gap:26px}
+  #about img{width:100%;height:auto;aspect-ratio:4/3;object-position:50% 12%}
+}
