@@ -982,7 +982,7 @@ button.btn{font-family:inherit}
    Fields are a single hairline on the navy that turns orange on focus, the
    same language as the services list. */
 .cta .cta-form{background:none;box-shadow:none;padding:0;border-radius:0;gap:30px}
-.cta .cta-form .field{display:flex;flex-direction:column;gap:6px;font-size:.88rem;font-weight:500;color:#C9D1E0}
+.cta .cta-form .field{display:flex;flex-direction:column;gap:6px;font-size:1rem;font-weight:500;color:#C9D1E0}
 .cta .cta-form input,.cta .cta-form textarea{background:transparent;border:0;border-bottom:1.5px solid rgba(255,255,255,.26);
   border-radius:0;padding:8px 0 10px;color:#fff;font-size:1.1rem;line-height:1.5;
   transition:border-color .25s ease,box-shadow .25s ease}
