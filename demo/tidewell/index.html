@@ -355,6 +355,16 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
 /* where we work: text only, centred */
 .area-grid{grid-template-columns:minmax(0,1fr); text-align:center; max-width:760px}
 .area .towns-line{margin-inline:auto}
+
+/* review: shadows so tiles read against the page, visible section header, footer lockup */
+.steps-head{font-size:clamp(2.2rem,4vw,3.2rem); color:var(--forest); margin-bottom:2.2rem}
+.step-tile{box-shadow:0 1px 2px rgba(30,36,31,.06), 0 18px 40px -22px rgba(30,36,31,.35); border:1px solid rgba(30,36,31,.06)}
+.prices-head{margin-bottom:1.8rem}
+.foot-name{line-height:1.1}
+.foot-name b{display:block; margin:0}
+.foot-name span{display:block; font-size:13px; color:rgba(243,238,228,.62); margin-top:3px}
+.foot .foot-name b{font-size:24px}
+.step-tile.card-top{align-items:flex-start}
 </style>
 </head>
 <body>
@@ -381,7 +391,7 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
       <a href="#visit">How it works</a>
       <a href="#prices">Prices</a>
       <a href="#year">Seasons</a>
-      <a href="#area">Where we work</a>
+      <a href="#builders">Builders</a>
     </nav>
     <a class="btn" href="tel:+14795550134"><svg aria-hidden="true"><use href="#i-phone"/></svg><span>Call<span class="long"> or text</span></span></a>
     <button class="navtoggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu"><span></span><span></span><span></span></button>
@@ -391,7 +401,7 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
       <a href="#visit">How it works</a>
       <a href="#prices">Prices</a>
       <a href="#year">Seasons</a>
-      <a href="#area">Where we work</a>
+      <a href="#builders">Builders</a>
       <a class="btn" href="tel:+14795550134"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call or text 479.555.0134</a>
     </div>
   </nav>
@@ -401,7 +411,6 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
 <section class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <p class="hero-where">Pool cleaning in Bentonville, Rogers and Bella&nbsp;Vista</p>
       <h1>We skim so you&nbsp;swim.</h1>
       <p class="hero-lede">Same day every week. A photo when we're&nbsp;done.</p>
       <div class="hero-cta">
@@ -418,17 +427,17 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
 <!-- ============ HOW IT WORKS ============ -->
 <section class="steps-sec" id="visit">
   <div class="wrap">
-    <h2 class="sr-only">How it works</h2>
+    <h2 class="steps-head">How it works</h2>
     <ol class="steps">
       <li>
         <div class="step-tile tile-paper" aria-hidden="true">
-          <div class="photo-stack"><img src="img/season-leaves-560.webp" alt="" width="560" height="700" loading="lazy" decoding="async"><img src="img/hero-farmhouse-pool-900.webp" alt="" width="900" height="600" loading="lazy" decoding="async"></div>
+          <div class="photo-stack"><img src="img/season-leaves-560.webp" alt="" width="560" height="700" loading="lazy" decoding="async"><img src="img/season-swim-560.webp" alt="" width="560" height="700" loading="lazy" decoding="async"></div>
           <div class="ask-card"><p>Pool's green after the storm. Can you come Tuesday?</p><span class="ask-go"><svg><use href="#i-arrow"/></svg></span></div>
         </div>
         <p class="step-text"><b>Text us.</b> A photo is all we&nbsp;need.</p>
       </li>
       <li>
-        <div class="step-tile" aria-hidden="true">
+        <div class="step-tile card-top" aria-hidden="true">
           <img class="tile-img" src="img/step-visit-900.webp" srcset="img/step-visit-560.webp 560w, img/step-visit-900.webp 900w" sizes="(max-width:900px) 90vw, 30vw" alt="" width="900" height="900" loading="lazy" decoding="async">
           <div class="glass-card">
             <p class="gc-head"><svg><use href="#i-dots"/></svg>On site now…</p>
@@ -457,7 +466,6 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
   <div class="wrap">
     <div class="prices-head">
       <h2>Prices</h2>
-      <p>Per visit, one pool. No&nbsp;contract.</p>
     </div>
     <div class="ratecard">
       <table class="rates">
@@ -482,11 +490,11 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
         <div class="sc-card"><p class="sc-title"><svg aria-hidden="true"><use href="#i-sun"/></svg>Opening</p><p class="sc-desc">Cover off, water balanced.</p><p class="sc-when"><svg aria-hidden="true"><use href="#i-repeat"/></svg>Repeats <span>every year</span> starting <span>March</span></p></div>
       </li>
       <li class="sc">
-        <img src="img/season-swim-900.webp" srcset="img/season-swim-560.webp 560w, img/season-swim-900.webp 900w" sizes="(max-width:700px) 80vw, 460px" alt="A clear pool below tall pines in summer" width="900" height="1125" loading="lazy" decoding="async">
+        <img src="img/season-swim-900.webp" srcset="img/season-swim-560.webp 560w, img/season-swim-900.webp 900w" sizes="(max-width:700px) 80vw, 460px" alt="A backyard pool on a lawn beside a two-story home in summer" width="900" height="1125" loading="lazy" decoding="async">
         <div class="sc-card"><p class="sc-title"><svg aria-hidden="true"><use href="#i-wave"/></svg>Swim season</p><p class="sc-desc">Weekly visits, all summer.</p><p class="sc-when"><svg aria-hidden="true"><use href="#i-repeat"/></svg>Repeats <span>every week</span> starting <span>May</span></p></div>
       </li>
       <li class="sc">
-        <img src="img/season-leaves-900.webp" srcset="img/season-leaves-560.webp 560w, img/season-leaves-900.webp 900w" sizes="(max-width:700px) 80vw, 460px" alt="Oak leaves floating on pool water in fall" width="900" height="1125" loading="lazy" decoding="async">
+        <img src="img/season-leaves-900.webp" srcset="img/season-leaves-560.webp 560w, img/season-leaves-900.webp 900w" sizes="(max-width:700px) 80vw, 460px" alt="Oak leaves floating on dark pool water in fall" width="900" height="1125" loading="lazy" decoding="async">
         <div class="sc-card"><p class="sc-title"><svg aria-hidden="true"><use href="#i-leaf"/></svg>Leaf season</p><p class="sc-desc">Netted before they stain.</p><p class="sc-when"><svg aria-hidden="true"><use href="#i-repeat"/></svg>Repeats <span>every visit</span> starting <span>October</span></p></div>
       </li>
       <li class="sc">
@@ -497,21 +505,10 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
   <div class="dots" role="tablist" aria-label="Choose a season"><button type="button" aria-label="Opening"></button><button type="button" aria-label="Swim season"></button><button type="button" aria-label="Leaf season"></button><button type="button" aria-label="Winter check"></button></div>
 </section>
 
-<!-- ============ AREA ============ -->
-<section class="area" id="area">
-  <div class="wrap area-grid">
-    <div>
-      <h2>Where we work</h2>
-      <p class="towns-line">Bella&nbsp;Vista · Bentonville · Rogers · Centerton · Pea&nbsp;Ridge · Cave&nbsp;Springs · Lowell</p>
-      <p class="towns-extra">Springdale and Fayetteville by&nbsp;request.</p>
-    </div>
-  </div>
-</section>
-
 <!-- ============ BUILDERS ============ -->
 <section class="builders" id="builders">
   <div class="wrap builders-grid">
-    <img src="img/builder-stone-home-1400.webp" srcset="img/builder-stone-home-800.webp 800w, img/builder-stone-home-1400.webp 1400w" sizes="(max-width:1000px) calc(100vw - 40px), 48vw" alt="A newly built stone and stucco home with fresh landscaping at sunset" width="1400" height="932" loading="lazy" decoding="async">
+    <img src="img/builder-farmhouse-1400.webp" srcset="img/builder-farmhouse-800.webp 800w, img/builder-farmhouse-1400.webp 1400w" sizes="(max-width:1000px) calc(100vw - 40px), 48vw" alt="A newly built white farmhouse-style home with a three-car garage" width="1400" height="933" loading="lazy" decoding="async">
     <div>
       <h2>For builders</h2>
       <p class="intro">Start-ups, spec homes and community pools across Benton&nbsp;County.</p>
@@ -547,8 +544,8 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
 
 <footer>
   <div class="wrap foot">
-    <div class="foot-brand"><svg class="foot-mark" aria-hidden="true" focusable="false"><use href="#i-mark"/></svg><p><b>Tidewell Pool Care</b>Bentonville, Rogers and Bella Vista, AR</p></div>
-    <p>&copy; <span id="yr">2026</span> Tidewell Pool Care &middot; <a href="tel:+14795550134">479.555.0134</a></p>
+    <div class="foot-brand"><svg class="foot-mark" aria-hidden="true" focusable="false"><use href="#i-mark"/></svg><p class="foot-name"><b>Tidewell</b><span>Pool Care, Northwest Arkansas</span></p></div>
+    <p>&copy; <span id="yr">2026</span> Tidewell Pool Care</p>
   </div>
 </footer>
 
