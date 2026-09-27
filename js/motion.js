@@ -108,11 +108,18 @@
     var btn = document.querySelector('.to-top');
     if (!btn) return;
     btn.removeAttribute('hidden');
+    var send = document.querySelector('.cta-form .form-send');
     var ticking = false;
     function update() {
       ticking = false;
       var y = window.pageYOffset || document.documentElement.scrollTop;
-      btn.classList.toggle('show', y > window.innerHeight * 0.8);
+      // On phones it steps aside while it would cover the contact form's button.
+      var covers = false;
+      if (send && window.innerWidth <= 760) {
+        var r = send.getBoundingClientRect();
+        covers = r.top < window.innerHeight && r.bottom > window.innerHeight - 84;
+      }
+      btn.classList.toggle('show', y > window.innerHeight * 0.8 && !covers);
     }
     window.addEventListener('scroll', function () {
       if (!ticking) { ticking = true; requestAnimationFrame(update); }
