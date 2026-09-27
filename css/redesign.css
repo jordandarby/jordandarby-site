@@ -1121,3 +1121,15 @@ footer .wrap{justify-content:center;text-align:center}
 .demo-newtab{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;color:#fff;text-decoration:none}
 .demo-newtab:hover{background:rgba(255,255,255,.14)}
 @media (max-width:480px){.demo-newtab{display:grid}}
+
+/* ---------- Websites and Services: each fits one screen ----------
+   Padding and gaps shrink with the screen height; the preview's width is set
+   from the height left under the heading (16:10 still plus its chrome bar). */
+@media (min-width:761px){
+  #websites,#services{padding:min(64px,7svh) 0}
+  #websites .section-head,#services .section-head{margin-bottom:min(40px,4svh)}
+  #websites .client-feature{max-width:min(900px,calc((100svh - 77px - 2 * min(64px,7svh) - 100px - min(40px,4svh) - 40px - 16px) * 1.6))}
+  .svc-list li{padding:min(22px,2.1svh) 0}
+  .svc-list h3{font-size:min(clamp(1.45rem,2.8vw,2.1rem),4.2svh)}
+  #services .svc-next{margin-top:min(30px,3svh)}
+}
