@@ -320,14 +320,7 @@ footer ul{flex-wrap:wrap;justify-content:center;gap:12px 22px}
    Taking it out of inline flow lines the two up properly. */
 footer .fa-linkedin{display:inline-flex;align-items:center;line-height:0}
 .nav-li{display:none}
-/* Keep the LinkedIn mark clear of the fixed back-to-top button, which sits
-   in the bottom-right corner. Only needed while the footer's right edge is
-   near the window edge; on wide screens the 1200px container clears it. */
-@media (min-width:761px) and (max-width:1400px){
-  footer .wrap{padding-right:100px}
-}
 
-footer .fa-linkedin svg{display:block}
 /* Honeypot: visually-hidden pattern that cannot affect layout or scroll width */
 .cta-form input[name="_gotcha"]{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
   overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;left:auto}
@@ -1099,3 +1092,4 @@ button.btn{font-family:inherit}
 }
 .testimonials .card-li svg{width:14px;height:14px}
 #recommendations .section-head h2{font-size:clamp(1.5rem,2.6vw,2.3rem)}
+footer .wrap{justify-content:center;text-align:center}
