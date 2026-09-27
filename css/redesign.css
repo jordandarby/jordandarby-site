@@ -1097,3 +1097,4 @@ button.btn{font-family:inherit}
   #about .wrap{grid-template-columns:1fr;gap:26px}
   #about img{width:100%;height:auto;aspect-ratio:4/3;object-position:50% 12%}
 }
+.testimonials .card-li svg{width:14px;height:14px}
