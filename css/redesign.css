@@ -423,20 +423,22 @@ p,.hero-bio,.cs-card p,.step p,.faq details p,.card p,.about p{
 }
 
 /* ---------- Work grid: multiple small category tags ---------- */
-.work-tags{position:absolute;top:9px;left:9px;right:9px;z-index:2;display:flex;flex-wrap:wrap;gap:4px;pointer-events:none;
-  opacity:0;transform:translateY(-4px);transition:opacity .3s,transform .3s}
+.work-tags{position:absolute;bottom:9px;left:9px;right:9px;z-index:2;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px;pointer-events:none;
+  opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s}
 .grid a:hover .work-tags{opacity:1;transform:none}
 .work-tags span{background:rgba(20,31,56,.82);color:var(--cream);font-family:'Poppins',sans-serif;
   font-size:.58rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
   padding:3px 7px;border-radius:4px;line-height:1.35;backdrop-filter:blur(2px)}
 .grid a:hover .work-tags span{background:var(--orange);color:var(--navy-deep)}
 @media (max-width:560px){
-  .work-tags{top:7px;left:7px;right:7px;gap:3px}
+  .work-tags{bottom:7px;left:7px;right:7px;gap:3px}
   .work-tags span{font-size:.55rem;padding:3px 6px}
 }
 
 /* Disclaimer chip on client-branding work */
 .work-tags .tag-note{background:rgba(252,245,222,.92);color:var(--navy);font-weight:600;letter-spacing:.04em}
+/* tags sit in the bottom-right corner; the hover title rides just above them */
+.grid a::after{padding-bottom:38px}
 
 /* ---------- Reveal fix: hover transitions on cards were overriding the
    entrance transition (transition is one property), so items blinked in.
