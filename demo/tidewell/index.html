@@ -531,6 +531,31 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
 .season-grid .sc-when span{border-radius:8px}
 @media(max-width:900px){.season-grid .sc{border-radius:22px}}
 @media(max-width:560px){.season-grid .sc-card{border-radius:14px}}
+/* ---------- phone polish ---------- */
+.sc-desc{text-wrap:balance}
+@media(max-width:700px){
+  /* plans read as a compact price list: name and use on the left, price on the right */
+  .plans{max-width:none; gap:10px}
+  .plans li{display:grid; grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"name price" "for price"; align-items:center; column-gap:1rem; text-align:left; padding:18px 22px}
+  .plan-name{grid-area:name; font-size:17px}
+  .plan-for{grid-area:for; margin-top:2px}
+  .plan-price{grid-area:price; margin:0; font-size:2.5rem}
+  .addons{max-width:none; margin-top:1.4rem}
+  .addons div{padding-inline:4px}
+  .banner-sec{padding-bottom:3.2rem}
+  .foot{flex-direction:column; justify-content:center; text-align:center; gap:.8rem}
+}
+@media(max-width:560px){
+  .hero-cta{justify-content:center; text-align:center}
+  .steps-sec .steps{gap:32px}
+  .step-text{margin-top:.9rem}
+}
+@media(max-width:560px){.acc summary{font-size:clamp(1.1rem,5vw,1.3rem); text-wrap:balance}}
+@media(min-width:701px) and (max-width:900px){
+  .plans{grid-template-columns:repeat(3,minmax(0,1fr)); max-width:none}
+  .addons{grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; max-width:none; border-bottom:0}
+  .addons div{flex-direction:column; justify-content:flex-start; padding:1rem 0 0}
+}
 </style>
 <noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -607,7 +632,7 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
         <div class="step-tile card-top" aria-hidden="true">
           <img class="tile-img" src="img/step-visit-900.webp" srcset="img/step-visit-560.webp 560w, img/step-visit-900.webp 900w" sizes="(max-width:900px) 90vw, 30vw" alt="" width="900" height="900" loading="lazy" decoding="async">
           <div class="glass-card">
-            <p class="gc-head"><svg><use href="#i-dots"/></svg>On site now…</p>
+            <p class="gc-head">On site now…</p>
             <p class="gc-row"><span class="gc-tick"><svg><use href="#i-check"/></svg></span>Skimmed and vacuumed</p>
             <p class="gc-row gc-dim"><span class="gc-tick"><svg><use href="#i-check"/></svg></span>Balancing the water</p>
           </div>
