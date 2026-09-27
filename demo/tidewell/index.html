@@ -556,6 +556,13 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
   .addons{grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; max-width:none; border-bottom:0}
   .addons div{flex-direction:column; justify-content:flex-start; padding:1rem 0 0}
 }
+/* ---------- in-page jumps: exact offset under the navbar, soft fade, no tap flash ---------- */
+section[id]{scroll-margin-top:var(--hdr,70px)}
+html{-webkit-tap-highlight-color:transparent}
+a,button,summary,label{-webkit-tap-highlight-color:transparent}
+:focus:not(:focus-visible){outline:none}
+body > section, body > footer{transition:opacity .45s ease}
+body.is-jumping > section, body.is-jumping > footer{opacity:0; transition-duration:.2s}
 </style>
 <noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -753,6 +760,33 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
   mobileNav.addEventListener('click', function(ev){ if (ev.target.closest('a')) setNav(false); });
   document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape') setNav(false); });
   window.addEventListener('resize', function(){ if (window.innerWidth > 1000) setNav(false); });
+  /* in-page links: land exactly under the navbar, with a soft fade between sections */
+  var hdr = document.querySelector('header');
+  var setHdr = function(){ document.documentElement.style.setProperty('--hdr', (Math.ceil(hdr.getBoundingClientRect().height) - 1) + 'px'); };
+  setHdr();
+  window.addEventListener('resize', setHdr);
+  var calmJump = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.addEventListener('click', function(ev){
+    var a = ev.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1), t = id && document.getElementById(id);
+    if (!t) return;
+    ev.preventDefault();
+    setNav(false);
+    var go = function(){
+      setHdr();
+      /* tuck the section 1px under the navbar so no sliver of the section above shows */
+      var y = Math.ceil(t.getBoundingClientRect().top + window.pageYOffset - hdr.getBoundingClientRect().height) + 1;
+      window.scrollTo(0, y <= 2 ? 0 : y);
+      if (history.replaceState) history.replaceState(null, '', '#' + id);
+    };
+    if (calmJump){ go(); return; }
+    document.body.classList.add('is-jumping');
+    setTimeout(function(){
+      go();
+      window.requestAnimationFrame(function(){ document.body.classList.remove('is-jumping'); });
+    }, 200);
+  });
   /* scroll reveal */
   var rvs = document.querySelectorAll('.rv');
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
