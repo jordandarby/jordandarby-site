@@ -312,32 +312,55 @@
   if (form && window.fetch) {
     var status = form.querySelector('.form-status');
     var fail = 'Something went wrong. Please try again, or message me on LinkedIn.';
+    var btn = form.querySelector('button[type="submit"]');
+    var btnHTML = btn.innerHTML;
+    var sentHTML = 'Sent!<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+    var pending = false;
+    var restore = function (text) {
+      pending = false;
+      btn.disabled = false;
+      btn.classList.remove('is-sent');
+      btn.innerHTML = btnHTML;
+      status.className = 'form-status error';
+      status.textContent = text || fail;
+    };
+    // Typing a new message after a send brings the button back.
+    form.addEventListener('input', function () {
+      if (pending || !btn.classList.contains('is-sent')) return;
+      btn.disabled = false;
+      btn.classList.remove('is-sent');
+      btn.innerHTML = btnHTML;
+      status.className = 'form-status';
+      status.textContent = '';
+    });
+    // The button turns green and says "Sent!" the moment it is pressed; the
+    // message goes out in the background. If that fails, the button comes
+    // back and the fields are untouched, so nothing typed is lost.
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var btn = form.querySelector('button[type="submit"]');
+      if (pending) return;
+      pending = true;
       btn.disabled = true;
-      status.className = 'form-status';
-      status.textContent = 'Sending…';
+      btn.classList.add('is-sent');
+      btn.innerHTML = sentHTML;
+      status.className = 'form-status sr-only';
+      status.textContent = 'Sending your message.';
       fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       }).then(function (r) {
         if (r.ok) {
-          form.classList.add('sent');
-          status.textContent = 'Thanks! Your message is on its way. I’ll be in touch soon.';
+          pending = false;
+          status.textContent = 'Message sent.';
+          form.reset();
+          if (msg) msg.style.height = '';
         } else {
           return r.json().then(function (d) {
-            btn.disabled = false;
-            status.className = 'form-status error';
-            status.textContent = (d && d.errors && d.errors[0] && d.errors[0].message) || fail;
-          });
+            restore(d && d.errors && d.errors[0] && d.errors[0].message);
+          }, function () { restore(); });
         }
-      }).catch(function () {
-        btn.disabled = false;
-        status.className = 'form-status error';
-        status.textContent = fail;
-      });
+      }).catch(function () { restore(); });
     });
   }
 
