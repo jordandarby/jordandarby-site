@@ -568,9 +568,10 @@ a.card-li:focus-visible{outline:2px solid var(--orange);outline-offset:3px;borde
    the viewport, and nothing inside it can catch a scroll or a stray tap. */
 .sp-stage{position:relative;aspect-ratio:16/10;overflow:hidden;background:#1F2E26}
 .sp-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-@media (prefers-reduced-motion:no-preference){
-  .sp-shot{transition:transform .6s ease}
-  .site-preview:hover .sp-shot{transform:scale(1.025)}
+/* The whole browser window grows on hover, not just the still inside it. */
+@media (prefers-reduced-motion:no-preference) and (hover:hover){
+  .site-preview{transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease}
+  .site-preview:hover{transform:scale(1.025);box-shadow:0 28px 60px rgba(20,31,56,.24)}
 }
 /* Same laptop-shaped still on every screen: on a phone it reads as an
    overview of the whole site rather than a sliver of its mobile header. */
@@ -1007,3 +1008,18 @@ button.btn{font-family:inherit}
 @media (max-width:900px){#websites{padding-bottom:60px}}
 #websites .section-head .web-hint{font-size:1.2rem}
 @media (max-width:760px){#websites .section-head .web-hint{font-size:1.1rem}}
+
+/* ---------- Contact: fits one screen, grouped toward the centre ----------
+   A narrower two-column group so the heading sits close to the form, with
+   tighter padding and field spacing so the section fits a laptop screen. */
+#contact{padding:72px 0}
+#contact .wrap{max-width:1000px;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:center}
+.cta .cta-form{gap:22px}
+.cta .cta-form .field{gap:4px}
+.cta .cta-form input,.cta .cta-form textarea{padding:6px 0 8px;font-size:1.05rem}
+.cta .cta-form .form-status:empty{display:none}
+@media (max-width:760px){
+  #contact{padding:56px 0}
+  #contact .wrap{grid-template-columns:1fr;gap:30px}
+  .cta .cta-form{gap:20px}
+}
