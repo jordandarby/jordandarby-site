@@ -980,12 +980,9 @@ button.btn{font-family:inherit}
 
 /* ---------- Contact form: open lines, no boxes ----------
    Fields are a single hairline on the navy that turns orange on focus, the
-   same language as the services list. Suggestion chips only write into the
-   text fields, which always stay free to type in. */
+   same language as the services list. */
 .cta .cta-form{background:none;box-shadow:none;padding:0;border-radius:0;gap:30px}
 .cta .cta-form .field{display:flex;flex-direction:column;gap:6px;font-size:.88rem;font-weight:500;color:#C9D1E0}
-.cta .cta-form .field > label{display:block;font-size:.88rem;font-weight:500;color:#C9D1E0}
-.cta .cta-form .opt{font-weight:400;color:rgba(231,235,243,.55);margin-left:4px}
 .cta .cta-form input,.cta .cta-form textarea{background:transparent;border:0;border-bottom:1.5px solid rgba(255,255,255,.26);
   border-radius:0;padding:8px 0 10px;color:#fff;font-size:1.1rem;line-height:1.5;
   transition:border-color .25s ease,box-shadow .25s ease}
@@ -994,14 +991,6 @@ button.btn{font-family:inherit}
 .cta .cta-form input:focus,.cta .cta-form textarea:focus{outline:none;border-bottom-color:var(--orange);box-shadow:0 1.5px 0 var(--orange)}
 .cta .cta-form textarea{resize:none;min-height:0;field-sizing:content;overflow:hidden}
 .cta .cta-form input:-webkit-autofill{-webkit-text-fill-color:#fff;box-shadow:0 0 0 1000px var(--navy) inset;caret-color:#fff}
-.cta .cta-form .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.cta .cta-form .chip{font:inherit;font-size:.86rem;font-weight:500;line-height:1.2;color:#E7EBF3;background:transparent;
-  border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:7px 14px;cursor:pointer;
-  width:auto;margin:0;flex:none;
-  transition:background .2s ease,border-color .2s ease,color .2s ease}
-.cta .cta-form .chip:hover{border-color:rgba(255,255,255,.6)}
-.cta .cta-form .chip[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:var(--navy-deep)}
-.cta .cta-form .chip:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
 .cta .cta-form .form-send{width:auto;align-self:flex-start;gap:10px;margin-top:4px}
 .cta .cta-form .form-send svg{transition:transform .3s cubic-bezier(.22,1,.36,1)}
 .cta .cta-form .form-send:hover svg{transform:translateX(4px)}
