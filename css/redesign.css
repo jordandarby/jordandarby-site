@@ -939,9 +939,6 @@ section[id]{scroll-margin-top:77px}
 /* ---------- Hero: who and where ---------- */
 .hero-copy h1{margin-bottom:18px}
 .hero-cta{align-items:center;gap:14px 26px;margin-top:28px}
-.hero-mail{color:var(--navy);font-weight:600;text-decoration:underline;text-decoration-color:var(--orange);
-  text-decoration-thickness:2px;text-underline-offset:5px}
-.hero-mail:hover{text-decoration-color:var(--navy)}
 @media (max-width:760px){
   .hero-cta{align-items:center}
   /* the moving strip is gone, so the phone hero shows the work grid instead */
@@ -961,8 +958,6 @@ section[id]{scroll-margin-top:77px}
 
 /* ---------- Contact: prose, not a checklist ---------- */
 .cta .cta-lede{color:#E7EBF3;font-size:1.08rem;line-height:1.7;margin:18px 0 0;max-width:38ch;text-wrap:pretty}
-.cta .cta-mail{color:#E7EBF3;margin:18px 0 0}
-.cta .cta-mail a{color:var(--orange);font-weight:600;text-decoration:underline;text-underline-offset:4px}
 
 /* ---------- Motion kept to what helps ----------
    No light sweep across buttons and no drawing rule under labels. */
@@ -970,3 +965,8 @@ section[id]{scroll-margin-top:77px}
 .section-head .eyebrow::after{display:none}
 /* Buttons don't inherit the page font by default; the form and demo buttons fell back to Arial. */
 button.btn{font-family:inherit}
+
+/* Testimonials: opening one card grows that card only. The row no longer
+   stretches its cards; motion.js gives closed cards a shared min-height so they
+   still line up when side by side. */
+.cards{align-items:start}

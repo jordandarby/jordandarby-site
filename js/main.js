@@ -304,7 +304,7 @@
   var form = document.querySelector('.cta-form');
   if (form && window.fetch) {
     var status = form.querySelector('.form-status');
-    var fail = 'Something went wrong. Please email hello@jordandarby.com.';
+    var fail = 'Something went wrong. Please try again, or message me on LinkedIn.';
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = form.querySelector('button');
