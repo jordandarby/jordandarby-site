@@ -525,6 +525,12 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
 .steps-sec .step-tile{color:var(--ink)}
 .step-text{text-align:center; max-width:none}
 .acc summary::after{background:none; box-shadow:none; width:auto; height:auto; color:var(--forest); font-size:26px; font-weight:400}
+/* season cards keep their rounded shape */
+.season-grid .sc{border-radius:28px}
+.season-grid .sc-card{border-radius:18px}
+.season-grid .sc-when span{border-radius:8px}
+@media(max-width:900px){.season-grid .sc{border-radius:22px}}
+@media(max-width:560px){.season-grid .sc-card{border-radius:14px}}
 </style>
 <noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -670,7 +676,7 @@ nav.main a:hover{color:#fff; text-decoration-color:#E6D2AE}
   <div class="wrap builders-grid">
     <div class="builders-copy">
       <h2 class="rv">For builders</h2>
-      <p class="intro rv">Pool start-ups, spec homes and community pools across Northwest&nbsp;Arkansas.</p>
+      <p class="intro rv">Care for new builds, spec homes and community pools across Northwest&nbsp;Arkansas.</p>
       <a class="btn" href="tel:+14795550134"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call about builder rates</a>
     </div>
     <img class="rv" src="img/builder-home-pool-1400.webp" srcset="img/builder-home-pool-800.webp 800w, img/builder-home-pool-1400.webp 1400w" sizes="(max-width:1000px) calc(100vw - 40px), 48vw" alt="A two-story home above its lit pool and lawn at dusk" width="1400" height="1050" loading="lazy" decoding="async">
