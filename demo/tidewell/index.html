@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tidewell Pool Care | Pool Cleaning in Bentonville, Rogers &amp; Bella Vista, AR</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<meta name="description" content="Pool care for estates, lake homes and new builds in Bentonville, Rogers, Bella Vista and Pinnacle, AR. A photo and water report after every visit. Call or text 479.555.0134.">
+<meta name="description" content="Pool care for estates, lake homes and new builds in Bentonville, Rogers and Bella Vista, AR. A photo and water report after every visit. Call or text 479.555.0134.">
 <meta property="og:title" content="Tidewell Pool Care | Pool cleaning in Northwest Arkansas">
 <meta property="og:description" content="Pool cleaning in Bentonville, Rogers and Bella Vista, AR. A photo and a water report after every visit. Call or text 479.555.0134.">
 <meta property="og:type" content="website">
@@ -263,7 +263,7 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
   .close-photo{height:auto; min-height:520px}
 }
 @media(max-width:700px){
-  .hero-photo img{aspect-ratio:4/5}
+  .hero-photo img{aspect-ratio:1/1}
   .tile{min-height:460px}
   .guides li{min-height:230px}
   .close-photo{min-height:480px}
@@ -274,7 +274,28 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
 #prices .rates .price{font-size:clamp(1.7rem,min(2.4vw,4.2svh),2.3rem)}
 #prices .rates thead th{padding-top:1rem; padding-bottom:.5rem}
 #prices .rates th,#prices .rates td{padding-top:min(1rem,1.3svh); padding-bottom:min(1rem,1.3svh)}
-#prices .rates .price.price-quote{font-family:var(--sans); font-size:15.5px; font-weight:600; letter-spacing:0; color:var(--ink)}
+#prices .rates .price.price-quote{font-family:var(--serif); font-size:clamp(1.25rem,min(1.8vw,3.2svh),1.6rem); font-weight:400; color:var(--ink)}
+
+/* ---------- review pass ---------- */
+.tile-story{background:var(--forest); color:#F3F1EC; display:flex; flex-direction:column; justify-content:space-between; padding:30px 36px 34px}
+.tile-story .label{display:flex; align-items:center; gap:.5rem; color:rgba(243,241,236,.75)}
+.tile-story .label svg{width:20px; height:20px; color:#E6D2AE}
+.story-big{font-family:var(--serif); font-size:clamp(2rem,min(3.3vw,6.2svh),3.3rem); line-height:1.12; letter-spacing:-.015em; max-width:16ch}
+.tile-story .fn{text-decoration-color:rgba(243,241,236,.45)}
+.tile-story .notes{grid-template-columns:minmax(0,1fr); gap:0; margin:min(2.2rem,3.5svh) 0 0; max-width:none}
+.tile-story .notes li{color:rgba(243,241,236,.82); border-top-color:rgba(243,241,236,.2); padding:.7rem 0; font-size:15px}
+.tile-story .notes li::before{color:#E6D2AE}
+.guides .g-top svg{width:20px; height:20px; opacity:.75}
+.signoff{font-family:var(--serif); font-size:18px; color:var(--ink)}
+@media(max-width:1000px){.tile-story{min-height:0; gap:3rem}}
+@media(max-width:700px){.tile-story{padding:24px 22px 26px}}
+
+@media(min-width:1001px){
+  .hero h1{font-size:clamp(2.6rem,min(4.9vw,9svh),5.2rem)}
+  .h1-line{white-space:nowrap}
+}
+.thread-head{display:table; margin:0 auto .5rem; padding:.3rem .7rem; border-radius:999px; background:rgba(0,0,0,.42); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); color:#fff; opacity:1; text-shadow:none}
+.guides li p{min-height:4.35em}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.001ms !important}}
 </style>
 </head>
@@ -294,7 +315,6 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
     <a class="brand" href="#top" aria-label="Tidewell Pool Care, home"><svg class="brand-logo" aria-hidden="true" focusable="false"><use href="#i-mark"/></svg><b>Tidewell</b></a>
     <nav class="main" aria-label="Main">
       <a href="#prices">Prices</a>
-      <a href="#seasons">Seasons</a>
       <a href="#area">Where we work</a>
       <a href="#builders">Builders</a>
       <a href="#faq">Questions</a>
@@ -307,7 +327,6 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
   <nav class="mobile-nav" id="mobileNav" aria-label="Menu" hidden>
     <div class="wrap">
       <a href="#prices">Prices</a>
-      <a href="#seasons">Seasons</a>
       <a href="#area">Where we work</a>
       <a href="#builders">Builders</a>
       <a href="#faq">Questions</a>
@@ -319,12 +338,12 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="wrap">
-    <h1>Tidewell,<br>We skim so you&nbsp;swim.</h1>
+    <h1>Tidewell,<br><span class="h1-line">Your pool, ready whenever you&nbsp;are.</span></h1>
     <dl class="facts">
-      <div><dt>Serving:</dt><dd>Bentonville, Rogers, Bella&nbsp;Vista, Pinnacle</dd></div>
+      <div><dt>Serving:</dt><dd>Bentonville, Rogers, Bella&nbsp;Vista</dd></div>
       <div><dt>For:</dt><dd>Estates, lake homes and new&nbsp;builds</dd></div>
-      <div><dt>Visits:</dt><dd>Same day every week</dd></div>
-      <div><dt>After every visit:</dt><dd>Photo and water report</dd></div>
+      <div><dt>Every visit:</dt><dd>Photo and water report</dd></div>
+      <div><dt>Standards:</dt><dd>Licensed, insured, same&nbsp;technician</dd></div>
     </dl>
     <figure class="hero-photo">
       <img src="img/hero-farmhouse-pool-1400.webp" srcset="img/hero-farmhouse-pool-900.webp 900w, img/hero-farmhouse-pool-1400.webp 1400w, img/hero-farmhouse-pool-2400.webp 2400w" sizes="(max-width:1320px) calc(100vw - 40px), 1280px" alt="A backyard pool with stone coping and a split-rail fence, below a farmhouse and wooded hills at dusk" width="1400" height="934" fetchpriority="high" decoding="async">
@@ -334,24 +353,19 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
   </div>
 </section>
 
-<!-- ============ STATEMENT ============ -->
-<section class="statement" id="visit">
-  <div class="wrap">
-    <p class="big"><span class="fn">Every&nbsp;visit<sup>1</sup></span> ends with <span class="fn">a&nbsp;photo<sup>2</sup></span> and <span class="fn">a&nbsp;water&nbsp;report<sup>3</sup></span>.</p>
-    <ol class="notes">
-      <li>Skim, brush and vacuum, empty the baskets, and check the equipment.</li>
-      <li>Texted to you before we leave, with the gate latched behind&nbsp;us.</li>
-      <li>Chlorine, pH and alkalinity, balanced to that day's&nbsp;test.</li>
-    </ol>
-  </div>
-</section>
-
-<!-- ============ TILES: brand + visit text ============ -->
-<section aria-label="Tidewell and an example visit text">
+<!-- ============ EVERY VISIT ============ -->
+<section id="visit" aria-label="What happens at every visit">
   <div class="wrap tiles">
-    <div class="tile tile-brand">
-      <div class="lockup"><svg aria-hidden="true" focusable="false"><use href="#i-mark"/></svg><b>Tidewell</b></div>
-      <div class="tile-foot"><span>Pool Care</span><span>Northwest Arkansas</span></div>
+    <div class="tile tile-story">
+      <p class="label"><svg aria-hidden="true" focusable="false"><use href="#i-mark"/></svg>Every visit</p>
+      <div>
+        <p class="story-big"><span class="fn">Every&nbsp;visit<sup>1</sup></span> ends with <span class="fn">a&nbsp;photo<sup>2</sup></span> and <span class="fn">a&nbsp;water&nbsp;report<sup>3</sup></span>.</p>
+        <ol class="notes">
+          <li>Skim, brush and vacuum, empty the baskets, and check the equipment.</li>
+          <li>Texted to you before we leave, with the gate latched behind&nbsp;us.</li>
+          <li>Chlorine, pH and alkalinity, balanced to that day's&nbsp;test.</li>
+        </ol>
+      </div>
     </div>
     <div class="tile">
       <img src="img/tile-lap-pool-dusk-1000.webp" srcset="img/tile-lap-pool-dusk-600.webp 600w, img/tile-lap-pool-dusk-1000.webp 1000w" sizes="(max-width:1000px) calc(100vw - 40px), 640px" alt="A lit lap pool beside a modern home and its covered terrace at dusk" width="1000" height="1232" loading="lazy" decoding="async">
@@ -368,7 +382,7 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
 <section class="sec" id="prices">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Prices</h2>
+      <h2>Care plans</h2>
       <p>Per visit, for one pool, with a water report every time. No contract, so you can stop whenever you&nbsp;like.</p>
     </div>
     <div class="ratecard">
@@ -394,14 +408,14 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
 <section class="sec" id="seasons" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Season guides</h2>
+      <h2>Through the year</h2>
       <p>What a pool in Northwest Arkansas needs, month by&nbsp;month.</p>
     </div>
     <ol class="guides">
-      <li class="g-spring"><div class="g-top"><b>Tidewell</b><span>March–April</span></div><div><h3><span>Season guide:</span>Opening</h3><p>Cover off, equipment on, water balanced before the first warm&nbsp;weekend.</p></div></li>
-      <li class="g-summer"><div class="g-top"><b>Tidewell</b><span>May–September</span></div><div><h3><span>Season guide:</span>Swim season</h3><p>Heat and storms burn chlorine. This is when weekly visits matter&nbsp;most.</p></div></li>
-      <li class="g-fall"><div class="g-top"><b>Tidewell</b><span>October–November</span></div><div><h3><span>Season guide:</span>Leaves</h3><p>Oak and hickory drop by the bagful. We net them before they&nbsp;stain.</p></div></li>
-      <li class="g-winter"><div class="g-top"><b>Tidewell</b><span>December–February</span></div><div><h3><span>Season guide:</span>Covered</h3><p>Checks after hard freezes, and monthly care for spas and heated&nbsp;pools.</p></div></li>
+      <li class="g-spring"><div class="g-top"><svg aria-hidden="true" focusable="false"><use href="#i-mark"/></svg><span>March–April</span></div><div><h3>Opening</h3><p>Cover off, equipment on, water balanced before the first warm&nbsp;weekend.</p></div></li>
+      <li class="g-summer"><div class="g-top"><svg aria-hidden="true" focusable="false"><use href="#i-mark"/></svg><span>May–September</span></div><div><h3>Swim season</h3><p>Heat and storms burn chlorine. This is when weekly visits matter&nbsp;most.</p></div></li>
+      <li class="g-fall"><div class="g-top"><svg aria-hidden="true" focusable="false"><use href="#i-mark"/></svg><span>October–November</span></div><div><h3>Leaves</h3><p>Oak and hickory drop by the bagful. We net them before they&nbsp;stain.</p></div></li>
+      <li class="g-winter"><div class="g-top"><svg aria-hidden="true" focusable="false"><use href="#i-mark"/></svg><span>December–February</span></div><div><h3>Covered</h3><p>Checks after hard freezes, and monthly care for spas and heated&nbsp;pools.</p></div></li>
     </ol>
   </div>
 </section>
@@ -416,7 +430,7 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
         <li>Bentonville</li>
         <li>Rogers</li>
       </ul>
-      <div class="towns-more"><span>Also Pinnacle, Centerton, Pea Ridge, Cave Springs, Lowell and homes on Beaver&nbsp;Lake.</span><span>Springdale and Fayetteville by request.</span></div>
+      <div class="towns-more"><span>Also Pinnacle Hills, Centerton, Pea Ridge, Cave Springs, Lowell and homes on Beaver&nbsp;Lake.</span><span>Springdale and Fayetteville by request.</span></div>
     </div>
   </div>
 </section>
@@ -431,7 +445,7 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
     <div class="tile tile-taupe">
       <p class="label">For builders and developers</p>
       <div>
-        <h2>Handover-ready pools for new&nbsp;builds.</h2>
+        <h2>Handover&#8209;ready pools for new&nbsp;builds.</h2>
         <p>For custom home builders and developers across Benton County. Plaster start-ups, spec homes and listings kept show-ready, and amenity pools on a set&nbsp;schedule.</p>
         <a class="pill pill-light" href="tel:+14795550134"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call about builder rates</a>
       </div>
@@ -460,8 +474,8 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
     <div class="close-photo">
       <img src="img/close-stone-pool-house-2000.webp" srcset="img/close-stone-pool-house-1100.webp 1100w, img/close-stone-pool-house-2000.webp 2000w" sizes="(max-width:1320px) calc(100vw - 40px), 1280px" alt="" width="2000" height="1333" loading="lazy" decoding="async">
       <div class="close-copy">
-        <h2>Want a price?</h2>
-        <p>Text your address and a photo of the pool. We'll reply with a quote and the day we'd&nbsp;come.</p>
+        <h2>Arrange a walkthrough.</h2>
+        <p>Text your address and a photo of the pool. We'll reply with a quote, or a time to walk the property with&nbsp;you.</p>
         <a class="pill pill-light" href="tel:+14795550134"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call or text 479.555.0134</a>
       </div>
     </div>
@@ -471,7 +485,7 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
 <footer>
   <div class="wrap foot">
     <a class="brand" href="#top" aria-label="Tidewell Pool Care, back to top"><svg class="brand-logo" aria-hidden="true" focusable="false"><use href="#i-mark"/></svg><b>Tidewell</b></a>
-    <nav aria-label="Footer"><a href="#prices">Prices</a><a href="#seasons">Seasons</a><a href="#faq">Questions</a></nav>
+    <p class="signoff">We skim so you&nbsp;swim.</p>
     <p>&copy; <span id="yr">2026</span> Tidewell Pool Care · <a href="tel:+14795550134">479.555.0134</a></p>
   </div>
 </footer>
