@@ -1093,3 +1093,4 @@ button.btn{font-family:inherit}
 .testimonials .card-li svg{width:14px;height:14px}
 #recommendations .section-head h2{font-size:clamp(1.5rem,2.6vw,2.3rem)}
 footer .wrap{justify-content:center;text-align:center}
+.testimonials .card-person{padding-top:28px}
