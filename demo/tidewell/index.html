@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tidewell Pool Care | Pool Cleaning in Bentonville, Rogers &amp; Bella Vista, AR</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<meta name="description" content="Weekly, bi-weekly, or monthly pool cleaning in Bentonville, Rogers and Bella Vista, AR, from $45 a visit with a photo and water report every time. Call or text 479.555.0134.">
+<meta name="description" content="Pool care for estates, lake homes and new builds in Bentonville, Rogers, Bella Vista and Pinnacle, AR. A photo and water report after every visit. Call or text 479.555.0134.">
 <meta property="og:title" content="Tidewell Pool Care | Pool cleaning in Northwest Arkansas">
 <meta property="og:description" content="Pool cleaning in Bentonville, Rogers and Bella Vista, AR. A photo and a water report after every visit. Call or text 479.555.0134.">
 <meta property="og:type" content="website">
@@ -175,7 +175,7 @@ details p{padding:0 3rem 1.3rem 0; color:var(--muted)}
 .close{padding:0 0 1.5rem}
 .close-photo{position:relative; border-radius:var(--r); overflow:hidden; min-height:620px; display:grid; place-items:center}
 .close-photo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 60%}
-.close-photo::after{content:''; position:absolute; inset:0; background:linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.45))}
+.close-photo::after{content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center, rgba(0,0,0,.52), rgba(0,0,0,.3) 70%)}
 .close-copy{position:relative; z-index:1; text-align:center; color:#fff; padding:3rem 1.5rem; display:flex; flex-direction:column; align-items:center}
 .close-copy h2{font-size:clamp(3rem,7vw,6rem); line-height:1}
 .close-copy p{max-width:34ch; margin:1rem 0 1.8rem; color:rgba(255,255,255,.92)}
@@ -232,6 +232,49 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
 @media(max-width:430px){
   .bar .pill .long{display:none}
 }
+
+/* ---------- each section fits one screen ---------- */
+:root{--vh:calc(100svh - 66px)}
+.hero{display:flex; flex-direction:column; height:var(--vh); min-height:600px; max-height:980px; padding:2.4rem 0 1.4rem}
+.hero > .wrap{display:flex; flex-direction:column; flex:1; min-height:0}
+.hero h1{font-size:clamp(2.6rem,min(6vw,9svh),5.8rem)}
+.facts{margin:auto 0 1.1rem; padding-top:.8rem}
+.hero-photo{flex:1; min-height:240px; max-height:640px}
+.hero-photo img{height:100%; aspect-ratio:auto}
+.facts{margin-top:2rem}
+.statement{padding:min(8rem,12svh) 0 min(7rem,10svh)}
+.tile{min-height:0; height:min(640px,calc(var(--vh) - 40px))}
+.sec{padding:min(5.5rem,9svh) 0}
+.ratecard{padding:.2rem 2.2rem 1.4rem}
+.rates th,.rates td{padding-top:min(1.1rem,1.6svh); padding-bottom:min(1.1rem,1.6svh)}
+.rates .price-quote{font-family:var(--sans); font-size:15.5px; font-weight:600; color:var(--ink)}
+.extras-line{margin-top:1rem}
+.ratecard-foot{margin-top:1rem; padding-top:1rem}
+.sec-head{margin-bottom:1.3rem}
+.guides li{aspect-ratio:auto; height:min(440px,calc(var(--vh) - 230px)); min-height:280px}
+.town-stack li{font-size:clamp(3rem,min(9vw,15svh),8.4rem)}
+.close-photo{min-height:0; height:min(640px,calc(var(--vh) - 40px))}
+@media(max-width:1000px){
+  .hero{height:auto; max-height:none; min-height:0}
+  .hero-photo{flex:none; max-height:none}
+  .hero-photo img{height:auto; aspect-ratio:4/3}
+  .tile{height:auto; min-height:520px}
+  .guides li{height:auto; min-height:260px}
+  .close-photo{height:auto; min-height:520px}
+}
+@media(max-width:700px){
+  .hero-photo img{aspect-ratio:4/5}
+  .tile{min-height:460px}
+  .guides li{min-height:230px}
+  .close-photo{min-height:480px}
+}
+#prices{padding:min(4rem,6svh) 0}
+#prices .sec-head{margin-bottom:1rem}
+#prices .rates tbody th{font-size:clamp(1.35rem,min(1.9vw,3.4svh),1.7rem)}
+#prices .rates .price{font-size:clamp(1.7rem,min(2.4vw,4.2svh),2.3rem)}
+#prices .rates thead th{padding-top:1rem; padding-bottom:.5rem}
+#prices .rates th,#prices .rates td{padding-top:min(1rem,1.3svh); padding-bottom:min(1rem,1.3svh)}
+#prices .rates .price.price-quote{font-family:var(--sans); font-size:15.5px; font-weight:600; letter-spacing:0; color:var(--ink)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.001ms !important}}
 </style>
 </head>
@@ -278,10 +321,10 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
   <div class="wrap">
     <h1>Tidewell,<br>We skim so you&nbsp;swim.</h1>
     <dl class="facts">
-      <div><dt>Serving:</dt><dd>Bentonville, Rogers, Bella&nbsp;Vista</dd></div>
-      <div><dt>Plans from:</dt><dd>$45 a visit</dd></div>
+      <div><dt>Serving:</dt><dd>Bentonville, Rogers, Bella&nbsp;Vista, Pinnacle</dd></div>
+      <div><dt>For:</dt><dd>Estates, lake homes and new&nbsp;builds</dd></div>
       <div><dt>Visits:</dt><dd>Same day every week</dd></div>
-      <div><dt>Contracts:</dt><dd>None</dd></div>
+      <div><dt>After every visit:</dt><dd>Photo and water report</dd></div>
     </dl>
     <figure class="hero-photo">
       <img src="img/hero-farmhouse-pool-1400.webp" srcset="img/hero-farmhouse-pool-900.webp 900w, img/hero-farmhouse-pool-1400.webp 1400w, img/hero-farmhouse-pool-2400.webp 2400w" sizes="(max-width:1320px) calc(100vw - 40px), 1280px" alt="A backyard pool with stone coping and a split-rail fence, below a farmhouse and wooded hills at dusk" width="1400" height="934" fetchpriority="high" decoding="async">
@@ -311,11 +354,11 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
       <div class="tile-foot"><span>Pool Care</span><span>Northwest Arkansas</span></div>
     </div>
     <div class="tile">
-      <img src="img/tile-pool-pines-1000.webp" srcset="img/tile-pool-pines-600.webp 600w, img/tile-pool-pines-1000.webp 1000w" sizes="(max-width:1000px) calc(100vw - 40px), 640px" alt="A clean pool with stone coping below tall pines and hardwoods" width="1000" height="1428" loading="lazy" decoding="async">
+      <img src="img/tile-lap-pool-dusk-1000.webp" srcset="img/tile-lap-pool-dusk-600.webp 600w, img/tile-lap-pool-dusk-1000.webp 1000w" sizes="(max-width:1000px) calc(100vw - 40px), 640px" alt="A lit lap pool beside a modern home and its covered terrace at dusk" width="1000" height="1232" loading="lazy" decoding="async">
       <div class="thread" role="img" aria-label="An example text from Tidewell after a visit: all done, chlorine 3 ppm, pH 7.4, gate latched">
         <p class="thread-head">Tidewell Pool Care · Tue 10:42 AM</p>
         <p class="bubble">All done. Chlorine 3 ppm, pH 7.4, alkalinity 90.</p>
-        <p class="bubble">Lot of pine needles in the skimmer this week. Gate's latched.</p>
+        <p class="bubble">Spa's heated for tonight. Gate's latched and the lights are on the timer.</p>
       </div>
     </div>
   </div>
@@ -335,6 +378,7 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
           <tr><th scope="row">Weekly</th><td class="price">$45</td><td>Pools in regular use, May through September</td></tr>
           <tr><th scope="row">Every two weeks</th><td class="price">$65</td><td>Covered pools, or ones that don't see much use</td></tr>
           <tr><th scope="row">Monthly</th><td class="price">$95</td><td>Keeping an eye on things in the off-season</td></tr>
+          <tr><th scope="row">Estate care</th><td class="price price-quote">By walkthrough</td><td>More than one pool, spas, fountains and water features</td></tr>
         </tbody>
       </table>
       <p class="extras-line"><b>Also:</b> spa or hot tub, add $15 a visit. First clean from $150 if needed. Green-to-clean $150, $250 or $400+. Openings and closings priced by pool&nbsp;size.</p>
@@ -372,7 +416,7 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
         <li>Bentonville</li>
         <li>Rogers</li>
       </ul>
-      <div class="towns-more"><span>Also Centerton, Pea Ridge, Cave Springs and Lowell, along&nbsp;I-49.</span><span>Springdale and Fayetteville by request.</span></div>
+      <div class="towns-more"><span>Also Pinnacle, Centerton, Pea Ridge, Cave Springs, Lowell and homes on Beaver&nbsp;Lake.</span><span>Springdale and Fayetteville by request.</span></div>
     </div>
   </div>
 </section>
@@ -381,14 +425,14 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
 <section id="builders" aria-label="For builders and developers">
   <div class="wrap tiles">
     <div class="tile tile-photo">
-      <img src="img/builder-stone-home-1400.webp" srcset="img/builder-stone-home-800.webp 800w, img/builder-stone-home-1400.webp 1400w" sizes="(max-width:1000px) calc(100vw - 40px), 640px" alt="A newly built stone and stucco home with fresh landscaping at sunset" width="1400" height="932" loading="lazy" decoding="async" style="object-position:56% center">
+      <img src="img/tile-cedar-pool-house-1000.webp" srcset="img/tile-cedar-pool-house-600.webp 600w, img/tile-cedar-pool-house-1000.webp 1000w" sizes="(max-width:1000px) calc(100vw - 40px), 640px" alt="A new cedar pool house beside a stone-edged plunge pool in the woods" width="1000" height="1141" loading="lazy" decoding="async">
       <div class="float-card" aria-hidden="true"><span class="fc-icon"><svg><use href="#i-drop"/></svg></span><div><b>Plaster start-up</b><span>Week 2 of 4 · Balanced today</span></div></div>
     </div>
     <div class="tile tile-taupe">
       <p class="label">For builders and developers</p>
       <div>
         <h2>Handover-ready pools for new&nbsp;builds.</h2>
-        <p>Plaster start-ups, spec homes and listings kept show-ready, and community pools on a set schedule, across Benton&nbsp;County.</p>
+        <p>For custom home builders and developers across Benton County. Plaster start-ups, spec homes and listings kept show-ready, and amenity pools on a set&nbsp;schedule.</p>
         <a class="pill pill-light" href="tel:+14795550134"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call about builder rates</a>
       </div>
     </div>
@@ -402,7 +446,7 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
     <div>
       <details><summary>Do I need to be home?</summary><p>No. We just need to reach the pool, and we text you when we're done.</p></details>
       <details><summary>What if the gate is locked?</summary><p>Give us the code, or tell us where the key is. We latch it behind us every time.</p></details>
-      <details><summary>Can we swim right after?</summary><p>Give the water about 30 minutes after we balance it, then jump&nbsp;in.</p></details>
+      <details><summary>Do you look after second homes?</summary><p>Yes. For lake homes and second homes we check the pool, equipment and gate every visit, and send photos you can see from&nbsp;anywhere.</p></details>
       <details><summary>What if it storms?</summary><p>Rain doesn't stop us. Lightning does, and we come back the next day at no&nbsp;charge.</p></details>
       <details><summary>Do you open and close pools?</summary><p>Yes. Openings in March and April, closings in October and November, priced by pool&nbsp;size.</p></details>
       <details><summary>Do you service hot tubs?</summary><p>Yes, with the pool for $15 a visit, or on their own through the&nbsp;winter.</p></details>
@@ -414,7 +458,7 @@ footer{padding:1.6rem 0 2.2rem; font-size:14px; color:var(--muted)}
 <section class="close">
   <div class="wrap">
     <div class="close-photo">
-      <img src="img/close-pool-pines-1080.webp" srcset="img/close-pool-pines-720.webp 720w, img/close-pool-pines-1080.webp 1080w" sizes="(max-width:1320px) calc(100vw - 40px), 1280px" alt="" width="1080" height="984" loading="lazy" decoding="async">
+      <img src="img/close-stone-pool-house-2000.webp" srcset="img/close-stone-pool-house-1100.webp 1100w, img/close-stone-pool-house-2000.webp 2000w" sizes="(max-width:1320px) calc(100vw - 40px), 1280px" alt="" width="2000" height="1333" loading="lazy" decoding="async">
       <div class="close-copy">
         <h2>Want a price?</h2>
         <p>Text your address and a photo of the pool. We'll reply with a quote and the day we'd&nbsp;come.</p>
