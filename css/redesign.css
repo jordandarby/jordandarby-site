@@ -1001,3 +1001,7 @@ button.btn{font-family:inherit}
   .cta .cta-form{gap:26px}
   .cta .cta-form .form-send{align-self:stretch;justify-content:center}
 }
+
+/* Website example: the preview stands alone, centred under the heading. */
+#websites .client-feature{display:block;max-width:900px;margin:0 auto}
+@media (max-width:900px){#websites{padding-bottom:60px}}
