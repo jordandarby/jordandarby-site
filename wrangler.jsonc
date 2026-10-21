@@ -1,0 +1,9 @@
+{
+  // Cloudflare Workers config: serve this repo as a static site.
+  "name": "jordandarby-site",
+  "compatibility_date": "2026-10-21",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "404-page"
+  }
+}
