@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leave a review | Jordan Darby Design</title>
+<link rel="canonical" href="https://jordandarby.com/review/">
+<meta property="og:title" content="Leave a review | Jordan Darby Design">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jordandarby.com/review/">
+<meta property="og:image" content="https://jordandarby.com/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A collage of Jordan Darby's branding and packaging design work">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Leave a review | Jordan Darby Design">
+<meta name="twitter:image" content="https://jordandarby.com/images/og-image.jpg">
+<link rel="icon" href="../images/favicon.png">
+<!-- Self-hosted fonts (faces declared in css/style.css). Preloaded so they are
+     in flight before the stylesheet parses. crossorigin is required even
+     same-origin: font fetches are CORS-mode, and without it the preload does
+     not match the real request and the file is fetched twice. -->
+<script>
+/* Wait for the fonts before the entrance runs. Added by script only, so a
+   visitor without JS is never affected, and released either when the fonts
+   report ready or after a short fixed wait, whichever lands first, so a slow
+   or failed font can only delay the hero, never hide it.
+
+   There is also a floor. With the fonts cached the ready signal comes back
+   almost instantly, so the page snapped straight in and the arrival read as
+   two different experiences depending on whether you had been here before.
+   Holding briefly either way makes it one deliberate entrance. */
+(function(){try{
+  var h=document.documentElement,t0=Date.now(),MIN=300;
+  h.classList.add('fonts-pending');
+  var go=function(){h.classList.remove('fonts-pending');};
+  var hold=function(){setTimeout(go,Math.max(0,MIN-(Date.now()-t0)));};
+  if(document.fonts&&document.fonts.ready&&document.fonts.ready.then){
+    document.fonts.ready.then(hold).catch(hold);
+    setTimeout(go,900);
+  }else{hold();}
+}catch(_){}})();
+</script>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../fonts/poppins-400-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../fonts/poppins-600-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../fonts/poppins-700-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../fonts/poppins-500-latin.woff2">
+<link rel="stylesheet" href="../css/style.css?v=194">
+<link rel="stylesheet" href="../css/redesign.css?v=194">
+<link rel="stylesheet" href="../css/motion.css?v=194">
+<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+<div class="scroll-bar" aria-hidden="true"></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="/"><img src="../images/favicon.png" alt="Jordan Darby headshot logo">Jordan Darby Design</a>
+    <a class="nav-li" href="https://www.linkedin.com/in/jordan-darby-design/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="3" fill="#182946"/><path d="M6.94 8.5v9.06H4.13V8.5h2.81ZM7.13 5.69a1.63 1.63 0 1 1-3.26 0 1.63 1.63 0 0 1 3.26 0ZM19.87 12.4v5.16h-2.8v-4.84c0-1.22-.44-2.05-1.53-2.05-.83 0-1.33.56-1.55 1.1-.08.2-.1.47-.1.74v5.05h-2.81s.04-8.2 0-9.06h2.8v1.29c.38-.58 1.05-1.4 2.55-1.4 1.86 0 3.44 1.22 3.44 4.01Z" fill="#FCF5DE"/></svg></a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span></button>
+    <ul class="nav-links">
+      <li><a href="/#websites">Websites</a></li>
+      <li><a href="/#examples">Examples</a></li>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+      <li class="nav-social"><a href="https://www.linkedin.com/in/jordan-darby-design/" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="section cta" id="review">
+    <div class="wrap">
+      <div>
+        <h1 class="reveal">Leave a review</h1>
+        <p class="cta-lede reveal">Two minutes, and it helps more than you know. Thank you!</p>
+      </div>
+      <form class="review-form" action="__REVIEWS_ENDPOINT__" method="POST">
+        <label class="field">Your name<input type="text" name="name" autocomplete="name" maxlength="120" required></label>
+        <label class="field">Your business<input type="text" name="business" autocomplete="organization" maxlength="120" required></label>
+        <label class="field">Email<input type="email" name="email" autocomplete="email" required></label>
+        <label class="field">What we worked on<input type="text" name="project" autocomplete="off" maxlength="120" required></label>
+        <fieldset class="stars">
+          <legend>Rating</legend>
+          <div class="star-row">
+          <label><input type="radio" name="rating" value="1" required><span class="sr-only">1 star</span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.11 6.47L12 17.45 6.19 20.5l1.11-6.47L2.6 9.45l6.5-.95z"/></svg></label>
+          <label><input type="radio" name="rating" value="2" required><span class="sr-only">2 stars</span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.11 6.47L12 17.45 6.19 20.5l1.11-6.47L2.6 9.45l6.5-.95z"/></svg></label>
+          <label><input type="radio" name="rating" value="3" required><span class="sr-only">3 stars</span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.11 6.47L12 17.45 6.19 20.5l1.11-6.47L2.6 9.45l6.5-.95z"/></svg></label>
+          <label><input type="radio" name="rating" value="4" required><span class="sr-only">4 stars</span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.11 6.47L12 17.45 6.19 20.5l1.11-6.47L2.6 9.45l6.5-.95z"/></svg></label>
+          <label><input type="radio" name="rating" value="5" required><span class="sr-only">5 stars</span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.11 6.47L12 17.45 6.19 20.5l1.11-6.47L2.6 9.45l6.5-.95z"/></svg></label>
+          </div>
+        </fieldset>
+        <label class="field">Your review<textarea name="review" rows="3" required></textarea></label>
+        <div class="consent-wrap">
+          <label class="consent"><input type="checkbox" name="permission" value="Yes, Jordan may share this review with my name and business" required><span>Jordan may share this review, with my name and business, on jordandarby.com and in his marketing.</span></label>
+        </div>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="_subject" value="New review">
+        <button type="submit" class="btn btn-orange form-send">Send review<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <ul>
+      <li><a href="/#websites">Websites</a></li>
+      <li><a href="/#examples">Examples</a></li>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#recommendations">Recommendations</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <span class="copy">&copy; 2026 Jordan Darby Design</span>
+    <a class="fa-linkedin" href="https://www.linkedin.com/in/jordan-darby-design/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="3" fill="#182946"/><path d="M6.94 8.5v9.06H4.13V8.5h2.81ZM7.13 5.69a1.63 1.63 0 1 1-3.26 0 1.63 1.63 0 0 1 3.26 0ZM19.87 12.4v5.16h-2.8v-4.84c0-1.22-.44-2.05-1.53-2.05-.83 0-1.33.56-1.55 1.1-.08.2-.1.47-.1.74v5.05h-2.81s.04-8.2 0-9.06h2.8v1.29c.38-.58 1.05-1.4 2.55-1.4 1.86 0 3.44 1.22 3.44 4.01Z" fill="#fff"/></svg></a>
+  </div>
+</footer>
+<script src="../js/main.js?v=194"></script>
+<script src="../js/motion.js?v=194" defer></script>
+<script src="../js/review.js?v=194"></script>
+</body>
+</html>
