@@ -239,12 +239,12 @@ body{font-size:17px}
 }
 
 /* ---------- Contact form: qualifying fields ---------- */
-.cta-form select{font-family:inherit;font-size:1rem;padding:13px 15px;border-radius:10px;
+.cta-form select,.review-form select{font-family:inherit;font-size:1rem;padding:13px 15px;border-radius:10px;
   border:1px solid rgba(255,255,255,.16);background:#fff;color:var(--ink);width:100%;
   appearance:none;-webkit-appearance:none;cursor:pointer;
   background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E4A63' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 13px center;background-size:17px;padding-right:40px}
-.cta-form select:focus{outline:2px solid var(--orange);outline-offset:1px;border-color:transparent}
+.cta-form select:focus,.review-form select:focus{outline:2px solid var(--orange);outline-offset:1px;border-color:transparent}
 @media (max-width:560px){}
 
 /* ---------- Pricing: custom / retainer band ---------- */
@@ -322,7 +322,7 @@ footer .fa-linkedin{display:inline-flex;align-items:center;line-height:0}
 .nav-li{display:none}
 
 /* Honeypot: visually-hidden pattern that cannot affect layout or scroll width */
-.cta-form input[name="_gotcha"]{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+.cta-form input[name="_gotcha"],.review-form input[name="_gotcha"]{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
   overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;left:auto}
 
 /* ================= MOBILE POLISH ================= */
@@ -618,9 +618,9 @@ body.demo-open{overflow:hidden}
    Inside the form it also hit .form-status and .form-note, and because flex
    gaps ADD to margins it opened a ~107px hole under the send button. The
    form's own 16px gap is the only spacing these need. */
-.cta-form p{margin:0}
+.cta-form p,.review-form p{margin:0}
 /* The empty status still reserves a gap; keep it in the a11y tree but flat. */
-.cta-form .form-status:empty{min-height:0}
+.cta-form .form-status:empty,.review-form .form-status:empty{min-height:0}
 
 /* The preview caption holds only the hint. */
 .sp-cap{justify-content:center}
@@ -978,25 +978,25 @@ button.btn{font-family:inherit}
 /* ---------- Contact form: open lines, no boxes ----------
    Fields are a single hairline on the navy that turns orange on focus, the
    same language as the services list. */
-.cta .cta-form{background:none;box-shadow:none;padding:0;border-radius:0;gap:30px}
-.cta .cta-form .field{display:flex;flex-direction:column;gap:6px;font-size:1rem;font-weight:500;color:#C9D1E0}
-.cta .cta-form input,.cta .cta-form textarea{background:transparent;border:0;border-bottom:1.5px solid rgba(255,255,255,.26);
+.cta .cta-form,.cta .review-form{background:none;box-shadow:none;padding:0;border-radius:0;gap:30px}
+.cta .cta-form .field,.cta .review-form .field{display:flex;flex-direction:column;gap:6px;font-size:1rem;font-weight:500;color:#C9D1E0}
+.cta .cta-form input,.cta .review-form input,.cta .cta-form textarea,.cta .review-form textarea{background:transparent;border:0;border-bottom:1.5px solid rgba(255,255,255,.26);
   border-radius:0;padding:8px 0 10px;color:#fff;font-size:1.1rem;line-height:1.5;
   transition:border-color .25s ease,box-shadow .25s ease}
-.cta .cta-form input::placeholder,.cta .cta-form textarea::placeholder{color:rgba(231,235,243,.4)}
-.cta .cta-form input:hover,.cta .cta-form textarea:hover{border-bottom-color:rgba(255,255,255,.5)}
-.cta .cta-form input:focus,.cta .cta-form textarea:focus{outline:none;border-bottom-color:var(--orange);box-shadow:0 1.5px 0 var(--orange)}
-.cta .cta-form textarea{resize:none;min-height:0;field-sizing:content;overflow:hidden}
-.cta .cta-form input:-webkit-autofill{-webkit-text-fill-color:#fff;box-shadow:0 0 0 1000px var(--navy) inset;caret-color:#fff}
-.cta .cta-form .form-send{width:auto;align-self:flex-start;gap:10px;margin-top:4px}
-.cta .cta-form .form-send svg{transition:transform .3s cubic-bezier(.22,1,.36,1)}
-.cta .cta-form .form-send:hover svg{transform:translateX(4px)}
-.cta .cta-form.sent{align-items:flex-start;text-align:left}
-.cta .cta-form.sent > *:not(.form-status){display:none}
-.cta .cta-form.sent .form-status{font-size:1.3rem;line-height:1.45;max-width:26ch}
+.cta .cta-form input::placeholder,.cta .review-form input::placeholder,.cta .cta-form textarea::placeholder,.cta .review-form textarea::placeholder{color:rgba(231,235,243,.4)}
+.cta .cta-form input:hover,.cta .review-form input:hover,.cta .cta-form textarea:hover,.cta .review-form textarea:hover{border-bottom-color:rgba(255,255,255,.5)}
+.cta .cta-form input:focus,.cta .review-form input:focus,.cta .cta-form textarea:focus,.cta .review-form textarea:focus{outline:none;border-bottom-color:var(--orange);box-shadow:0 1.5px 0 var(--orange)}
+.cta .cta-form textarea,.cta .review-form textarea{resize:none;min-height:0;field-sizing:content;overflow:hidden}
+.cta .cta-form input:-webkit-autofill,.cta .review-form input:-webkit-autofill{-webkit-text-fill-color:#fff;box-shadow:0 0 0 1000px var(--navy) inset;caret-color:#fff}
+.cta .cta-form .form-send,.cta .review-form .form-send{width:auto;align-self:flex-start;gap:10px;margin-top:4px}
+.cta .cta-form .form-send svg,.cta .review-form .form-send svg{transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.cta .cta-form .form-send:hover svg,.cta .review-form .form-send:hover svg{transform:translateX(4px)}
+.cta .cta-form.sent,.cta .review-form.sent{align-items:flex-start;text-align:left}
+.cta .cta-form.sent > *:not(.form-status),.cta .review-form.sent > *:not(.form-status){display:none}
+.cta .cta-form.sent .form-status,.cta .review-form.sent .form-status{font-size:1.3rem;line-height:1.45;max-width:26ch}
 @media (max-width:760px){
-  .cta .cta-form{gap:26px}
-  .cta .cta-form .form-send{align-self:stretch;justify-content:center}
+  .cta .cta-form,.cta .review-form{gap:26px}
+  .cta .cta-form .form-send,.cta .review-form .form-send{align-self:stretch;justify-content:center}
 }
 
 /* Website example: the preview stands alone, centred under the heading. */
@@ -1010,14 +1010,14 @@ button.btn{font-family:inherit}
    tighter padding and field spacing so the section fits a laptop screen. */
 #contact{padding:72px 0}
 #contact .wrap{max-width:1000px;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:center}
-.cta .cta-form{gap:22px}
-.cta .cta-form .field{gap:4px}
-.cta .cta-form input,.cta .cta-form textarea{padding:6px 0 8px;font-size:1.05rem}
-.cta .cta-form .form-status:empty{display:none}
+.cta .cta-form,.cta .review-form{gap:22px}
+.cta .cta-form .field,.cta .review-form .field{gap:4px}
+.cta .cta-form input,.cta .review-form input,.cta .cta-form textarea,.cta .review-form textarea{padding:6px 0 8px;font-size:1.05rem}
+.cta .cta-form .form-status:empty,.cta .review-form .form-status:empty{display:none}
 @media (max-width:760px){
   #contact{padding:56px 0}
   #contact .wrap{grid-template-columns:1fr;gap:30px}
-  .cta .cta-form{gap:20px}
+  .cta .cta-form,.cta .review-form{gap:20px}
 }
 
 /* ---------- Reviews: open columns, no boxes ----------
@@ -1135,12 +1135,12 @@ footer .wrap{justify-content:center;text-align:center}
 }
 
 /* ---------- Contact: the send button turns brand green and reads "Sent!" ---------- */
-.cta .cta-form .form-send{transition:background-color .35s ease,color .35s ease,transform .2s,box-shadow .2s}
-.cta .cta-form .form-send.is-sent{background:var(--green);color:var(--navy-deep);cursor:default}
-.cta .cta-form .form-send.is-sent:hover{transform:none}
-.cta .cta-form .form-send.is-sent svg{animation:sentTick .45s cubic-bezier(.22,1,.36,1) both}
+.cta .cta-form .form-send,.cta .review-form .form-send{transition:background-color .35s ease,color .35s ease,transform .2s,box-shadow .2s}
+.cta .cta-form .form-send.is-sent,.cta .review-form .form-send.is-sent{background:var(--green);color:var(--navy-deep);cursor:default}
+.cta .cta-form .form-send.is-sent:hover,.cta .review-form .form-send.is-sent:hover{transform:none}
+.cta .cta-form .form-send.is-sent svg,.cta .review-form .form-send.is-sent svg{animation:sentTick .45s cubic-bezier(.22,1,.36,1) both}
 @keyframes sentTick{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.cta .cta-form .form-send.is-sent svg{animation:none}}
+@media (prefers-reduced-motion:reduce){.cta .cta-form .form-send.is-sent svg,.cta .review-form .form-send.is-sent svg{animation:none}}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 /* ---------- Contact on phones: fits the visible screen ----------
@@ -1149,41 +1149,41 @@ footer .wrap{justify-content:center;text-align:center}
   #contact{padding:min(48px,5.5svh) 0;min-height:calc(100svh - 77px);display:flex;align-items:center}
   #contact .wrap{width:100%;gap:min(28px,3.2svh)}
   #contact .cta-lede{margin-top:min(14px,1.6svh)}
-  .cta .cta-form{gap:min(18px,2.2svh)}
-  .cta .cta-form .field{gap:2px;font-size:.95rem}
-  .cta .cta-form input,.cta .cta-form textarea{padding:4px 0 6px}
-  .cta .cta-form .form-send{padding:13px 24px;margin-top:2px}
+  .cta .cta-form,.cta .review-form{gap:min(18px,2.2svh)}
+  .cta .cta-form .field,.cta .review-form .field{gap:2px;font-size:.95rem}
+  .cta .cta-form input,.cta .review-form input,.cta .cta-form textarea,.cta .review-form textarea{padding:4px 0 6px}
+  .cta .cta-form .form-send,.cta .review-form .form-send{padding:13px 24px;margin-top:2px}
 }
 
 /* ---------- Contact: sent state greys out the fields ---------- */
-.cta .cta-form .field{transition:opacity .35s ease}
-.cta .cta-form.is-locked .field{opacity:.42;pointer-events:none}
+.cta .cta-form .field,.cta .review-form .field{transition:opacity .35s ease}
+.cta .cta-form.is-locked .field,.cta .review-form.is-locked .field{opacity:.42;pointer-events:none}
 @media (max-width:760px) and (max-height:600px){
   #contact{padding:18px 0}
   #contact .wrap{gap:14px}
   #contact .cta-lede{margin-top:6px}
-  .cta .cta-form{gap:10px}
-  .cta .cta-form .form-send{padding:11px 22px}
+  .cta .cta-form,.cta .review-form{gap:10px}
+  .cta .cta-form .form-send,.cta .review-form .form-send{padding:11px 22px}
 }
 
 /* ---------- Contact: red field errors, on brand ----------
    A warm coral red that sits with the orange on navy; the line under the field
    turns red and a short note with an alert mark slides in below it. */
 .cta{--error:#FF7A6B}
-.cta .cta-form .field.has-error{color:var(--error)}
-.cta .cta-form .field.has-error input,
-.cta .cta-form .field.has-error textarea{border-bottom-color:var(--error);box-shadow:0 1.5px 0 var(--error)}
-.cta .cta-form .field-error{display:flex;align-items:center;gap:7px;margin-top:4px;font-size:.88rem;font-weight:500;line-height:1.35;color:var(--error);
+.cta .cta-form .field.has-error,.cta .review-form .field.has-error{color:var(--error)}
+.cta .cta-form .field.has-error input,.cta .review-form .field.has-error input,
+.cta .cta-form .field.has-error textarea,.cta .review-form .field.has-error textarea{border-bottom-color:var(--error);box-shadow:0 1.5px 0 var(--error)}
+.cta .cta-form .field-error,.cta .review-form .field-error{display:flex;align-items:center;gap:7px;margin-top:4px;font-size:.88rem;font-weight:500;line-height:1.35;color:var(--error);
   animation:errIn .3s cubic-bezier(.22,1,.36,1) both}
-.cta .cta-form .field-error svg{flex:none}
-.cta .cta-form .field.has-error input{animation:errNudge .32s ease}
+.cta .cta-form .field-error svg,.cta .review-form .field-error svg{flex:none}
+.cta .cta-form .field.has-error input,.cta .review-form .field.has-error input{animation:errNudge .32s ease}
 @keyframes errIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 @keyframes errNudge{0%,100%{transform:none}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 @media (prefers-reduced-motion:reduce){
-  .cta .cta-form .field-error,.cta .cta-form .field.has-error input{animation:none}
+  .cta .cta-form .field-error,.cta .review-form .field-error,.cta .cta-form .field.has-error input,.cta .review-form .field.has-error input{animation:none}
 }
-.cta .cta-form .form-status.error{display:flex;align-items:flex-start;gap:8px;color:var(--error);font-weight:500;font-size:.95rem}
-.cta .cta-form .form-status.error svg{flex:none;margin-top:3px}
+.cta .cta-form .form-status.error,.cta .review-form .form-status.error{display:flex;align-items:flex-start;gap:8px;color:var(--error);font-weight:500;font-size:.95rem}
+.cta .cta-form .form-status.error svg,.cta .review-form .form-status.error svg{flex:none;margin-top:3px}
 
 /* Touch screens keep :hover after a tap, which left "Show less" stuck in its
    navy hover colour; on touch the link keeps its resting orange underline. */
@@ -1192,3 +1192,32 @@ footer .wrap{justify-content:center;text-align:center}
   .t-toggle:hover{gap:7px}
 }
 .t-toggle{-webkit-tap-highlight-color:transparent}
+
+/* ---------- Review page (/review/) ----------
+   The contact section's navy block and open-line fields, plus a star row and a
+   permission tick. The page is a link Jordan sends; it is not in the nav. */
+#review{padding:72px 0 88px;min-height:calc(100svh - 77px)}
+#review .wrap{max-width:1000px;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start}
+#review h1{font-size:clamp(2.2rem,4vw,3rem);line-height:1.15;color:#fff}
+.cta .review-form .stars{border:0;margin:0;padding:0;min-width:0}
+.cta .review-form .stars legend{padding:0;margin-bottom:6px;font-size:1rem;font-weight:500;color:#C9D1E0}
+.cta .review-form .star-row{display:flex;gap:4px}
+.cta .review-form .star-row label{display:block;position:relative;width:48px;height:48px;cursor:pointer;color:rgba(255,255,255,.3);transition:color .2s ease,transform .2s ease}
+.cta .review-form .star-row label svg{width:100%;height:100%;display:block}
+.cta .review-form .star-row input{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;opacity:0;cursor:pointer;border:0;background:none}
+.cta .review-form .star-row label.on{color:var(--orange)}
+.cta .review-form .star-row label:hover{transform:scale(1.08)}
+.cta .review-form .star-row label:has(input:focus-visible){outline:2px solid var(--orange);outline-offset:2px;border-radius:6px}
+.cta .review-form .consent{display:flex;flex-direction:row;align-items:flex-start;gap:12px;font-size:1rem;font-weight:500;line-height:1.5;color:#C9D1E0;cursor:pointer}
+.cta .review-form .consent input{flex:none;width:24px;height:24px;margin:1px 0 0;padding:0;border:0;background:none;accent-color:var(--orange);cursor:pointer}
+.cta .review-form .stars.has-error legend,.cta .review-form .consent-wrap.has-error .consent{color:var(--error)}
+.cta .review-form .stars .field-error,.cta .review-form .consent-wrap .field-error{margin-top:6px}
+.cta .review-form.is-locked .stars,.cta .review-form.is-locked .consent{opacity:.42;pointer-events:none;transition:opacity .35s ease}
+.cta .review-form.sent .form-status{color:#fff;font-weight:600}
+@media (prefers-reduced-motion:reduce){.cta .review-form .star-row label{transition:none}.cta .review-form .star-row label:hover{transform:none}}
+@media (max-width:760px){
+  #review{padding:44px 0 56px}
+  #review .wrap{grid-template-columns:1fr;gap:28px;padding:0 16px}
+  .cta .review-form .star-row{gap:2px}
+  .cta .review-form .star-row label{width:46px;height:46px}
+}
