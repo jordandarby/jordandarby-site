@@ -1,12 +1,15 @@
-// Review form: prefill from the link, our own field notes, AJAX send with a
-// thank-you in place of the form. Same pattern as the contact form in main.js;
-// without JS the form still posts normally.
+// Review form: the link carries who is writing, the client types the review
+// and ticks permission. Our own field notes, AJAX send with a thank-you in
+// place of the form. Same pattern as the contact form in main.js; without JS
+// the form still posts normally.
 (function () {
   var form = document.querySelector('.review-form');
   if (!form) return;
 
-  // Prefill Name, Business and "What we worked on" from the link
-  // (?name=&business=&project=). Only empty fields are filled.
+  // Name, business and project come from the link (?name=&business=&project=).
+  // The name and business boxes only show when the link did not fill them, so
+  // a client who arrives through Jordan's link sees the review box and the tick.
+  var fromLink = false;
   try {
     var params = new URLSearchParams(window.location.search);
     ['name', 'business', 'project'].forEach(function (key) {
@@ -16,7 +19,9 @@
       if (v.length > 120) v = v.slice(0, 120);
       f.value = v;
     });
+    fromLink = !!(form.elements.name.value && form.elements.business.value);
   } catch (_) {}
+  if (fromLink) form.classList.add('from-link');
 
   var alertIcon = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M12 7v6" stroke="#182946" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="16.6" r="1.4" fill="#182946"/></svg>';
 
@@ -28,17 +33,6 @@
     grow();
   }
 
-  // Stars: the chosen star and the ones before it fill orange.
-  var starLabels = [].slice.call(form.querySelectorAll('.star-row label'));
-  var radios = [].slice.call(form.querySelectorAll('input[name="rating"]'));
-  var paint = function () {
-    var chosen = 0;
-    radios.forEach(function (r) { if (r.checked) chosen = +r.value; });
-    starLabels.forEach(function (l, i) { l.classList.toggle('on', i < chosen); });
-  };
-  radios.forEach(function (r) { r.addEventListener('change', paint); });
-  paint();
-
   if (!window.fetch) return;
 
   var status = form.querySelector('.form-status');
@@ -49,13 +43,9 @@
   var pending = false;
   form.noValidate = true;
 
-  var emailOk = function (v) { return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[a-z]{2,}$/i.test(v); };
   var notes = {
     name: 'Please add your name',
     business: 'Please add your business',
-    email: 'Please add your email',
-    project: 'Please add what we worked on',
-    rating: 'Please pick a star rating',
     review: 'Please write a few words',
     permission: 'Please tick this so I can share your words'
   };
@@ -67,21 +57,9 @@
   textFields.forEach(function (f) {
     checks.push({
       key: f.name, holder: f.closest('.field'), focus: f, inputs: [f],
-      problem: function () {
-        var v = f.value.trim();
-        if (!v) return notes[f.name];
-        if (f.name === 'email' && !emailOk(v)) return 'Check this email for a typo';
-        return '';
-      }
+      problem: function () { return f.value.trim() ? '' : notes[f.name]; }
     });
   });
-  // Rating sits before the review in the form, so check it in that order.
-  var ratingCheck = {
-    key: 'rating', holder: form.querySelector('.stars'), focus: radios[0], inputs: radios,
-    problem: function () { return radios.some(function (r) { return r.checked; }) ? '' : notes.rating; }
-  };
-  var reviewIdx = checks.map(function (c) { return c.key; }).indexOf('review');
-  checks.splice(reviewIdx, 0, ratingCheck);
   checks.push({
     key: 'permission', holder: form.querySelector('.consent-wrap'), focus: consent, inputs: [consent],
     problem: function () { return consent.checked ? '' : notes.permission; }
@@ -110,15 +88,12 @@
     });
   };
 
-  // A note clears as soon as the field is fixed; the email is re-checked when you leave it.
+  // A note clears as soon as the field is fixed.
   checks.forEach(function (c) {
     c.inputs.forEach(function (i) {
       var clear = function () { if (c.holder.classList.contains('has-error') && !c.problem()) showError(c, ''); };
       i.addEventListener('input', clear);
       i.addEventListener('change', clear);
-      if (c.key === 'email') {
-        i.addEventListener('blur', function () { if (i.value.trim() && c.problem()) showError(c, c.problem()); });
-      }
     });
   });
 
@@ -126,7 +101,7 @@
   var lock = function (on) {
     form.classList.toggle('is-locked', on);
     allInputs.forEach(function (i) {
-      if (i.type === 'radio' || i.type === 'checkbox') i.disabled = on;
+      if (i.type === 'checkbox') i.disabled = on;
       else i.readOnly = on;
     });
   };
@@ -192,7 +167,7 @@
             restore('');
             status.className = 'form-status';
             status.textContent = '';
-            showError(c, c.key === 'email' ? 'Check this email for a typo' : (e0.message || 'Please check this.'));
+            showError(c, e0.message || 'Please check this.');
             c.focus.focus();
           } else {
             restore(e0 && e0.message);
