@@ -1194,30 +1194,19 @@ footer .wrap{justify-content:center;text-align:center}
 .t-toggle{-webkit-tap-highlight-color:transparent}
 
 /* ---------- Review page (/review/) ----------
-   The contact section's navy block and open-line fields, plus a star row and a
-   permission tick. The page is a link Jordan sends; it is not in the nav. */
-#review{padding:72px 0 88px;min-height:calc(100svh - 77px)}
+   The contact section's navy block and open-line fields, plus a permission
+   tick. The page is a link Jordan sends; it is not in the nav. */
+#review{padding:88px 0 104px}
 #review .wrap{max-width:1000px;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start}
+.cta .review-form textarea{min-height:5.5em}
 #review h1{font-size:clamp(2.2rem,4vw,3rem);line-height:1.15;color:#fff}
-.cta .review-form .stars{border:0;margin:0;padding:0;min-width:0}
-.cta .review-form .stars legend{padding:0;margin-bottom:6px;font-size:1rem;font-weight:500;color:#C9D1E0}
-.cta .review-form .star-row{display:flex;gap:4px}
-.cta .review-form .star-row label{display:block;position:relative;width:48px;height:48px;cursor:pointer;color:rgba(255,255,255,.3);transition:color .2s ease,transform .2s ease}
-.cta .review-form .star-row label svg{width:100%;height:100%;display:block}
-.cta .review-form .star-row input{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;opacity:0;cursor:pointer;border:0;background:none}
-.cta .review-form .star-row label.on{color:var(--orange)}
-.cta .review-form .star-row label:hover{transform:scale(1.08)}
-.cta .review-form .star-row label:has(input:focus-visible){outline:2px solid var(--orange);outline-offset:2px;border-radius:6px}
 .cta .review-form .consent{display:flex;flex-direction:row;align-items:flex-start;gap:12px;font-size:1rem;font-weight:500;line-height:1.5;color:#C9D1E0;cursor:pointer}
 .cta .review-form .consent input{flex:none;width:24px;height:24px;margin:1px 0 0;padding:0;border:0;background:none;accent-color:var(--orange);cursor:pointer}
-.cta .review-form .stars.has-error legend,.cta .review-form .consent-wrap.has-error .consent{color:var(--error)}
-.cta .review-form .stars .field-error,.cta .review-form .consent-wrap .field-error{margin-top:6px}
-.cta .review-form.is-locked .stars,.cta .review-form.is-locked .consent{opacity:.42;pointer-events:none;transition:opacity .35s ease}
+.cta .review-form .consent-wrap.has-error .consent{color:var(--error)}
+.cta .review-form .consent-wrap .field-error{margin-top:6px}
+.cta .review-form.is-locked .consent{opacity:.42;pointer-events:none;transition:opacity .35s ease}
 .cta .review-form.sent .form-status{color:#fff;font-weight:600}
-@media (prefers-reduced-motion:reduce){.cta .review-form .star-row label{transition:none}.cta .review-form .star-row label:hover{transform:none}}
 @media (max-width:760px){
-  #review{padding:44px 0 56px}
+  #review{padding:48px 0 64px}
   #review .wrap{grid-template-columns:1fr;gap:28px;padding:0 16px}
-  .cta .review-form .star-row{gap:2px}
-  .cta .review-form .star-row label{width:46px;height:46px}
 }
