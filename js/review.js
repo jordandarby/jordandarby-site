@@ -1,27 +1,10 @@
-// Review form: the link carries who is writing, the client types the review
-// and ticks permission. Our own field notes, AJAX send with a thank-you in
-// place of the form. Same pattern as the contact form in main.js; without JS
-// the form still posts normally.
+// Review form: name, review, permission tick. Our own field notes, AJAX send
+// with a thank-you in place of the form. Same pattern as the contact form in
+// main.js; without JS the form still posts normally.
 (function () {
   var form = document.querySelector('.review-form');
   if (!form) return;
 
-  // Name, business and project come from the link (?name=&business=&project=).
-  // The name and business boxes only show when the link did not fill them, so
-  // a client who arrives through Jordan's link sees the review box and the tick.
-  var fromLink = false;
-  try {
-    var params = new URLSearchParams(window.location.search);
-    ['name', 'business', 'project'].forEach(function (key) {
-      var v = (params.get(key) || '').trim();
-      var f = form.elements[key];
-      if (!v || !f || f.value) return;
-      if (v.length > 120) v = v.slice(0, 120);
-      f.value = v;
-    });
-    fromLink = !!(form.elements.name.value && form.elements.business.value);
-  } catch (_) {}
-  if (fromLink) form.classList.add('from-link');
 
   var alertIcon = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M12 7v6" stroke="#182946" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="16.6" r="1.4" fill="#182946"/></svg>';
 
@@ -45,7 +28,6 @@
 
   var notes = {
     name: 'Please add your name',
-    business: 'Please add your business',
     review: 'Please write a few words',
     permission: 'Please tick this so I can share your words'
   };
@@ -134,8 +116,7 @@
     }
 
     var name = form.elements.name.value.trim();
-    var business = form.elements.business.value.trim();
-    form.elements._subject.value = 'Review from ' + name + ', ' + business;
+    form.elements._subject.value = 'Review from ' + name;
     // FormData is read before the fields lock, since disabled inputs are not sent.
     var data = new FormData(form);
 

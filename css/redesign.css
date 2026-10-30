@@ -1195,9 +1195,7 @@ footer .wrap{justify-content:center;text-align:center}
 
 /* ---------- Review page (/review/) ----------
    The contact section's navy block and open-line fields, plus a permission
-   tick. The page is a link Jordan sends; it is not in the nav. The name and
-   business boxes show only when the link did not fill them. */
-.cta .review-form.from-link .who{display:none}
+   tick. The page is a link Jordan sends; it is not in the nav. */
 #review{padding:88px 0 104px}
 #review .wrap{max-width:1000px;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start}
 .cta .review-form textarea{min-height:5.5em}
