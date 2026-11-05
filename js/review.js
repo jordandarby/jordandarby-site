@@ -1,4 +1,4 @@
-// Review form: name, review, permission tick. Our own field notes, AJAX send
+// Review form: name, review, two permission ticks. Our own field notes, AJAX send
 // with a thank-you in place of the form. Same pattern as the contact form in
 // main.js; without JS the form still posts normally.
 (function () {
@@ -29,12 +29,14 @@
   var notes = {
     name: 'Please add your name',
     review: 'Please write a few words',
-    permission: 'Please tick this so I can share your words'
+    permission: 'Please tick this so I can share your words',
+    portfolio: 'Please tick this so I can show the work'
   };
 
   // Each check: the element that shows the note, the input to focus, and the problem.
   var textFields = [].slice.call(form.querySelectorAll('.field input, .field textarea'));
   var consent = form.querySelector('input[name="permission"]');
+  var portfolio = form.querySelector('input[name="portfolio"]');
   var checks = [];
   textFields.forEach(function (f) {
     checks.push({
@@ -45,6 +47,10 @@
   checks.push({
     key: 'permission', holder: form.querySelector('.consent-wrap'), focus: consent, inputs: [consent],
     problem: function () { return consent.checked ? '' : notes.permission; }
+  });
+  checks.push({
+    key: 'portfolio', holder: portfolio.closest('.consent-wrap'), focus: portfolio, inputs: [portfolio],
+    problem: function () { return portfolio.checked ? '' : notes.portfolio; }
   });
 
   var showError = function (c, text) {
